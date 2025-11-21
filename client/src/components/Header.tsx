@@ -1,18 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { APP_LOGO, APP_TITLE } from "@/const";
+import { APP_LOGO } from "@/const";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [location] = useLocation();
 
   const navItems = [
     { href: "/", label: "Accueil" },
     { href: "#services", label: "Services" },
-    { href: "#tarifs", label: "Tarifs" },
-    { href: "#temoignages", label: "Témoignages" },
+    { href: "#temoignages", label: "Avis clients" },
     { href: "#contact", label: "Contact" },
   ];
 
@@ -28,28 +26,28 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <img src={APP_LOGO} alt={APP_TITLE} className="h-10 w-auto" />
-          <span className="text-xl font-bold text-primary">{APP_TITLE}</span>
+    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 shadow-sm">
+      <div className="container flex h-20 items-center justify-between">
+        <Link href="/" className="flex items-center space-x-3">
+          <img src={APP_LOGO} alt="ProClean Empire" className="h-12 w-auto" />
+          <span className="text-2xl font-bold text-blue-900">ProClean Empire</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={(e) => scrollToSection(e, item.href)}
-              className="text-sm font-medium transition-colors hover:text-primary"
+              className="text-base font-medium transition-colors hover:text-blue-600 text-gray-700"
             >
               {item.label}
             </a>
           ))}
-          <Button asChild>
+          <Button className="bg-blue-600 hover:bg-blue-700" asChild>
             <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>
-              Devis Gratuit
+              Prestations
             </a>
           </Button>
         </nav>
@@ -66,21 +64,21 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden border-t bg-background">
+        <div className="md:hidden border-t bg-white">
           <nav className="container flex flex-col space-y-4 py-4">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-base font-medium transition-colors hover:text-blue-600 text-gray-700"
               >
                 {item.label}
               </a>
             ))}
-            <Button asChild className="w-full">
+            <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
               <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>
-                Devis Gratuit
+                Prestations
               </a>
             </Button>
           </nav>

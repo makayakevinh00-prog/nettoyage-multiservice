@@ -14,3 +14,13 @@
 - [x] Design moderne et professionnel avec palette de couleurs appropriée
 - [x] Images et icônes pour les services
 - [x] Optimisation responsive pour mobile/tablette/desktop
+
+## Mises à jour demandées
+
+- [x] Changer le nom en "ProClean Empire"
+- [x] Intégrer le logo ProClean fourni
+- [x] Remplacer les images par celles fournies par l'utilisateur
+- [x] S'inspirer du design de l'exemple fourni
+- [x] Mettre en avant les services: Voiture, Tapis, Terrasse, Balcon
+- [x] Adapter la palette de couleurs au bleu ProClean
+- [x] Améliorer la hero section avec un style plus moderne
