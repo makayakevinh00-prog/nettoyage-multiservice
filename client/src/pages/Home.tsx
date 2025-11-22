@@ -21,7 +21,10 @@ import {
   Waves,
   Calendar,
   Clock,
-  Euro
+  Leaf,
+  Sparkles,
+  Shield,
+  Clock3
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -83,93 +86,56 @@ export default function Home() {
     {
       icon: Car,
       title: "Nettoyage Automobile",
-      description: "Intérieur et extérieur, lavage haute pression, lustrage et protection.",
-      image: "/hero-proclean.png",
+      description: "Lavage intérieur et extérieur, lustrage, protection céramique. Votre véhicule retrouve son éclat d'origine.",
+      image: "/service-automobile.jpg",
     },
     {
       icon: Waves,
       title: "Nettoyage Terrasse",
-      description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
-      image: "/services-grid.png",
+      description: "Démoussage, nettoyage haute pression, traitement anti-mousse. Redonnez vie à vos espaces extérieurs.",
+      image: "/service-terrasse.jpg",
     },
     {
       icon: Sofa,
-      title: "Nettoyage Tapis",
-      description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "/services-grid.png",
+      title: "Nettoyage Tapis & Canapés",
+      description: "Injection-extraction professionnelle, détachage en profondeur, séchage rapide et efficace.",
+      image: "/service-tapis.jpg",
     },
     {
       icon: Building2,
       title: "Nettoyage Balcon",
-      description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "/services-grid.png",
-    },
-  ];
-
-  const tarifs = [
-    {
-      service: "Nettoyage Automobile",
-      items: [
-        { name: "Lavage extérieur simple", price: "25€" },
-        { name: "Lavage extérieur + intérieur", price: "45€" },
-        { name: "Lavage complet + lustrage", price: "80€" },
-        { name: "Detailing premium", price: "150€" },
-      ],
+      description: "Nettoyage complet des sols, joints, garde-corps. Un balcon impeccable pour profiter de l'extérieur.",
+      image: "/service-balcon.jpg",
     },
     {
-      service: "Nettoyage Terrasse",
-      items: [
-        { name: "Terrasse jusqu'à 20m²", price: "80€" },
-        { name: "Terrasse 20-40m²", price: "140€" },
-        { name: "Terrasse 40-60m²", price: "200€" },
-        { name: "Traitement anti-mousse", price: "+30€" },
-      ],
-    },
-    {
-      service: "Nettoyage Tapis & Canapés",
-      items: [
-        { name: "Tapis petit format (< 3m²)", price: "40€" },
-        { name: "Tapis moyen format (3-6m²)", price: "70€" },
-        { name: "Tapis grand format (> 6m²)", price: "100€" },
-        { name: "Canapé 2-3 places", price: "80€" },
-      ],
-    },
-    {
-      service: "Nettoyage Balcon",
-      items: [
-        { name: "Balcon standard", price: "50€" },
-        { name: "Balcon avec garde-corps", price: "70€" },
-        { name: "Grand balcon/loggia", price: "100€" },
-        { name: "Nettoyage joints", price: "+20€" },
-      ],
-    },
-  ];
-
-  const gallery = [
-    {
-      title: "Nettoyage Automobile",
-      before: "/gallery-car-before.jpg",
-      after: "/gallery-car-after.jpg",
-    },
-    {
-      title: "Nettoyage Terrasse",
-      before: "/gallery-terrace-before.jpg",
-      after: "/gallery-terrace-after.jpg",
-    },
-    {
-      title: "Nettoyage Tapis",
-      before: "/gallery-carpet-before.jpg",
-      after: "/gallery-carpet-after.jpg",
+      icon: Leaf,
+      title: "Entretien Jardinage",
+      description: "Tonte, taille de haies, débroussaillage, entretien des espaces verts. Un jardin toujours soigné.",
+      image: "/service-jardinage.jpg",
     },
   ];
 
   const avantages = [
-    "Équipements professionnels de dernière génération",
-    "Produits écologiques et respectueux de l'environnement",
-    "Équipe formée et expérimentée",
-    "Intervention rapide en Île-de-France",
-    "Devis gratuit et sans engagement",
-    "Satisfaction garantie ou argent remboursé",
+    {
+      icon: Sparkles,
+      title: "Résultats Impeccables",
+      description: "Équipements professionnels de dernière génération pour un résultat parfait à chaque intervention.",
+    },
+    {
+      icon: Leaf,
+      title: "Produits Écologiques",
+      description: "Nous utilisons des produits respectueux de l'environnement et de votre santé.",
+    },
+    {
+      icon: Shield,
+      title: "Équipe Qualifiée",
+      description: "Professionnels formés et expérimentés, assurés et garantis pour votre tranquillité.",
+    },
+    {
+      icon: Clock3,
+      title: "Intervention Rapide",
+      description: "Service disponible partout en Île-de-France avec des délais d'intervention courts.",
+    },
   ];
 
   const testimonials = [
@@ -194,192 +160,180 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50/30 to-white">
       <Header />
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-          <div className="absolute inset-0 bg-[url('/hero-alt.png')] bg-cover bg-center opacity-30"></div>
-          <div className="container relative z-10 py-20">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="text-white">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <section className="relative min-h-[650px] flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/hero-proclean.png')] bg-cover bg-center opacity-20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-transparent"></div>
+          
+          <div className="container relative z-10 py-24">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="text-white space-y-8">
+                <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+                  <span className="text-sm font-semibold text-white">✨ Service Premium en Île-de-France</span>
+                </div>
+                
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
                   <span className="text-white">PROCLEAN</span>{" "}
-                  <span className="text-blue-400">EMPIRE</span>
+                  <span className="text-blue-200">EMPIRE</span>
                 </h1>
-                <p className="text-2xl md:text-3xl font-semibold mb-4 text-blue-300">
-                  NETTOYAGE PREMIUM
+                
+                <p className="text-2xl md:text-3xl font-semibold text-blue-100">
+                  Nettoyage Premium Multiservice
                 </p>
-                <p className="text-xl mb-8 text-gray-300">
-                  VOITURE · TAPIS · TERRASSE
+                
+                <p className="text-xl text-blue-50 leading-relaxed max-w-xl">
+                  Votre partenaire de confiance pour le nettoyage professionnel de vos véhicules, 
+                  terrasses, tapis, balcons et jardins. Excellence et satisfaction garanties.
                 </p>
-                <p className="text-lg mb-8 text-gray-200 max-w-xl">
-                  ProClean Empire est votre partenaire de confiance pour le nettoyage de terrasses, toits, façades, jardins, véhicules et logements. 
-                  Nous intervenons partout en <strong>Île-de-France</strong>, avec des équipements professionnels et un sens du détail qui fait la différence.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6" asChild>
-                    <a href="#reservation">Réserver en Ligne</a>
+                
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-300"
+                    asChild
+                  >
+                    <a href="#reservation">Réserver Maintenant</a>
                   </Button>
-                  <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white text-lg px-8 py-6" asChild>
-                    <a href="#services">Nos Services</a>
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6"
+                    asChild
+                  >
+                    <a href="#services">Découvrir nos Services</a>
                   </Button>
                 </div>
               </div>
-              <div className="relative hidden md:block">
-                <img 
-                  src="/hero-proclean.png" 
-                  alt="ProClean Empire - Nettoyage professionnel" 
-                  className="rounded-lg shadow-2xl w-full h-auto"
-                />
+              
+              <div className="relative hidden lg:block">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+                  <img 
+                    src="/hero-proclean.png" 
+                    alt="ProClean Empire - Nettoyage professionnel" 
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Section Services */}
-        <section id="services" className="py-20 bg-gradient-to-b from-white to-blue-50">
+        <section id="services" className="py-24 bg-white">
           <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-                C'EST L'HEURE DU GRAND NETTOYAGE!
+            <div className="text-center mb-16">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">NOS PRESTATIONS</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Des Services d'Excellence
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Découvrez nos services de nettoyage professionnel pour redonner éclat et propreté à vos espaces.
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Découvrez notre gamme complète de services de nettoyage professionnel 
+                pour redonner éclat et propreté à tous vos espaces.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <Card key={index} className="hover:shadow-xl transition-all duration-300 border-2 hover:border-blue-500 overflow-hidden group">
-                  <div className="relative h-48 overflow-hidden">
+                <Card 
+                  key={index} 
+                  className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-400 overflow-hidden bg-white"
+                >
+                  <div className="relative h-64 overflow-hidden">
                     <img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-bold text-xl">{service.title}</h3>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    <div className="absolute top-4 right-4 w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                      <service.icon className="h-7 w-7 text-blue-600" />
                     </div>
                   </div>
-                  <CardContent className="pt-6">
-                    <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
-                      <service.icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <p className="text-gray-600">{service.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section Galerie Avant/Après */}
-        <section id="galerie" className="py-20 bg-white">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-                Nos Réalisations Avant/Après
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Découvrez la transformation spectaculaire de nos interventions professionnelles.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8">
-              {gallery.map((item, index) => (
-                <Card key={index} className="overflow-hidden border-2 hover:border-blue-500 transition-colors">
                   <CardHeader>
-                    <CardTitle className="text-center text-blue-900">{item.title}</CardTitle>
+                    <CardTitle className="text-2xl text-gray-900 group-hover:text-blue-600 transition-colors">
+                      {service.title}
+                    </CardTitle>
+                    <CardDescription className="text-base text-gray-600 leading-relaxed">
+                      {service.description}
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <p className="text-sm font-semibold text-gray-600 mb-2">AVANT</p>
-                      <img 
-                        src={item.before} 
-                        alt={`${item.title} - Avant`}
-                        className="w-full h-48 object-cover rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-green-600 mb-2">APRÈS</p>
-                      <img 
-                        src={item.after} 
-                        alt={`${item.title} - Après`}
-                        className="w-full h-48 object-cover rounded-lg"
-                      />
-                    </div>
-                  </CardContent>
                 </Card>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section Tarifs */}
-        <section id="tarifs" className="py-20 bg-gradient-to-b from-blue-50 to-white">
+        {/* Section Pourquoi nous choisir */}
+        <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
           <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
-                Nos Tarifs
+            <div className="text-center mb-16">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">NOS ATOUTS</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Pourquoi Choisir ProClean Empire ?
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Des prix transparents et compétitifs pour tous nos services de nettoyage.
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Une expertise reconnue et un engagement qualité pour votre satisfaction totale.
               </p>
             </div>
-            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {tarifs.map((tarif, index) => (
-                <Card key={index} className="border-2 hover:border-blue-500 transition-colors">
-                  <CardHeader className="bg-blue-900 text-white">
-                    <CardTitle className="flex items-center">
-                      <Euro className="mr-2 h-5 w-5" />
-                      {tarif.service}
-                    </CardTitle>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {avantages.map((avantage, index) => (
+                <Card key={index} className="text-center border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white">
+                  <CardHeader>
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <avantage.icon className="h-8 w-8 text-white" />
+                    </div>
+                    <CardTitle className="text-xl text-gray-900">{avantage.title}</CardTitle>
+                    <CardDescription className="text-base text-gray-600 leading-relaxed">
+                      {avantage.description}
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="pt-6">
-                    <ul className="space-y-3">
-                      {tarif.items.map((item, idx) => (
-                        <li key={idx} className="flex justify-between items-center pb-3 border-b last:border-b-0">
-                          <span className="text-gray-700">{item.name}</span>
-                          <span className="font-bold text-blue-900">{item.price}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
                 </Card>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Section Réservation en Ligne */}
-        <section id="reservation" className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        {/* Section Réservation */}
+        <section id="reservation" className="py-24 bg-white">
           <div className="container max-w-4xl">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">RÉSERVATION</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
                 Réservez Votre Intervention
               </h2>
-              <p className="text-lg text-blue-200">
-                Choisissez votre service, date et heure. Nous vous confirmerons rapidement.
+              <p className="text-xl text-gray-600">
+                Choisissez votre service, date et heure. Nous vous confirmerons rapidement votre rendez-vous.
               </p>
             </div>
-            <Card className="border-2 border-blue-400">
-              <CardContent className="pt-6">
+            
+            <Card className="border-2 border-blue-200 shadow-xl bg-white">
+              <CardContent className="pt-8">
                 <form onSubmit={handleBooking} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="booking-name">Nom complet *</Label>
+                      <Label htmlFor="booking-name" className="text-gray-700 font-medium">Nom complet *</Label>
                       <Input
                         id="booking-name"
                         required
                         value={bookingData.name}
                         onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })}
                         placeholder="Jean Dupont"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="booking-email">Email *</Label>
+                      <Label htmlFor="booking-email" className="text-gray-700 font-medium">Email *</Label>
                       <Input
                         id="booking-email"
                         type="email"
@@ -387,13 +341,14 @@ export default function Home() {
                         value={bookingData.email}
                         onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
                         placeholder="jean.dupont@email.com"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="booking-phone">Téléphone *</Label>
+                      <Label htmlFor="booking-phone" className="text-gray-700 font-medium">Téléphone *</Label>
                       <Input
                         id="booking-phone"
                         type="tel"
@@ -401,83 +356,88 @@ export default function Home() {
                         value={bookingData.phone}
                         onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })}
                         placeholder="06 12 34 56 78"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="booking-service">Service souhaité *</Label>
+                      <Label htmlFor="booking-service" className="text-gray-700 font-medium">Service souhaité *</Label>
                       <Select 
                         value={bookingData.service} 
                         onValueChange={(value) => setBookingData({ ...bookingData, service: value })}
                       >
-                        <SelectTrigger className="border-2 focus:border-blue-500">
+                        <SelectTrigger className="border-2 border-gray-200 focus:border-blue-500 h-12">
                           <SelectValue placeholder="Choisir un service" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="automobile">Nettoyage Automobile</SelectItem>
                           <SelectItem value="terrasse">Nettoyage Terrasse</SelectItem>
-                          <SelectItem value="tapis">Nettoyage Tapis</SelectItem>
+                          <SelectItem value="tapis">Nettoyage Tapis & Canapés</SelectItem>
                           <SelectItem value="balcon">Nettoyage Balcon</SelectItem>
+                          <SelectItem value="jardinage">Entretien Jardinage</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="booking-date">Date souhaitée *</Label>
+                      <Label htmlFor="booking-date" className="text-gray-700 font-medium">Date souhaitée *</Label>
                       <div className="relative">
-                        <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                        <Calendar className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
                         <Input
                           id="booking-date"
                           type="date"
                           required
                           value={bookingData.date}
                           onChange={(e) => setBookingData({ ...bookingData, date: e.target.value })}
-                          className="border-2 focus:border-blue-500 pl-10"
+                          className="border-2 border-gray-200 focus:border-blue-500 pl-11 h-12"
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="booking-time">Heure souhaitée *</Label>
+                      <Label htmlFor="booking-time" className="text-gray-700 font-medium">Heure souhaitée *</Label>
                       <div className="relative">
-                        <Clock className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                        <Clock className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
                         <Input
                           id="booking-time"
                           type="time"
                           required
                           value={bookingData.time}
                           onChange={(e) => setBookingData({ ...bookingData, time: e.target.value })}
-                          className="border-2 focus:border-blue-500 pl-10"
+                          className="border-2 border-gray-200 focus:border-blue-500 pl-11 h-12"
                         />
                       </div>
                     </div>
                   </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="booking-address">Adresse d'intervention *</Label>
+                    <Label htmlFor="booking-address" className="text-gray-700 font-medium">Adresse d'intervention *</Label>
                     <Input
                       id="booking-address"
                       required
                       value={bookingData.address}
                       onChange={(e) => setBookingData({ ...bookingData, address: e.target.value })}
                       placeholder="12 Rue de la République, 75001 Paris"
-                      className="border-2 focus:border-blue-500"
+                      className="border-2 border-gray-200 focus:border-blue-500 h-12"
                     />
                   </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="booking-message">Informations complémentaires</Label>
+                    <Label htmlFor="booking-message" className="text-gray-700 font-medium">Informations complémentaires</Label>
                     <Textarea
                       id="booking-message"
                       value={bookingData.message}
                       onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })}
                       placeholder="Précisions sur votre demande..."
                       rows={4}
-                      className="border-2 focus:border-blue-500"
+                      className="border-2 border-gray-200 focus:border-blue-500"
                     />
                   </div>
+                  
                   <Button 
                     type="submit" 
                     size="lg" 
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300"
                     disabled={sendBookingMutation.isPending}
                   >
                     {sendBookingMutation.isPending ? "Envoi en cours..." : "Confirmer ma Réservation"}
@@ -488,60 +448,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section Pourquoi nous choisir */}
-        <section className="py-20 bg-slate-900 text-white">
+        {/* Témoignages */}
+        <section id="temoignages" className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
           <div className="container">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 text-blue-400">
-                  Pourquoi Choisir ProClean Empire ?
-                </h2>
-                <p className="text-xl mb-8 text-gray-300">
-                  Le plaisir du propre en vidéo
-                </p>
-                <div className="space-y-4">
-                  {avantages.map((avantage, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <CheckCircle2 className="h-6 w-6 text-blue-400 flex-shrink-0 mt-1" />
-                      <span className="text-lg">{avantage}</span>
-                    </div>
-                  ))}
-                </div>
+            <div className="text-center mb-16">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">TÉMOIGNAGES</span>
               </div>
-              <div className="relative">
-                <img 
-                  src="/hero-alt.png" 
-                  alt="ProClean Empire en action" 
-                  className="rounded-lg shadow-2xl w-full h-auto"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Témoignages Section */}
-        <section id="temoignages" className="py-20 bg-gradient-to-b from-blue-50 to-white">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">Avis de nos Clients</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                La satisfaction de nos clients est notre priorité absolue.
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Ils Nous Font Confiance
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                La satisfaction de nos clients est notre plus belle récompense.
               </p>
             </div>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="border-2 hover:border-blue-500 transition-colors">
+                <Card key={index} className="border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white">
                   <CardHeader>
-                    <div className="flex mb-2">
+                    <div className="flex mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
-                    <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                    <CardDescription>{testimonial.role}</CardDescription>
+                    <CardTitle className="text-xl text-gray-900">{testimonial.name}</CardTitle>
+                    <CardDescription className="text-blue-600 font-medium">{testimonial.role}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-600 italic">"{testimonial.content}"</p>
+                    <p className="text-gray-600 italic leading-relaxed">"{testimonial.content}"</p>
                   </CardContent>
                 </Card>
               ))}
@@ -550,31 +485,37 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <section id="contact" className="py-24 bg-white">
           <div className="container max-w-4xl">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">Demandez votre Devis Gratuit</h2>
-              <p className="text-lg text-blue-200">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">CONTACT</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Demandez Votre Devis Gratuit
+              </h2>
+              <p className="text-xl text-gray-600">
                 Remplissez le formulaire ci-dessous et nous vous contacterons dans les 24 heures.
               </p>
             </div>
-            <Card className="border-2 border-blue-400">
-              <CardContent className="pt-6">
+            
+            <Card className="border-2 border-blue-200 shadow-xl bg-white">
+              <CardContent className="pt-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nom complet *</Label>
+                      <Label htmlFor="name" className="text-gray-700 font-medium">Nom complet *</Label>
                       <Input
                         id="name"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Jean Dupont"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
+                      <Label htmlFor="email" className="text-gray-700 font-medium">Email *</Label>
                       <Input
                         id="email"
                         type="email"
@@ -582,13 +523,14 @@ export default function Home() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="jean.dupont@email.com"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                   </div>
-                  <div className="grid md:grid-cols-2 gap-4">
+                  
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Téléphone *</Label>
+                      <Label htmlFor="phone" className="text-gray-700 font-medium">Téléphone *</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -596,39 +538,41 @@ export default function Home() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="06 17 21 22 30"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="service">Service souhaité *</Label>
+                      <Label htmlFor="service" className="text-gray-700 font-medium">Service souhaité *</Label>
                       <Input
                         id="service"
                         required
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         placeholder="Ex: Nettoyage automobile"
-                        className="border-2 focus:border-blue-500"
+                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />
                     </div>
                   </div>
+                  
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message" className="text-gray-700 font-medium">Message</Label>
                     <Textarea
                       id="message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Décrivez vos besoins en détail..."
                       rows={5}
-                      className="border-2 focus:border-blue-500"
+                      className="border-2 border-gray-200 focus:border-blue-500"
                     />
                   </div>
+                  
                   <Button 
                     type="submit" 
                     size="lg" 
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
+                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300"
                     disabled={sendQuoteMutation.isPending}
                   >
-                    {sendQuoteMutation.isPending ? "Envoi en cours..." : "Envoyer ma demande"}
+                    {sendQuoteMutation.isPending ? "Envoi en cours..." : "Envoyer ma Demande"}
                   </Button>
                 </form>
               </CardContent>

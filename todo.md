@@ -33,3 +33,13 @@
 - [x] Configurer l'email de contact : makayakevinh00@gmail.com
 - [x] Mettre à jour le numéro de téléphone : 06 17 21 22 30
 - [x] Intégrer l'envoi d'emails pour les demandes de contact et réservations
+
+## Modifications demandées
+
+- [x] Retirer la section galerie avant/après
+- [x] Retirer la section tarifs/prix
+- [x] Générer de belles images pour chaque service (automobile, terrasse, tapis, balcon)
+- [x] Ajouter le service de jardinage
+- [x] Rendre le design plus lumineux et accueillant
+- [x] Améliorer l'ergonomie et la fluidité du site
+- [x] Conserver le système de réservation
