@@ -21,11 +21,11 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3 text-sm">
                 <Phone className="h-4 w-4 text-blue-400" />
-                <span>+33 1 23 45 67 89</span>
+                <a href="tel:0617212230" className="hover:text-blue-400 transition-colors">06 17 21 22 30</a>
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <Mail className="h-4 w-4 text-blue-400" />
-                <span>contact@proclean-empire.fr</span>
+                <a href="mailto:makayakevinh00@gmail.com" className="hover:text-blue-400 transition-colors">makayakevinh00@gmail.com</a>
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <MapPin className="h-4 w-4 text-blue-400" />

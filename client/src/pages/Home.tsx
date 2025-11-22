@@ -3,20 +3,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { 
   Car,
   CheckCircle2, 
-  Home as HomeIcon, 
-  Sparkles, 
   Star,
   Sofa,
   Building2,
-  Waves
+  Waves,
+  Calendar,
+  Clock,
+  Euro
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { trpc } from "@/lib/trpc";
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -27,10 +36,47 @@ export default function Home() {
     message: "",
   });
 
+  const [bookingData, setBookingData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    date: "",
+    time: "",
+    address: "",
+    message: "",
+  });
+
+  const sendQuoteMutation = trpc.contact.sendQuote.useMutation({
+    onSuccess: () => {
+      toast.success("Merci ! Nous vous contacterons sous 24h.");
+      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    },
+    onError: (error) => {
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
+      console.error(error);
+    },
+  });
+
+  const sendBookingMutation = trpc.contact.sendBooking.useMutation({
+    onSuccess: () => {
+      toast.success("Votre réservation a été envoyée ! Nous vous confirmerons rapidement.");
+      setBookingData({ name: "", email: "", phone: "", service: "", date: "", time: "", address: "", message: "" });
+    },
+    onError: (error) => {
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
+      console.error(error);
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Merci ! Nous vous contacterons sous 24h.");
-    setFormData({ name: "", email: "", phone: "", service: "", message: "" });
+    sendQuoteMutation.mutate(formData);
+  };
+
+  const handleBooking = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendBookingMutation.mutate(bookingData);
   };
 
   const services = [
@@ -57,6 +103,63 @@ export default function Home() {
       title: "Nettoyage Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
       image: "/services-grid.png",
+    },
+  ];
+
+  const tarifs = [
+    {
+      service: "Nettoyage Automobile",
+      items: [
+        { name: "Lavage extérieur simple", price: "25€" },
+        { name: "Lavage extérieur + intérieur", price: "45€" },
+        { name: "Lavage complet + lustrage", price: "80€" },
+        { name: "Detailing premium", price: "150€" },
+      ],
+    },
+    {
+      service: "Nettoyage Terrasse",
+      items: [
+        { name: "Terrasse jusqu'à 20m²", price: "80€" },
+        { name: "Terrasse 20-40m²", price: "140€" },
+        { name: "Terrasse 40-60m²", price: "200€" },
+        { name: "Traitement anti-mousse", price: "+30€" },
+      ],
+    },
+    {
+      service: "Nettoyage Tapis & Canapés",
+      items: [
+        { name: "Tapis petit format (< 3m²)", price: "40€" },
+        { name: "Tapis moyen format (3-6m²)", price: "70€" },
+        { name: "Tapis grand format (> 6m²)", price: "100€" },
+        { name: "Canapé 2-3 places", price: "80€" },
+      ],
+    },
+    {
+      service: "Nettoyage Balcon",
+      items: [
+        { name: "Balcon standard", price: "50€" },
+        { name: "Balcon avec garde-corps", price: "70€" },
+        { name: "Grand balcon/loggia", price: "100€" },
+        { name: "Nettoyage joints", price: "+20€" },
+      ],
+    },
+  ];
+
+  const gallery = [
+    {
+      title: "Nettoyage Automobile",
+      before: "/gallery-car-before.jpg",
+      after: "/gallery-car-after.jpg",
+    },
+    {
+      title: "Nettoyage Terrasse",
+      before: "/gallery-terrace-before.jpg",
+      after: "/gallery-terrace-after.jpg",
+    },
+    {
+      title: "Nettoyage Tapis",
+      before: "/gallery-carpet-before.jpg",
+      after: "/gallery-carpet-after.jpg",
     },
   ];
 
@@ -117,7 +220,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6" asChild>
-                    <a href="#contact">Prendre RDV</a>
+                    <a href="#reservation">Réserver en Ligne</a>
                   </Button>
                   <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white text-lg px-8 py-6" asChild>
                     <a href="#services">Nos Services</a>
@@ -135,8 +238,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Section C'est l'heure du grand nettoyage */}
-        <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+        {/* Section Services */}
+        <section id="services" className="py-20 bg-gradient-to-b from-white to-blue-50">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
@@ -169,6 +272,219 @@ export default function Home() {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Section Galerie Avant/Après */}
+        <section id="galerie" className="py-20 bg-white">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
+                Nos Réalisations Avant/Après
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Découvrez la transformation spectaculaire de nos interventions professionnelles.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {gallery.map((item, index) => (
+                <Card key={index} className="overflow-hidden border-2 hover:border-blue-500 transition-colors">
+                  <CardHeader>
+                    <CardTitle className="text-center text-blue-900">{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-600 mb-2">AVANT</p>
+                      <img 
+                        src={item.before} 
+                        alt={`${item.title} - Avant`}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-green-600 mb-2">APRÈS</p>
+                      <img 
+                        src={item.after} 
+                        alt={`${item.title} - Après`}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section Tarifs */}
+        <section id="tarifs" className="py-20 bg-gradient-to-b from-blue-50 to-white">
+          <div className="container">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-900">
+                Nos Tarifs
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Des prix transparents et compétitifs pour tous nos services de nettoyage.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {tarifs.map((tarif, index) => (
+                <Card key={index} className="border-2 hover:border-blue-500 transition-colors">
+                  <CardHeader className="bg-blue-900 text-white">
+                    <CardTitle className="flex items-center">
+                      <Euro className="mr-2 h-5 w-5" />
+                      {tarif.service}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <ul className="space-y-3">
+                      {tarif.items.map((item, idx) => (
+                        <li key={idx} className="flex justify-between items-center pb-3 border-b last:border-b-0">
+                          <span className="text-gray-700">{item.name}</span>
+                          <span className="font-bold text-blue-900">{item.price}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Section Réservation en Ligne */}
+        <section id="reservation" className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+          <div className="container max-w-4xl">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+                Réservez Votre Intervention
+              </h2>
+              <p className="text-lg text-blue-200">
+                Choisissez votre service, date et heure. Nous vous confirmerons rapidement.
+              </p>
+            </div>
+            <Card className="border-2 border-blue-400">
+              <CardContent className="pt-6">
+                <form onSubmit={handleBooking} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-name">Nom complet *</Label>
+                      <Input
+                        id="booking-name"
+                        required
+                        value={bookingData.name}
+                        onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })}
+                        placeholder="Jean Dupont"
+                        className="border-2 focus:border-blue-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-email">Email *</Label>
+                      <Input
+                        id="booking-email"
+                        type="email"
+                        required
+                        value={bookingData.email}
+                        onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
+                        placeholder="jean.dupont@email.com"
+                        className="border-2 focus:border-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-phone">Téléphone *</Label>
+                      <Input
+                        id="booking-phone"
+                        type="tel"
+                        required
+                        value={bookingData.phone}
+                        onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })}
+                        placeholder="06 12 34 56 78"
+                        className="border-2 focus:border-blue-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-service">Service souhaité *</Label>
+                      <Select 
+                        value={bookingData.service} 
+                        onValueChange={(value) => setBookingData({ ...bookingData, service: value })}
+                      >
+                        <SelectTrigger className="border-2 focus:border-blue-500">
+                          <SelectValue placeholder="Choisir un service" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="automobile">Nettoyage Automobile</SelectItem>
+                          <SelectItem value="terrasse">Nettoyage Terrasse</SelectItem>
+                          <SelectItem value="tapis">Nettoyage Tapis</SelectItem>
+                          <SelectItem value="balcon">Nettoyage Balcon</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-date">Date souhaitée *</Label>
+                      <div className="relative">
+                        <Calendar className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                        <Input
+                          id="booking-date"
+                          type="date"
+                          required
+                          value={bookingData.date}
+                          onChange={(e) => setBookingData({ ...bookingData, date: e.target.value })}
+                          className="border-2 focus:border-blue-500 pl-10"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="booking-time">Heure souhaitée *</Label>
+                      <div className="relative">
+                        <Clock className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+                        <Input
+                          id="booking-time"
+                          type="time"
+                          required
+                          value={bookingData.time}
+                          onChange={(e) => setBookingData({ ...bookingData, time: e.target.value })}
+                          className="border-2 focus:border-blue-500 pl-10"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="booking-address">Adresse d'intervention *</Label>
+                    <Input
+                      id="booking-address"
+                      required
+                      value={bookingData.address}
+                      onChange={(e) => setBookingData({ ...bookingData, address: e.target.value })}
+                      placeholder="12 Rue de la République, 75001 Paris"
+                      className="border-2 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="booking-message">Informations complémentaires</Label>
+                    <Textarea
+                      id="booking-message"
+                      value={bookingData.message}
+                      onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })}
+                      placeholder="Précisions sur votre demande..."
+                      rows={4}
+                      className="border-2 focus:border-blue-500"
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
+                    disabled={sendBookingMutation.isPending}
+                  >
+                    {sendBookingMutation.isPending ? "Envoi en cours..." : "Confirmer ma Réservation"}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -279,7 +595,7 @@ export default function Home() {
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="+33 1 23 45 67 89"
+                        placeholder="06 17 21 22 30"
                         className="border-2 focus:border-blue-500"
                       />
                     </div>
@@ -306,8 +622,13 @@ export default function Home() {
                       className="border-2 focus:border-blue-500"
                     />
                   </div>
-                  <Button type="submit" size="lg" className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6">
-                    Envoyer ma demande
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-6"
+                    disabled={sendQuoteMutation.isPending}
+                  >
+                    {sendQuoteMutation.isPending ? "Envoi en cours..." : "Envoyer ma demande"}
                   </Button>
                 </form>
               </CardContent>

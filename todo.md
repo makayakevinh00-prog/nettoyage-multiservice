@@ -24,3 +24,12 @@
 - [x] Mettre en avant les services: Voiture, Tapis, Terrasse, Balcon
 - [x] Adapter la palette de couleurs au bleu ProClean
 - [x] Améliorer la hero section avec un style plus moderne
+
+## Nouvelles fonctionnalités à ajouter
+
+- [x] Créer une galerie photos avant/après avec images générées par IA
+- [x] Développer un système de réservation en ligne (choix service, date, heure)
+- [x] Ajouter une grille tarifaire détaillée par service
+- [x] Configurer l'email de contact : makayakevinh00@gmail.com
+- [x] Mettre à jour le numéro de téléphone : 06 17 21 22 30
+- [x] Intégrer l'envoi d'emails pour les demandes de contact et réservations
