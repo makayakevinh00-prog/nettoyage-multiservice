@@ -71,3 +71,10 @@
 - [x] Ajouter un sitemap.xml pour les moteurs de recherche
 - [x] Ajouter robots.txt pour le référencement
 - [x] Optimiser les balises Open Graph pour les réseaux sociaux
+
+## Intégration Calendrier
+
+- [x] Générer des fichiers .ics pour les rendez-vous
+- [x] Envoyer le fichier .ics au client par email
+- [x] Permettre au client d'ajouter le rendez-vous à son calendrier en un clic
+- [x] Le fichier .ics contient toutes les informations (date, heure, lieu, participants)

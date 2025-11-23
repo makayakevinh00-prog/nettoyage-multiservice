@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
+import { generateICSFile } from "./lib/calendar";
 
 export const appRouter = router({
   system: systemRouter,
@@ -97,7 +98,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           content: emailContent,
         });
 
-        // Envoyer l'email de confirmation au client
+        // Envoyer l'email de confirmation au client avec fichier .ics
         try {
           const confirmationEmail = generateBookingConfirmationEmail({
             name: input.name,
@@ -107,11 +108,23 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             address: input.address,
           });
 
+          // Générer le fichier .ics
+          const icsContent = generateICSFile(input);
+          
+          const attachments = icsContent ? [
+            {
+              filename: 'rendez-vous-proclean.ics',
+              content: icsContent,
+              contentType: 'text/calendar',
+            },
+          ] : undefined;
+
           await sendEmail({
             to: input.email,
             subject: '✅ Confirmation de votre réservation - ProClean Empire',
             html: confirmationEmail.html,
             text: confirmationEmail.text,
+            attachments,
           });
         } catch (emailError) {
           console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);

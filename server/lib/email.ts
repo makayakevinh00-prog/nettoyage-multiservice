@@ -16,6 +16,11 @@ export interface SendEmailOptions {
   subject: string;
   html: string;
   text?: string;
+  attachments?: Array<{
+    filename: string;
+    content: string | Buffer;
+    contentType?: string;
+  }>;
 }
 
 export async function sendEmail(options: SendEmailOptions) {
@@ -26,6 +31,7 @@ export async function sendEmail(options: SendEmailOptions) {
       subject: options.subject,
       text: options.text,
       html: options.html,
+      attachments: options.attachments,
     });
 
     console.log('Email envoyé:', info.messageId);
@@ -95,6 +101,11 @@ export function generateBookingConfirmationEmail(data: {
         <div class="info-row">
           <span class="label">📍 Adresse :</span> ${data.address}
         </div>
+      </div>
+      
+      <div style="text-align: center; margin: 30px 0;">
+        <p style="margin-bottom: 15px;"><strong>📅 Ajoutez ce rendez-vous à votre calendrier</strong></p>
+        <p style="font-size: 14px; color: #6b7280;">Un fichier calendrier (.ics) est joint à cet email.<br>Ouvrez-le pour l'ajouter automatiquement à votre calendrier (Google, Outlook, Apple...)</p>
       </div>
       
       <p><strong>Prochaines étapes :</strong></p>
