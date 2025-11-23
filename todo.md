@@ -78,3 +78,9 @@
 - [x] Envoyer le fichier .ics au client par email
 - [x] Permettre au client d'ajouter le rendez-vous à son calendrier en un clic
 - [x] Le fichier .ics contient toutes les informations (date, heure, lieu, participants)
+
+## Mise à jour favicon
+
+- [x] Remplacer le favicon par le logo ProClean dans le Management Dashboard
+- [x] Optimiser le titre du site pour le référencement Google
+- [x] Améliorer la description pour apparaître dans les recherches
