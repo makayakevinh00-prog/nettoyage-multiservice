@@ -57,3 +57,7 @@
 ## Bugs à corriger
 
 - [x] Corriger l'erreur de chargement de Google Maps Places API dans AddressAutocomplete
+
+## Bugs critiques
+
+- [x] Retirer l'autocomplétion Google Maps (erreurs d'API key) et utiliser un champ standard

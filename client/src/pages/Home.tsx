@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import AddressAutocomplete from "@/components/AddressAutocomplete";
+
 import { 
   Car,
   CheckCircle2, 
@@ -452,13 +452,14 @@ export default function Home() {
                   
                   <div className="space-y-2">
                     <Label htmlFor="booking-address" className="text-gray-700 font-medium">Adresse d'intervention *</Label>
-                    <AddressAutocomplete
+                    <Input
                       id="booking-address"
+                      type="text"
                       required
                       value={bookingData.address}
-                      onChange={(value) => setBookingData({ ...bookingData, address: value })}
-                      placeholder="Commencez à taper votre adresse..."
-                      className="border-2 border-gray-200 focus:border-blue-500 h-12"
+                      onChange={(e) => setBookingData({ ...bookingData, address: e.target.value })}
+                      placeholder="Ex: 123 Rue de la Paix, 75001 Paris"
+                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                     />
                   </div>
                   
