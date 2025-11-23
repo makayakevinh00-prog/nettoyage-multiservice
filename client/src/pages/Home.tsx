@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/select";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import DateTimePicker from "@/components/DateTimePicker";
+import FrenchAddressAutocomplete from "@/components/FrenchAddressAutocomplete";
 
 import { 
   Car,
@@ -419,47 +421,22 @@ export default function Home() {
                     </div>
                   </div>
                   
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-date" className="text-gray-700 font-medium">Date souhaitée *</Label>
-                      <div className="relative">
-                        <Calendar className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
-                        <Input
-                          id="booking-date"
-                          type="date"
-                          required
-                          value={bookingData.date}
-                          onChange={(e) => setBookingData({ ...bookingData, date: e.target.value })}
-                          className="border-2 border-gray-200 focus:border-blue-500 pl-11 h-12"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-time" className="text-gray-700 font-medium">Heure souhaitée *</Label>
-                      <div className="relative">
-                        <Clock className="absolute left-3 top-3.5 h-5 w-5 text-gray-500" />
-                        <Input
-                          id="booking-time"
-                          type="time"
-                          required
-                          value={bookingData.time}
-                          onChange={(e) => setBookingData({ ...bookingData, time: e.target.value })}
-                          className="border-2 border-gray-200 focus:border-blue-500 pl-11 h-12"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  <DateTimePicker
+                    selectedDate={bookingData.date}
+                    selectedTime={bookingData.time}
+                    onDateChange={(date) => setBookingData({ ...bookingData, date })}
+                    onTimeChange={(time) => setBookingData({ ...bookingData, time })}
+                  />
                   
                   <div className="space-y-2">
                     <Label htmlFor="booking-address" className="text-gray-700 font-medium">Adresse d'intervention *</Label>
-                    <Input
+                    <FrenchAddressAutocomplete
                       id="booking-address"
-                      type="text"
                       required
                       value={bookingData.address}
-                      onChange={(e) => setBookingData({ ...bookingData, address: e.target.value })}
-                      placeholder="Ex: 123 Rue de la Paix, 75001 Paris"
-                      className="border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      onChange={(value) => setBookingData({ ...bookingData, address: value })}
+                      placeholder="Commencez à taper votre adresse..."
+                      className="border-2 border-gray-200 focus:border-blue-500 h-12"
                     />
                   </div>
                   

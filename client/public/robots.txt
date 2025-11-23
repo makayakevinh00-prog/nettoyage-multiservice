@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nettoyage-multiservice.manus.space/sitemap.xml

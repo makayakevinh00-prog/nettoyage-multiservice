@@ -61,3 +61,13 @@
 ## Bugs critiques
 
 - [x] Retirer l'autocomplétion Google Maps (erreurs d'API key) et utiliser un champ standard
+
+## Améliorations UX et SEO
+
+- [x] Ajouter un calendrier interactif pour la sélection de date
+- [x] Créer des créneaux horaires prédéfinis (matin, après-midi, soir)
+- [x] Intégrer l'autocomplétion d'adresse avec l'API adresse.data.gouv.fr (gratuite)
+- [x] Optimiser le SEO (meta tags, descriptions, mots-clés)
+- [x] Ajouter un sitemap.xml pour les moteurs de recherche
+- [x] Ajouter robots.txt pour le référencement
+- [x] Optimiser les balises Open Graph pour les réseaux sociaux
