@@ -19,59 +19,64 @@ export default function AddressAutocomplete({
   className
 }: AddressAutocompleteProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     if (!inputRef.current) return;
 
-    // Charger l'API Google Maps Places
-    const loadGoogleMaps = async () => {
-      try {
-        // Vérifier si google.maps est déjà chargé
-        if (typeof google !== 'undefined' && google.maps && google.maps.places) {
-          initAutocomplete();
-          return;
-        }
-
-        // Charger le script Google Maps via le proxy Manus
-        const script = document.createElement('script');
-        script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&loading=async';
-        script.async = true;
-        script.defer = true;
-        script.onload = () => {
-          initAutocomplete();
-        };
-        document.head.appendChild(script);
-      } catch (error) {
-        console.error('Erreur lors du chargement de Google Maps:', error);
-      }
-    };
-
+    // Fonction pour initialiser l'autocomplétion
     const initAutocomplete = () => {
-      if (!inputRef.current) return;
+      if (!inputRef.current || !window.google?.maps?.places) {
+        return;
+      }
 
-      const autocompleteInstance = new google.maps.places.Autocomplete(inputRef.current, {
+      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
         componentRestrictions: { country: 'fr' },
         fields: ['formatted_address', 'address_components', 'geometry'],
         types: ['address']
       });
 
-      autocompleteInstance.addListener('place_changed', () => {
-        const place = autocompleteInstance.getPlace();
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
         if (place.formatted_address) {
           onChange(place.formatted_address);
         }
       });
 
-      setAutocomplete(autocompleteInstance);
+      setIsLoaded(true);
     };
 
-    loadGoogleMaps();
+    // Vérifier si Google Maps est déjà chargé
+    if (window.google?.maps?.places) {
+      initAutocomplete();
+      return;
+    }
+
+    // Sinon, charger le script
+    const checkGoogleMaps = setInterval(() => {
+      if (window.google?.maps?.places) {
+        clearInterval(checkGoogleMaps);
+        initAutocomplete();
+      }
+    }, 100);
+
+    // Charger le script si nécessaire
+    if (!document.querySelector('script[src*="maps.googleapis.com"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?libraries=places&loading=async';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+
+    // Nettoyage après 10 secondes
+    const timeout = setTimeout(() => {
+      clearInterval(checkGoogleMaps);
+    }, 10000);
 
     return () => {
-      if (autocomplete) {
-        google.maps.event.clearInstanceListeners(autocomplete);
-      }
+      clearInterval(checkGoogleMaps);
+      clearTimeout(timeout);
     };
   }, []);
 
@@ -89,3 +94,4 @@ export default function AddressAutocomplete({
     />
   );
 }
+

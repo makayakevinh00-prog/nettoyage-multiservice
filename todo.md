@@ -53,3 +53,7 @@
 - [x] Ajouter le logo comme favicon (icône dans l'onglet navigateur)
 - [x] Rendre le logo cliquable pour retourner en haut de page
 - [x] Améliorer la navigation et l'ergonomie générale
+
+## Bugs à corriger
+
+- [x] Corriger l'erreur de chargement de Google Maps Places API dans AddressAutocomplete
