@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
+import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 
 export const appRouter = router({
   system: systemRouter,
@@ -90,10 +91,32 @@ Cette réservation a été envoyée depuis le site ProClean Empire.
 Veuillez contacter le client pour confirmer le rendez-vous.
         `.trim();
 
+        // Envoyer la notification au propriétaire
         await notifyOwner({
           title: `Nouvelle réservation - ${input.date} à ${input.time}`,
           content: emailContent,
         });
+
+        // Envoyer l'email de confirmation au client
+        try {
+          const confirmationEmail = generateBookingConfirmationEmail({
+            name: input.name,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+          });
+
+          await sendEmail({
+            to: input.email,
+            subject: '✅ Confirmation de votre réservation - ProClean Empire',
+            html: confirmationEmail.html,
+            text: confirmationEmail.text,
+          });
+        } catch (emailError) {
+          console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
+          // Ne pas bloquer la réservation si l'email échoue
+        }
 
         return { success: true };
       }),

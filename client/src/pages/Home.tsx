@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { 
   Car,
   CheckCircle2, 
@@ -26,11 +27,14 @@ import {
   Shield,
   Clock3
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
+import { useLocation } from "wouter";
 
 export default function Home() {
+  const [location] = useLocation();
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -49,6 +53,22 @@ export default function Home() {
     address: "",
     message: "",
   });
+
+  // Gérer la pré-sélection du service depuis l'URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get('service');
+    if (serviceParam) {
+      setBookingData(prev => ({ ...prev, service: serviceParam }));
+      // Scroll vers la section réservation
+      setTimeout(() => {
+        const element = document.querySelector('#reservation');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location]);
 
   const sendQuoteMutation = trpc.contact.sendQuote.useMutation({
     onSuccess: () => {
@@ -263,6 +283,26 @@ export default function Home() {
                       {service.description}
                     </CardDescription>
                   </CardHeader>
+                  <CardContent>
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700"
+                      onClick={() => {
+                        const serviceValue = service.title.toLowerCase().includes('automobile') ? 'automobile' :
+                                           service.title.toLowerCase().includes('terrasse') ? 'terrasse' :
+                                           service.title.toLowerCase().includes('tapis') ? 'tapis' :
+                                           service.title.toLowerCase().includes('balcon') ? 'balcon' : 'jardinage';
+                        setBookingData(prev => ({ ...prev, service: serviceValue }));
+                        setTimeout(() => {
+                          const element = document.querySelector('#reservation');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }, 100);
+                      }}
+                    >
+                      Réserver ce Service
+                    </Button>
+                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -412,12 +452,12 @@ export default function Home() {
                   
                   <div className="space-y-2">
                     <Label htmlFor="booking-address" className="text-gray-700 font-medium">Adresse d'intervention *</Label>
-                    <Input
+                    <AddressAutocomplete
                       id="booking-address"
                       required
                       value={bookingData.address}
-                      onChange={(e) => setBookingData({ ...bookingData, address: e.target.value })}
-                      placeholder="12 Rue de la République, 75001 Paris"
+                      onChange={(value) => setBookingData({ ...bookingData, address: value })}
+                      placeholder="Commencez à taper votre adresse..."
                       className="border-2 border-gray-200 focus:border-blue-500 h-12"
                     />
                   </div>

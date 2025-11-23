@@ -43,3 +43,13 @@
 - [x] Rendre le design plus lumineux et accueillant
 - [x] Améliorer l'ergonomie et la fluidité du site
 - [x] Conserver le système de réservation
+
+## Nouvelles améliorations UX
+
+- [x] Ajouter les réseaux sociaux (Instagram, TikTok, LinkedIn) dans le footer
+- [x] Créer des liens directs vers chaque service avec pré-sélection du formulaire
+- [x] Intégrer l'autocomplétion d'adresse avec Google Maps Places API
+- [x] Envoyer un email de confirmation automatique au client après réservation
+- [x] Ajouter le logo comme favicon (icône dans l'onglet navigateur)
+- [x] Rendre le logo cliquable pour retourner en haut de page
+- [x] Améliorer la navigation et l'ergonomie générale

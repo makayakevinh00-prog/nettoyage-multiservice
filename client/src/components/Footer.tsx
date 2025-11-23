@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -34,14 +35,44 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Horaires */}
+          {/* Horaires & Réseaux sociaux */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-blue-400">Horaires</h3>
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2 text-sm mb-6">
               <p>Lundi - Vendredi: 8h - 19h</p>
               <p>Samedi: 9h - 17h</p>
               <p>Dimanche: Sur rendez-vous</p>
               <p className="text-blue-400 font-medium mt-4">Intervention 7j/7 disponible</p>
+            </div>
+            <h3 className="text-lg font-semibold mb-4 text-blue-400">Suivez-nous</h3>
+            <div className="flex space-x-4">
+              <a 
+                href="https://www.instagram.com/proclean_empire/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@procleanempire" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="TikTok"
+              >
+                <FaTiktok className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/proclean-empire/about/?viewAsMember=true" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
             </div>
           </div>
         </div>

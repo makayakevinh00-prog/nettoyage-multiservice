@@ -28,10 +28,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 shadow-sm">
       <div className="container flex h-20 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3">
+        <a 
+          href="#" 
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center space-x-3 hover:opacity-80 transition-opacity cursor-pointer"
+        >
           <img src={APP_LOGO} alt="ProClean Empire" className="h-12 w-auto" />
           <span className="text-2xl font-bold text-blue-900">ProClean Empire</span>
-        </Link>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
