@@ -37,7 +37,13 @@ import { useLocation } from "wouter";
 export default function Home() {
   const [location] = useLocation();
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    service: 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage' | '';
+    message: string;
+  }>({
     name: "",
     email: "",
     phone: "",
@@ -45,7 +51,16 @@ export default function Home() {
     message: "",
   });
 
-  const [bookingData, setBookingData] = useState({
+  const [bookingData, setBookingData] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    service: 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage' | '';
+    date: string;
+    time: 'matin' | 'apres-midi' | 'soir' | '';
+    address: string;
+    message: string;
+  }>({
     name: "",
     email: "",
     phone: "",
@@ -61,7 +76,7 @@ export default function Home() {
     const params = new URLSearchParams(window.location.search);
     const serviceParam = params.get('service');
     if (serviceParam) {
-      setBookingData(prev => ({ ...prev, service: serviceParam }));
+      setBookingData(prev => ({ ...prev, service: serviceParam as typeof bookingData.service }));
       // Scroll vers la section réservation
       setTimeout(() => {
         const element = document.querySelector('#reservation');
@@ -96,12 +111,28 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    sendQuoteMutation.mutate(formData);
+    if (!formData.service) {
+      toast.error("Veuillez sélectionner un service");
+      return;
+    }
+    sendQuoteMutation.mutate({
+      ...formData,
+      service: formData.service as 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage',
+    });
   };
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    sendBookingMutation.mutate(bookingData);
+    // Validation avant envoi
+    if (!bookingData.service || !bookingData.time) {
+      toast.error("Veuillez remplir tous les champs obligatoires");
+      return;
+    }
+    sendBookingMutation.mutate({
+      ...bookingData,
+      service: bookingData.service as 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage',
+      time: bookingData.time as 'matin' | 'apres-midi' | 'soir',
+    });
   };
 
   const services = [
@@ -405,7 +436,7 @@ export default function Home() {
                       <Label htmlFor="booking-service" className="text-gray-700 font-medium">Service souhaité *</Label>
                       <Select 
                         value={bookingData.service} 
-                        onValueChange={(value) => setBookingData({ ...bookingData, service: value })}
+                        onValueChange={(value) => setBookingData({ ...bookingData, service: value as typeof bookingData.service })}
                       >
                         <SelectTrigger className="border-2 border-gray-200 focus:border-blue-500 h-12">
                           <SelectValue placeholder="Choisir un service" />
@@ -425,7 +456,7 @@ export default function Home() {
                     selectedDate={bookingData.date}
                     selectedTime={bookingData.time}
                     onDateChange={(date) => setBookingData({ ...bookingData, date })}
-                    onTimeChange={(time) => setBookingData({ ...bookingData, time })}
+                    onTimeChange={(time) => setBookingData({ ...bookingData, time: time as typeof bookingData.time })}
                   />
                   
                   <div className="space-y-2">
@@ -565,7 +596,7 @@ export default function Home() {
                         id="service"
                         required
                         value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                        onChange={(e) => setFormData({ ...formData, service: e.target.value as typeof formData.service })}
                         placeholder="Ex: Nettoyage automobile"
                         className="border-2 border-gray-200 focus:border-blue-500 h-12"
                       />

@@ -23,11 +23,11 @@ export const appRouter = router({
   contact: router({
     sendQuote: publicProcedure
       .input(z.object({
-        name: z.string().min(1),
-        email: z.string().email(),
-        phone: z.string().min(1),
-        service: z.string().min(1),
-        message: z.string().optional(),
+        name: z.string().min(1).max(100).trim(),
+        email: z.string().email().max(255).trim().toLowerCase(),
+        phone: z.string().min(10).max(20).trim().regex(/^[0-9\s\+\-\(\)]+$/),
+        service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage']),
+        message: z.string().max(1000).trim().optional(),
       }))
       .mutation(async ({ input }) => {
         const emailContent = `
@@ -55,14 +55,14 @@ Cette demande a été envoyée depuis le site ProClean Empire.
 
     sendBooking: publicProcedure
       .input(z.object({
-        name: z.string().min(1),
-        email: z.string().email(),
-        phone: z.string().min(1),
-        service: z.string().min(1),
-        date: z.string().min(1),
-        time: z.string().min(1),
-        address: z.string().min(1),
-        message: z.string().optional(),
+        name: z.string().min(1).max(100).trim(),
+        email: z.string().email().max(255).trim().toLowerCase(),
+        phone: z.string().min(10).max(20).trim().regex(/^[0-9\s\+\-\(\)]+$/),
+        service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage']),
+        date: z.string().min(1).max(50).trim(),
+        time: z.enum(['matin', 'apres-midi', 'soir']),
+        address: z.string().min(5).max(500).trim(),
+        message: z.string().max(1000).trim().optional(),
       }))
       .mutation(async ({ input }) => {
         const serviceNames: Record<string, string> = {
