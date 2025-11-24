@@ -60,7 +60,7 @@ Cette demande a été envoyée depuis le site ProClean Empire.
         phone: z.string().min(10).max(20).trim().regex(/^[0-9\s\+\-\(\)]+$/),
         service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage']),
         date: z.string().min(1).max(50).trim(),
-        time: z.enum(['matin', 'apres-midi', 'soir']),
+        time: z.string().min(1).max(10).trim(),
         address: z.string().min(5).max(500).trim(),
         message: z.string().max(1000).trim().optional(),
       }))

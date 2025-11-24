@@ -109,3 +109,9 @@
 - [x] Mettre à jour le nom de domaine vers procleanempire.com
 - [x] Configurer l'envoi d'emails vers serviceclient@procleanempire.com
 - [x] Vérifier la configuration email avec test SMTP réussi
+
+## Bugs urgents à corriger
+
+- [x] Changer l'email dans le Footer vers serviceclient@procleanempire.com
+- [x] Corriger le bug "Une erreur est survenue" lors de la prise de rendez-vous
+- [x] Tester le formulaire de réservation en conditions réelles

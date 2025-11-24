@@ -131,7 +131,7 @@ export default function Home() {
     sendBookingMutation.mutate({
       ...bookingData,
       service: bookingData.service as 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage',
-      time: bookingData.time as 'matin' | 'apres-midi' | 'soir',
+      time: bookingData.time,
     });
   };
 

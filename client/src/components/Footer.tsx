@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <Mail className="h-4 w-4 text-blue-400" />
-                <a href="mailto:makayakevinh00@gmail.com" className="hover:text-blue-400 transition-colors">makayakevinh00@gmail.com</a>
+                <a href="mailto:serviceclient@procleanempire.com" className="hover:text-blue-400 transition-colors">serviceclient@procleanempire.com</a>
               </div>
               <div className="flex items-center space-x-3 text-sm">
                 <MapPin className="h-4 w-4 text-blue-400" />
