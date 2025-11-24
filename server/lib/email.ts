@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'makayakevinh00@gmail.com',
+    user: 'serviceclient@procleanempire.com',
     pass: process.env.GMAIL_APP_PASSWORD || '', // À configurer dans les secrets
   },
 });
@@ -26,7 +26,7 @@ export interface SendEmailOptions {
 export async function sendEmail(options: SendEmailOptions) {
   try {
     const info = await transporter.sendMail({
-      from: '"ProClean Empire" <makayakevinh00@gmail.com>',
+      from: '"ProClean Empire" <serviceclient@procleanempire.com>',
       to: options.to,
       subject: options.subject,
       text: options.text,
@@ -118,7 +118,7 @@ export function generateBookingConfirmationEmail(data: {
       <p>Si vous avez des questions ou souhaitez modifier votre réservation, n'hésitez pas à nous contacter :</p>
       <ul>
         <li>📞 Téléphone : <strong>06 17 21 22 30</strong></li>
-        <li>📧 Email : <strong>makayakevinh00@gmail.com</strong></li>
+        <li>📧 Email : <strong>serviceclient@procleanempire.com</strong></li>
       </ul>
       
       <div class="footer">
@@ -153,7 +153,7 @@ PROCHAINES ÉTAPES :
 
 CONTACT :
 - Téléphone : 06 17 21 22 30
-- Email : makayakevinh00@gmail.com
+- Email : serviceclient@procleanempire.com
 
 ProClean Empire
 Nettoyage Premium Multiservice

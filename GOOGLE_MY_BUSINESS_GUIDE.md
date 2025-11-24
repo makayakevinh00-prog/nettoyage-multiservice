@@ -55,7 +55,7 @@
 
 **Téléphone** : `06 17 21 22 30`
 
-**Site web** : `https://procleanempire-multiservice.manus.space`
+**Site web** : `https://procleanempire.com`
 
 ### 2.2 Horaires d'ouverture
 
@@ -343,7 +343,7 @@ Avant de publier, vérifiez que vous avez :
 - [ ] Catégorie principale : Service de nettoyage
 - [ ] Adresse et zone de service renseignées
 - [ ] Téléphone : 06 17 21 22 30
-- [ ] Site web : https://procleanempire-multiservice.manus.space
+- [ ] Site web : https://procleanempire.com
 - [ ] Email : makayakevinh00@gmail.com
 - [ ] Horaires d'ouverture définis
 - [ ] Description complète (750 caractères)

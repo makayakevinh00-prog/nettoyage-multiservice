@@ -48,7 +48,7 @@ Cochez les cases suivantes :
 1. Cliquez sur **"Flux de données Web"**
 2. Renseignez les informations :
 
-**URL du site web** : `https://procleanempire-multiservice.manus.space`
+**URL du site web** : `https://procleanempire.com`
 
 **Nom du flux** : `Site Web ProClean`
 

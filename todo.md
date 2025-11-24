@@ -101,3 +101,11 @@
 - [x] Ajouter un bouton WhatsApp flottant en bas à droite
 - [x] Intégrer Google Analytics 4 pour le suivi des visiteurs (guide créé, en attente de l'ID GA4)
 - [x] Corriger les bugs du site (suppression de Map.tsx inutilisé)
+
+## Bug critique à corriger
+
+- [x] Corriger l'erreur d'envoi des formulaires de contact et réservation
+- [x] Changer l'email vers serviceclient@procleanempire.com partout
+- [x] Mettre à jour le nom de domaine vers procleanempire.com
+- [x] Configurer l'envoi d'emails vers serviceclient@procleanempire.com
+- [x] Vérifier la configuration email avec test SMTP réussi
