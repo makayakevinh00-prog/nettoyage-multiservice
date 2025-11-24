@@ -94,3 +94,10 @@
 - [x] Ajouter une protection contre les injections SQL, XSS
 - [x] Validation des types TypeScript pour la sécurité
 - [x] Créer le document SECURITY.md avec toutes les mesures
+
+## Nouvelles fonctionnalités
+
+- [x] Créer le guide Google My Business complet
+- [x] Ajouter un bouton WhatsApp flottant en bas à droite
+- [x] Intégrer Google Analytics 4 pour le suivi des visiteurs (guide créé, en attente de l'ID GA4)
+- [x] Corriger les bugs du site (suppression de Map.tsx inutilisé)
