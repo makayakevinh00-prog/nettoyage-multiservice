@@ -6,6 +6,7 @@ import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 import { generateICSFile } from "./lib/calendar";
+import { addEventToGoogleCalendar } from "./lib/google-calendar";
 
 export const appRouter = router({
   system: systemRouter,
@@ -128,7 +129,13 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           });
         } catch (emailError) {
           console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
-          // Ne pas bloquer la réservation si l'email échoue
+        }
+
+        // Ajouter au calendrier Google
+        try {
+          await addEventToGoogleCalendar(input);
+        } catch (calendarError) {
+          console.error('Erreur lors de l\'ajout au calendrier Google:', calendarError);
         }
 
         return { success: true };
