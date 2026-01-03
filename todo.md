@@ -127,3 +127,12 @@
 - [ ] Implémenter la logique de remboursement automatique
 - [ ] Tester les paiements avec la clé Stripe fournie
 - [ ] Documenter le processus de remboursement pour l'admin
+
+
+## Corrections critiques demandées
+
+- [x] Ajouter le rendez-vous au calendrier du propriétaire (serviceclient@procleanempire.com)
+- [x] Rediriger vers le paiement Stripe après la réservation
+- [x] Intégrer HubSpot CRM pour les formulaires et contacts
+- [x] Ajouter le tracking Google Ads (AW-17788571669)
+- [x] Ajouter Google Analytics 4

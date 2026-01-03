@@ -6,7 +6,7 @@ import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 import { generateICSFile } from "./lib/calendar";
-import { addEventToGoogleCalendar } from "./lib/googleCalendar";
+import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleCalendar";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -105,7 +105,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           content: emailContent,
         });
 
-        // Ajouter l'événement à Google Calendar
+        // Ajouter l'événement à Google Calendar du client
         try {
           await addEventToGoogleCalendar({
             name: input.name,
@@ -118,7 +118,24 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             message: input.message,
           });
         } catch (calendarError) {
-          console.error('Erreur lors de l\'ajout à Google Calendar:', calendarError);
+          console.error('Erreur lors de l\'ajout à Google Calendar du client:', calendarError);
+          // Ne pas bloquer la réservation si Google Calendar échoue
+        }
+
+        // Ajouter l'événement au calendrier du propriétaire
+        try {
+          await addEventToOwnerCalendar({
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: input.message,
+          });
+        } catch (calendarError) {
+          console.error('Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
           // Ne pas bloquer la réservation si Google Calendar échoue
         }
 

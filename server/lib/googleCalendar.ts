@@ -138,6 +138,71 @@ ${booking.message ? `Notes: ${booking.message}` : ''}
 }
 
 /**
+ * Ajoute un événement au calendrier du propriétaire (serviceclient@procleanempire.com)
+ */
+export async function addEventToOwnerCalendar(booking: BookingEvent): Promise<boolean> {
+  try {
+    const calendar = initializeCalendarService();
+    const ownerCalendarId = 'serviceclient@procleanempire.com';
+
+    // Convertir la date et l'heure en format ISO
+    const [year, month, day] = booking.date.split('-');
+    const [hours, minutes] = booking.time.split(':');
+    
+    const startTime = new Date(
+      parseInt(year),
+      parseInt(month) - 1,
+      parseInt(day),
+      parseInt(hours),
+      parseInt(minutes)
+    );
+
+    // Durée de 2 heures par défaut
+    const endTime = new Date(startTime.getTime() + 2 * 60 * 60 * 1000);
+
+    const event = {
+      summary: `[RESERVATION] ${getServiceDescription(booking.service)} - ${booking.name}`,
+      description: `
+Client: ${booking.name}
+Email: ${booking.email}
+Téléphone: ${booking.phone}
+Service: ${getServiceDescription(booking.service)}
+Adresse: ${booking.address}
+${booking.message ? `Notes: ${booking.message}` : ''}
+      `.trim(),
+      location: booking.address,
+      start: {
+        dateTime: startTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      end: {
+        dateTime: endTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: 'notification', minutes: 60 }, // 1 heure avant
+          { method: 'notification', minutes: 1440 }, // 24 heures avant
+        ],
+      },
+    };
+
+    const response = await calendar.events.insert({
+      calendarId: ownerCalendarId,
+      requestBody: event,
+      sendNotifications: true,
+    });
+
+    console.log(`✅ Événement créé dans le calendrier du propriétaire: ${response.data.id}`);
+    return true;
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'ajout à Google Calendar du propriétaire:', error);
+    return false;
+  }
+}
+
+/**
  * Teste la connexion à Google Calendar
  */
 export async function testGoogleCalendarConnection(): Promise<boolean> {
