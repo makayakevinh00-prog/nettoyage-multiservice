@@ -7,6 +7,7 @@ import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 import { generateICSFile } from "./lib/calendar";
 import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleCalendar";
+import { syncBookingToHubSpot } from "./lib/hubspot";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -137,6 +138,23 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         } catch (calendarError) {
           console.error('Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
           // Ne pas bloquer la réservation si Google Calendar échoue
+        }
+
+        // Synchroniser avec HubSpot CRM
+        try {
+          await syncBookingToHubSpot({
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: input.message,
+          });
+        } catch (hubspotError) {
+          console.error('Erreur lors de la synchronisation HubSpot:', hubspotError);
+          // Ne pas bloquer la réservation si HubSpot échoue
         }
 
         // Envoyer l'email de confirmation au client avec fichier .ics
