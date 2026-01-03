@@ -8,6 +8,13 @@
       "when": 1763812016709,
       "tag": "0000_good_mysterio",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1767466866089,
+      "tag": "0001_strange_vermin",
+      "breakpoints": true
     }
   ]
 }

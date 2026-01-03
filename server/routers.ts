@@ -6,7 +6,12 @@ import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 import { generateICSFile } from "./lib/calendar";
-import { addEventToGoogleCalendar } from "./lib/google-calendar";
+import { addEventToGoogleCalendar } from "./lib/googleCalendar";
+import Stripe from "stripe";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
+  apiVersion: "2024-12-27.acacia",
+});
 
 export const appRouter = router({
   system: systemRouter,
@@ -71,6 +76,7 @@ Cette demande a été envoyée depuis le site ProClean Empire.
           terrasse: "Nettoyage Terrasse",
           tapis: "Nettoyage Tapis",
           balcon: "Nettoyage Balcon",
+          jardinage: "Entretien Jardinage",
         };
 
         const emailContent = `
@@ -98,6 +104,23 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           title: `Nouvelle réservation - ${input.date} à ${input.time}`,
           content: emailContent,
         });
+
+        // Ajouter l'événement à Google Calendar
+        try {
+          await addEventToGoogleCalendar({
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: input.message,
+          });
+        } catch (calendarError) {
+          console.error('Erreur lors de l\'ajout à Google Calendar:', calendarError);
+          // Ne pas bloquer la réservation si Google Calendar échoue
+        }
 
         // Envoyer l'email de confirmation au client avec fichier .ics
         try {
@@ -129,16 +152,49 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           });
         } catch (emailError) {
           console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
-        }
-
-        // Ajouter au calendrier Google
-        try {
-          await addEventToGoogleCalendar(input);
-        } catch (calendarError) {
-          console.error('Erreur lors de l\'ajout au calendrier Google:', calendarError);
+          // Ne pas bloquer la réservation si l'email échoue
         }
 
         return { success: true };
+      }),
+
+    createPaymentIntent: publicProcedure
+      .input(z.object({
+        name: z.string().min(1).max(100).trim(),
+        email: z.string().email().max(255).trim().toLowerCase(),
+        phone: z.string().min(10).max(20).trim().regex(/^[0-9\s\+\-\(\)]+$/),
+        service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage']),
+        date: z.string().min(1).max(50).trim(),
+        time: z.string().min(1).max(10).trim(),
+        address: z.string().min(5).max(500).trim(),
+        message: z.string().max(1000).trim().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          // Créer un PaymentIntent pour la caution de 25€
+          const paymentIntent = await stripe.paymentIntents.create({
+            amount: 2500, // 25€ en centimes
+            currency: 'eur',
+            metadata: {
+              name: input.name,
+              email: input.email,
+              phone: input.phone,
+              service: input.service,
+              date: input.date,
+              time: input.time,
+              address: input.address,
+              message: input.message || '',
+            },
+          });
+
+          return {
+            clientSecret: paymentIntent.client_secret,
+            paymentIntentId: paymentIntent.id,
+          };
+        } catch (error) {
+          console.error('Erreur lors de la création du PaymentIntent:', error);
+          throw new Error('Impossible de créer le paiement');
+        }
       }),
   }),
 });

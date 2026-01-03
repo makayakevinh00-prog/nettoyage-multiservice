@@ -115,3 +115,15 @@
 - [x] Changer l'email dans le Footer vers serviceclient@procleanempire.com
 - [x] Corriger le bug "Une erreur est survenue" lors de la prise de rendez-vous
 - [x] Tester le formulaire de réservation en conditions réelles
+
+
+## Intégration Google Calendar et Stripe
+
+- [x] Configurer Google Calendar API avec Service Account
+- [x] Ajouter automatiquement les rendez-vous au calendrier serviceclient@procleanempire.com
+- [x] Implémenter le paiement de caution Stripe (25€)
+- [x] Créer le formulaire de paiement avec Stripe
+- [ ] Ajouter le webhook Stripe pour les paiements confirmés
+- [ ] Implémenter la logique de remboursement automatique
+- [ ] Tester les paiements avec la clé Stripe fournie
+- [ ] Documenter le processus de remboursement pour l'admin
