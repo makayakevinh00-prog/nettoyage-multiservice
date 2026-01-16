@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, and, gte, lte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, bookings, InsertBooking } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -87,6 +87,64 @@ export async function getUserByOpenId(openId: string) {
   const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
 
   return result.length > 0 ? result[0] : undefined;
+}
+
+// Booking queries
+export async function createBooking(data: InsertBooking) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create booking: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db.insert(bookings).values(data);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create booking:", error);
+    throw error;
+  }
+}
+
+export async function getBookingsByDateRange(startDate: string, endDate: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get bookings: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(bookings)
+      .where(
+        and(
+          gte(bookings.date, startDate),
+          lte(bookings.date, endDate)
+        )
+      );
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get bookings:", error);
+    return [];
+  }
+}
+
+export async function getBookingById(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get booking: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .select()
+      .from(bookings)
+      .where(eq(bookings.id, id))
+      .limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get booking:", error);
+    return undefined;
+  }
 }
 
 // TODO: add feature queries here as your schema grows.

@@ -7,6 +7,7 @@ import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+import { initializeReminderScheduler } from "../lib/reminderScheduler";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -59,6 +60,12 @@ async function startServer() {
 
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
+    // Initialiser le système de rappel de RDV
+    try {
+      initializeReminderScheduler();
+    } catch (error) {
+      console.error('Erreur lors de l\'initialisation du système de rappel:', error);
+    }
   });
 }
 
