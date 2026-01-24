@@ -1,19 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import DateTimePicker from "@/components/DateTimePicker";
-import FrenchAddressAutocomplete from "@/components/FrenchAddressAutocomplete";
+import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 
 import { 
   Car,
@@ -29,187 +17,106 @@ import {
   Shield,
   Clock3
 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { trpc } from "@/lib/trpc";
+import { useState } from "react";
 import { useLocation } from "wouter";
 
 export default function Home() {
   const [location] = useLocation();
-  
-  const [formData, setFormData] = useState<{
-    name: string;
-    email: string;
-    phone: string;
-    service: 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage' | '';
-    message: string;
-  }>({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
-
-  const [bookingData, setBookingData] = useState<{
-    name: string;
-    email: string;
-    phone: string;
-    service: 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage' | '';
-    date: string;
-    time: 'matin' | 'apres-midi' | 'soir' | '';
-    address: string;
-    message: string;
-  }>({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    date: "",
-    time: "",
-    address: "",
-    message: "",
-  });
-
-  // Gérer la pré-sélection du service depuis l'URL
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const serviceParam = params.get('service');
-    if (serviceParam) {
-      setBookingData(prev => ({ ...prev, service: serviceParam as typeof bookingData.service }));
-      // Scroll vers la section réservation
-      setTimeout(() => {
-        const element = document.querySelector('#reservation');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    }
-  }, [location]);
-
-  const sendQuoteMutation = trpc.contact.sendQuote.useMutation({
-    onSuccess: () => {
-      toast.success("Merci ! Nous vous contacterons sous 24h.");
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-    },
-    onError: (error) => {
-      toast.error("Une erreur est survenue. Veuillez réessayer.");
-      console.error(error);
-    },
-  });
-
-  const sendBookingMutation = trpc.contact.sendBooking.useMutation({
-    onSuccess: () => {
-      toast.success("Votre réservation a été envoyée ! Nous vous confirmerons rapidement.");
-      setBookingData({ name: "", email: "", phone: "", service: "", date: "", time: "", address: "", message: "" });
-    },
-    onError: (error) => {
-      toast.error("Une erreur est survenue. Veuillez réessayer.");
-      console.error(error);
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.service) {
-      toast.error("Veuillez sélectionner un service");
-      return;
-    }
-    sendQuoteMutation.mutate({
-      ...formData,
-      service: formData.service as 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage',
-    });
-  };
-
-  const handleBooking = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Validation avant envoi
-    if (!bookingData.service || !bookingData.time) {
-      toast.error("Veuillez remplir tous les champs obligatoires");
-      return;
-    }
-    sendBookingMutation.mutate({
-      ...bookingData,
-      service: bookingData.service as 'automobile' | 'terrasse' | 'tapis' | 'balcon' | 'jardinage',
-      time: bookingData.time,
-    });
-  };
 
   const services = [
     {
       icon: Car,
       title: "Nettoyage Automobile",
-      description: "Lavage intérieur et extérieur, lustrage, protection céramique. Votre véhicule retrouve son éclat d'origine.",
-      image: "/service-automobile.jpg",
+      description: "Intérieur et extérieur, lavage haute pression, lustrage et protection.",
+      image: "/hero-proclean.png",
     },
     {
       icon: Waves,
       title: "Nettoyage Terrasse",
-      description: "Démoussage, nettoyage haute pression, traitement anti-mousse. Redonnez vie à vos espaces extérieurs.",
-      image: "/service-terrasse.jpg",
+      description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
+      image: "/services-grid.png",
     },
     {
       icon: Sofa,
-      title: "Nettoyage Tapis & Canapés",
-      description: "Injection-extraction professionnelle, détachage en profondeur, séchage rapide et efficace.",
-      image: "/service-tapis.jpg",
+      title: "Nettoyage Tapis",
+      description: "Injection-extraction, détachage professionnel, séchage rapide.",
+      image: "/services-grid.png",
     },
     {
       icon: Building2,
       title: "Nettoyage Balcon",
-      description: "Nettoyage complet des sols, joints, garde-corps. Un balcon impeccable pour profiter de l'extérieur.",
-      image: "/service-balcon.jpg",
+      description: "Nettoyage complet, joints, garde-corps et revêtements.",
+      image: "/services-grid.png",
     },
     {
       icon: Leaf,
       title: "Entretien Jardinage",
-      description: "Tonte, taille de haies, débroussaillage, entretien des espaces verts. Un jardin toujours soigné.",
-      image: "/service-jardinage.jpg",
+      description: "Taille, débroussaillage, entretien paysager professionnel.",
+      image: "/services-grid.png",
+    },
+    {
+      icon: Sparkles,
+      title: "Nettoyage Facade",
+      description: "Nettoyage haute pression, traitement anti-mousse, ravalement.",
+      image: "/services-grid.png",
+    },
+    {
+      icon: Building2,
+      title: "Nettoyage Panneaux Solaires",
+      description: "Nettoyage haute pression, maintenance, optimisation rendement.",
+      image: "/services-grid.png",
+    },
+    {
+      icon: Building2,
+      title: "Nettoyage Professionnel",
+      description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure.",
+      image: "/services-grid.png",
     },
   ];
 
   const avantages = [
     {
-      icon: Sparkles,
-      title: "Résultats Impeccables",
-      description: "Équipements professionnels de dernière génération pour un résultat parfait à chaque intervention.",
-    },
-    {
-      icon: Leaf,
-      title: "Produits Écologiques",
-      description: "Nous utilisons des produits respectueux de l'environnement et de votre santé.",
-    },
-    {
       icon: Shield,
-      title: "Équipe Qualifiée",
-      description: "Professionnels formés et expérimentés, assurés et garantis pour votre tranquillité.",
+      title: "Équipements Pro",
+      description: "Matériel dernière génération pour résultats optimaux",
+    },
+    {
+      icon: CheckCircle2,
+      title: "Produits Écologiques",
+      description: "Respectueux de l'environnement et de votre santé",
     },
     {
       icon: Clock3,
       title: "Intervention Rapide",
-      description: "Service disponible partout en Île-de-France avec des délais d'intervention courts.",
+      description: "Disponibles en Île-de-France sous 48h",
+    },
+    {
+      icon: Star,
+      title: "Satisfaction Garantie",
+      description: "Ou argent remboursé, 100% sans risque",
     },
   ];
 
   const testimonials = [
     {
-      name: "Alexandre M.",
+      name: "Patricia Ibaibe",
       role: "Particulier",
-      content: "Service exceptionnel pour le nettoyage de ma voiture. Résultat impeccable, on dirait qu'elle sort de l'usine !",
+      content: "Très beau travail ! Dans le Airbnb je vous les conseille !",
       rating: 5,
     },
     {
-      name: "Sophie D.",
-      role: "Propriétaire",
-      content: "J'ai fait nettoyer ma terrasse et mes tapis. Le travail est remarquable, très professionnel. Je recommande vivement.",
+      name: "kevinh makaya",
+      role: "Particulier",
+      content: "Impeccable !!! Ils ont nettoyé chez ma mère et c'est vraiment fou le travail fourni",
       rating: 5,
     },
     {
-      name: "Thomas L.",
-      role: "Copropriété",
-      content: "ProClean Empire intervient régulièrement pour notre immeuble. Toujours à l'heure, efficace et soigné.",
+      name: "Serena Beya",
+      role: "Particulier",
+      content: "Service impeccable ! Ma voiture est ressortie comme neuve. L'équipe est professionnelle, ponctuelle et très soigneuse. Je recommande sans hésiter !",
       rating: 5,
     },
+
   ];
 
   return (
@@ -293,9 +200,9 @@ export default function Home() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => (
-                <Card 
+                <div 
                   key={index} 
-                  className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-400 overflow-hidden bg-white"
+                  className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-400 overflow-hidden bg-white rounded-lg"
                 >
                   <div className="relative h-64 overflow-hidden">
                     <img 
@@ -308,23 +215,16 @@ export default function Home() {
                       <service.icon className="h-7 w-7 text-blue-600" />
                     </div>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-2xl text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
                       {service.title}
-                    </CardTitle>
-                    <CardDescription className="text-base text-gray-600 leading-relaxed">
+                    </h3>
+                    <p className="text-base text-gray-600 leading-relaxed mb-4">
                       {service.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
+                    </p>
                     <Button 
                       className="w-full bg-blue-600 hover:bg-blue-700"
                       onClick={() => {
-                        const serviceValue = service.title.toLowerCase().includes('automobile') ? 'automobile' :
-                                           service.title.toLowerCase().includes('terrasse') ? 'terrasse' :
-                                           service.title.toLowerCase().includes('tapis') ? 'tapis' :
-                                           service.title.toLowerCase().includes('balcon') ? 'balcon' : 'jardinage';
-                        setBookingData(prev => ({ ...prev, service: serviceValue }));
                         setTimeout(() => {
                           const element = document.querySelector('#reservation');
                           if (element) {
@@ -335,8 +235,8 @@ export default function Home() {
                     >
                       Réserver ce Service
                     </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -359,17 +259,13 @@ export default function Home() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {avantages.map((avantage, index) => (
-                <Card key={index} className="text-center border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white">
-                  <CardHeader>
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
-                      <avantage.icon className="h-8 w-8 text-white" />
-                    </div>
-                    <CardTitle className="text-xl text-gray-900">{avantage.title}</CardTitle>
-                    <CardDescription className="text-base text-gray-600 leading-relaxed">
-                      {avantage.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
+                <div key={index} className="text-center border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white rounded-lg p-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <avantage.icon className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{avantage.title}</h3>
+                  <p className="text-gray-600">{avantage.description}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -377,8 +273,8 @@ export default function Home() {
 
         {/* Section Réservation */}
         <section id="reservation" className="py-24 bg-white">
-          <div className="container max-w-4xl">
-            <div className="text-center mb-12">
+          <div className="container">
+            <div className="text-center mb-16">
               <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
                 <span className="text-sm font-semibold text-blue-700">RÉSERVATION</span>
               </div>
@@ -386,114 +282,37 @@ export default function Home() {
                 Réservez Votre Intervention
               </h2>
               <p className="text-xl text-gray-600">
-                Choisissez votre service, date et heure. Nous vous confirmerons rapidement votre rendez-vous.
+                Choisissez votre service, les options détaillées, et recevez votre devis personnalisé.
               </p>
             </div>
             
-            <Card className="border-2 border-blue-200 shadow-xl bg-white">
-              <CardContent className="pt-8">
-                <form onSubmit={handleBooking} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-name" className="text-gray-700 font-medium">Nom complet *</Label>
-                      <Input
-                        id="booking-name"
-                        required
-                        value={bookingData.name}
-                        onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })}
-                        placeholder="Jean Dupont"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-email" className="text-gray-700 font-medium">Email *</Label>
-                      <Input
-                        id="booking-email"
-                        type="email"
-                        required
-                        value={bookingData.email}
-                        onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
-                        placeholder="jean.dupont@email.com"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-phone" className="text-gray-700 font-medium">Téléphone *</Label>
-                      <Input
-                        id="booking-phone"
-                        type="tel"
-                        required
-                        value={bookingData.phone}
-                        onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })}
-                        placeholder="06 12 34 56 78"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="booking-service" className="text-gray-700 font-medium">Service souhaité *</Label>
-                      <Select 
-                        value={bookingData.service} 
-                        onValueChange={(value) => setBookingData({ ...bookingData, service: value as typeof bookingData.service })}
-                      >
-                        <SelectTrigger className="border-2 border-gray-200 focus:border-blue-500 h-12">
-                          <SelectValue placeholder="Choisir un service" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="automobile">Nettoyage Automobile</SelectItem>
-                          <SelectItem value="terrasse">Nettoyage Terrasse</SelectItem>
-                          <SelectItem value="tapis">Nettoyage Tapis & Canapés</SelectItem>
-                          <SelectItem value="balcon">Nettoyage Balcon</SelectItem>
-                          <SelectItem value="jardinage">Entretien Jardinage</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <DateTimePicker
-                    selectedDate={bookingData.date}
-                    selectedTime={bookingData.time}
-                    onDateChange={(date) => setBookingData({ ...bookingData, date })}
-                    onTimeChange={(time) => setBookingData({ ...bookingData, time: time as typeof bookingData.time })}
-                  />
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="booking-address" className="text-gray-700 font-medium">Adresse d'intervention *</Label>
-                    <FrenchAddressAutocomplete
-                      id="booking-address"
-                      required
-                      value={bookingData.address}
-                      onChange={(value) => setBookingData({ ...bookingData, address: value })}
-                      placeholder="Commencez à taper votre adresse..."
-                      className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="booking-message" className="text-gray-700 font-medium">Informations complémentaires</Label>
-                    <Textarea
-                      id="booking-message"
-                      value={bookingData.message}
-                      onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })}
-                      placeholder="Précisions sur votre demande..."
-                      rows={4}
-                      className="border-2 border-gray-200 focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                    disabled={sendBookingMutation.isPending}
-                  >
-                    {sendBookingMutation.isPending ? "Envoi en cours..." : "Confirmer ma Réservation"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <AdvancedBookingForm />
+          </div>
+        </section>
+
+        {/* Galerie avant/après */}
+        <section className="py-24 bg-white">
+          <div className="container">
+            <div className="text-center mb-16">
+              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
+                <span className="text-sm font-semibold text-blue-700">GALERIE</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Nos Réalisations
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Découvrez les transformations spectaculaires de nos clients.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <img src="/gallery/aLJESpvhZTeM.jpg" alt="Terrasse avant/après" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+              <img src="/gallery/Ykf3AlT3TbGH.png" alt="Patio nettoyage" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+              <img src="/gallery/crpcsQzuHnym.jpg" alt="Terrasse propre" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+              <img src="/gallery/tl4jlGLfxzTe.webp" alt="Nettoyage tapis" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+              <img src="/gallery/zTsRk9imHR7P.jpeg" alt="Nettoyage professionnel" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+              <img src="/gallery/eKzBvq3WtGvE.jpg" alt="Balcon nettoyage" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+            </div>
           </div>
         </section>
 
@@ -512,120 +331,22 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white">
-                  <CardHeader>
-                    <div className="flex mb-3">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <CardTitle className="text-xl text-gray-900">{testimonial.name}</CardTitle>
-                    <CardDescription className="text-blue-600 font-medium">{testimonial.role}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 italic leading-relaxed">"{testimonial.content}"</p>
-                  </CardContent>
-                </Card>
+                <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-600">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
+                  <div>
+                    <p className="font-bold text-gray-900">{testimonial.name}</p>
+                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="py-24 bg-white">
-          <div className="container max-w-4xl">
-            <div className="text-center mb-12">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">CONTACT</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Demandez Votre Devis Gratuit
-              </h2>
-              <p className="text-xl text-gray-600">
-                Remplissez le formulaire ci-dessous et nous vous contacterons dans les 24 heures.
-              </p>
-            </div>
-            
-            <Card className="border-2 border-blue-200 shadow-xl bg-white">
-              <CardContent className="pt-8">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name" className="text-gray-700 font-medium">Nom complet *</Label>
-                      <Input
-                        id="name"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="Jean Dupont"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-gray-700 font-medium">Email *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="jean.dupont@email.com"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-gray-700 font-medium">Téléphone *</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="06 17 21 22 30"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="service" className="text-gray-700 font-medium">Service souhaité *</Label>
-                      <Input
-                        id="service"
-                        required
-                        value={formData.service}
-                        onChange={(e) => setFormData({ ...formData, service: e.target.value as typeof formData.service })}
-                        placeholder="Ex: Nettoyage automobile"
-                        className="border-2 border-gray-200 focus:border-blue-500 h-12"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-gray-700 font-medium">Message</Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Décrivez vos besoins en détail..."
-                      rows={5}
-                      className="border-2 border-gray-200 focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    size="lg" 
-                    className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                    disabled={sendQuoteMutation.isPending}
-                  >
-                    {sendQuoteMutation.isPending ? "Envoi en cours..." : "Envoyer ma Demande"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
           </div>
         </section>
       </main>

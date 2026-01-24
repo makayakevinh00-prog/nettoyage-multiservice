@@ -146,8 +146,16 @@
 - [x] Intégrer HubSpot pour créer les opportunités avec montants
 - [x] Générer les emails de devis personnalisés avec tarifs
 - [x] Configurer les rappels HubSpot avec demande de confirmation
-- [ ] Ajouter les frais d'annulation (25€ si annulation < 24h)
-- [ ] Intégrer le formulaire avancé dans Home.tsx
-- [ ] Mettre à jour les routes tRPC pour gérer les options détaillées
-- [ ] Tester le flux complet de réservation à paiement
-- [ ] Valider l'intégration HubSpot avec les opportunités
+- [x] Ajouter les frais d'annulation (25€ si annulation < 24h)
+- [x] Intégrer le formulaire avancé dans Home.tsx
+- [x] Mettre à jour les routes tRPC pour gérer les options détaillées
+- [x] Tester le flux complet de réservation à paiement
+- [x] Valider l'intégration HubSpot avec les opportunités
+
+## Finalisation du site avec avis Google et images professionnelles
+
+- [x] Ajouter les avis Google réels avec carousel défilant (13 avis, 5.0/5 étoiles)
+- [x] Intégrer les images professionnelles dans la galerie
+- [x] Ajouter les services professionnels (panneaux solaires, bureaux, autres espaces)
+- [x] Tester et valider le site complet
+- [x] Sauvegarder le checkpoint final
