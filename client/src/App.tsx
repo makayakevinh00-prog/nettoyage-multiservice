@@ -6,6 +6,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
@@ -69,6 +70,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <Footer />
           <WhatsAppButton />
         </TooltipProvider>
       </ThemeProvider>
