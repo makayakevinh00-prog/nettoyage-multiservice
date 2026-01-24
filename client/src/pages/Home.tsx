@@ -15,7 +15,10 @@ import {
   Shield,
   Clock3,
   ArrowRight,
-  Zap
+  Zap,
+  Droplets,
+  Trash2,
+  Video
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
