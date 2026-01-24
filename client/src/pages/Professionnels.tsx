@@ -8,6 +8,7 @@ export default function Professionnels() {
   const [, setLocation] = useLocation();
   const [formData, setFormData] = useState({
     company: "",
+    siren: "",
     name: "",
     email: "",
     phone: "",
@@ -29,6 +30,7 @@ export default function Professionnels() {
     toast.success("Votre demande a été envoyée ! Nous vous contacterons sous 24h.");
     setFormData({
       company: "",
+      siren: "",
       name: "",
       email: "",
       phone: "",
@@ -264,6 +266,23 @@ export default function Professionnels() {
                   />
                 </div>
 
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    SIREN *
+                  </label>
+                  <input
+                    type="text"
+                    name="siren"
+                    value={formData.siren}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="123 456 789"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-1 gap-6 mb-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-2">
                     Nom de Contact *
