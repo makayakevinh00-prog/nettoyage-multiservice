@@ -1,7 +1,7 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles, Share2, Facebook, Twitter, Linkedin, Mail } from "lucide-react";
 import { useLocation, useSearch } from "wouter";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 
@@ -268,6 +268,64 @@ export default function ServiceDetail() {
             prefilledService={serviceId}
             onSuccess={() => setLocation('/merci')}
           />
+        </div>
+      </section>
+
+      {/* Social Share Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container max-w-4xl text-center">
+          <h3 className="text-3xl font-bold mb-8 text-gray-900">Partagez ce Service</h3>
+          <p className="text-gray-600 mb-8">Aimez ce service ? Partagez-le avec vos amis et votre réseau</p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+              onClick={() => {
+                const url = window.location.href;
+                const text = `Découvrez le service ${service.title} de ProClean Empire`;
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+              }}
+            >
+              <Facebook size={20} />
+              Facebook
+            </Button>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 border-blue-400 text-blue-400 hover:bg-blue-50"
+              onClick={() => {
+                const url = window.location.href;
+                const text = `Découvrez le service ${service.title} de ProClean Empire`;
+                window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
+              }}
+            >
+              <Twitter size={20} />
+              Twitter
+            </Button>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 border-blue-700 text-blue-700 hover:bg-blue-50"
+              onClick={() => {
+                const url = window.location.href;
+                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+              }}
+            >
+              <Linkedin size={20} />
+              LinkedIn
+            </Button>
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 border-gray-400 text-gray-600 hover:bg-gray-100"
+              onClick={() => {
+                const url = window.location.href;
+                const subject = `Service : ${service.title}`;
+                const body = `Découvrez ce service chez ProClean Empire : ${url}`;
+                window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+              }}
+            >
+              <Mail size={20} />
+              Email
+            </Button>
+          </div>
         </div>
       </section>
 
