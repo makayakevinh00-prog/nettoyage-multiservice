@@ -1,10 +1,21 @@
 import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react";
 import { FaTiktok } from "react-icons/fa";
+import { APP_LOGO } from "@/const";
 
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-white border-t border-slate-800">
       <div className="container py-12">
+        <div className="flex justify-center mb-8">
+          <a 
+            href="/" 
+            className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer"
+            title="Retour à l'accueil"
+          >
+            <img src={APP_LOGO} alt="ProClean Empire" className="h-12 w-auto" />
+            <span className="text-lg font-bold text-white hidden sm:inline">ProClean <span className="text-blue-400">Empire</span></span>
+          </a>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* À propos */}
           <div>

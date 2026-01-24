@@ -271,55 +271,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      {/* Social Share Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container max-w-4xl text-center">
-          <h3 className="text-3xl font-bold mb-8 text-gray-900">Partagez ce Service</h3>
-          <p className="text-gray-600 mb-8">Aimez ce service ? Partagez-le avec vos amis et votre réseau</p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3"
-              onClick={() => {
-                const url = window.location.href;
-                const text = `Découvrez le service ${service.title} de ProClean Empire`;
-                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-              }}
-            >
-              <span className="text-xl">f</span>
-              Facebook
-            </Button>
-            <Button
-              className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-3"
-              onClick={() => {
-                window.open(`https://www.tiktok.com/`, '_blank');
-              }}
-            >
-              <span className="text-xl">♪</span>
-              TikTok
-            </Button>
-            <Button
-              className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3"
-              onClick={() => {
-                window.open(`https://www.instagram.com/`, '_blank');
-              }}
-            >
-              <span className="text-xl">📷</span>
-              Instagram
-            </Button>
-            <Button
-              className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-3"
-              onClick={() => {
-                const url = window.location.href;
-                window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-              }}
-            >
-              <span className="text-xl">in</span>
-              LinkedIn
-            </Button>
 
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="py-16">

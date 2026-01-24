@@ -70,11 +70,7 @@ export default function StripePayment({ bookingData, onSuccess, onError }: Strip
 
   return (
     <form onSubmit={handlePayment} className="space-y-4">
-      <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-        <p className="text-sm text-gray-700">
-          💳 <strong>Caution de 25€</strong> - Remboursée après la prestation ou conservée en cas d'annulation après 24h
-        </p>
-      </div>
+
 
       <div className="p-4 border border-gray-300 rounded-lg">
         <CardElement

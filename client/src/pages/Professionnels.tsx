@@ -344,11 +344,15 @@ export default function Professionnels() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Sélectionnez un type</option>
+                    <option value="bureaux">Nettoyage de Bureaux</option>
                     <option value="immeuble">Immeuble résidentiel</option>
                     <option value="commercial">Espace commercial</option>
                     <option value="industriel">Site industriel</option>
                     <option value="parking">Parking/Allées</option>
                     <option value="facade">Façade/Toiture</option>
+                    <option value="vitres">Nettoyage de Vitres</option>
+                    <option value="moquette">Nettoyage de Moquette</option>
+                    <option value="sol">Nettoyage de Sol</option>
                     <option value="autre">Autre</option>
                   </select>
                 </div>

@@ -95,6 +95,22 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* Social Media Links */}
+        <div className="hidden md:flex items-center gap-3 mr-4">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors" title="Facebook">
+            <span className="text-lg">f</span>
+          </a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-700 transition-colors" title="TikTok">
+            <span className="text-lg">♪</span>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700 transition-colors" title="Instagram">
+            <span className="text-lg">📷</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-800 transition-colors" title="LinkedIn">
+            <span className="text-lg">in</span>
+          </a>
+        </div>
+
         {/* CTA Button */}
         <div className="hidden lg:block">
           <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>

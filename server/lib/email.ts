@@ -177,7 +177,6 @@ export function generateBookingConfirmationEmail(data: {
       </ul>
       
       <p><strong>Besoin de modifier ou annuler ?</strong></p>
-      <p style="color: #ef4444; font-weight: bold;">⚠️ Attention : Les annulations moins de 24h avant le rendez-vous sont soumises à des frais de 25€.</p>
       
       <p>Si vous avez des questions ou souhaitez modifier votre réservation, n'hésitez pas à nous contacter :</p>
       <ul>
@@ -227,7 +226,6 @@ PROCHAINES ÉTAPES :
 ✓ Notre équipe arrivera à l'heure prévue avec tous les équipements
 
 BESOIN DE MODIFIER OU ANNULER ?
-⚠️ Attention : Les annulations moins de 24h avant le rendez-vous sont soumises à des frais de 25€.
 
 CONTACT :
 - Téléphone : 06 17 21 22 30

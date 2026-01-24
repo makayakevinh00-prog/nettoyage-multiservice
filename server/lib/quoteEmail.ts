@@ -119,7 +119,6 @@ export function generateQuoteEmail(data: QuoteEmailData) {
         <strong>⚠️ Conditions importantes :</strong>
         <ul style="margin: 10px 0; padding-left: 20px;">
           <li>Ce devis est valable 30 jours</li>
-          <li>Frais d'annulation : 25€ si annulation moins de 24h avant le rendez-vous</li>
           <li>Le paiement s'effectue sur place après intervention</li>
           <li>Une facture vous sera remise à la fin du service</li>
         </ul>
@@ -169,7 +168,6 @@ MONTANT À PRÉVOIR : ${formattedPrice}
 
 CONDITIONS IMPORTANTES :
 - Ce devis est valable 30 jours
-- Frais d'annulation : 25€ si annulation moins de 24h avant le rendez-vous
 - Le paiement s'effectue sur place après intervention
 - Une facture vous sera remise à la fin du service
 
