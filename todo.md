@@ -358,3 +358,16 @@
 - [x] Ajouter plus d'espace blanc entre les sections
 - [x] Optimiser pour mobile et tous les appareils
 - [x] Tester l'ergonomie complète
+
+
+## BUGS CRITIQUES À CORRIGER IMMÉDIATEMENT
+
+- [x] Corriger erreur page Balcon (ne s'affiche pas)
+- [x] Corriger erreur page Tapis (ne s'affiche pas)
+- [x] Corriger erreur page Terrasse (ne s'affiche pas)
+- [x] Corriger erreur page Jardinage (ne s'affiche pas)
+- [x] Fixer les prix incohérents entre pages
+- [x] Réparer les liens du menu qui ne fonctionnent pas
+- [x] Optimiser layout et animations
+- [x] Générer images avec t-shirts ProClean Empire
+- [x] Tester tout le site complètement

@@ -10,10 +10,9 @@ const serviceDetails: Record<string, any> = {
     description: "Injection-extraction, détachage professionnel, séchage rapide",
     image: "/service-tapis.jpg",
     packages: [
-      { name: "Tapis Petit (< 3m²)", price: "40€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
-      { name: "Tapis Moyen (3-6m²)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
-      { name: "Tapis Grand (> 6m²)", price: "100€", features: ["Nettoyage haute pression", "Détachage intensif", "Traitement protecteur"] },
-      { name: "Canapé 2-3 Places", price: "80€", features: ["Nettoyage injection-extraction", "Détachage", "Désodorisation"] },
+      { name: "Petit (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
+      { name: "Moyen (120x170 a 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
+      { name: "Grand (200x290 cm et plus)", price: "110€", features: ["Nettoyage haute pression", "Détachage intensif", "Traitement protecteur"] },
     ],
   },
   balcon: {
@@ -24,7 +23,6 @@ const serviceDetails: Record<string, any> = {
       { name: "Balcon Standard", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec Garde-Corps", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
       { name: "Grand Balcon/Loggia", price: "100€", features: ["Nettoyage haute pression", "Traitement protecteur", "Finition premium"] },
-      { name: "Nettoyage Joints", price: "+20€", features: ["Détachage des joints", "Traitement anti-mousse"] },
     ],
   },
   jardinage: {
@@ -75,10 +73,11 @@ const serviceDetails: Record<string, any> = {
 
 export default function ServiceDetail() {
   const { user } = useAuth();
-  const [, setLocation] = useLocation();
-  const search = useSearch();
-  const params = new URLSearchParams(search);
-  const serviceId = params.get("service") || "tapis";
+  const [location, setLocation] = useLocation();
+  
+  // Extract service ID from URL path
+  const pathMatch = location.match(/\/service\/([a-z-]+)/);
+  const serviceId = pathMatch ? pathMatch[1].replace("-", "") : "tapis";
   
   const service = serviceDetails[serviceId] || serviceDetails.tapis;
 

@@ -19,6 +19,11 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/service/automobile"} component={ServiceAutomobile} />
       <Route path={"/service/terrasse"} component={ServiceTerrasse} />
+      <Route path={"/service/tapis"} component={ServiceDetail} />
+      <Route path={"/service/balcon"} component={ServiceDetail} />
+      <Route path={"/service/jardinage"} component={ServiceDetail} />
+      <Route path={"/service/facade"} component={ServiceDetail} />
+      <Route path={"/service/panneaux-solaires"} component={ServiceDetail} />
       <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/404"} component={NotFound} />
