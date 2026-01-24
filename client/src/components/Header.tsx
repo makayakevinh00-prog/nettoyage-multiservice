@@ -75,9 +75,9 @@ export default function Header() {
               {/* Desktop Submenu */}
               {item.submenu && (
                 <div className="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
-                  {item.submenu.map((subitem) => (
+                  {item.submenu.map((subitem, idx) => (
                     <a
-                      key={subitem.href}
+                      key={`submenu-${idx}`}
                       href={subitem.href}
                       onClick={(e) => {
                         e.preventDefault();
@@ -134,9 +134,9 @@ export default function Header() {
                     </button>
                     {openSubmenu === item.label && (
                       <div className="pl-4 space-y-1 mt-1">
-                        {item.submenu.map((subitem) => (
+                        {item.submenu.map((subitem, idx) => (
                           <a
-                            key={subitem.href}
+                            key={`mobile-submenu-${idx}`}
                             href={subitem.href}
                             onClick={(e) => {
                               e.preventDefault();
