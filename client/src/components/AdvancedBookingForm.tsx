@@ -44,6 +44,7 @@ export default function AdvancedBookingForm({
     phone: string;
     service: string;
     serviceOption: string;
+    quantity: number;
     date: string;
     time: "matin" | "apres-midi" | "soir" | "";
     address: string;
@@ -54,6 +55,7 @@ export default function AdvancedBookingForm({
     phone: prefilledPhone || "",
     service: prefilledService || "",
     serviceOption: prefilledOption || "",
+    quantity: 1,
     date: "",
     time: "",
     address: "",
@@ -80,6 +82,7 @@ export default function AdvancedBookingForm({
         phone: "",
         service: "",
         serviceOption: "",
+        quantity: 1,
         date: "",
         time: "",
         address: "",
@@ -201,23 +204,44 @@ export default function AdvancedBookingForm({
               </div>
 
               {selectedService && (
-                <div>
-                  <Label htmlFor="option">Option *</Label>
-                  <Select value={bookingData.serviceOption} onValueChange={(value) => {
-                    setBookingData({ ...bookingData, serviceOption: value });
-                  }}>
-                    <SelectTrigger id="option">
-                      <SelectValue placeholder="Choisir une option" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {selectedService.options.map((option) => (
-                        <SelectItem key={option.id} value={option.id}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <>
+                  <div>
+                    <Label htmlFor="option">Option *</Label>
+                    <Select value={bookingData.serviceOption} onValueChange={(value) => {
+                      setBookingData({ ...bookingData, serviceOption: value });
+                    }}>
+                      <SelectTrigger id="option">
+                        <SelectValue placeholder="Choisir une option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {selectedService.options.map((option) => (
+                          <SelectItem key={option.id} value={option.id}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="quantity">
+                      {bookingData.service === "automobile" && "Nombre de vehicules *"}
+                      {bookingData.service === "tapis" && "Nombre de tapis *"}
+                      {bookingData.service === "terrasse" && "Nombre de terrasses *"}
+                      {bookingData.service === "balcon" && "Nombre de balcons *"}
+                      {bookingData.service === "facade" && "Nombre de facades *"}
+                      {bookingData.service === "panneaux-solaires" && "Nombre de panneaux *"}
+                    </Label>
+                    <Input
+                      id="quantity"
+                      type="number"
+                      min="1"
+                      value={bookingData.quantity}
+                      onChange={(e) => setBookingData({ ...bookingData, quantity: Math.max(1, parseInt(e.target.value) || 1) })}
+                      className="border-gray-300"
+                    />
+                  </div>
+                </>
               )}
 
               {totalPrice > 0 && (
