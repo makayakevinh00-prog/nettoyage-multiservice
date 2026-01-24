@@ -24,6 +24,8 @@ function Router() {
       <Route path={"/service/panneaux-solaires"} component={ServiceDetail} />
       <Route path={"/service/automobile"} component={ServiceDetail} />
       <Route path={"/service/piscine"} component={ServiceDetail} />
+      <Route path={"/service/terrasse"} component={ServiceDetail} />
+      <Route path={"/service/panneaux"} component={ServiceDetail} />
       <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/404"} component={NotFound} />
