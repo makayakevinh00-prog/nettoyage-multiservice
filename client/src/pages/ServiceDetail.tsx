@@ -289,15 +289,22 @@ export default function ServiceDetail() {
               Facebook
             </Button>
             <Button
-              className="flex items-center gap-2 bg-blue-400 hover:bg-blue-500 text-white px-6 py-3"
+              className="flex items-center gap-2 bg-black hover:bg-gray-800 text-white px-6 py-3"
               onClick={() => {
-                const url = window.location.href;
-                const text = `Découvrez le service ${service.title} de ProClean Empire`;
-                window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
+                window.open(`https://www.tiktok.com/`, '_blank');
               }}
             >
-              <span className="text-xl">𝕏</span>
-              Twitter
+              <span className="text-xl">♪</span>
+              TikTok
+            </Button>
+            <Button
+              className="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white px-6 py-3"
+              onClick={() => {
+                window.open(`https://www.instagram.com/`, '_blank');
+              }}
+            >
+              <span className="text-xl">📷</span>
+              Instagram
             </Button>
             <Button
               className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-3"
@@ -309,18 +316,7 @@ export default function ServiceDetail() {
               <span className="text-xl">in</span>
               LinkedIn
             </Button>
-            <Button
-              className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3"
-              onClick={() => {
-                const url = window.location.href;
-                const subject = `Service : ${service.title}`;
-                const body = `Découvrez ce service chez ProClean Empire : ${url}`;
-                window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-              }}
-            >
-              <span className="text-xl">✉</span>
-              Email
-            </Button>
+
           </div>
         </div>
       </section>
