@@ -239,7 +239,7 @@ export default function Home() {
                       <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
                       <p className="text-gray-600 mb-4">{service.description}</p>
                       <div className="text-blue-600 font-semibold group-hover:text-blue-700">
-                        En savoir plus →
+                        En savoir plus
                       </div>
                     </div>
                   </a>
