@@ -14,6 +14,7 @@ import {
   Sparkles,
   Shield,
   Clock3,
+  Calendar,
   ArrowRight,
   Zap,
   Droplets,
