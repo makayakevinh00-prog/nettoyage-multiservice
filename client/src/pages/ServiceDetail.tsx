@@ -18,7 +18,7 @@ const serviceDetails: Record<string, any> = {
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
-    image: "/service-tapis.jpg",
+    image: "/hero-tapis.jpg",
     packages: [
       { name: "Petit (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
       { name: "Moyen (120x170 a 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
@@ -28,7 +28,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "/service-balcon.jpg",
+    image: "/hero-balcon.jpg",
     packages: [
       { name: "Balcon Standard", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec Garde-Corps", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
@@ -38,7 +38,7 @@ const serviceDetails: Record<string, any> = {
   jardinage: {
     title: "Entretien Jardinage",
     description: "Taille, débroussaillage, entretien paysager professionnel",
-    image: "/service-jardinage.jpg",
+    image: "/hero-jardinage.jpg",
     packages: [
       { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
       { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
@@ -48,8 +48,8 @@ const serviceDetails: Record<string, any> = {
   },
   facade: {
     title: "Nettoyage Façade",
-    description: "Nettoyage haute pression, traitement anti-mousse, ravalement",
-    image: "/service-facade.jpg",
+    description: "Nettoyage haute pression, traitement anti-mousse, joints",
+    image: "/hero-facade.jpg",
     packages: [
       { name: "Façade Petite", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
       { name: "Façade Moyenne", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
