@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 import { 
@@ -48,73 +47,56 @@ export default function Home() {
       title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
       image: "/service-tapis.jpg",
-      link: "/service?service=tapis",
+      link: "/service/tapis",
     },
     {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
       image: "/service-balcon.jpg",
-      link: "/service?service=balcon",
+      link: "/service/balcon",
     },
     {
       icon: Leaf,
       title: "Jardinage",
-      description: "Taille, débroussaillage, entretien paysager professionnel.",
+      description: "Entretien paysager, taille, débroussaillage professionnel.",
       image: "/service-jardinage.jpg",
-      link: "/service?service=jardinage",
-    },
-    {
-      icon: Sparkles,
-      title: "Façade",
-      description: "Nettoyage haute pression, traitement anti-mousse, ravalement.",
-      image: "/service-facade.jpg",
-      link: "/service?service=facade",
-    },
-    {
-      icon: Zap,
-      title: "Panneaux Solaires",
-      description: "Nettoyage haute pression, maintenance, optimisation rendement.",
-      image: "/service-panneaux.jpg",
-      link: "/service?service=panneaux",
+      link: "/service/jardinage",
     },
     {
       icon: Building2,
-      title: "Professionnel",
-      description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure.",
-      image: "/service-professionnel.jpg",
-      link: "/service?service=professionnel",
-    },
-  ];
-
-  const avantages = [
-    {
-      icon: Shield,
-      title: "Équipements Pro",
-      description: "Matériel dernière génération pour résultats optimaux",
-    },
-    {
-      icon: CheckCircle2,
-      title: "Produits Écologiques",
-      description: "Respectueux de l'environnement et de votre santé",
-    },
-    {
-      icon: Clock3,
-      title: "Intervention Rapide",
-      description: "Disponibles en Île-de-France sous 48h",
-    },
-    {
-      icon: Star,
-      title: "Satisfaction Garantie",
-      description: "Ou argent remboursé, 100% sans risque",
+      title: "Façade",
+      description: "Nettoyage haute pression, traitement anti-mousse, joints.",
+      image: "/service-facade.jpg",
+      link: "/service/facade",
     },
   ];
 
   const stats = [
-    { number: "13", label: "Avis Google", rating: "5.0/5 ⭐" },
-    { number: "500+", label: "Clients Satisfaits" },
-    { number: "5+", label: "Années d'Expérience" },
-    { number: "24h", label: "Intervention Rapide" },
+    { number: "5+", label: "Ans d'Expérience" },
+    { number: "1000+", label: "Clients Satisfaits" },
+    { number: "7", label: "Services Disponibles" },
+  ];
+
+  const testimonials = [
+    {
+      name: "Alexandre M.",
+      role: "Particulier",
+      content: "Service exceptionnel pour le nettoyage de ma voiture. Résultat impeccable !",
+      rating: 5,
+    },
+    {
+      name: "Sophie D.",
+      role: "Propriétaire",
+      content: "J'ai fait nettoyer ma terrasse et mes tapis. Le travail est remarquable.",
+      rating: 5,
+    },
+    {
+      name: "Thomas L.",
+      role: "Copropriété",
+      content: "ProClean Empire intervient régulièrement pour notre immeuble. Toujours à l'heure et efficace.",
+      rating: 5,
+    },
   ];
 
   return (
@@ -122,46 +104,49 @@ export default function Home() {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 to-gray-200">
+        {/* Hero Section - Style La Providence */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-60"
+            className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/hero-proclean.png')",
-              transform: `translateY(${scrollY * 0.5}px)`,
+              backgroundImage: "url('/hero-nettoyage-pro.jpg')",
+              transform: `translateY(${scrollY * 0.3}px)`,
             }}
           />
           
-          <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent" />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
           
-          <div className="relative z-10 container mx-auto px-4 py-20 text-center md:text-left">
-            <div className="max-w-2xl">
-              <div className="inline-block mb-6 px-4 py-2 bg-blue-600/30 border border-blue-600/60 rounded-full">
-                <span className="text-blue-700 text-sm font-semibold">✨ Service Premium en Île-de-France</span>
-              </div>
-              
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+          {/* Content - Centered */}
+          <div className="relative z-10 container mx-auto px-4 text-center">
+            <div className="max-w-3xl mx-auto">
+              {/* Main Title */}
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                 PROCLEAN<br />
-                <span className="text-blue-600">EMPIRE</span>
+                <span className="text-blue-400">EMPIRE</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-700 mb-4 font-light">
+              {/* Subtitle */}
+              <p className="text-2xl md:text-3xl text-gray-100 mb-4 font-light">
                 Nettoyage Multiservice Premium
               </p>
               
-              <p className="text-lg text-gray-600 mb-8 max-w-xl">
+              {/* Description */}
+              <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
+                Nous entretenons tous les sites où la propreté est capitale.
+              </p>
+              
+              {/* Services List */}
+              <p className="text-gray-300 mb-10 text-base">
                 Voiture • Tapis • Terrasse • Balcon • Jardinage • Façade • Professionnel
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#booking" className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-                  Réserver Maintenant
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </a>
-                <a href="#services" className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300">
-                  Découvrir nos Services
-                </a>
-              </div>
+              {/* CTA Button */}
+              <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                DEMANDER UN DEVIS
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
             </div>
           </div>
         </section>
@@ -169,93 +154,49 @@ export default function Home() {
         {/* Stats Section */}
         <section className="bg-gradient-to-r from-slate-900 to-black py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat, idx) => (
-                <div key={idx} className="text-center transform hover:scale-110 transition-transform duration-300">
-                  <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-300 font-medium">{stat.label}</div>
-                  {stat.rating && <div className="text-yellow-400 text-sm mt-1">{stat.rating}</div>}
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              {stats.map((stat, i) => (
+                <div key={i} className="text-white">
+                  <div className="text-5xl md:text-6xl font-bold text-blue-400 mb-2">{stat.number}</div>
+                  <div className="text-gray-300 text-lg">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* About Section - Team Profile */}
-        <section className="py-20 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="order-2 md:order-1">
-                <img 
-                  src="/team-profile-bright.jpg" 
-                  alt="ProClean Empire - Équipe Professionnelle" 
-                  className="rounded-lg shadow-2xl w-full object-cover h-96"
-                />
-              </div>
-              <div className="order-1 md:order-2">
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                  Votre Partenaire de Confiance
-                </h2>
-                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  ProClean Empire est spécialisée dans le nettoyage multiservice premium en Île-de-France. Avec plus de 5 ans d'expérience, nous mettons à votre service une équipe professionnelle, des équipements de dernière génération et un engagement envers l'excellence.
-                </p>
-                <div className="space-y-4">
-                  {avantages.map((avantage, idx) => (
-                    <div key={idx} className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <avantage.icon className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900">{avantage.title}</h3>
-                        <p className="text-gray-600 text-sm">{avantage.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Services Section */}
-        <section id="services" className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+        <section id="services" className="py-20 md:py-32 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Nos Services
-              </h2>
-              <p className="text-xl text-gray-600">
-                Une gamme complète de solutions de nettoyage adaptées à vos besoins
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nos Services</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Une gamme complète de services de nettoyage professionnel adaptés à tous vos besoins
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service: any, idx) => {
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, i) => {
                 const Icon = service.icon;
                 return (
                   <a
+                    key={i}
                     href={service.link}
-                    key={idx}
-                    className="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 block"
+                    className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
-                    <div className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                      style={{ backgroundImage: `url('${service.image}')` }}
-                    />
-                    
-                    <div className="relative p-8 h-full flex flex-col justify-between">
-                      <div>
-                        <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
-                          <Icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" />
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
-                      </div>
-                      
-                      <div className="mt-6 flex items-center text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all duration-300">
-                        En savoir plus
-                        <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="relative h-48 overflow-hidden bg-gray-200">
+                      <img 
+                        src={service.image} 
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <Icon className="w-8 h-8 text-blue-600 mb-3" />
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                      <p className="text-gray-600 mb-4">{service.description}</p>
+                      <div className="text-blue-600 font-semibold group-hover:text-blue-700">
+                        En savoir plus →
                       </div>
                     </div>
                   </a>
@@ -265,45 +206,86 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Booking Section */}
-        <section id="booking" className="py-20 md:py-32 bg-black">
+        {/* Advantages Section */}
+        <section className="py-20 md:py-32 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Réservez Votre Service
-              </h2>
-              <p className="text-xl text-gray-400">
-                Formulaire de réservation simple et rapide
-              </p>
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Pourquoi Nous Choisir</h2>
             </div>
-            
-            <div className="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 md:p-12 shadow-2xl">
-              <AdvancedBookingForm />
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                { icon: Shield, title: "Professionnel", desc: "Équipe formée et expérimentée" },
+                { icon: Sparkles, title: "Qualité", desc: "Résultats impeccables garantis" },
+                { icon: Clock3, title: "Rapide", desc: "Intervention rapide en Île-de-France" },
+                { icon: Zap, title: "Efficace", desc: "Équipements dernière génération" },
+                { icon: CheckCircle2, title: "Fiable", desc: "Satisfaction garantie ou remboursé" },
+                { icon: Star, title: "Avis", desc: "13 avis clients 5.0/5 étoiles" },
+              ].map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <div key={i} className="text-center">
+                    <Icon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-gray-600">{item.desc}</p>
+                  </div>
+                );
+              })}
             </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Avis Clients</h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, i) => (
+                <div key={i} className="bg-white rounded-lg p-8 shadow-md">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, j) => (
+                      <Star key={j} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-gray-600 mb-4 italic">"{testimonial.content}"</p>
+                  <div>
+                    <p className="font-bold text-gray-900">{testimonial.name}</p>
+                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Booking Section */}
+        <section id="booking" className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
+              <p className="text-xl text-gray-600">Remplissez le formulaire ci-dessous pour demander un devis</p>
+            </div>
+            <AdvancedBookingForm />
           </div>
         </section>
 
         {/* CTA Section */}
         <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-blue-800">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Besoin d'une intervention d'urgence ?
-            </h2>
-            <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-              Contactez-nous directement au <span className="font-semibold">06 17 21 22 30</span> ou par email à <span className="font-semibold">serviceclient@procleanempire.com</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Prêt à transformer vos espaces ?</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+              Contactez-nous dès aujourd'hui pour un devis gratuit et sans engagement
             </p>
-            <a 
-              href="tel:+33617212230"
-              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
-            >
-              Nous Appeler Maintenant
+            <a href="#booking" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+              Demander un Devis
               <ArrowRight className="ml-2 w-5 h-5" />
             </a>
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

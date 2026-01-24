@@ -241,3 +241,15 @@
 - [x] Ajouter plus de lumière à la hero section
 - [x] Garder le style professionnel
 - [x] Tester et valider les changements
+
+
+## Redesign Page de Garde - Style La Providence
+
+- [x] Générer une nouvelle image professionnelle de nettoyage
+- [x] Créer une hero section avec fond sombre et overlay
+- [x] Centrer le logo et le texte
+- [x] Ajouter un titre impactant centré
+- [x] Ajouter une description courte et claire
+- [x] Créer un bouton CTA blanc/clair
+- [x] Ajouter l'effet bokeh/flou subtil
+- [x] Tester et valider le nouveau design
