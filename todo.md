@@ -277,3 +277,16 @@
 - [x] Intégrer avec HubSpot pour les demandes professionnelles
 - [x] Ajouter un lien vers la section professionnels dans la navigation
 - [x] Tester le formulaire professionnel
+
+
+## Intégration Avis Google Dynamiques
+
+- [x] Créer un composant GoogleReviews pour afficher les avis
+- [x] Configurer l'API Google Places
+- [x] Récupérer les avis depuis Google Places API
+- [x] Créer un carousel pour les avis
+- [x] Afficher la note globale et le nombre d'avis
+- [x] Ajouter les photos des avis
+- [x] Ajouter les dates et noms des auteurs
+- [x] Intégrer la section dans la page d'accueil
+- [x] Tester l'affichage des avis

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
+import GoogleReviews from "@/components/GoogleReviews";
 import { 
   Car,
   CheckCircle2, 
@@ -260,6 +261,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Google Reviews Section */}
+        <GoogleReviews />
 
         {/* Booking Section */}
         <section id="booking" className="py-20 md:py-32 bg-white">
