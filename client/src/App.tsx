@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import ServiceTapis from "./pages/ServiceTapis";
 import ServiceAuto from "./pages/ServiceAuto";
 import ServiceExterieur from "./pages/ServiceExterieur";
+import BlogArticles from "./pages/BlogArticles";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
@@ -35,13 +36,13 @@ function Router() {
       <Route path={"/service/panneaux"} component={ServiceDetail} />
       <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
-      <Route path={"/blog"} component={Blog} />
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/service/tapis"} component={ServiceTapis} />
       <Route path={"/service/auto"} component={ServiceAuto} />
       <Route path={"/service/exterieur"} component={ServiceExterieur} />
+      <Route path={"/blog"} component={BlogArticles} />
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
