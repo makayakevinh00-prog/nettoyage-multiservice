@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { ArrowRight, Building2, CheckCircle2, Clock3, Shield, Zap } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, Clock3, Shield, Zap, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
+import { useLocation } from "wouter";
+import { APP_LOGO } from "@/const";
 
 export default function Professionnels() {
+  const [, setLocation] = useLocation();
   const [formData, setFormData] = useState({
     company: "",
     name: "",
@@ -72,9 +75,25 @@ export default function Professionnels() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header with Logo and Back Button */}
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+        <div className="container flex items-center justify-between py-4">
+          <button
+            onClick={() => setLocation("/")}
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition"
+          >
+            <ArrowLeft size={20} />
+            Retour
+          </button>
+          <img src={APP_LOGO} alt="ProClean Empire" className="h-8" />
+          <div className="w-20" />
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="relative min-h-[400px] flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-800 py-20">
-        <div className="container mx-auto px-4 text-center">
+      <section className="relative min-h-[400px] flex items-center justify-center bg-cover bg-center py-20" style={{backgroundImage: "url('/hero-proclean.png')"}}>
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
             Solutions Professionnelles
           </h1>
