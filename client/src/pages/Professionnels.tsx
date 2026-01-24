@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Building2, CheckCircle2, Clock3, Shield, Zap, ArrowLeft } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, Clock3, Shield, Zap, ArrowLeft, Phone, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
 import { APP_LOGO } from "@/const";
@@ -92,12 +92,92 @@ export default function Professionnels() {
         </div>
       </div>
 
+      {/* Hero Section with Company Info */}
+      <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-20">
+        <div className="container mx-auto px-4">
+          <h1 className="text-5xl font-bold mb-4">Informations Professionnelles</h1>
+          <p className="text-xl text-gray-300">ProClean Empire - Nettoyage Professionnel en Île-de-France</p>
+        </div>
+      </section>
+
+      {/* Company Info Cards */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          {/* Company Info */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Building2 className="text-blue-600" />
+              Informations Légales
+            </h2>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-semibold text-gray-600">SIREN</label>
+                <p className="text-lg text-gray-900 font-mono">123 456 789</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-semibold text-gray-600">Raison Sociale</label>
+                <p className="text-lg text-gray-900 font-semibold">ProClean Empire SARL</p>
+              </div>
+              
+              <div>
+                <label className="text-sm font-semibold text-gray-600">SIRET</label>
+                <p className="text-lg text-gray-900 font-mono">123 456 789 00012</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Phone className="text-blue-600" />
+              Coordonnées
+            </h2>
+            
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <label className="text-sm font-semibold text-gray-600">Téléphone</label>
+                  <p className="text-lg text-gray-900">06 17 21 22 30</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <label className="text-sm font-semibold text-gray-600">Email</label>
+                  <p className="text-lg text-gray-900">serviceclient@procleanempire.com</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
+                <div>
+                  <label className="text-sm font-semibold text-gray-600">Adresse</label>
+                  <p className="text-lg text-gray-900">Île-de-France</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <section className="border-t border-gray-200 py-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-gray-900">Demande de Devis Professionnel</h2>
+          <p className="text-gray-600 mt-2">Remplissez le formulaire ci-dessous pour recevoir un devis personnalisé</p>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative min-h-[400px] flex items-center justify-center bg-cover bg-center py-20" style={{backgroundImage: "url('/hero-proclean.png')"}}>
         <div className="absolute inset-0 bg-black/40" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Informations Professionnelles
+            Formulaire de Devis
           </h1>
           <p className="text-2xl text-blue-100 max-w-2xl mx-auto">
             ProClean Empire - Nettoyage Professionnel en Île-de-France
