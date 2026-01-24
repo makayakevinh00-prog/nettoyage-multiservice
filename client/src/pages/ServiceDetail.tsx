@@ -278,43 +278,39 @@ export default function ServiceDetail() {
           <p className="text-gray-600 mb-8">Aimez ce service ? Partagez-le avec vos amis et votre réseau</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button
-              variant="outline"
-              className="flex items-center gap-2 border-blue-600 text-blue-600 hover:bg-blue-50"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3"
               onClick={() => {
                 const url = window.location.href;
                 const text = `Découvrez le service ${service.title} de ProClean Empire`;
                 window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
               }}
             >
-              <Facebook size={20} />
+              <span className="text-xl">f</span>
               Facebook
             </Button>
             <Button
-              variant="outline"
-              className="flex items-center gap-2 border-blue-400 text-blue-400 hover:bg-blue-50"
+              className="flex items-center gap-2 bg-blue-400 hover:bg-blue-500 text-white px-6 py-3"
               onClick={() => {
                 const url = window.location.href;
                 const text = `Découvrez le service ${service.title} de ProClean Empire`;
                 window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank', 'width=600,height=400');
               }}
             >
-              <Twitter size={20} />
+              <span className="text-xl">𝕏</span>
               Twitter
             </Button>
             <Button
-              variant="outline"
-              className="flex items-center gap-2 border-blue-700 text-blue-700 hover:bg-blue-50"
+              className="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white px-6 py-3"
               onClick={() => {
                 const url = window.location.href;
                 window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
               }}
             >
-              <Linkedin size={20} />
+              <span className="text-xl">in</span>
               LinkedIn
             </Button>
             <Button
-              variant="outline"
-              className="flex items-center gap-2 border-gray-400 text-gray-600 hover:bg-gray-100"
+              className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3"
               onClick={() => {
                 const url = window.location.href;
                 const subject = `Service : ${service.title}`;
@@ -322,7 +318,7 @@ export default function ServiceDetail() {
                 window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
               }}
             >
-              <Mail size={20} />
+              <span className="text-xl">✉</span>
               Email
             </Button>
           </div>
