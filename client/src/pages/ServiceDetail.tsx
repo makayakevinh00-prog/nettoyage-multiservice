@@ -28,7 +28,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "/team-balcon.jpg",
+    image: "/service-balcon.jpg",
     packages: [
       { name: "Balcon Standard", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec Garde-Corps", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
@@ -38,7 +38,7 @@ const serviceDetails: Record<string, any> = {
   jardinage: {
     title: "Entretien Jardinage",
     description: "Taille, débroussaillage, entretien paysager professionnel",
-    image: "/team-jardinage.jpg",
+    image: "/service-jardinage.jpg",
     packages: [
       { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
       { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
@@ -89,101 +89,186 @@ const serviceDetails: Record<string, any> = {
       { name: "Ouverture/Fermeture", price: "Demande de Devis", features: ["Préparation saisonnière", "Nettoyage complet", "Mise en service"] },
     ],
   },
+  poubelle: {
+    title: "Nettoyage Poubelle",
+    description: "Nettoyage et désinfection des poubelles avec abonnement",
+    image: "/service-poubelle.jpg",
+    packages: [
+      { name: "Abonnement Mensuel", price: "Contacter pour en savoir plus", features: ["Nettoyage hebdomadaire", "Désinfection", "Maintenance régulière"] },
+      { name: "Abonnement Trimestriel", price: "Contacter pour en savoir plus", features: ["Nettoyage régulier", "Désinfection premium", "Support prioritaire"] },
+      { name: "Forfait Annuel", price: "Contacter pour en savoir plus", features: ["Nettoyage 52x/an", "Désinfection intensive", "Maintenance complète"] },
+    ],
+  },
+  digital: {
+    title: "Services Digital",
+    description: "Appareils de filming pour TikTok et Instagram",
+    image: "/service-digital.jpg",
+    packages: [
+      { name: "Kit Filming Basique", price: "Demande de Devis", features: ["Caméra HD", "Stabilisateur", "Microphone"] },
+      { name: "Kit Filming Premium", price: "Demande de Devis", features: ["Caméra 4K", "Drone", "Stabilisateur professionnel", "Microphone sans fil"] },
+      { name: "Service Complet", price: "Demande de Devis", features: ["Filming complet", "Montage vidéo", "Publication réseaux", "Stratégie contenu"] },
+    ],
+  },
 };
-
 export default function ServiceDetail() {
-  const [location] = useLocation();
   const { user } = useAuth();
-  const searchParams = useSearch();
+  const [location, setLocation] = useLocation();
   
-  const serviceId = location.split('/').pop() || '';
-  const service = serviceDetails[serviceId];
-
-  if (!service) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold mb-4">Service non trouvé</h1>
-          <Button onClick={() => window.history.back()}>Retour</Button>
-        </div>
-      </div>
-    );
-  }
+  // Extract service ID from URL path
+  const pathMatch = location.match(/\/service\/([a-z-]+)/);
+  const serviceId = pathMatch ? pathMatch[1].replace("-", "") : "tapis";
+  
+  const service = serviceDetails[serviceId] || serviceDetails.tapis;
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <Button variant="ghost" onClick={() => window.history.back()} className="mb-6">
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Retour
-        </Button>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200">
+        <div className="container flex items-center justify-between py-4">
+          <button
+            onClick={() => setLocation("/")}
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition"
+          >
+            <ArrowLeft size={20} />
+            Retour
+          </button>
+          <h1 className="text-2xl font-bold text-gray-900">{service.title}</h1>
+          <div className="w-20" />
+        </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <img
-              src={service.image}
-              alt={service.title}
-              className="w-full h-96 object-cover rounded-lg shadow-lg"
-            />
+      {/* Hero Section */}
+      <section className="relative h-96 overflow-hidden">
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h2 className="text-5xl font-bold mb-4">{service.title} Premium</h2>
+            <p className="text-xl">{service.description}</p>
           </div>
-          <div>
-            <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-            <p className="text-lg text-muted-foreground mb-6">{service.description}</p>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3">
-                <Sparkles className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold">Service Professionnel</h3>
-                  <p className="text-sm text-muted-foreground">Équipement de dernière génération</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold">Intervention Rapide</h3>
-                  <p className="text-sm text-muted-foreground">Disponible en Île-de-France</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold">Satisfaction Garantie</h3>
-                  <p className="text-sm text-muted-foreground">Ou argent remboursé</p>
-                </div>
-              </div>
+        </div>
+      </section>
+
+      {/* Description */}
+      <section className="py-16 bg-gray-50">
+        <div className="container max-w-4xl">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">Service Professionnel</h3>
+              <p className="text-gray-600 mb-6">
+                ProClean Empire propose un service {service.title.toLowerCase()} complet et professionnel. 
+                Nos experts utilisent les meilleures techniques et produits pour garantir un résultat impeccable.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="text-blue-600" size={20} />
+                  <span className="text-gray-700">Équipements professionnels</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="text-blue-600" size={20} />
+                  <span className="text-gray-700">Produits écologiques</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="text-blue-600" size={20} />
+                  <span className="text-gray-700">Intervention rapide</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <CheckCircle2 className="text-blue-600" size={20} />
+                  <span className="text-gray-700">Satisfaction garantie</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <img
+                src={service.image}
+                alt="Détail du service"
+                className="rounded-lg shadow-lg w-full h-80 object-cover"
+              />
             </div>
           </div>
         </div>
+      </section>
 
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-8">Forfaits Disponibles</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Packages */}
+      <section className="py-16">
+        <div className="container max-w-5xl">
+          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Nos Forfaits</h3>
+          <div className="grid md:grid-cols-2 gap-8">
             {service.packages.map((pkg: any, idx: number) => (
-              <Card key={idx} className="hover:shadow-lg transition-shadow">
+              <Card key={idx} className="hover:shadow-lg transition">
                 <CardHeader>
                   <CardTitle className="text-xl">{pkg.name}</CardTitle>
-                  <CardDescription className="text-lg font-semibold text-blue-600">
-                    {pkg.price}
-                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <ul className="space-y-2">
-                    {pkg.features.map((feature: string, fidx: number) => (
-                      <li key={fidx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
+                  <ul className="space-y-2 mb-6">
+                    {pkg.features.map((feature: string, i: number) => (
+                      <li key={i} className="flex items-center gap-2 text-gray-700">
+                        <CheckCircle2 size={16} className="text-green-600" />
+                        {feature}
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
-                    Réserver
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    {pkg.price === "Demande de Devis" ? "Demander un Devis" : "Réserver ce forfait"}
                   </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Avantages */}
+      <section className="py-16 bg-blue-50">
+        <div className="container max-w-4xl">
+          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Pourquoi Nous Choisir ?</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <Sparkles className="mx-auto mb-4 text-blue-600" size={40} />
+              <h4 className="text-xl font-bold mb-2">Résultats Professionnels</h4>
+              <p className="text-gray-600">
+                Nos experts utilisent les meilleures techniques pour un résultat impeccable
+              </p>
+            </div>
+            <div className="text-center">
+              <Clock className="mx-auto mb-4 text-blue-600" size={40} />
+              <h4 className="text-xl font-bold mb-2">Intervention Rapide</h4>
+              <p className="text-gray-600">
+                Disponibles en Île-de-France sous 48h pour votre convenance
+              </p>
+            </div>
+            <div className="text-center">
+              <CheckCircle2 className="mx-auto mb-4 text-blue-600" size={40} />
+              <h4 className="text-xl font-bold mb-2">Garantie Satisfaction</h4>
+              <p className="text-gray-600">
+                100% satisfait ou remboursé, sans questions
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16">
+        <div className="container max-w-4xl text-center">
+          <h3 className="text-3xl font-bold mb-6 text-gray-900">Prêt à Commencer ?</h3>
+          <p className="text-xl text-gray-600 mb-8">
+            Contactez-nous dès maintenant pour un devis gratuit et une intervention rapide
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              Demander un Devis
+            </Button>
+            <Button size="lg" variant="outline">
+              Nous Contacter
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
