@@ -20,7 +20,6 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "Accueil" },
-    { href: "/nous-connaitre", label: "Nous Connaitre" },
     { label: "Services", submenu: services },
     { href: "#temoignages", label: "Avis clients" },
     { label: "Professionnels", href: "/professionnels" },

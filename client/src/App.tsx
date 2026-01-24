@@ -6,9 +6,10 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
+import ServiceAutomobile from "./pages/ServiceAutomobile";
+import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
-import NousConnaitre from "./pages/NousConnaitre";
 import ChatWidget from "./components/ChatWidget";
 
 function Router() {
@@ -16,15 +17,14 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/service/automobile"} component={ServiceDetail} />
-      <Route path={"/service/terrasse"} component={ServiceDetail} />
+      <Route path={"/service/automobile"} component={ServiceAutomobile} />
+      <Route path={"/service/terrasse"} component={ServiceTerrasse} />
       <Route path={"/service/tapis"} component={ServiceDetail} />
       <Route path={"/service/balcon"} component={ServiceDetail} />
       <Route path={"/service/jardinage"} component={ServiceDetail} />
       <Route path={"/service/facade"} component={ServiceDetail} />
       <Route path={"/service/panneaux-solaires"} component={ServiceDetail} />
       <Route path={"/service"} component={ServiceDetail} />
-      <Route path={"/nous-connaitre"} component={NousConnaitre} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
