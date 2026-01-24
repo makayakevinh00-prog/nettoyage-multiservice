@@ -95,20 +95,127 @@ export default function Professionnels() {
         <div className="absolute inset-0 bg-black/40" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Solutions Professionnelles
+            Informations Professionnelles
           </h1>
           <p className="text-2xl text-blue-100 max-w-2xl mx-auto">
-            Nettoyage multiservice pour les entreprises, immeubles et gestionnaires de propriétés
+            ProClean Empire - Nettoyage Professionnel en Île-de-France
           </p>
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Legal Information Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            {/* Legal Info */}
+            <div className="bg-white rounded-lg p-8 shadow-md border border-gray-200">
+              <div className="flex items-center gap-3 mb-6">
+                <Building2 className="w-8 h-8 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">Informations Légales</h2>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">SIREN</p>
+                  <p className="text-lg text-gray-900 font-mono">123 456 789</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Raison Sociale</p>
+                  <p className="text-lg text-gray-900 font-bold">ProClean Empire SARL</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">SIRET</p>
+                  <p className="text-lg text-gray-900 font-mono">123 456 789 00012</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Forme Juridique</p>
+                  <p className="text-lg text-gray-900">SARL</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Capital Social</p>
+                  <p className="text-lg text-gray-900">50 000 €</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="bg-white rounded-lg p-8 shadow-md border border-gray-200">
+              <div className="flex items-center gap-3 mb-6">
+                <Shield className="w-8 h-8 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">Coordonnées</h2>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Téléphone</p>
+                  <p className="text-lg text-gray-900">01 XX XX XX XX</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Email</p>
+                  <p className="text-lg text-gray-900">contact@procleanempire.fr</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Adresse</p>
+                  <p className="text-lg text-gray-900">Île-de-France</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 font-semibold">Zone d'Intervention</p>
+                  <p className="text-lg text-gray-900">Île-de-France (75-95)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications Section */}
       <section className="py-20 md:py-32 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Pourquoi Nous Choisir pour Vos Projets Professionnels
+              Certifications & Conformités
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Assurance Responsabilité Civile</h3>
+              <p className="text-gray-600 text-sm">Couverture complète pour tous les sinistres</p>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Normes Environnementales</h3>
+              <p className="text-gray-600 text-sm">Produits écologiques certifiés</p>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Conformité RGPD</h3>
+              <p className="text-gray-600 text-sm">Protection des données clients</p>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Équipe Formée</h3>
+              <p className="text-gray-600 text-sm">Techniciens certifiés et expérimentés</p>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Équipements Professionnels</h3>
+              <p className="text-gray-600 text-sm">Matériel certifié et entretenu</p>
+            </div>
+            <div className="bg-white rounded-lg p-6 shadow-md">
+              <CheckCircle2 className="w-10 h-10 text-green-600 mb-3" />
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Garantie Satisfaction</h3>
+              <p className="text-gray-600 text-sm">100% satisfait ou remboursé</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Avantages Professionnels
             </h2>
           </div>
 
@@ -128,7 +235,7 @@ export default function Professionnels() {
       </section>
 
       {/* Form Section */}
-      <section className="py-20 md:py-32 bg-white">
+      <section className="py-20 md:py-32 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-12">
@@ -312,7 +419,6 @@ export default function Professionnels() {
           </p>
           <a href="tel:+33612345678" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
             Nous Appeler
-            <ArrowRight className="ml-2 w-5 h-5" />
           </a>
         </div>
       </section>

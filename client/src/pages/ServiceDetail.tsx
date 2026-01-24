@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles } from "lucide-react";
 import { useLocation, useSearch } from "wouter";
-import MultiStepBookingForm from "@/components/MultiStepBookingForm";
+import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 
 const serviceDetails: Record<string, any> = {
   automobile: {
@@ -259,8 +259,8 @@ export default function ServiceDetail() {
           <p className="text-center text-gray-600 mb-8">
             Remplissez le formulaire ci-dessous pour reserver votre service
           </p>
-          <MultiStepBookingForm
-            serviceName={service.title}
+          <AdvancedBookingForm
+            prefilledService={serviceId}
             onSuccess={() => setLocation('/merci')}
           />
         </div>
