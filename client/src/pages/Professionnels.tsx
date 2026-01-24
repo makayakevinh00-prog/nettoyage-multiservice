@@ -93,7 +93,7 @@ export default function Professionnels() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-[400px] flex items-center justify-center bg-cover bg-center py-20" style={{backgroundImage: "url('/hero-proclean.png')"}}>
+      <section className="relative min-h-[400px] flex items-center justify-center bg-cover bg-center py-20" style={{backgroundImage: "url('/hero-nettoyage-pro.jpg')"}}>
         <div className="absolute inset-0 bg-black/40" />
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
