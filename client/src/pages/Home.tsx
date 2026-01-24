@@ -77,13 +77,6 @@ export default function Home() {
       link: "/service/facade",
     },
     {
-      icon: Waves,
-      title: "Automobile",
-      description: "Lavage complet, lustrage, protection céramique.",
-      image: "/team-cleaning-car.jpg",
-      link: "/service/automobile",
-    },
-    {
       icon: Droplets,
       title: "Piscine",
       description: "Nettoyage complet, traitement de l'eau, maintenance.",
