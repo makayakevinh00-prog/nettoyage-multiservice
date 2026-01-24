@@ -183,14 +183,14 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* About Section - Team Profile */}
         <section className="py-20 md:py-32 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1">
                 <img 
-                  src="/hero-proclean.png" 
-                  alt="ProClean Empire" 
+                  src="/team-profile-bright.jpg" 
+                  alt="ProClean Empire - Équipe Professionnelle" 
                   className="rounded-lg shadow-2xl w-full object-cover h-96"
                 />
               </div>
@@ -199,7 +199,7 @@ export default function Home() {
                   Votre Partenaire de Confiance
                 </h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                  ProClean Empire est spécialisée dans le nettoyage multiservice premium en Île-de-France. Avec plus de 10 ans d'expérience, nous mettons à votre service une équipe professionnelle, des équipements de dernière génération et un engagement envers l'excellence.
+                  ProClean Empire est spécialisée dans le nettoyage multiservice premium en Île-de-France. Avec plus de 5 ans d'expérience, nous mettons à votre service une équipe professionnelle, des équipements de dernière génération et un engagement envers l'excellence.
                 </p>
                 <div className="space-y-4">
                   {avantages.map((avantage, idx) => (

@@ -221,3 +221,13 @@
 - [x] Ajouter affichage "Demande de Devis" en orange
 - [x] Garder toute la structure et les images
 - [x] Tester les pages modifiées
+
+
+## Mise en Avant de l'Image de Profil - Phase 3
+
+- [x] Ajouter l'image de profil sur la page d'accueil
+- [x] Remplacer l'image générique par team-profile-bright.jpg
+- [x] Retirer "Demande de Devis" en rouge des forfaits
+- [x] Remplacer "Réserver ce forfait" par "Demander un Devis" (si prix = Demande de Devis)
+- [x] Remplacer "Réserver Maintenant" par "Demander un Devis" sur les CTA
+- [x] Tester et valider tous les changements

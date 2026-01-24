@@ -166,14 +166,14 @@ export default function ServiceDetail() {
                   <CardTitle className="text-xl">{pkg.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="mb-6">
-                    <div className={`text-3xl font-bold flex items-center gap-2 ${
-                      pkg.price === "Demande de Devis" ? "text-orange-600" : "text-blue-600"
-                    }`}>
-                      {pkg.price}
-                      {pkg.price !== "Demande de Devis" && <Euro size={24} />}
+                  {pkg.price !== "Demande de Devis" && (
+                    <div className="mb-6">
+                      <div className="text-3xl font-bold text-blue-600 flex items-center gap-2">
+                        {pkg.price}
+                        <Euro size={24} />
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((feature: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-gray-700">
@@ -183,7 +183,7 @@ export default function ServiceDetail() {
                     ))}
                   </ul>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Réserver ce forfait
+                    {pkg.price === "Demande de Devis" ? "Demander un Devis" : "Réserver ce forfait"}
                   </Button>
                 </CardContent>
               </Card>
@@ -231,10 +231,10 @@ export default function ServiceDetail() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Réserver Maintenant
+              Demander un Devis
             </Button>
             <Button size="lg" variant="outline">
-              Demander un Devis
+              Nous Contacter
             </Button>
           </div>
         </div>
