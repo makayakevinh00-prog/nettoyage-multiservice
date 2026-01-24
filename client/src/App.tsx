@@ -17,6 +17,7 @@ import ServiceTapis from "./pages/ServiceTapis";
 import ServiceAuto from "./pages/ServiceAuto";
 import ServiceExterieur from "./pages/ServiceExterieur";
 import BlogArticles from "./pages/BlogArticles";
+import ThankYou from "./pages/ThankYou";
 import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
@@ -43,6 +44,7 @@ function Router() {
       <Route path={"/service/auto"} component={ServiceAuto} />
       <Route path={"/service/exterieur"} component={ServiceExterieur} />
       <Route path={"/blog"} component={BlogArticles} />
+      <Route path={"/merci"} component={ThankYou} />
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

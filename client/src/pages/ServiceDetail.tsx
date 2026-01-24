@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles } from "lucide-react";
 import { useLocation, useSearch } from "wouter";
+import MultiStepBookingForm from "@/components/MultiStepBookingForm";
 
 const serviceDetails: Record<string, any> = {
   automobile: {
@@ -203,13 +204,13 @@ export default function ServiceDetail() {
                     ))}
                   </ul>
                   <Button 
-                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    className="w-full bg-orange-500 hover:bg-orange-600"
                     onClick={() => {
-                      // Store the selected service and option in localStorage
-                      localStorage.setItem('prefilledService', serviceId);
-                      localStorage.setItem('prefilledOption', pkg.id);
-                      // Navigate to booking section
-                      setLocation('/#booking');
+                      // Scroll to booking form
+                      document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                      // Store the selected service and option
+                      localStorage.setItem('selectedService', serviceId);
+                      localStorage.setItem('selectedOption', pkg.name);
                     }}
                   >
                     {pkg.price === "Demande de Devis" ? "Demander un Devis" : "Réserver ce forfait"}
@@ -248,6 +249,20 @@ export default function ServiceDetail() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Booking Form */}
+      <section id="booking-form" className="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="container max-w-2xl">
+          <h3 className="text-3xl font-bold mb-2 text-center text-gray-900">Reservez Maintenant</h3>
+          <p className="text-center text-gray-600 mb-8">
+            Remplissez le formulaire ci-dessous pour reserver votre service
+          </p>
+          <MultiStepBookingForm
+            serviceName={service.title}
+            onSuccess={() => setLocation('/merci')}
+          />
         </div>
       </section>
 
