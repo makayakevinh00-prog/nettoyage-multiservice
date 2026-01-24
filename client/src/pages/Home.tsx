@@ -123,33 +123,33 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-100 to-gray-200">
           <div 
-            className="absolute inset-0 bg-cover bg-center opacity-40"
+            className="absolute inset-0 bg-cover bg-center opacity-60"
             style={{
               backgroundImage: "url('/hero-proclean.png')",
               transform: `translateY(${scrollY * 0.5}px)`,
             }}
           />
           
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/40 to-transparent" />
           
           <div className="relative z-10 container mx-auto px-4 py-20 text-center md:text-left">
             <div className="max-w-2xl">
-              <div className="inline-block mb-6 px-4 py-2 bg-blue-600/20 border border-blue-500/50 rounded-full">
-                <span className="text-blue-300 text-sm font-semibold">✨ Service Premium en Île-de-France</span>
+              <div className="inline-block mb-6 px-4 py-2 bg-blue-600/30 border border-blue-600/60 rounded-full">
+                <span className="text-blue-700 text-sm font-semibold">✨ Service Premium en Île-de-France</span>
               </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
                 PROCLEAN<br />
-                <span className="text-blue-400">EMPIRE</span>
+                <span className="text-blue-600">EMPIRE</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-300 mb-4 font-light">
+              <p className="text-xl md:text-2xl text-gray-700 mb-4 font-light">
                 Nettoyage Multiservice Premium
               </p>
               
-              <p className="text-lg text-gray-400 mb-8 max-w-xl">
+              <p className="text-lg text-gray-600 mb-8 max-w-xl">
                 Voiture • Tapis • Terrasse • Balcon • Jardinage • Façade • Professionnel
               </p>
               

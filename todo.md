@@ -231,3 +231,13 @@
 - [x] Remplacer "Réserver ce forfait" par "Demander un Devis" (si prix = Demande de Devis)
 - [x] Remplacer "Réserver Maintenant" par "Demander un Devis" sur les CTA
 - [x] Tester et valider tous les changements
+
+
+## Amélioration Page de Garde - Moins Sombre, Plus Pro
+
+- [x] Réduire l'opacité du fond noir
+- [x] Éclaircir les overlays et gradients
+- [x] Améliorer le contraste du texte
+- [x] Ajouter plus de lumière à la hero section
+- [x] Garder le style professionnel
+- [x] Tester et valider les changements
