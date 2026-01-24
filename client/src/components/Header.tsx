@@ -50,7 +50,7 @@ export default function Header() {
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer flex-shrink-0"
         >
           <img src={APP_LOGO} alt="ProClean Empire" className="h-10 w-auto" />
-          <span className="text-lg font-bold text-gray-900 hidden sm:inline">ProClean</span>
+          <span className="text-lg font-bold text-gray-900 hidden sm:inline">ProClean <span className="text-blue-600">Empire</span></span>
         </a>
 
         {/* Desktop Navigation */}
