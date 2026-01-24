@@ -89,26 +89,6 @@ const serviceDetails: Record<string, any> = {
       { name: "Ouverture/Fermeture", price: "Demande de Devis", features: ["Préparation saisonnière", "Nettoyage complet", "Mise en service"] },
     ],
   },
-  poubelle: {
-    title: "Nettoyage Poubelle",
-    description: "Nettoyage et désinfection des poubelles avec abonnement",
-    image: "/service-poubelle.jpg",
-    packages: [
-      { name: "Abonnement Mensuel", price: "Contacter pour en savoir plus", features: ["Nettoyage hebdomadaire", "Désinfection", "Maintenance régulière"] },
-      { name: "Abonnement Trimestriel", price: "Contacter pour en savoir plus", features: ["Nettoyage régulier", "Désinfection premium", "Support prioritaire"] },
-      { name: "Forfait Annuel", price: "Contacter pour en savoir plus", features: ["Nettoyage 52x/an", "Désinfection intensive", "Maintenance complète"] },
-    ],
-  },
-  digital: {
-    title: "Services Digital",
-    description: "Appareils de filming pour TikTok et Instagram",
-    image: "/service-digital.jpg",
-    packages: [
-      { name: "Kit Filming Basique", price: "Demande de Devis", features: ["Caméra HD", "Stabilisateur", "Microphone"] },
-      { name: "Kit Filming Premium", price: "Demande de Devis", features: ["Caméra 4K", "Drone", "Stabilisateur professionnel", "Microphone sans fil"] },
-      { name: "Service Complet", price: "Demande de Devis", features: ["Filming complet", "Montage vidéo", "Publication réseaux", "Stratégie contenu"] },
-    ],
-  },
 };
 export default function ServiceDetail() {
   const { user } = useAuth();

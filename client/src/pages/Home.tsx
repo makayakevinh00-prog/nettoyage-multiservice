@@ -90,20 +90,6 @@ export default function Home() {
       image: "/service-piscine.jpg",
       link: "/service/piscine",
     },
-    {
-      icon: Trash2,
-      title: "Poubelle",
-      description: "Nettoyage et désinfection avec abonnement mensuel.",
-      image: "/service-poubelle.jpg",
-      link: "/service/poubelle",
-    },
-    {
-      icon: Video,
-      title: "Digital",
-      description: "Appareils de filming pour TikTok et Instagram.",
-      image: "/service-digital.jpg",
-      link: "/service/digital",
-    },
   ];
 
   const stats = [
