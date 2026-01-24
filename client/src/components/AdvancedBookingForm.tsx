@@ -235,30 +235,12 @@ export default function AdvancedBookingForm({
           {/* Date et Heure */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Date et Heure</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="booking-date">Date souhaitée *</Label>
-                <DateTimePicker
-                  value={bookingData.date}
-                  onChange={(date) => setBookingData({ ...bookingData, date })}
-                />
-              </div>
-              <div>
-                <Label htmlFor="booking-time">Créneau horaire *</Label>
-                <Select value={bookingData.time} onValueChange={(value: any) => {
-                  setBookingData({ ...bookingData, time: value });
-                }}>
-                  <SelectTrigger id="booking-time">
-                    <SelectValue placeholder="Choisir un créneau" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="matin">Matin (8h-12h)</SelectItem>
-                    <SelectItem value="apres-midi">Après-midi (12h-17h)</SelectItem>
-                    <SelectItem value="soir">Soir (17h-20h)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            <DateTimePicker
+              selectedDate={bookingData.date}
+              selectedTime={bookingData.time}
+              onDateChange={(date) => setBookingData({ ...bookingData, date })}
+              onTimeChange={(time) => setBookingData({ ...bookingData, time })}
+            />
           </div>
 
           {/* Lieu d'Intervention */}
