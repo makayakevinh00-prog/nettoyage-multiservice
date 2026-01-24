@@ -296,9 +296,7 @@ export default function AdvancedBookingForm({
             </Button>
           </div>
 
-          <p className="text-xs text-gray-500">
-            * Frais d'annulation : 25€ si annulation moins de 24h avant le rendez-vous
-          </p>
+
         </form>
       </CardContent>
     </Card>

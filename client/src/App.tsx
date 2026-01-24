@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
 import ChatWidget from "./components/ChatWidget";
+import ProCleanAIAssistant from "./components/ProCleanAIAssistant";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -51,6 +52,7 @@ function App() {
           <Toaster />
           <Router />
           <ChatWidget />
+          <ProCleanAIAssistant />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
