@@ -343,3 +343,18 @@
 - [x] Intégrer les mutations tRPC pour les témoignages
 - [x] Ajouter une page d'administration pour modérer les avis
 - [x] Tester le système complet
+
+
+## Amélioration Ergonomie et Performance (Style Apple)
+
+- [x] Créer une navigation améliorée avec sous-menus intelligents
+- [x] Ajouter sous-menu Services avec tous les services listés
+- [x] Ajouter sous-menu Professionnels avec options B2B
+- [x] Optimiser l'accessibilité (contraste, tailles de texte, espacements)
+- [x] Optimiser la performance et le chargement des images
+- [x] Implémenter lazy loading pour les images
+- [x] Simplifier et épurer le design (style Apple minimaliste)
+- [x] Réduire le texte et utiliser plus d'icônes
+- [x] Ajouter plus d'espace blanc entre les sections
+- [x] Optimiser pour mobile et tous les appareils
+- [x] Tester l'ergonomie complète

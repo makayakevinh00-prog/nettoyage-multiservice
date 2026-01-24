@@ -191,6 +191,7 @@ export default function Home() {
                       <img 
                         src={service.image} 
                         alt={service.title}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
@@ -212,25 +213,22 @@ export default function Home() {
         {/* Advantages Section */}
         <section className="py-20 md:py-32 bg-white">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Pourquoi Nous Choisir</h2>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Pourquoi ProClean Empire</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-12 max-w-4xl mx-auto">
               {[
-                { icon: Shield, title: "Professionnel", desc: "Équipe formée et expérimentée" },
-                { icon: Sparkles, title: "Qualité", desc: "Résultats impeccables garantis" },
-                { icon: Clock3, title: "Rapide", desc: "Intervention rapide en Île-de-France" },
-                { icon: Zap, title: "Efficace", desc: "Équipements dernière génération" },
-                { icon: CheckCircle2, title: "Fiable", desc: "Satisfaction garantie ou remboursé" },
-                { icon: Star, title: "Avis", desc: "13 avis clients 5.0/5 étoiles" },
+                { icon: Shield, title: "Professionnel", desc: "Equipe formee" },
+                { icon: Sparkles, title: "Qualite", desc: "Resultats garantis" },
+                { icon: CheckCircle2, title: "Fiable", desc: "Satisfaction 100%" },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={i} className="text-center">
-                    <Icon className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
+                  <div key={i} className="text-center space-y-3">
+                    <Icon className="w-10 h-10 text-blue-600 mx-auto" />
+                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
                   </div>
                 );
               })}

@@ -106,19 +106,19 @@ export default function AdvancedBookingForm({ onSuccess }: AdvancedBookingFormPr
   };
 
   return (
-    <Card className="border-2 border-blue-200 shadow-xl bg-white">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 border-b-2 border-blue-200">
-        <CardTitle className="text-2xl text-blue-900">Réserver Votre Service</CardTitle>
-        <CardDescription className="text-blue-700">
-          Sélectionnez votre service et les options correspondantes pour obtenir un devis précis
+    <Card className="border-2 border-blue-200 shadow-lg bg-white">
+      <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 border-b-2 border-blue-200 p-4 md:p-6">
+        <CardTitle className="text-xl md:text-2xl text-blue-900">Réserver Votre Service</CardTitle>
+        <CardDescription className="text-sm md:text-base text-blue-700">
+          Sélectionnez votre service pour un devis précis
         </CardDescription>
       </CardHeader>
-      <CardContent className="pt-8">
+      <CardContent className="pt-4 md:pt-8 px-4 md:px-6">
         <form onSubmit={handleBooking} className="space-y-6">
           {/* Informations personnelles */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-gray-900">Vos Informations</h3>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
               <div className="space-y-2">
                 <Label htmlFor="booking-name" className="text-gray-700 font-medium">
                   Nom Complet *
