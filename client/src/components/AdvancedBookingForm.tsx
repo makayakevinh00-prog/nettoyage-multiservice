@@ -232,14 +232,31 @@ export default function AdvancedBookingForm({
                       {bookingData.service === "facade" && "Nombre de facades *"}
                       {bookingData.service === "panneaux-solaires" && "Nombre de panneaux *"}
                     </Label>
-                    <Input
-                      id="quantity"
-                      type="number"
-                      min="1"
-                      value={bookingData.quantity}
-                      onChange={(e) => setBookingData({ ...bookingData, quantity: Math.max(1, parseInt(e.target.value) || 1) })}
-                      className="border-gray-300"
-                    />
+                    <div className="flex items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setBookingData({ ...bookingData, quantity: Math.max(1, bookingData.quantity - 1) })}
+                        className="w-12 h-12 flex items-center justify-center border-2 border-gray-300 rounded-lg hover:bg-gray-100 font-bold text-xl"
+                      >
+                        −
+                      </button>
+                      <input
+                        id="quantity"
+                        type="number"
+                        min="1"
+                        value={bookingData.quantity}
+                        onChange={(e) => setBookingData({ ...bookingData, quantity: Math.max(1, parseInt(e.target.value) || 1) })}
+                        className="w-20 h-12 text-center border-2 border-gray-300 rounded-lg font-bold text-xl"
+                        readOnly
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setBookingData({ ...bookingData, quantity: bookingData.quantity + 1 })}
+                        className="w-12 h-12 flex items-center justify-center border-2 border-gray-300 rounded-lg hover:bg-gray-100 font-bold text-xl"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
                 </>
               )}
