@@ -9,6 +9,7 @@ import WhatsAppButton from "./components/WhatsAppButton";
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceDetail from "./pages/ServiceDetail";
+import Professionnels from "./pages/Professionnels";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -18,6 +19,7 @@ function Router() {
       <Route path={"/service/automobile"} component={ServiceAutomobile} />
       <Route path={"/service/terrasse"} component={ServiceTerrasse} />
       <Route path={"/service"} component={ServiceDetail} />
+      <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

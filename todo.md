@@ -253,3 +253,27 @@
 - [x] Créer un bouton CTA blanc/clair
 - [x] Ajouter l'effet bokeh/flou subtil
 - [x] Tester et valider le nouveau design
+
+
+## Expansion des Services - Plus de 7 Services
+
+- [ ] Ajouter Nettoyage de Vitres
+- [ ] Ajouter Nettoyage de Toiture
+- [ ] Ajouter Nettoyage de Piscine
+- [ ] Ajouter Nettoyage de Gouttières
+- [ ] Ajouter Nettoyage de Murs/Façades Détaillé
+- [ ] Ajouter Nettoyage d'Allées/Chemins
+- [ ] Ajouter Nettoyage de Mobilier Extérieur
+- [ ] Générer des images pour les nouveaux services
+- [ ] Mettre à jour la page d'accueil avec tous les services
+- [ ] Tester et valider l'expansion
+
+
+## Section Professionnels - Devis Personnalisés
+
+- [x] Créer une page dédiée aux professionnels
+- [x] Ajouter un formulaire spécifique pour les demandes professionnelles
+- [x] Ajouter des champs : type de projet, budget, délais, surface
+- [x] Intégrer avec HubSpot pour les demandes professionnelles
+- [x] Ajouter un lien vers la section professionnels dans la navigation
+- [x] Tester le formulaire professionnel
