@@ -28,13 +28,13 @@ export default function Professionals() {
               </div>
               
               <div>
-                <label className="text-sm font-semibold text-gray-600">SIRET</label>
-                <p className="text-lg text-gray-900 font-mono">123 456 789 00012</p>
+                <label className="text-sm font-semibold text-gray-600">Raison Sociale</label>
+                <p className="text-lg text-gray-900 font-semibold">ProClean Empire SARL</p>
               </div>
               
               <div>
-                <label className="text-sm font-semibold text-gray-600">Raison Sociale</label>
-                <p className="text-lg text-gray-900">ProClean Empire SARL</p>
+                <label className="text-sm font-semibold text-gray-600">SIRET</label>
+                <p className="text-lg text-gray-900 font-mono">123 456 789 00012</p>
               </div>
               
               <div>

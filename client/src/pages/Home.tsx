@@ -15,7 +15,6 @@ import {
   Shield,
   Clock3,
   Calendar,
-  ArrowRight,
   Zap,
   Droplets,
   Trash2,
@@ -295,21 +294,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="relative py-20 md:py-32 overflow-hidden animate-fadeIn">
-          <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('/hero-nettoyage-pro.jpg')"}}/>
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10 container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Prêt à transformer vos espaces ?</h2>
-            <p className="text-xl text-gray-100 mb-10 max-w-2xl mx-auto">
-              Contactez-nous dès aujourd'hui pour un devis gratuit et sans engagement
-            </p>
-            <a href="#booking" className="inline-flex items-center justify-center px-8 py-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-              Demander un Devis
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
-          </div>
-        </section>
+
 
         {/* Testimonial Carousel Section */}
         <TestimonialCarousel />
