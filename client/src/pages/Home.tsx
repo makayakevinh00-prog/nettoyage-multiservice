@@ -135,7 +135,7 @@ export default function Home() {
               
               {/* Description */}
               <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
-                Nous entretenons tous les sites où la propreté est capitale.
+                Votre expert en nettoyage professionnel en Île-de-France. Transformez vos espaces en 5 ans d'expérience et d'excellence.
               </p>
               
               {/* Services List */}

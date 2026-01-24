@@ -54,7 +54,7 @@ export default function Header() {
             </a>
           ))}
           <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-            <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>
+            <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
               Prestations
             </a>
           </Button>
@@ -85,7 +85,7 @@ export default function Header() {
               </a>
             ))}
             <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
-              <a href="#contact" onClick={(e) => scrollToSection(e, "#contact")}>
+              <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
                 Prestations
               </a>
             </Button>
