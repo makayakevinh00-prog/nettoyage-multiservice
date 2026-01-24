@@ -173,3 +173,19 @@
 - [x] Créer une navigation sticky et moderne
 - [x] Optimiser la typographie et la hiérarchie
 - [x] Tester le design sur mobile et desktop
+
+
+## Optimisation SEO Local
+
+- [x] Créer le fichier sitemap.xml avec tous les services
+- [x] Créer le fichier robots.txt optimé
+- [x] Ajouter les balises meta optimées pour le SEO
+- [x] Intégrer le schema JSON pour les entreprises locales
+- [x] Ajouter les balises structurées pour les services
+- [x] Configurer les balises Open Graph pour les réseaux sociaux
+- [x] Ajouter les balises canonical pour éviter les doublons
+- [x] Optimiser les titres et descriptions pour chaque page
+- [x] Ajouter les mots-clés locaux (Île-de-France, villes)
+- [ ] Tester avec Google Search Console
+- [ ] Revendiquer Google My Business
+- [ ] Créer un blog avec contenu SEO

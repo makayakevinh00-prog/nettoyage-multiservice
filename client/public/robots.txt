@@ -1,4 +1,35 @@
+# ProClean Empire - Robots.txt
+# Configuration pour les moteurs de recherche
+
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
 
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Autres bots
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Sitemap
 Sitemap: https://procleanempire.com/sitemap.xml
+
+# Délai de crawl par défaut
+Crawl-delay: 1
+Request-rate: 1/10
