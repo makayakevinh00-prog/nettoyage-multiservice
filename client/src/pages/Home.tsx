@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 import GoogleReviews from "@/components/GoogleReviews";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import ServiceAreaSection from "@/components/ServiceAreaSection";
 
 import { 
   Car,
