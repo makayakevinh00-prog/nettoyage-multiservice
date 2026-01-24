@@ -73,6 +73,34 @@ export default function Home() {
       image: "/service-facade.jpg",
       link: "/service/facade",
     },
+    {
+      icon: Waves,
+      title: "Automobile",
+      description: "Lavage complet, lustrage, protection céramique.",
+      image: "/team-cleaning-car.jpg",
+      link: "/service/automobile",
+    },
+    {
+      icon: Droplets,
+      title: "Piscine",
+      description: "Nettoyage complet, traitement de l'eau, maintenance.",
+      image: "/service-piscine.jpg",
+      link: "/service/piscine",
+    },
+    {
+      icon: Trash2,
+      title: "Poubelle",
+      description: "Nettoyage et désinfection avec abonnement mensuel.",
+      image: "/service-poubelle.jpg",
+      link: "/service/poubelle",
+    },
+    {
+      icon: Video,
+      title: "Digital",
+      description: "Appareils de filming pour TikTok et Instagram.",
+      image: "/service-digital.jpg",
+      link: "/service/digital",
+    },
   ];
 
   const stats = [

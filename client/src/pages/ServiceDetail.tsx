@@ -5,9 +5,19 @@ import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles } from "lucide-react";
 import { useLocation, useSearch } from "wouter";
 
 const serviceDetails: Record<string, any> = {
+  automobile: {
+    title: "Nettoyage Automobile",
+    description: "Lavage intérieur et extérieur, lustrage, protection",
+    image: "/team-cleaning-car.jpg",
+    packages: [
+      { name: "Lavage Complet", price: "90€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
+      { name: "Lavage + Lustrage", price: "120€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
+      { name: "Detailing Premium", price: "150€", features: ["Lavage haute pression", "Lustrage intensif", "Protection céramique", "Finition premium"] },
+    ],
+  },
   tapis: {
     title: "Nettoyage Tapis & Canapés",
-    description: "Injection-extraction, détachage professionnel, séchage rapide",
+    description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
     image: "/service-tapis.jpg",
     packages: [
       { name: "Petit (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
@@ -69,8 +79,37 @@ const serviceDetails: Record<string, any> = {
       { name: "Contrat Mensuel", price: "Demande de Devis", features: ["Nettoyage régulier", "Maintenance", "Support prioritaire"] },
     ],
   },
+  piscine: {
+    title: "Nettoyage Piscine",
+    description: "Nettoyage complet, traitement de l'eau, maintenance",
+    image: "/service-piscine.jpg",
+    packages: [
+      { name: "Nettoyage Simple", price: "Demande de Devis", features: ["Nettoyage bassin", "Nettoyage filtration", "Vérification pH"] },
+      { name: "Maintenance Mensuelle", price: "Demande de Devis", features: ["Nettoyage régulier", "Traitement chimique", "Inspection"] },
+      { name: "Ouverture/Fermeture", price: "Demande de Devis", features: ["Préparation saisonnière", "Nettoyage complet", "Mise en service"] },
+    ],
+  },
+  poubelle: {
+    title: "Nettoyage Poubelle",
+    description: "Nettoyage et désinfection des poubelles avec abonnement",
+    image: "/service-poubelle.jpg",
+    packages: [
+      { name: "Abonnement Mensuel", price: "Contacter pour en savoir plus", features: ["Nettoyage hebdomadaire", "Désinfection", "Maintenance régulière"] },
+      { name: "Abonnement Trimestriel", price: "Contacter pour en savoir plus", features: ["Nettoyage régulier", "Désinfection premium", "Support prioritaire"] },
+      { name: "Forfait Annuel", price: "Contacter pour en savoir plus", features: ["Nettoyage 52x/an", "Désinfection intensive", "Maintenance complète"] },
+    ],
+  },
+  digital: {
+    title: "Services Digital",
+    description: "Appareils de filming pour TikTok et Instagram",
+    image: "/service-digital.jpg",
+    packages: [
+      { name: "Kit Filming Basique", price: "Demande de Devis", features: ["Caméra HD", "Stabilisateur", "Microphone"] },
+      { name: "Kit Filming Premium", price: "Demande de Devis", features: ["Caméra 4K", "Drone", "Stabilisateur professionnel", "Microphone sans fil"] },
+      { name: "Service Complet", price: "Demande de Devis", features: ["Filming complet", "Montage vidéo", "Publication réseaux", "Stratégie contenu"] },
+    ],
+  },
 };
-
 export default function ServiceDetail() {
   const { user } = useAuth();
   const [location, setLocation] = useLocation();
