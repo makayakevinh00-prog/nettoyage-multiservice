@@ -13,8 +13,10 @@ import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
-import ChatWidget from "./components/ChatWidget";
-import ProCleanAIAssistant from "./components/ProCleanAIAssistant";
+import ServiceTapis from "./pages/ServiceTapis";
+import ServiceAuto from "./pages/ServiceAuto";
+import ServiceExterieur from "./pages/ServiceExterieur";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -37,6 +39,9 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
+      <Route path={"/service/tapis"} component={ServiceTapis} />
+      <Route path={"/service/auto"} component={ServiceAuto} />
+      <Route path={"/service/exterieur"} component={ServiceExterieur} />
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
@@ -60,8 +65,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <ChatWidget />
-          <ProCleanAIAssistant />
+          <WhatsAppButton />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
