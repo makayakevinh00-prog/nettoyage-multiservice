@@ -9,13 +9,13 @@ export default function Header() {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   const services = [
-    { name: "Automobile", href: "/service/automobile" },
-    { name: "Terrasse", href: "/service/terrasse" },
-    { name: "Tapis & Canapés", href: "/service/tapis" },
-    { name: "Balcon", href: "/service/balcon" },
-    { name: "Façade", href: "/service/facade" },
-    { name: "Panneaux Solaires", href: "/service/panneaux-solaires" },
-    { name: "Jardinage", href: "/service/jardinage" },
+    { name: "Automobile", href: "/#booking", service: "automobile" },
+    { name: "Terrasse", href: "/#booking", service: "terrasse" },
+    { name: "Tapis & Canapés", href: "/#booking", service: "tapis" },
+    { name: "Balcon", href: "/#booking", service: "balcon" },
+    { name: "Façade", href: "/#booking", service: "facade" },
+    { name: "Panneaux Solaires", href: "/#booking", service: "panneaux" },
+    { name: "Jardinage", href: "/#booking", service: "jardinage" },
   ];
 
   const navItems = [
@@ -79,6 +79,11 @@ export default function Header() {
                     <a
                       key={subitem.href}
                       href={subitem.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        localStorage.setItem('prefilledService', (subitem as any).service || '');
+                        window.location.href = '/#booking';
+                      }}
                       className="block px-4 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors"
                     >
                       {subitem.name}
@@ -133,7 +138,12 @@ export default function Header() {
                           <a
                             key={subitem.href}
                             href={subitem.href}
-                            onClick={() => setIsMenuOpen(false)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              localStorage.setItem('prefilledService', (subitem as any).service || '');
+                              window.location.href = '/#booking';
+                              setIsMenuOpen(false);
+                            }}
                             className="block px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors"
                           >
                             {subitem.name}

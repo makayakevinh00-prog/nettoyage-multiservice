@@ -2,11 +2,6 @@ import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 import GoogleReviews from "@/components/GoogleReviews";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import ServiceAreaSection from "@/components/ServiceAreaSection";
-import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import PartnersAndTrust from "@/components/PartnersAndTrust";
-import QuoteCalculator from "@/components/QuoteCalculator";
-import LocalSEOFooter from "@/components/LocalSEOFooter";
 
 import { 
   Car,
@@ -284,32 +279,7 @@ export default function Home() {
         {/* Google Reviews Section */}
         <GoogleReviews />
 
-        {/* Before/After Section */}
-        <section className="py-20 md:py-32 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 text-center mb-16">Nos Realisations</h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              <BeforeAfterSlider 
-                before="/gallery-car-before.jpg"
-                after="/gallery-car-after.jpg"
-                title="Nettoyage Automobile"
-                description="Transformation complete d une voiture negligee"
-              />
-              <BeforeAfterSlider 
-                before="/gallery-terrace-before.jpg"
-                after="/gallery-terrace-after.jpg"
-                title="Nettoyage Terrasse"
-                description="Demoussage et nettoyage haute pression"
-              />
-            </div>
-          </div>
-        </section>
 
-        {/* Quote Calculator Section */}
-        <QuoteCalculator />
-
-        {/* Partners & Trust Section */}
-        <PartnersAndTrust />
 
         {/* Booking Section */}
         <section id="booking" className="py-20 md:py-32 bg-white animate-fadeIn">
@@ -344,8 +314,7 @@ export default function Home() {
         {/* Testimonial Carousel Section */}
         <TestimonialCarousel />
 
-        {/* Local SEO Footer */}
-        <LocalSEOFooter />
+
       </main>
     </div>
   );
