@@ -17,12 +17,27 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
 import { Euro } from "lucide-react";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 interface AdvancedBookingFormProps {
   onSuccess?: () => void;
+  prefilledService?: string;
+  prefilledOption?: string;
+  prefilledName?: string;
+  prefilledEmail?: string;
+  prefilledPhone?: string;
 }
 
-export default function AdvancedBookingForm({ onSuccess }: AdvancedBookingFormProps) {
+export default function AdvancedBookingForm({ 
+  onSuccess,
+  prefilledService,
+  prefilledOption,
+  prefilledName,
+  prefilledEmail,
+  prefilledPhone
+}: AdvancedBookingFormProps) {
+  const { user } = useAuth();
+  
   const [bookingData, setBookingData] = useState<{
     name: string;
     email: string;
@@ -34,23 +49,34 @@ export default function AdvancedBookingForm({ onSuccess }: AdvancedBookingFormPr
     address: string;
     message: string;
   }>({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    serviceOption: "",
+    name: prefilledName || user?.name || "",
+    email: prefilledEmail || user?.email || "",
+    phone: prefilledPhone || "",
+    service: prefilledService || "",
+    serviceOption: prefilledOption || "",
     date: "",
     time: "",
     address: "",
     message: "",
   });
 
+  // Mettre a jour les donnees pre-remplies quand elles changent
+  useEffect(() => {
+    if (prefilledService) {
+      setBookingData(prev => ({
+        ...prev,
+        service: prefilledService,
+        serviceOption: prefilledOption || ""
+      }));
+    }
+  }, [prefilledService, prefilledOption]);
+
   const sendBookingMutation = trpc.contact.sendBooking.useMutation({
     onSuccess: () => {
       toast.success("Votre réservation a été envoyée ! Nous vous confirmerons rapidement.");
       setBookingData({
-        name: "",
-        email: "",
+        name: user?.name || "",
+        email: user?.email || "",
         phone: "",
         service: "",
         serviceOption: "",
@@ -106,214 +132,171 @@ export default function AdvancedBookingForm({ onSuccess }: AdvancedBookingFormPr
   };
 
   return (
-    <Card className="border-2 border-blue-200 shadow-lg bg-white">
-      <CardHeader className="bg-gradient-to-r from-blue-50 to-blue-100 border-b-2 border-blue-200 p-4 md:p-6">
-        <CardTitle className="text-xl md:text-2xl text-blue-900">Réserver Votre Service</CardTitle>
-        <CardDescription className="text-sm md:text-base text-blue-700">
-          Sélectionnez votre service pour un devis précis
-        </CardDescription>
+    <Card className="max-w-2xl mx-auto">
+      <CardHeader>
+        <CardTitle>Réserver Votre Service</CardTitle>
+        <CardDescription>Sélectionnez votre service pour un devis précis</CardDescription>
       </CardHeader>
-      <CardContent className="pt-4 md:pt-8 px-4 md:px-6">
+      <CardContent>
         <form onSubmit={handleBooking} className="space-y-6">
-          {/* Informations personnelles */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Vos Informations</h3>
-            <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="booking-name" className="text-gray-700 font-medium">
-                  Nom Complet *
-                </Label>
+          {/* Vos Informations */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Vos Informations</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="booking-name">Nom Complet *</Label>
                 <Input
                   id="booking-name"
-                  type="text"
-                  required
+                  placeholder="Jean Dupont"
                   value={bookingData.name}
                   onChange={(e) => setBookingData({ ...bookingData, name: e.target.value })}
-                  placeholder="Jean Dupont"
-                  className="border-2 border-gray-200 focus:border-blue-500 h-12"
+                  required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="booking-email" className="text-gray-700 font-medium">
-                  Email *
-                </Label>
+              <div>
+                <Label htmlFor="booking-email">Email *</Label>
                 <Input
                   id="booking-email"
                   type="email"
-                  required
+                  placeholder="jean.dupont@email.com"
                   value={bookingData.email}
                   onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
-                  placeholder="jean.dupont@email.com"
-                  className="border-2 border-gray-200 focus:border-blue-500 h-12"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="booking-phone">Téléphone *</Label>
+                <Input
+                  id="booking-phone"
+                  type="tel"
+                  placeholder="06 12 34 56 78"
+                  value={bookingData.phone}
+                  onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })}
+                  required
                 />
               </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="booking-phone" className="text-gray-700 font-medium">
-                Téléphone *
-              </Label>
-              <Input
-                id="booking-phone"
-                type="tel"
-                required
-                value={bookingData.phone}
-                onChange={(e) => setBookingData({ ...bookingData, phone: e.target.value })}
-                placeholder="06 12 34 56 78"
-                className="border-2 border-gray-200 focus:border-blue-500 h-12"
-              />
-            </div>
           </div>
 
-          {/* Service et Options */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Votre Service</h3>
-            <div className="space-y-2">
-              <Label htmlFor="booking-service" className="text-gray-700 font-medium">
-                Service souhaité *
-              </Label>
-              <Select
-                value={bookingData.service}
-                onValueChange={(value) =>
-                  setBookingData({
-                    ...bookingData,
-                    service: value,
-                    serviceOption: "", // Réinitialiser l'option
-                  })
-                }
-              >
-                <SelectTrigger className="border-2 border-gray-200 focus:border-blue-500 h-12">
-                  <SelectValue placeholder="Choisir un service" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(SERVICES).map((service) => (
-                    <SelectItem key={service.id} value={service.id}>
-                      {service.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Options détaillées */}
-            {selectedService && selectedService.options.length > 0 && (
-              <div className="space-y-2">
-                <Label htmlFor="booking-option" className="text-gray-700 font-medium">
-                  Options disponibles *
-                </Label>
-                <Select
-                  value={bookingData.serviceOption}
-                  onValueChange={(value) =>
-                    setBookingData({ ...bookingData, serviceOption: value })
-                  }
-                >
-                  <SelectTrigger className="border-2 border-gray-200 focus:border-blue-500 h-12">
-                    <SelectValue placeholder="Sélectionner une option" />
+          {/* Votre Service */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Votre Service</h3>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="service">Service souhaité *</Label>
+                <Select value={bookingData.service} onValueChange={(value) => {
+                  setBookingData({ ...bookingData, service: value, serviceOption: "" });
+                }}>
+                  <SelectTrigger id="service">
+                    <SelectValue placeholder="Choisir un service" />
                   </SelectTrigger>
                   <SelectContent>
-                    {selectedService.options.map((option) => (
-                      <SelectItem key={option.id} value={option.id}>
-                        <div className="flex items-center gap-2">
-                          <span>{option.label}</span>
-                          {option.price > 0 && (
-                            <span className="text-blue-600 font-semibold">
-                              {formatPrice(option.price)}
-                            </span>
-                          )}
-                        </div>
+                    {Object.entries(SERVICES).map(([key, service]) => (
+                      <SelectItem key={key} value={key}>
+                        {service.name}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
-
-                {/* Description de l'option */}
-                {bookingData.serviceOption && (
-                  <div className="p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
-                    <p className="text-sm text-gray-700">
-                      {
-                        selectedService.options.find((opt) => opt.id === bookingData.serviceOption)
-                          ?.description
-                      }
-                    </p>
-                  </div>
-                )}
               </div>
-            )}
+
+              {selectedService && (
+                <div>
+                  <Label htmlFor="option">Option *</Label>
+                  <Select value={bookingData.serviceOption} onValueChange={(value) => {
+                    setBookingData({ ...bookingData, serviceOption: value });
+                  }}>
+                    <SelectTrigger id="option">
+                      <SelectValue placeholder="Choisir une option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {selectedService.options.map((option) => (
+                        <SelectItem key={option.id} value={option.id}>
+                          {option.name} {option.price !== "Demande de Devis" && `- ${formatPrice(option.price)}`}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {totalPrice > 0 && (
+                <div className="bg-blue-50 p-4 rounded-lg flex items-center justify-between">
+                  <span className="font-semibold text-gray-700">Prix estimé:</span>
+                  <div className="flex items-center gap-2">
+                    <Euro size={20} className="text-blue-600" />
+                    <span className="text-2xl font-bold text-blue-600">{formatPrice(totalPrice)}</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Date et Heure */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Date et Heure</h3>
-            <DateTimePicker
-              selectedDate={bookingData.date}
-              selectedTime={bookingData.time}
-              onDateChange={(date) => setBookingData({ ...bookingData, date })}
-              onTimeChange={(time) =>
-                setBookingData({ ...bookingData, time: time as typeof bookingData.time })
-              }
-            />
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Date et Heure</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="booking-date">Date souhaitée *</Label>
+                <DateTimePicker
+                  value={bookingData.date}
+                  onChange={(date) => setBookingData({ ...bookingData, date })}
+                />
+              </div>
+              <div>
+                <Label htmlFor="booking-time">Créneau horaire *</Label>
+                <Select value={bookingData.time} onValueChange={(value: any) => {
+                  setBookingData({ ...bookingData, time: value });
+                }}>
+                  <SelectTrigger id="booking-time">
+                    <SelectValue placeholder="Choisir un créneau" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="matin">Matin (8h-12h)</SelectItem>
+                    <SelectItem value="apres-midi">Après-midi (12h-17h)</SelectItem>
+                    <SelectItem value="soir">Soir (17h-20h)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
 
-          {/* Adresse */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-gray-900">Lieu d'Intervention</h3>
-            <div className="space-y-2">
-              <Label htmlFor="booking-address" className="text-gray-700 font-medium">
-                Adresse *
-              </Label>
+          {/* Lieu d'Intervention */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Lieu d'Intervention</h3>
+            <div>
+              <Label htmlFor="booking-address">Adresse *</Label>
               <FrenchAddressAutocomplete
-                id="booking-address"
-                required
                 value={bookingData.address}
-                onChange={(value) => setBookingData({ ...bookingData, address: value })}
-                placeholder="Commencez à taper votre adresse..."
-                className="border-2 border-gray-200 focus:border-blue-500 h-12"
+                onChange={(address) => setBookingData({ ...bookingData, address })}
               />
             </div>
           </div>
 
           {/* Informations complémentaires */}
-          <div className="space-y-2">
-            <Label htmlFor="booking-message" className="text-gray-700 font-medium">
-              Informations complémentaires
-            </Label>
+          <div>
+            <Label htmlFor="booking-message">Informations complémentaires</Label>
             <Textarea
               id="booking-message"
+              placeholder="Précisions sur votre demande..."
               value={bookingData.message}
               onChange={(e) => setBookingData({ ...bookingData, message: e.target.value })}
-              placeholder="Précisions sur votre demande..."
               rows={4}
-              className="border-2 border-gray-200 focus:border-blue-500"
             />
           </div>
 
-          {/* Résumé du prix */}
-          {totalPrice > 0 && (
-            <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-200 rounded-lg">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Euro className="h-6 w-6 text-green-600" />
-                  <span className="text-gray-700 font-medium">Montant estimé :</span>
-                </div>
-                <span className="text-3xl font-bold text-green-600">{formatPrice(totalPrice)}</span>
-              </div>
-              <p className="text-sm text-gray-600 mt-2">
-                Vous recevrez un devis détaillé par email après confirmation.
-              </p>
-            </div>
-          )}
-
           {/* Bouton de soumission */}
-          <Button
-            type="submit"
-            size="lg"
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300"
-            disabled={sendBookingMutation.isPending}
-          >
-            {sendBookingMutation.isPending ? "Envoi en cours..." : "Confirmer ma Réservation"}
-          </Button>
+          <div className="flex gap-4">
+            <Button 
+              type="submit" 
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+              disabled={sendBookingMutation.isPending}
+            >
+              {totalPrice > 0 ? "Réserver" : "Demander un Devis"}
+            </Button>
+          </div>
 
-          {/* Note importante */}
-          <p className="text-xs text-gray-500 text-center">
+          <p className="text-xs text-gray-500">
             * Frais d'annulation : 25€ si annulation moins de 24h avant le rendez-vous
           </p>
         </form>

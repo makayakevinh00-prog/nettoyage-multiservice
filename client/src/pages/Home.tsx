@@ -26,12 +26,27 @@ import { useLocation } from "wouter";
 export default function Home() {
   const [location] = useLocation();
   const [scrollY, setScrollY] = useState(0);
+  const [prefilledService, setPrefilledService] = useState("");
+  const [prefilledOption, setPrefilledOption] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const service = localStorage.getItem('prefilledService');
+    const option = localStorage.getItem('prefilledOption');
+    if (service) {
+      setPrefilledService(service);
+      localStorage.removeItem('prefilledService');
+    }
+    if (option) {
+      setPrefilledOption(option);
+      localStorage.removeItem('prefilledOption');
+    }
+  }, [location]);
 
   const services = [
     {
@@ -256,7 +271,10 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
               <p className="text-xl text-gray-600">Remplissez le formulaire ci-dessous pour demander un devis</p>
             </div>
-            <AdvancedBookingForm />
+            <AdvancedBookingForm 
+              prefilledService={prefilledService}
+              prefilledOption={prefilledOption}
+            />
           </div>
         </section>
 
