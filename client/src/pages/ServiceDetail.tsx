@@ -195,6 +195,11 @@ export default function ServiceDetail() {
                   <CardTitle className="text-xl">{pkg.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <div className="mb-4">
+                    {pkg.price !== "Demande de Devis" && !pkg.price.includes("0") && (
+                      <div className="text-2xl font-bold text-blue-600 mb-4">{pkg.price}</div>
+                    )}
+                  </div>
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((feature: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-gray-700">
@@ -204,7 +209,7 @@ export default function ServiceDetail() {
                     ))}
                   </ul>
                   <Button 
-                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    className="w-full bg-blue-600 hover:bg-blue-700"
                     onClick={() => {
                       // Scroll to booking form
                       document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
@@ -213,7 +218,7 @@ export default function ServiceDetail() {
                       localStorage.setItem('selectedOption', pkg.name);
                     }}
                   >
-                    {pkg.price === "Demande de Devis" ? "Demander un Devis" : "Réserver ce forfait"}
+                    {pkg.price === "Demande de Devis" || pkg.price.includes("0") ? "Demander un Devis" : "Reserver"}
                   </Button>
                 </CardContent>
               </Card>
