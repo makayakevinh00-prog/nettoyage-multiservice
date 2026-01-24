@@ -165,14 +165,6 @@ export default function ServiceDetail() {
                   <CardTitle className="text-xl">{pkg.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {pkg.price !== "Demande de Devis" && (
-                    <div className="mb-6">
-                      <div className="text-3xl font-bold text-blue-600 flex items-center gap-2">
-                        {pkg.price}
-                        <Euro size={24} />
-                      </div>
-                    </div>
-                  )}
                   <ul className="space-y-2 mb-6">
                     {pkg.features.map((feature: string, i: number) => (
                       <li key={i} className="flex items-center gap-2 text-gray-700">
