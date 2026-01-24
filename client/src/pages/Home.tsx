@@ -1,311 +1,298 @@
-import Header from "@/components/Header";
-import AdvancedBookingForm from "@/components/AdvancedBookingForm";
-import GoogleReviews from "@/components/GoogleReviews";
-import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import { TestimonialForm } from "@/components/TestimonialForm";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { 
   Car,
-  CheckCircle2, 
-  Star,
+  Waves,
   Sofa,
   Building2,
-  Waves,
   Leaf,
   Sparkles,
   Shield,
   Clock3,
+  CheckCircle2,
   ArrowRight,
-  Zap
+  Zap,
+  Phone
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import { TestimonialForm } from "@/components/TestimonialForm";
+import GoogleReviews from "@/components/GoogleReviews";
+import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 
 export default function Home() {
-  const [location] = useLocation();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [, setLocation] = useLocation();
+  const [showBooking, setShowBooking] = useState(false);
 
   const services = [
     {
       icon: Car,
-      title: "Automobile",
-      description: "Intérieur et extérieur, lavage haute pression, lustrage.",
-      image: "/service-automobile.jpg",
-      link: "/service/automobile",
+      title: "Nettoyage Automobile",
+      description: "Lavage complet intérieur et extérieur, haute pression, lustrage professionnel.",
     },
     {
       icon: Waves,
-      title: "Terrasse",
-      description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
-      image: "/service-terrasse.jpg",
-      link: "/service/terrasse",
+      title: "Nettoyage Terrasse",
+      description: "Nettoyage haute pression, traitement anti-mousse, protection durable.",
     },
     {
       icon: Sofa,
-      title: "Tapis & Canapés",
+      title: "Nettoyage Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "/service-tapis.jpg",
-      link: "/service/tapis",
     },
     {
       icon: Building2,
-      title: "Balcon",
-      description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "/service-balcon.jpg",
-      link: "/service/balcon",
+      title: "Nettoyage Balcon",
+      description: "Nettoyage complet, joints, garde-corps, revêtements spécialisés.",
     },
     {
       icon: Leaf,
-      title: "Jardinage",
-      description: "Entretien paysager, taille, débroussaillage professionnel.",
-      image: "/service-jardinage.jpg",
-      link: "/service/jardinage",
+      title: "Entretien Jardinage",
+      description: "Taille, débroussaillage, entretien paysager professionnel.",
     },
     {
       icon: Building2,
-      title: "Façade",
-      description: "Nettoyage haute pression, traitement anti-mousse, joints.",
-      image: "/service-facade.jpg",
-      link: "/service/facade",
+      title: "Nettoyage Façade",
+      description: "Nettoyage haute pression, traitement anti-mousse, ravalement.",
+    },
+    {
+      icon: Sparkles,
+      title: "Panneaux Solaires",
+      description: "Nettoyage spécialisé, maintenance, optimisation rendement.",
+    },
+    {
+      icon: Shield,
+      title: "Services Professionnels",
+      description: "Bureaux, espaces commerciaux, nettoyage sur mesure.",
+    },
+  ];
+
+  const values = [
+    {
+      icon: Sparkles,
+      title: "Excellence",
+      description: "Qualité irréprochable dans chaque intervention",
+    },
+    {
+      icon: Clock3,
+      title: "Réactivité",
+      description: "Interventions rapides et efficaces en Île-de-France",
+    },
+    {
+      icon: Shield,
+      title: "Proximité",
+      description: "Équipes locales, disponibles et à votre écoute",
+    },
+    {
+      icon: Zap,
+      title: "Innovation",
+      description: "Équipements modernes et techniques éco-responsables",
     },
   ];
 
   const stats = [
     { number: "5+", label: "Ans d'Expérience" },
     { number: "1000+", label: "Clients Satisfaits" },
-    { number: "7", label: "Services Disponibles" },
-  ];
-
-  const testimonials = [
-    {
-      name: "Alexandre M.",
-      role: "Particulier",
-      content: "Service exceptionnel pour le nettoyage de ma voiture. Résultat impeccable !",
-      rating: 5,
-    },
-    {
-      name: "Sophie D.",
-      role: "Propriétaire",
-      content: "J'ai fait nettoyer ma terrasse et mes tapis. Le travail est remarquable.",
-      rating: 5,
-    },
-    {
-      name: "Thomas L.",
-      role: "Copropriété",
-      content: "ProClean Empire intervient régulièrement pour notre immeuble. Toujours à l'heure et efficace.",
-      rating: 5,
-    },
+    { number: "50000+", label: "m² Nettoyés" },
+    { number: "8", label: "Services Disponibles" },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      <Header />
-      
-      <main className="flex-1">
-        {/* Hero Section - Style La Providence */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/hero-nettoyage-pro.jpg')",
-              transform: `translateY(${scrollY * 0.3}px)`,
-            }}
-          />
-          
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
-          
-          {/* Content - Centered */}
-          <div className="relative z-10 container mx-auto px-4 text-center">
-            <div className="max-w-3xl mx-auto">
-              {/* Main Title */}
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                PROCLEAN<br />
-                <span className="text-blue-400">EMPIRE</span>
-              </h1>
-              
-              {/* Subtitle */}
-              <p className="text-2xl md:text-3xl text-gray-100 mb-4 font-light">
-                Nettoyage Multiservice Premium
-              </p>
-              
-              {/* Description */}
-              <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
-                Votre expert en nettoyage professionnel en Île-de-France. Transformez vos espaces en 5 ans d'expérience et d'excellence.
-              </p>
-              
-              {/* Services List */}
-              <p className="text-gray-300 mb-10 text-base">
-                Voiture • Tapis • Terrasse • Balcon • Jardinage • Façade • Professionnel
-              </p>
-              
-              {/* CTA Button */}
-              <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-                DEMANDER UN DEVIS
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-            </div>
-          </div>
-        </section>
+    <div className="min-h-screen bg-white">
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/team-professional-portrait.jpg')",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
 
-        {/* Stats Section */}
-        <section className="bg-gradient-to-r from-slate-900 to-black py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              {stats.map((stat, i) => (
-                <div key={i} className="text-white">
-                  <div className="text-5xl md:text-6xl font-bold text-blue-400 mb-2">{stat.number}</div>
-                  <div className="text-gray-300 text-lg">{stat.label}</div>
+        {/* Content */}
+        <div className="relative z-10 container text-center text-white max-w-4xl mx-auto px-4">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight tracking-tight">
+            PROCLEAN<br />
+            <span className="text-blue-400">EMPIRE</span>
+          </h1>
+          <p className="text-2xl md:text-3xl font-light mb-4 text-gray-100">
+            Nettoyage Multiservice Premium
+          </p>
+          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto">
+            Nous entretenons tous les espaces où la propreté est capitale.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg rounded-lg"
+              onClick={() => setShowBooking(true)}
+            >
+              <Phone className="mr-2" size={20} />
+              Réserver Maintenant
+            </Button>
+            <Button 
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white/10 px-8 py-6 text-lg rounded-lg"
+              onClick={() => setLocation("/nous-connaitre")}
+            >
+              En Savoir Plus
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* NOS VALEURS */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 uppercase tracking-wide">
+            Les Plus + ProClean Empire
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg max-w-2xl mx-auto">
+            Découvrez ce qui nous différencie sur le marché du nettoyage professionnel
+          </p>
+          
+          <div className="grid md:grid-cols-4 gap-8">
+            {values.map((value, idx) => (
+              <div key={idx} className="text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="p-4 bg-blue-50 rounded-full">
+                    <value.icon size={32} className="text-blue-600" />
+                  </div>
                 </div>
-              ))}
-            </div>
+                <h3 className="text-xl font-bold mb-2 text-gray-900">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Services Section */}
-        <section id="services" className="py-20 md:py-32 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nos Services</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Une gamme complète de services de nettoyage professionnel adaptés à tous vos besoins
-              </p>
-            </div>
+      {/* STATISTIQUES */}
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="text-center">
+                <div className="text-5xl md:text-6xl font-bold text-blue-600 mb-2">
+                  {stat.number}
+                </div>
+                <p className="text-gray-600 text-lg">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, i) => {
-                const Icon = service.icon;
-                return (
-                  <a
-                    key={i}
-                    href={service.link}
-                    className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+      {/* NOS SERVICES */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 uppercase tracking-wide">
+            Nos Services
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg max-w-2xl mx-auto">
+            Une gamme complète de services de nettoyage adaptés à tous vos besoins
+          </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, idx) => (
+              <Card key={idx} className="hover:shadow-lg transition-shadow cursor-pointer border-0 bg-gray-50">
+                <CardContent className="p-6">
+                  <div className="flex justify-center mb-4">
+                    <service.icon size={40} className="text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-center mb-2 text-gray-900">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm text-center">
+                    {service.description}
+                  </p>
+                  <button
+                    onClick={() => setLocation(`/service/${service.title.toLowerCase().replace(/[&\s]/g, '-')}`)}
+                    className="w-full mt-4 text-blue-600 hover:text-blue-700 font-semibold text-sm flex items-center justify-center gap-2"
                   >
-                    <div className="relative h-48 overflow-hidden bg-gray-200">
-                      <img 
-                        src={service.image} 
-                        alt={service.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <Icon className="w-8 h-8 text-blue-600 mb-3" />
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                      <p className="text-gray-600 mb-4">{service.description}</p>
-                      <div className="text-blue-600 font-semibold group-hover:text-blue-700">
-                        En savoir plus →
-                      </div>
-                    </div>
-                  </a>
-                );
-              })}
-            </div>
+                    En savoir plus <ArrowRight size={16} />
+                  </button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Advantages Section */}
-        <section className="py-20 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Pourquoi ProClean Empire</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-12 max-w-4xl mx-auto">
-              {[
-                { icon: Shield, title: "Professionnel", desc: "Equipe formee" },
-                { icon: Sparkles, title: "Qualite", desc: "Resultats garantis" },
-                { icon: CheckCircle2, title: "Fiable", desc: "Satisfaction 100%" },
-              ].map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div key={i} className="text-center space-y-3">
-                    <Icon className="w-10 h-10 text-blue-600 mx-auto" />
-                    <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="py-20 md:py-32 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Avis Clients</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, i) => (
-                <div key={i} className="bg-white rounded-lg p-8 shadow-md">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4 italic">"{testimonial.content}"</p>
-                  <div>
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Google Reviews Section */}
-        <GoogleReviews />
-
-        {/* Booking Section */}
-        <section id="booking" className="py-20 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
-              <p className="text-xl text-gray-600">Remplissez le formulaire ci-dessous pour demander un devis</p>
-            </div>
+      {/* SECTION RÉSERVATION */}
+      {showBooking && (
+        <section className="py-20 bg-blue-50">
+          <div className="container max-w-4xl mx-auto px-4">
+            <button
+              onClick={() => setShowBooking(false)}
+              className="mb-4 text-gray-600 hover:text-gray-900"
+            >
+              ← Fermer
+            </button>
             <AdvancedBookingForm />
           </div>
         </section>
+      )}
 
-        {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-blue-800">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Prêt à transformer vos espaces ?</h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Contactez-nous dès aujourd'hui pour un devis gratuit et sans engagement
-            </p>
-            <a href="#booking" className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-100 text-blue-600 font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
-              Demander un Devis
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
-          </div>
-        </section>
+      {/* TÉMOIGNAGES */}
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 uppercase tracking-wide">
+            Avis Clients
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg max-w-2xl mx-auto">
+            Découvrez ce que nos clients pensent de nos services
+          </p>
+          <TestimonialCarousel />
+        </div>
+      </section>
 
-        {/* Testimonial Carousel Section */}
-        <TestimonialCarousel />
+      {/* FORMULAIRE TÉMOIGNAGE */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-4xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 uppercase tracking-wide">
+            Partagez Votre Expérience
+          </h2>
+          <p className="text-center text-gray-600 mb-16 text-lg">
+            Votre avis nous aide à nous améliorer continuellement
+          </p>
+          <TestimonialForm />
+        </div>
+      </section>
 
-        {/* Testimonial Form Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-              Partagez votre expérience
-            </h2>
-            <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-              Votre avis nous aide à nous améliorer. Soumettez votre témoignage et aidez d'autres clients à découvrir nos services.
-            </p>
-            <TestimonialForm />
-          </div>
-        </section>
-      </main>
+      {/* AVIS GOOGLE */}
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 uppercase tracking-wide">
+            Avis Google
+          </h2>
+          <GoogleReviews />
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+        <div className="container max-w-4xl mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Prêt à Transformer Vos Espaces ?
+          </h2>
+          <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            Contactez-nous dès aujourd'hui pour un devis gratuit et sans engagement
+          </p>
+          <Button 
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-lg font-semibold"
+            onClick={() => setShowBooking(true)}
+          >
+            Demander un Devis
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }

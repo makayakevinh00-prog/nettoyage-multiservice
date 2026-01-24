@@ -5,6 +5,27 @@ import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles } from "lucide-react";
 import { useLocation, useSearch } from "wouter";
 
 const serviceDetails: Record<string, any> = {
+  automobile: {
+    title: "Nettoyage Automobile",
+    description: "Nettoyage complet interieur et exterieur de votre vehicule",
+    image: "/team-cleaning-car.jpg",
+    packages: [
+      { name: "Sans sieges", price: "70€", features: ["Lavage haute pression", "Nettoyage interieur", "Sechage"] },
+      { name: "Avec sieges", price: "90€", features: ["Lavage complet", "Nettoyage sieges", "Aspirateur", "Finition"] },
+      { name: "Gros vehicule (SUV/4x4)", price: "120€", features: ["Lavage haute pression", "Nettoyage complet", "Traitement protecteur"] },
+    ],
+  },
+  terrasse: {
+    title: "Nettoyage Terrasse",
+    description: "Nettoyage haute pression et traitement anti-mousse de votre terrasse",
+    image: "/team-cleaning-terrace.jpg",
+    packages: [
+      { name: "2 m2", price: "15€", features: ["Nettoyage haute pression", "Finition brillante"] },
+      { name: "5 m2", price: "18€", features: ["Nettoyage complet", "Traitement anti-mousse"] },
+      { name: "10 m2", price: "29€", features: ["Nettoyage haute pression", "Traitement protecteur"] },
+      { name: "20 m2", price: "53€", features: ["Nettoyage complet", "Traitement anti-mousse", "Finition premium"] },
+    ],
+  },
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Injection-extraction, détachage professionnel, séchage rapide",
@@ -77,7 +98,9 @@ export default function ServiceDetail() {
   
   // Extract service ID from URL path
   const pathMatch = location.match(/\/service\/([a-z-]+)/);
-  const serviceId = pathMatch ? pathMatch[1].replace("-", "") : "tapis";
+  const rawServiceId = pathMatch ? pathMatch[1] : "tapis";
+  // Handle special cases: panneaux-solaires -> panneaux
+  const serviceId = rawServiceId === "panneaux-solaires" ? "panneaux" : rawServiceId;
   
   const service = serviceDetails[serviceId] || serviceDetails.tapis;
 
