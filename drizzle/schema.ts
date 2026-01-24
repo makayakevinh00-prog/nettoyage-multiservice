@@ -47,3 +47,36 @@ export const bookings = mysqlTable("bookings", {
 
 export type Booking = typeof bookings.$inferSelect;
 export type InsertBooking = typeof bookings.$inferInsert;
+
+// Table pour les messages de chat
+export const chatMessages = mysqlTable("chatMessages", {
+  id: int("id").autoincrement().primaryKey(),
+  visitorId: varchar("visitorId", { length: 64 }).notNull(),
+  visitorName: varchar("visitorName", { length: 100 }),
+  visitorEmail: varchar("visitorEmail", { length: 320 }),
+  message: text("message").notNull(),
+  sender: mysqlEnum("sender", ["visitor", "ai", "admin"]).notNull(),
+  isRead: int("isRead").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ChatMessage = typeof chatMessages.$inferSelect;
+export type InsertChatMessage = typeof chatMessages.$inferInsert;
+
+// Table pour les témoignages clients
+export const testimonials = mysqlTable("testimonials", {
+  id: int("id").autoincrement().primaryKey(),
+  clientName: varchar("clientName", { length: 100 }).notNull(),
+  clientEmail: varchar("clientEmail", { length: 320 }).notNull(),
+  service: varchar("service", { length: 100 }).notNull(),
+  rating: int("rating").notNull(), // 1-5 stars
+  title: varchar("title", { length: 200 }).notNull(),
+  content: text("content").notNull(),
+  imageUrl: varchar("imageUrl", { length: 500 }),
+  isApproved: int("isApproved").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Testimonial = typeof testimonials.$inferSelect;
+export type InsertTestimonial = typeof testimonials.$inferInsert;

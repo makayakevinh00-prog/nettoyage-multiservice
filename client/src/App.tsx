@@ -5,11 +5,12 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import WhatsAppButton from "./components/WhatsAppButton";
+
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
+import ChatWidget from "./components/ChatWidget";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -42,7 +43,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <WhatsAppButton />
+          <ChatWidget />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

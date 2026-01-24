@@ -1,6 +1,6 @@
 import { eq, and, gte, lte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, bookings, InsertBooking } from "../drizzle/schema";
+import { InsertUser, users, bookings, InsertBooking, testimonials, InsertTestimonial } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -144,6 +144,95 @@ export async function getBookingById(id: number) {
   } catch (error) {
     console.error("[Database] Failed to get booking:", error);
     return undefined;
+  }
+}
+
+// Testimonial queries
+export async function createTestimonial(data: InsertTestimonial) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create testimonial: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db.insert(testimonials).values(data);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create testimonial:", error);
+    throw error;
+  }
+}
+
+export async function getApprovedTestimonials() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get testimonials: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(testimonials)
+      .where(eq(testimonials.isApproved, 1))
+      .orderBy(testimonials.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get testimonials:", error);
+    return [];
+  }
+}
+
+export async function getPendingTestimonials() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get pending testimonials: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(testimonials)
+      .where(eq(testimonials.isApproved, 0))
+      .orderBy(testimonials.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get pending testimonials:", error);
+    return [];
+  }
+}
+
+export async function approveTestimonial(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot approve testimonial: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .update(testimonials)
+      .set({ isApproved: 1 })
+      .where(eq(testimonials.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to approve testimonial:", error);
+    throw error;
+  }
+}
+
+export async function deleteTestimonial(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot delete testimonial: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .delete(testimonials)
+      .where(eq(testimonials.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to delete testimonial:", error);
+    throw error;
   }
 }
 

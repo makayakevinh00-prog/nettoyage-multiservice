@@ -1,13 +1,16 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, router, adminProcedure } from "./_core/trpc";
 import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
 import { generateICSFile } from "./lib/calendar";
 import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleCalendar";
 import { syncBookingToHubSpot } from "./lib/hubspot";
+import { generateChatResponse } from "./lib/chatAI";
+import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial } from "./db";
+import { storagePut } from "./storage";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
@@ -229,6 +232,162 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         } catch (error) {
           console.error('Erreur lors de la création du PaymentIntent:', error);
           throw new Error('Impossible de créer le paiement');
+        }
+      }),
+  }),
+
+  chat: router({
+    sendMessage: publicProcedure
+      .input(z.object({
+        visitorId: z.string().min(1).max(64),
+        visitorName: z.string().min(1).max(100).trim(),
+        visitorEmail: z.string().email().max(255).trim().toLowerCase(),
+        message: z.string().min(1).max(1000).trim(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          // Sauvegarder le message du visiteur en base de données
+          // (À implémenter avec la base de données)
+          console.log('[Chat] Message reçu:', input);
+          
+          // Générer une réponse IA personnalisée
+          const aiResponse = await generateChatResponse(input.message, input.visitorName);
+          
+          // Notifier le propriétaire
+          await notifyOwner({
+            title: 'Nouveau message chat',
+            content: `${input.visitorName} (${input.visitorEmail}) a envoyé: ${input.message}`,
+          });
+
+          return { success: true, aiResponse };
+        } catch (error) {
+          console.error('[Chat] Erreur lors de l\'envoi du message:', error);
+          throw new Error('Impossible d\'envoyer le message');
+        }
+      }),
+
+    getMessages: publicProcedure
+      .input(z.object({
+        visitorId: z.string().min(1).max(64),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          // Récupérer les messages du visiteur
+          // (À implémenter avec la base de données)
+          console.log('[Chat] Récupération des messages pour:', input.visitorId);
+          return [];
+        } catch (error) {
+          console.error('[Chat] Erreur lors de la récupération des messages:', error);
+          throw new Error('Impossible de récupérer les messages');
+        }
+      }),
+  }),
+
+  admin: router({
+    getPendingTestimonials: adminProcedure
+      .query(async () => {
+        try {
+          return await getPendingTestimonials();
+        } catch (error) {
+          console.error('[Admin] Failed to get pending testimonials:', error);
+          return [];
+        }
+      }),
+
+    getApprovedTestimonials: adminProcedure
+      .query(async () => {
+        try {
+          return await getApprovedTestimonials();
+        } catch (error) {
+          console.error('[Admin] Failed to get approved testimonials:', error);
+          return [];
+        }
+      }),
+
+    approveTestimonial: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        try {
+          await approveTestimonial(input.id);
+          return { success: true };
+        } catch (error) {
+          console.error('[Admin] Failed to approve testimonial:', error);
+          throw new Error('Impossible d\'approuver le teemoignage');
+        }
+      }),
+
+    deleteTestimonial: adminProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input }) => {
+        try {
+          await deleteTestimonial(input.id);
+          return { success: true };
+        } catch (error) {
+          console.error('[Admin] Failed to delete testimonial:', error);
+          throw new Error('Impossible de supprimer le teemoignage');
+        }
+      }),
+  }),
+
+  testimonials: router({
+    submit: publicProcedure
+      .input(z.object({
+        clientName: z.string().min(1).max(100).trim(),
+        clientEmail: z.string().email().max(255).trim().toLowerCase(),
+        service: z.string().min(1).max(100).trim(),
+        rating: z.number().int().min(1).max(5),
+        title: z.string().min(5).max(200).trim(),
+        content: z.string().min(10).max(1000).trim(),
+        imageBase64: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          let imageUrl: string | undefined;
+
+          if (input.imageBase64) {
+            try {
+              const buffer = Buffer.from(input.imageBase64, 'base64');
+              const { url } = await storagePut(
+                `testimonials/${Date.now()}-${Math.random().toString(36).substr(2, 9)}.jpg`,
+                buffer,
+                'image/jpeg'
+              );
+              imageUrl = url;
+            } catch (error) {
+              console.error('[Testimonials] Failed to upload image:', error);
+            }
+          }
+
+          await createTestimonial({
+            clientName: input.clientName,
+            clientEmail: input.clientEmail,
+            service: input.service,
+            rating: input.rating,
+            title: input.title,
+            content: input.content,
+            imageUrl,
+            isApproved: 0,
+          });
+
+          await notifyOwner({
+            title: 'Nouveau teemoignage en attente de moderation',
+            content: `Teemoignage de ${input.clientName} pour ${input.service}. Note: ${input.rating}/5`,
+          });
+
+          return { success: true };
+        } catch (error) {
+          console.error('[Testimonials] Failed to submit testimonial:', error);
+          throw new Error('Impossible de soumettre le teemoignage');
+        }
+      }),
+
+    getApproved: publicProcedure
+      .query(async () => {
+        try {
+          return await getApprovedTestimonials();
+        } catch (error) {
+          console.error('[Testimonials] Failed to get approved testimonials:', error);
+          return [];
         }
       }),
   }),

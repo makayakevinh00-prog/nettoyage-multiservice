@@ -101,14 +101,7 @@ export default function AdvancedBookingForm({ onSuccess }: AdvancedBookingFormPr
       date: bookingData.date,
       time: bookingData.time,
       address: bookingData.address,
-      message: bookingData.message,
-      // Options détaillées
-      serviceOptions: JSON.stringify({
-        optionId: bookingData.serviceOption,
-        optionLabel: selectedService?.options.find((opt) => opt.id === bookingData.serviceOption)?.label,
-        price: totalPrice,
-      }),
-      totalPrice: Math.round(totalPrice * 100), // Convertir en centimes
+      message: bookingData.message
     });
   };
 

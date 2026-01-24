@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 import GoogleReviews from "@/components/GoogleReviews";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
+import { TestimonialForm } from "@/components/TestimonialForm";
 import { 
   Car,
   CheckCircle2, 
@@ -287,6 +289,22 @@ export default function Home() {
               Demander un Devis
               <ArrowRight className="ml-2 w-5 h-5" />
             </a>
+          </div>
+        </section>
+
+        {/* Testimonial Carousel Section */}
+        <TestimonialCarousel />
+
+        {/* Testimonial Form Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
+              Partagez votre expérience
+            </h2>
+            <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+              Votre avis nous aide à nous améliorer. Soumettez votre témoignage et aidez d'autres clients à découvrir nos services.
+            </p>
+            <TestimonialForm />
           </div>
         </section>
       </main>

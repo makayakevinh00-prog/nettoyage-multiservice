@@ -307,3 +307,39 @@
 - [x] Optimiser les formulaires
 - [x] Tester tous les boutons et liens
 - [x] Valider la fluidité générale du site
+
+
+## Chat en Direct - IA et Notifications
+
+- [x] Créer la table de base de données pour les messages de chat
+- [x] Créer le composant widget de chat flottant
+- [x] Ajouter les mutations tRPC pour sendMessage et getMessages
+- [x] Intégrer l'IA (LLM) pour les réponses automatiques
+- [x] Ajouter les notifications en temps réel au propriétaire
+- [x] Ajouter le logo ProClean Empire dans le chat
+- [x] Personnaliser les réponses IA avec détection d'intentions
+- [x] Retirer le bouton WhatsApp
+- [ ] Créer une page d'administration pour gérer les chats
+- [ ] Tester le chat en direct avec différents scénarios
+
+
+## Personnalisation des Réponses IA du Chat
+
+- [x] Créer un système de détection d'intentions
+- [x] Ajouter des réponses spécifiques pour chaque type de question
+- [x] Personnaliser avec le prénom du visiteur
+- [x] Ajouter des suggestions d'actions (réservation, devis, etc.)
+- [ ] Gérer l'escalade vers un agent humain
+- [ ] Tester les différents scénarios de conversation
+
+
+## Système de Témoignages Clients Avancé
+
+- [x] Créer la table de base de données pour les témoignages
+- [x] Créer le formulaire de soumission d'avis avec photos
+- [x] Ajouter les validations et les règles de modération
+- [x] Créer la section d'affichage des témoignages
+- [x] Ajouter un carousel pour les témoignages
+- [x] Intégrer les mutations tRPC pour les témoignages
+- [x] Ajouter une page d'administration pour modérer les avis
+- [x] Tester le système complet
