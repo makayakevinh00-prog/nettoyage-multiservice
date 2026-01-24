@@ -68,7 +68,9 @@ Cette demande a été envoyée depuis le site ProClean Empire.
         name: z.string().min(1).max(100).trim(),
         email: z.string().email().max(255).trim().toLowerCase(),
         phone: z.string().min(10).max(20).trim().regex(/^[0-9\s\+\-\(\)]+$/),
-        service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage']),
+        service: z.enum(['automobile', 'terrasse', 'tapis', 'balcon', 'jardinage', 'facade', 'panneaux-solaires']),
+        serviceOption: z.string().optional(),
+        quantity: z.number().min(1).default(1),
         date: z.string().min(1).max(50).trim(),
         time: z.string().min(1).max(10).trim(),
         address: z.string().min(5).max(500).trim(),
@@ -119,7 +121,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             date: input.date,
             time: input.time,
             address: input.address,
-            message: input.message,
+            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${input.message ? `\nNotes: ${input.message}` : ''}`,
           });
         } catch (calendarError) {
           console.error('Erreur lors de l\'ajout à Google Calendar du client:', calendarError);
@@ -136,7 +138,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             date: input.date,
             time: input.time,
             address: input.address,
-            message: input.message,
+            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${input.message ? `\nNotes: ${input.message}` : ''}`,
           });
         } catch (calendarError) {
           console.error('Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);

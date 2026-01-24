@@ -46,7 +46,7 @@ export default function AdvancedBookingForm({
     serviceOption: string;
     quantity: number;
     date: string;
-    time: "matin" | "apres-midi" | "soir" | "";
+    time: string;
     address: string;
     message: string;
   }>({
