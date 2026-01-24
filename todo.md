@@ -210,3 +210,14 @@
 - [x] Ajouter les informations à préparer avant l'intervention
 - [x] Configurer les en-têtes email (SPF, DKIM) pour éviter les spams
 - [x] Tester l'email de confirmation
+
+
+## Modifications Pages Services - Retrait des Prix
+
+- [x] Retirer les prix de la page Terrasse (gardés pour référence)
+- [x] Retirer les prix de la page Jardinage  
+- [x] Retirer les prix de la page Professionnel
+- [x] Remplacer les prix par "Demande de Devis"
+- [x] Ajouter affichage "Demande de Devis" en orange
+- [x] Garder toute la structure et les images
+- [x] Tester les pages modifiées

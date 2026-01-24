@@ -32,10 +32,10 @@ const serviceDetails: Record<string, any> = {
     description: "Taille, débroussaillage, entretien paysager professionnel",
     image: "/service-jardinage.jpg",
     packages: [
-      { name: "Taille Haies", price: "50€/h", features: ["Taille professionnelle", "Évacuation des débris"] },
-      { name: "Débroussaillage", price: "60€/h", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
-      { name: "Entretien Jardin", price: "70€/h", features: ["Taille des plantes", "Désherbage", "Entretien général"] },
-      { name: "Forfait Mensuel", price: "200€", features: ["Entretien régulier", "Taille saisonnière", "Nettoyage"] },
+      { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
+      { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
+      { name: "Entretien Jardin", price: "Demande de Devis", features: ["Taille des plantes", "Désherbage", "Entretien général"] },
+      { name: "Forfait Mensuel", price: "Demande de Devis", features: ["Entretien régulier", "Taille saisonnière", "Nettoyage"] },
     ],
   },
   facade: {
@@ -65,10 +65,10 @@ const serviceDetails: Record<string, any> = {
     description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure",
     image: "/service-professionnel.jpg",
     packages: [
-      { name: "Bureau Petit", price: "80€", features: ["Nettoyage complet", "Finition premium"] },
-      { name: "Bureau Moyen", price: "150€", features: ["Nettoyage en profondeur", "Traitement surfaces"] },
-      { name: "Espace Commercial", price: "250€+", features: ["Nettoyage complet", "Traitement spécialisé", "Finition"] },
-      { name: "Contrat Mensuel", price: "À partir de 400€", features: ["Nettoyage régulier", "Maintenance", "Support prioritaire"] },
+      { name: "Bureau Petit", price: "Demande de Devis", features: ["Nettoyage complet", "Finition premium"] },
+      { name: "Bureau Moyen", price: "Demande de Devis", features: ["Nettoyage en profondeur", "Traitement surfaces"] },
+      { name: "Espace Commercial", price: "Demande de Devis", features: ["Nettoyage complet", "Traitement spécialisé", "Finition"] },
+      { name: "Contrat Mensuel", price: "Demande de Devis", features: ["Nettoyage régulier", "Maintenance", "Support prioritaire"] },
     ],
   },
 };
@@ -167,9 +167,11 @@ export default function ServiceDetail() {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-6">
-                    <div className="text-3xl font-bold text-blue-600 flex items-center gap-2">
+                    <div className={`text-3xl font-bold flex items-center gap-2 ${
+                      pkg.price === "Demande de Devis" ? "text-orange-600" : "text-blue-600"
+                    }`}>
                       {pkg.price}
-                      <Euro size={24} />
+                      {pkg.price !== "Demande de Devis" && <Euro size={24} />}
                     </div>
                   </div>
                   <ul className="space-y-2 mb-6">
