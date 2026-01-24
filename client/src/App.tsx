@@ -6,12 +6,18 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import WhatsAppButton from "./components/WhatsAppButton";
+import ServiceAutomobile from "./pages/ServiceAutomobile";
+import ServiceTerrasse from "./pages/ServiceTerrasse";
+import ServiceDetail from "./pages/ServiceDetail";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/service/automobile"} component={ServiceAutomobile} />
+      <Route path={"/service/terrasse"} component={ServiceTerrasse} />
+      <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

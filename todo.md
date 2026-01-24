@@ -189,3 +189,13 @@
 - [ ] Tester avec Google Search Console
 - [ ] Revendiquer Google My Business
 - [ ] Créer un blog avec contenu SEO
+
+
+## Améliorations Demandées par l'Utilisateur
+
+- [x] Ajouter plus d'images partout sur le site (comme lplaprovidence.com)
+- [x] Changer 10 ans d'expérience en 5 ans
+- [x] Créer une page détaillée pour chaque service
+- [x] Ajouter de belles images pour chaque service
+- [x] Faire que les clics sur les services redirigent vers les pages détaillées
+- [x] Tester complètement le site

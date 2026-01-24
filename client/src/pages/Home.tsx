@@ -33,49 +33,57 @@ export default function Home() {
       icon: Car,
       title: "Automobile",
       description: "Intérieur et extérieur, lavage haute pression, lustrage.",
-      image: "/hero-proclean.png",
+      image: "/service-automobile.jpg",
+      link: "/service/automobile",
     },
     {
       icon: Waves,
       title: "Terrasse",
       description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
-      image: "/services-grid.png",
+      image: "/service-terrasse.jpg",
+      link: "/service/terrasse",
     },
     {
       icon: Sofa,
       title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "/services-grid.png",
+      image: "/service-tapis.jpg",
+      link: "/service?service=tapis",
     },
     {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "/services-grid.png",
+      image: "/service-balcon.jpg",
+      link: "/service?service=balcon",
     },
     {
       icon: Leaf,
       title: "Jardinage",
       description: "Taille, débroussaillage, entretien paysager professionnel.",
-      image: "/services-grid.png",
+      image: "/service-jardinage.jpg",
+      link: "/service?service=jardinage",
     },
     {
       icon: Sparkles,
       title: "Façade",
       description: "Nettoyage haute pression, traitement anti-mousse, ravalement.",
-      image: "/services-grid.png",
+      image: "/service-facade.jpg",
+      link: "/service?service=facade",
     },
     {
       icon: Zap,
       title: "Panneaux Solaires",
       description: "Nettoyage haute pression, maintenance, optimisation rendement.",
-      image: "/services-grid.png",
+      image: "/service-panneaux.jpg",
+      link: "/service?service=panneaux",
     },
     {
       icon: Building2,
       title: "Professionnel",
       description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure.",
-      image: "/services-grid.png",
+      image: "/service-professionnel.jpg",
+      link: "/service?service=professionnel",
     },
   ];
 
@@ -105,7 +113,7 @@ export default function Home() {
   const stats = [
     { number: "13", label: "Avis Google", rating: "5.0/5 ⭐" },
     { number: "500+", label: "Clients Satisfaits" },
-    { number: "10+", label: "Années d'Expérience" },
+    { number: "5+", label: "Années d'Expérience" },
     { number: "24h", label: "Intervention Rapide" },
   ];
 
@@ -224,12 +232,13 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service, idx) => {
+              {services.map((service: any, idx) => {
                 const Icon = service.icon;
                 return (
-                  <div 
+                  <a
+                    href={service.link}
                     key={idx}
-                    className="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 block"
                   >
                     <div className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-opacity duration-300"
                       style={{ backgroundImage: `url('${service.image}')` }}
@@ -249,7 +258,7 @@ export default function Home() {
                         <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
-                  </div>
+                  </a>
                 );
               })}
             </div>
