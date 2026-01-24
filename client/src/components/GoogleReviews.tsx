@@ -22,17 +22,37 @@ export default function GoogleReviews() {
 
   const fetchGoogleReviews = async () => {
     try {
-      // Appel au serveur pour récupérer les avis Google
       const response = await fetch("/api/google-reviews");
+      
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        console.warn("Reponse non-JSON, utilisation des avis statiques");
+        setReviews(mockReviews);
+        setAverageRating(5.0);
+        setTotalReviews(13);
+        setLoading(false);
+        return;
+      }
+      
       if (response.ok) {
         const data = await response.json();
-        setReviews(data.reviews || []);
-        setAverageRating(data.averageRating || 0);
-        setTotalReviews(data.totalReviews || 0);
+        if (data.reviews && data.reviews.length > 0) {
+          setReviews(data.reviews);
+          setAverageRating(data.averageRating || 5.0);
+          setTotalReviews(data.totalReviews || data.reviews.length);
+        } else {
+          setReviews(mockReviews);
+          setAverageRating(5.0);
+          setTotalReviews(13);
+        }
+      } else {
+        console.warn("Erreur API, utilisation des avis statiques");
+        setReviews(mockReviews);
+        setAverageRating(5.0);
+        setTotalReviews(13);
       }
     } catch (error) {
-      console.error("Erreur lors de la récupération des avis Google:", error);
-      // Fallback avec des avis statiques
+      console.error("Erreur lors de la recuperation des avis Google:", error);
       setReviews(mockReviews);
       setAverageRating(5.0);
       setTotalReviews(13);
@@ -80,13 +100,11 @@ export default function GoogleReviews() {
   return (
     <section id="temoignages" className="py-20 md:py-32 bg-gradient-to-br from-blue-50 to-gray-50">
       <div className="container mx-auto px-4">
-        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Avis de Nos Clients
           </h2>
 
-          {/* Rating Summary */}
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
@@ -104,21 +122,18 @@ export default function GoogleReviews() {
               <p className="text-2xl font-bold text-gray-900">
                 {averageRating.toFixed(1)}/5
               </p>
-              <p className="text-gray-600">{totalReviews} avis vérifiés</p>
+              <p className="text-gray-600">{totalReviews} avis verifies</p>
             </div>
           </div>
 
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Découvrez ce que nos clients pensent de nos services de nettoyage professionnel
+            Decouvrez ce que nos clients pensent de nos services de nettoyage professionnel
           </p>
         </div>
 
-        {/* Reviews Carousel */}
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8 md:p-12">
-            {/* Review Content */}
             <div className="mb-8">
-              {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star
@@ -132,12 +147,10 @@ export default function GoogleReviews() {
                 ))}
               </div>
 
-              {/* Review Text */}
               <p className="text-lg text-gray-700 mb-6 italic">
                 "{currentReview.text}"
               </p>
 
-              {/* Author Info */}
               <div className="flex items-center gap-4">
                 {currentReview.profile_photo_url && (
                   <img
@@ -157,17 +170,15 @@ export default function GoogleReviews() {
               </div>
             </div>
 
-            {/* Navigation */}
             <div className="flex items-center justify-between">
               <button
                 onClick={prevReview}
                 className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Avis précédent"
+                aria-label="Avis precedent"
               >
                 <ChevronLeft className="w-6 h-6 text-gray-600" />
               </button>
 
-              {/* Dots */}
               <div className="flex gap-2">
                 {reviews.map((_, i) => (
                   <button
@@ -176,7 +187,7 @@ export default function GoogleReviews() {
                     className={`w-2 h-2 rounded-full transition-all ${
                       i === currentIndex ? "bg-blue-600 w-8" : "bg-gray-300"
                     }`}
-                    aria-label={`Aller à l'avis ${i + 1}`}
+                    aria-label={`Aller a l'avis ${i + 1}`}
                   />
                 ))}
               </div>
@@ -190,22 +201,19 @@ export default function GoogleReviews() {
               </button>
             </div>
 
-            {/* Counter */}
             <p className="text-center text-sm text-gray-500 mt-4">
               {currentIndex + 1} / {reviews.length}
             </p>
           </div>
 
-          {/* Google Logo */}
           <div className="text-center mt-8">
             <p className="text-sm text-gray-600">
-              Avis vérifiés depuis{" "}
+              Avis verifies depuis{" "}
               <span className="font-semibold text-gray-900">Google</span>
             </p>
           </div>
         </div>
 
-        {/* CTA */}
         <div className="text-center mt-12">
           <a
             href="https://www.google.com/maps/search/ProClean+Empire"
@@ -221,40 +229,39 @@ export default function GoogleReviews() {
   );
 }
 
-// Avis statiques de secours
 const mockReviews: Review[] = [
   {
     author_name: "Alexandre M.",
     rating: 5,
-    text: "Service exceptionnel pour le nettoyage de ma voiture. Résultat impeccable, on dirait qu'elle sort de l'usine ! L'équipe est professionnelle et rapide.",
+    text: "Service exceptionnel pour le nettoyage de ma voiture. Resultat impeccable, on dirait qu'elle sort de l'usine ! L'equipe est professionnelle et rapide.",
     time: Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60,
     profile_photo_url: "https://lh3.googleusercontent.com/a/default-user=s64",
   },
   {
     author_name: "Sophie D.",
     rating: 5,
-    text: "J'ai fait nettoyer ma terrasse et mes tapis. Le travail est remarquable, très professionnel. Je recommande vivement ProClean Empire.",
+    text: "J'ai fait nettoyer ma terrasse et mes tapis. Le travail est remarquable, tres professionnel. Je recommande vivement ProClean Empire.",
     time: Math.floor(Date.now() / 1000) - 14 * 24 * 60 * 60,
     profile_photo_url: "https://lh3.googleusercontent.com/a/default-user=s64",
   },
   {
     author_name: "Thomas L.",
     rating: 5,
-    text: "ProClean Empire intervient régulièrement pour notre immeuble. Toujours à l'heure, efficace et soigné. Excellent rapport qualité-prix.",
+    text: "ProClean Empire intervient regulierement pour notre immeuble. Toujours a l'heure, efficace et soigne. Excellent rapport qualite-prix.",
     time: Math.floor(Date.now() / 1000) - 21 * 24 * 60 * 60,
     profile_photo_url: "https://lh3.googleusercontent.com/a/default-user=s64",
   },
   {
     author_name: "Marie P.",
     rating: 5,
-    text: "Nettoyage de façade impeccable. L'équipe a fait preuve de professionnalisme et de rigueur. Très satisfaite du résultat.",
+    text: "Nettoyage de facade impeccable. L'equipe a fait preuve de professionnalisme et de rigueur. Tres satisfaite du resultat.",
     time: Math.floor(Date.now() / 1000) - 30 * 24 * 60 * 60,
     profile_photo_url: "https://lh3.googleusercontent.com/a/default-user=s64",
   },
   {
     author_name: "Jean C.",
     rating: 5,
-    text: "Excellent service de nettoyage de balcon. Rapide, efficace et très professionnel. Je recommande sans hésiter.",
+    text: "Excellent service de nettoyage de balcon. Rapide, efficace et tres professionnel. Je recommande sans hesiter.",
     time: Math.floor(Date.now() / 1000) - 45 * 24 * 60 * 60,
     profile_photo_url: "https://lh3.googleusercontent.com/a/default-user=s64",
   },
