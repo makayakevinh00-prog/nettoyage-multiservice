@@ -11,9 +11,9 @@ const serviceDetails: Record<string, any> = {
     description: "Lavage intérieur et extérieur, lustrage, protection",
     image: "/proclean-voiture-lavage.jpg",
     packages: [
-      { name: "Lavage Complet", price: "90€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
-      { name: "Lavage + Lustrage", price: "120€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
-      { name: "Detailing Premium", price: "150€", features: ["Lavage haute pression", "Lustrage intensif", "Protection céramique", "Finition premium"] },
+      { name: "Nettoyage intérieur + extérieur", price: "70€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
+      { name: "Nettoyage complet", price: "90€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
+      { name: "SUV", price: "120€", features: ["Lavage haute pression", "Lustrage intensif", "Protection céramique", "Finition premium"] },
     ],
   },
   tapis: {
@@ -21,9 +21,9 @@ const serviceDetails: Record<string, any> = {
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
     image: "/proclean-tapis-aspiration.jpg",
     packages: [
-      { name: "Petit (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
-      { name: "Moyen (120x170 a 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
-      { name: "Grand (200x290 cm et plus)", price: "110€", features: ["Nettoyage haute pression", "Détachage intensif", "Traitement protecteur"] },
+      { name: "Petit tapis (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
+      { name: "Tapis moyen (120x170 à 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
+      { name: "Grand tapis (200x290 cm et plus)", price: "110€", features: ["Nettoyage haute pression", "Détachage intensif", "Traitement protecteur"] },
     ],
   },
   balcon: {
@@ -31,9 +31,9 @@ const serviceDetails: Record<string, any> = {
     description: "Nettoyage complet, joints, garde-corps et revêtements",
     image: "/proclean-balcon-nettoyage.jpg",
     packages: [
-      { name: "Balcon Standard", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
-      { name: "Balcon avec Garde-Corps", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
-      { name: "Grand Balcon/Loggia", price: "100€", features: ["Nettoyage haute pression", "Traitement protecteur", "Finition premium"] },
+      { name: "Balcon standard (jusqu'à 15m²)", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
+      { name: "Balcon avec garde-corps (15-30m²)", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
+      { name: "Grand balcon/loggia (30m² et plus)", price: "100€", features: ["Nettoyage haute pression", "Traitement protecteur", "Finition premium"] },
     ],
   },
   jardinage: {
@@ -52,10 +52,10 @@ const serviceDetails: Record<string, any> = {
     description: "Nettoyage haute pression, traitement anti-mousse, joints",
     image: "/proclean-facade-nettoyage.jpg",
     packages: [
-      { name: "Façade Petite", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
-      { name: "Façade Moyenne", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
-      { name: "Façade Grande", price: "500€+", features: ["Nettoyage haute pression", "Traitement anti-mousse", "Ravalement"] },
-      { name: "Traitement Protecteur", price: "+50€", features: ["Protection 24 mois", "Anti-mousse", "Anti-pollution"] },
+      { name: "Petite façade (jusqu'à 50m²)", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
+      { name: "Façade moyenne (50-150m²)", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
+      { name: "Grande façade (150m² et plus)", price: "500€+", features: ["Nettoyage haute pression", "Traitement anti-mousse", "Ravalement"] },
+      { name: "Traitement protecteur anti-mousse", price: "+50€", features: ["Protection 24 mois", "Anti-mousse", "Anti-pollution"] },
     ],
   },
   panneaux: {
@@ -63,10 +63,10 @@ const serviceDetails: Record<string, any> = {
     description: "Nettoyage haute pression, maintenance, optimisation rendement",
     image: "/proclean-panneaux-solaires.jpg",
     packages: [
-      { name: "Nettoyage Simple", price: "100€", features: ["Nettoyage haute pression", "Inspection"] },
-      { name: "Maintenance Complète", price: "200€", features: ["Nettoyage", "Inspection électrique", "Maintenance"] },
-      { name: "Forfait Annuel", price: "300€", features: ["4 nettoyages/an", "Inspections régulières", "Maintenance"] },
-      { name: "Optimisation Rendement", price: "+100€", features: ["Diagnostic complet", "Optimisation", "Rapport détaillé"] },
+      { name: "Nettoyage simple (jusqu'à 20m²)", price: "100€", features: ["Nettoyage haute pression", "Inspection"] },
+      { name: "Maintenance complète (20-50m²)", price: "200€", features: ["Nettoyage", "Inspection électrique", "Maintenance"] },
+      { name: "Forfait annuel (4 nettoyages)", price: "300€", features: ["4 nettoyages/an", "Inspections régulières", "Maintenance"] },
+      { name: "Optimisation rendement", price: "+100€", features: ["Diagnostic complet", "Optimisation", "Rapport détaillé"] },
     ],
   },
   professionnel: {
@@ -95,9 +95,9 @@ const serviceDetails: Record<string, any> = {
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
     image: "/proclean-terrasse-nettoyage.jpg",
     packages: [
-      { name: "Terrasse Petite", price: "Demande de Devis", features: ["Nettoyage haute pression", "Démoussage"] },
-      { name: "Terrasse Moyenne", price: "Demande de Devis", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
-      { name: "Terrasse Grande", price: "Demande de Devis", features: ["Nettoyage haute pression", "Traitement protecteur", "Finition premium"] },
+      { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
+      { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
+      { name: "Terrasse grande (40m² et plus)", price: "200€", features: ["Nettoyage haute pression", "Traitement protecteur", "Finition premium"] },
     ],
   },
 };
