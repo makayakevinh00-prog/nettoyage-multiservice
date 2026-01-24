@@ -11,7 +11,7 @@ import { syncBookingToHubSpot } from "./lib/hubspot";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-12-27.acacia",
+  apiVersion: "2025-12-15.clover",
 });
 
 export const appRouter = router({

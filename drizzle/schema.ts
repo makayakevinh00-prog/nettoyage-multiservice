@@ -36,6 +36,9 @@ export const bookings = mysqlTable("bookings", {
   time: varchar("time", { length: 10 }).notNull(),
   address: text("address").notNull(),
   message: text("message"),
+  // Options détaillées selon le service
+  serviceOptions: text("serviceOptions"), // JSON avec les options choisies
+  totalPrice: int("totalPrice").notNull().default(0), // Prix en centimes (ex: 5000 = 50€)
   stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
   paymentStatus: mysqlEnum("paymentStatus", ["pending", "completed", "failed", "refunded"]).default("pending").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

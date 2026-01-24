@@ -136,3 +136,18 @@
 - [x] Intégrer HubSpot CRM pour les formulaires et contacts
 - [x] Ajouter le tracking Google Ads (AW-17788571669)
 - [x] Ajouter Google Analytics 4
+
+
+## Système de réservation avancé avec options détaillées
+
+- [x] Ajouter les options détaillées pour chaque service (automobile, tapis, terrasse, etc.)
+- [x] Implémenter la tarification dynamique basée sur les options choisies
+- [x] Créer les calculs de prix en temps réel dans le formulaire
+- [x] Intégrer HubSpot pour créer les opportunités avec montants
+- [x] Générer les emails de devis personnalisés avec tarifs
+- [x] Configurer les rappels HubSpot avec demande de confirmation
+- [ ] Ajouter les frais d'annulation (25€ si annulation < 24h)
+- [ ] Intégrer le formulaire avancé dans Home.tsx
+- [ ] Mettre à jour les routes tRPC pour gérer les options détaillées
+- [ ] Tester le flux complet de réservation à paiement
+- [ ] Valider l'intégration HubSpot avec les opportunités
