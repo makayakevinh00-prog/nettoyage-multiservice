@@ -10,6 +10,8 @@ import Home from "./pages/Home";
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
 import Blog from "./pages/Blog";
+import FAQ from "./pages/FAQ";
+import WhyChooseUs from "./pages/WhyChooseUs";
 import ChatWidget from "./components/ChatWidget";
 import ProCleanAIAssistant from "./components/ProCleanAIAssistant";
 
@@ -31,6 +33,8 @@ function Router() {
       <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/blog"} component={Blog} />
+      <Route path={"/faq"} component={FAQ} />
+      <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

@@ -151,30 +151,44 @@ export default function Home() {
             <div className="max-w-3xl mx-auto">
               {/* Main Title */}
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                PROCLEAN<br />
-                <span className="text-blue-400">EMPIRE</span>
+                Le nettoyage professionnel qui redonne vie à vos biens
               </h1>
               
               {/* Subtitle */}
-              <p className="text-2xl md:text-3xl text-gray-100 mb-4 font-light">
-                Nettoyage Multiservice Premium
+              <p className="text-2xl md:text-3xl text-orange-400 mb-4 font-semibold">
+                Auto, Habitat, Jardin. Intervention 7j/7 à domicile.
               </p>
               
-              {/* Description */}
-              <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
-                Votre expert en nettoyage professionnel en Île-de-France. Transformez vos espaces en 5 ans d'expérience et d'excellence.
-              </p>
-              
-              {/* Services List */}
-              <p className="text-gray-300 mb-10 text-base">
-                Voiture • Tapis • Terrasse • Balcon • Jardinage • Façade • Professionnel
-              </p>
+              {/* Trust Bar */}
+              <div className="flex flex-wrap justify-center gap-6 mb-10 py-6 border-t border-b border-gray-400/30">
+                <div className="flex items-center gap-2 text-white">
+                  <Clock3 size={20} className="text-orange-400" />
+                  <span className="text-sm font-medium">Devis sous 30min</span>
+                </div>
+                <div className="flex items-center gap-2 text-white">
+                  <Leaf size={20} className="text-green-400" />
+                  <span className="text-sm font-medium">Éco-responsable</span>
+                </div>
+                <div className="flex items-center gap-2 text-white">
+                  <Calendar size={20} className="text-blue-400" />
+                  <span className="text-sm font-medium">7j/7 disponible</span>
+                </div>
+                <div className="flex items-center gap-2 text-white">
+                  <Sparkles size={20} className="text-yellow-400" />
+                  <span className="text-sm font-medium">Matériel Pro</span>
+                </div>
+              </div>
               
               {/* CTA Button */}
-              <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-white hover:bg-gray-100 text-gray-900 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
-                DEMANDER UN DEVIS
+              <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
+                Demander mon devis gratuit
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
+              
+              {/* Secondary CTA */}
+              <p className="text-gray-300 mt-6 text-sm">
+                ✓ Sans engagement • ✓ Gratuit • ✓ Réponse rapide
+              </p>
             </div>
           </div>
         </section>

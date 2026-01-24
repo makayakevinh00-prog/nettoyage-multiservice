@@ -383,3 +383,60 @@
 - [ ] Envoyer la réservation au serveur depuis le chat
 - [ ] Afficher un message de confirmation après réservation
 - [ ] Tester le flux complet de réservation via le chat
+
+
+## OPTIMISATION MARKETING ET VENTE - TUNNEL DE CONVERSION
+
+### Phase 1 : Restructurer la Page d'Accueil (Tunnel de Vente)
+- [x] Créer Hero Header avec titre accrocheur : "Le nettoyage professionnel qui redonne vie à vos biens en Île-de-France"
+- [x] Ajouter sous-titre : "Auto, Habitat, Jardin. Intervention 7j/7 à domicile"
+- [x] Créer CTA principal orange/vert : "Demander mon devis gratuit"
+- [x] Ajouter "Barre de Confiance" sous le titre avec icônes :
+  - [x] Devis sous 30min
+  - [x] Éco-responsable
+  - [x] 7j/7 disponible
+  - [x] Matériel Pro
+
+### Phase 2 : Pages de Services Détaillées (SEO)
+- [ ] Créer page détaillée Nettoyage Tapis & Canapé avec mots-clés (acariens, taches, odeurs)
+- [ ] Créer page détaillée Lavage Auto Premium avec étapes (shampoing, lustrage, moteur)
+- [ ] Créer page détaillée Entretien Extérieur (toiture, terrasse, pelouse)
+- [ ] Ajouter descriptions SEO optimisées pour chaque service
+- [ ] Intégrer les images avant/après pour chaque service
+
+### Phase 3 : Preuve Sociale et Crédibilité
+- [ ] Rédiger 10+ témoignages clients réalistes et détaillés
+- [ ] Créer galerie "Avant/Après" avec images impressionnantes
+- [ ] Ajouter compteur de clients satisfaits
+- [ ] Ajouter compteur de projets réalisés
+- [ ] Créer section "Résultats garantis"
+
+### Phase 4 : Éléments Techniques Avancés
+- [ ] Implémenter bouton WhatsApp flottant avec lien de partage
+- [ ] Créer formulaire de contact avancé :
+  - [ ] Type de prestation
+  - [ ] Ville
+  - [ ] Upload photo de l'objet à nettoyer
+  - [ ] Description détaillée du problème
+- [ ] Ajouter section "Zone d'intervention" avec liste des départements (75, 77, 78, 91, 92, 93, 94, 95)
+- [ ] Intégrer Google Maps pour visualiser les zones de service
+
+### Phase 5 : Contenu Blog SEO (5 Articles)
+- [ ] Rédiger article : "Comment enlever une tache de vin sur un canapé en tissu ?"
+- [ ] Rédiger article : "Pourquoi nettoyer sa terrasse avant le printemps ?"
+- [ ] Rédiger article : "Le guide ultime pour entretenir le cuir de sa voiture"
+- [ ] Rédiger article : "Démoussage de toiture : quel est le meilleur moment ?"
+- [ ] Rédiger article : "Astuces pour garder son tapis propre plus longtemps"
+
+### Phase 6 : FAQ et Confiance
+- [x] Créer section FAQ avec 10 questions fréquentes
+- [x] Créer section "Pourquoi nous choisir" avec arguments de vente clés
+- [ ] Créer page "À propos" avec histoire et expertise
+- [ ] Ajouter certifications et accréditations
+
+### Phase 7 : Tests et Déploiement
+- [ ] Tester le tunnel de vente complet
+- [ ] Valider la conversion sur mobile et desktop
+- [ ] Tester tous les formulaires et uploads
+- [ ] Vérifier les liens WhatsApp
+- [ ] Tester l'affichage des zones d'intervention
