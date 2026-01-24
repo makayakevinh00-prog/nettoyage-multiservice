@@ -1,11 +1,24 @@
 import { useState, useEffect } from "react";
 import { AIChatBox, Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, X, Calendar, Clock, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
+interface BookingData {
+  service?: string;
+  date?: string;
+  time?: string;
+  address?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+}
 
 export default function ProCleanAIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
+  const [bookingMode, setBookingMode] = useState(false);
+  const [bookingData, setBookingData] = useState<BookingData>({});
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "system",
@@ -52,6 +65,68 @@ Sois amical, professionnel et utile. Réponds toujours en français.`
     const newMessages = [...messages, { role: "user", content }];
     setMessages(newMessages);
     chatMutation.mutate({ messages: newMessages });
+
+    // Détection de mots-clés pour la réservation
+    if (content.toLowerCase().includes("réserver") || 
+        content.toLowerCase().includes("reservation") ||
+        content.toLowerCase().includes("prendre rendez-vous")) {
+      setBookingMode(true);
+      setTimeout(() => {
+        setMessages(prev => [...prev, {
+          role: "assistant",
+          content: "Parfait ! 📅 Je vais vous aider à réserver. Quel service souhaitez-vous ? (Automobile, Terrasse, Tapis, Balcon, Jardinage, Façade, Toit, Panneaux Solaires, Poubelle)"
+        }]);
+      }, 500);
+    }
+  };
+
+  const handleBookingStep = (input: string) => {
+    const newMessages = [...messages, { role: "user", content: input }];
+    setMessages(newMessages);
+
+    if (!bookingData.service) {
+      setBookingData({ ...bookingData, service: input });
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: `Excellent ! ${input} ✓\n\nQuelle date souhaitez-vous ? (ex: 25/01/2026)`
+      }]);
+    } else if (!bookingData.date) {
+      setBookingData({ ...bookingData, date: input });
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: `Date confirmée : ${input} ✓\n\nQuel créneau préférez-vous ? (Matin 8-12h, Après-midi 14-18h, Soir 18-20h)`
+      }]);
+    } else if (!bookingData.time) {
+      setBookingData({ ...bookingData, time: input });
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: `Créneau sélectionné : ${input} ✓\n\nQuelle est votre adresse d'intervention ?`
+      }]);
+    } else if (!bookingData.address) {
+      const updatedData = { ...bookingData, address: input };
+      setBookingData(updatedData);
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: `Adresse confirmée ✓\n\n📋 Récapitulatif de votre réservation :\n\n• Service : ${updatedData.service}\n• Date : ${updatedData.date}\n• Créneau : ${updatedData.time}\n• Adresse : ${updatedData.address}\n\nVoulez-vous confirmer cette réservation ? (Oui/Non)`
+      }]);
+    } else if (input.toLowerCase().includes("oui")) {
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: "✅ Réservation confirmée ! Vous allez être redirigé vers le formulaire de paiement pour finaliser votre demande."
+      }]);
+      setBookingMode(false);
+      toast.success("Réservation créée ! Redirection vers le formulaire...");
+      setTimeout(() => {
+        window.location.href = "/#booking";
+      }, 2000);
+    } else {
+      setBookingData({});
+      setBookingMode(false);
+      setMessages(prev => [...prev, {
+        role: "assistant",
+        content: "D'accord, annulation de la réservation. Comment puis-je vous aider autrement ?"
+      }]);
+    }
   };
 
   // Afficher automatiquement le chat après 3 secondes
@@ -59,10 +134,9 @@ Sois amical, professionnel et utile. Réponds toujours en français.`
     const timer = setTimeout(() => {
       if (!isOpen) {
         setIsOpen(true);
-        // Ajouter un message de bienvenue
         setMessages(prev => [...prev, {
           role: "assistant",
-          content: "Bonjour ! 👋 Je suis l'assistant ProClean Empire. Comment puis-je vous aider aujourd'hui ? Vous cherchez un service de nettoyage particulier ?"
+          content: "Bonjour ! 👋 Je suis l'assistant ProClean Empire. Comment puis-je vous aider aujourd'hui ? Vous cherchez un service de nettoyage particulier ou souhaitez réserver ?"
         }]);
       }
     }, 3000);
@@ -82,28 +156,120 @@ Sois amical, professionnel et utile. Réponds toujours en français.`
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                setBookingMode(false);
+              }}
               className="text-white hover:bg-blue-700"
             >
               <X size={20} />
             </Button>
           </div>
-          <div className="flex-1 overflow-hidden">
-            <AIChatBox
-              messages={messages}
-              onSendMessage={handleSendMessage}
-              isLoading={chatMutation.isPending}
-              placeholder="Posez votre question..."
-              height="100%"
-              emptyStateMessage="Comment puis-je vous aider ?"
-              suggestedPrompts={[
-                "Quels services proposez-vous ?",
-                "Quel est le tarif du nettoyage automobile ?",
-                "Comment réserver un service ?",
-                "Êtes-vous disponible rapidement ?"
-              ]}
-            />
-          </div>
+
+          {bookingMode ? (
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              <div className="space-y-3">
+                {messages.filter(m => m.role !== "system").map((msg, idx) => (
+                  <div
+                    key={idx}
+                    className={`flex ${
+                      msg.role === "user" ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`max-w-xs px-4 py-2 rounded-lg ${
+                        msg.role === "user"
+                          ? "bg-blue-600 text-white"
+                          : "bg-gray-100 text-gray-900"
+                      }`}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 space-y-2">
+                {!bookingData.service && (
+                  <>
+                    {["Automobile", "Terrasse", "Tapis", "Balcon", "Jardinage"].map(
+                      (service) => (
+                        <Button
+                          key={service}
+                          onClick={() => handleBookingStep(service)}
+                          variant="outline"
+                          className="w-full text-left justify-start"
+                        >
+                          {service}
+                        </Button>
+                      )
+                    )}
+                  </>
+                )}
+                {bookingData.service && !bookingData.date && (
+                  <div className="text-sm text-gray-600">
+                    Entrez la date (ex: 25/01/2026)
+                  </div>
+                )}
+                {bookingData.date && !bookingData.time && (
+                  <>
+                    {["Matin 8-12h", "Après-midi 14-18h", "Soir 18-20h"].map(
+                      (slot) => (
+                        <Button
+                          key={slot}
+                          onClick={() => handleBookingStep(slot)}
+                          variant="outline"
+                          className="w-full text-left justify-start"
+                        >
+                          <Clock size={16} className="mr-2" />
+                          {slot}
+                        </Button>
+                      )
+                    )}
+                  </>
+                )}
+                {bookingData.time && !bookingData.address && (
+                  <div className="text-sm text-gray-600">
+                    Entrez votre adresse
+                  </div>
+                )}
+                {bookingData.address && (
+                  <>
+                    <Button
+                      onClick={() => handleBookingStep("Oui")}
+                      className="w-full bg-green-600 hover:bg-green-700"
+                    >
+                      ✓ Confirmer
+                    </Button>
+                    <Button
+                      onClick={() => handleBookingStep("Non")}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      ✗ Annuler
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 overflow-hidden">
+              <AIChatBox
+                messages={messages}
+                onSendMessage={handleSendMessage}
+                isLoading={chatMutation.isPending}
+                placeholder="Posez votre question..."
+                height="100%"
+                emptyStateMessage="Comment puis-je vous aider ?"
+                suggestedPrompts={[
+                  "Quels services proposez-vous ?",
+                  "Je veux réserver",
+                  "Quel est le tarif ?",
+                  "Êtes-vous disponibles ?"
+                ]}
+              />
+            </div>
+          )}
         </div>
       ) : (
         <Button

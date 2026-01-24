@@ -371,3 +371,15 @@
 - [x] Optimiser layout et animations
 - [x] Générer images avec t-shirts ProClean Empire
 - [x] Tester tout le site complètement
+
+
+## Prise de Rendez-vous dans le Chat IA
+
+- [ ] Créer un système de réservation conversationnel dans le chat IA
+- [ ] Implémenter les étapes de sélection (service, date, heure, adresse)
+- [ ] Ajouter des boutons interactifs pour les choix multiples
+- [ ] Valider les données avant confirmation
+- [ ] Afficher un récapitulatif de la réservation
+- [ ] Envoyer la réservation au serveur depuis le chat
+- [ ] Afficher un message de confirmation après réservation
+- [ ] Tester le flux complet de réservation via le chat

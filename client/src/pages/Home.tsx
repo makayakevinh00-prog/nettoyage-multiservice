@@ -210,7 +210,7 @@ export default function Home() {
                   <a
                     key={i}
                     href={service.link}
-                    className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                    className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
                     <div className="relative h-48 overflow-hidden bg-gray-200">
                       <img 
@@ -250,7 +250,7 @@ export default function Home() {
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
-                  <div key={i} className="text-center space-y-3">
+                  <div key={i} className={`text-center space-y-3 animate-slideUp stagger-${i + 1}`}>
                     <Icon className="w-10 h-10 text-blue-600 mx-auto" />
                     <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
                     <p className="text-sm text-gray-600">{item.desc}</p>
@@ -265,7 +265,7 @@ export default function Home() {
         <GoogleReviews />
 
         {/* Booking Section */}
-        <section id="booking" className="py-20 md:py-32 bg-white">
+        <section id="booking" className="py-20 md:py-32 bg-white animate-fadeIn">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
@@ -279,7 +279,7 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative py-20 md:py-32 overflow-hidden">
+        <section className="relative py-20 md:py-32 overflow-hidden animate-fadeIn">
           <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('/hero-nettoyage-pro.jpg')"}}/>
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative z-10 container mx-auto px-4 text-center">

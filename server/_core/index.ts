@@ -36,6 +36,33 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  
+  // Stripe webhook handler (must be before express.json())
+  app.post('/api/stripe/webhook', express.raw({type: 'application/json'}), async (req, res) => {
+    const sig = req.headers['stripe-signature'] as string;
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    
+    if (!webhookSecret) {
+      console.error('STRIPE_WEBHOOK_SECRET not configured');
+      return res.status(400).send('Webhook secret not configured');
+    }
+    
+    try {
+      const event = (require('stripe')).webhooks.constructEvent(req.body, sig, webhookSecret);
+      
+      if (event.id.startsWith('evt_test_')) {
+        console.log('[Webhook] Test event detected');
+        return res.json({ verified: true });
+      }
+      
+      console.log('[Webhook] Event type:', event.type);
+      res.json({received: true});
+    } catch (error) {
+      console.error('Webhook error:', error);
+      res.status(400).send('Webhook Error');
+    }
+  });
+  
   // tRPC API
   app.use(
     "/api/trpc",
