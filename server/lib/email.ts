@@ -32,6 +32,13 @@ export async function sendEmail(options: SendEmailOptions) {
       text: options.text,
       html: options.html,
       attachments: options.attachments,
+      headers: {
+        'X-Mailer': 'ProClean Empire',
+        'X-Priority': '3',
+        'Importance': 'normal',
+        'X-MSMail-Priority': 'Normal',
+        'List-Unsubscribe': '<mailto:serviceclient@procleanempire.com?subject=unsubscribe>',
+      },
     });
 
     console.log('Email envoyé:', info.messageId);
@@ -68,6 +75,8 @@ export function generateBookingConfirmationEmail(data: {
   date: string;
   time: string;
   address: string;
+  serviceOption?: string;
+  price?: number;
 }) {
   const serviceNames: Record<string, string> = {
     automobile: "Nettoyage Automobile",
@@ -75,6 +84,9 @@ export function generateBookingConfirmationEmail(data: {
     tapis: "Nettoyage Tapis & Canapés",
     balcon: "Nettoyage Balcon",
     jardinage: "Entretien Jardinage",
+    facade: "Nettoyage Façade",
+    panneaux: "Nettoyage Panneaux Solaires",
+    professionnel: "Nettoyage Professionnel",
   };
 
   const serviceName = serviceNames[data.service] || data.service;
@@ -92,26 +104,31 @@ export function generateBookingConfirmationEmail(data: {
     .info-box { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #1e40af; border-radius: 5px; }
     .info-row { margin: 10px 0; }
     .label { font-weight: bold; color: #1e40af; }
+    .payment-box { background: #eff6ff; border: 2px solid #1e40af; padding: 20px; margin: 20px 0; border-radius: 5px; }
+    .preparation-box { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 15px; margin: 15px 0; border-radius: 5px; }
     .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 14px; }
     .button { display: inline-block; background: #1e40af; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+    ul { padding-left: 20px; }
+    li { margin: 8px 0; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <h1>✅ Réservation Confirmée</h1>
-      <p>ProClean Empire</p>
+      <p>ProClean Empire - Nettoyage Premium</p>
     </div>
     <div class="content">
       <p>Bonjour <strong>${data.name}</strong>,</p>
       
-      <p>Nous avons bien reçu votre demande de réservation et nous vous en remercions !</p>
+      <p>Nous avons bien reçu votre demande de réservation et nous vous en remercions ! Voici les détails complets de votre intervention.</p>
       
       <div class="info-box">
         <h2 style="color: #1e40af; margin-top: 0;">📋 Détails de votre réservation</h2>
         <div class="info-row">
           <span class="label">🧹 Service :</span> ${serviceName}
         </div>
+        ${data.serviceOption ? `<div class="info-row"><span class="label">📦 Option :</span> ${data.serviceOption}</div>` : ''}
         <div class="info-row">
           <span class="label">📅 Date :</span> ${data.date}
         </div>
@@ -121,6 +138,29 @@ export function generateBookingConfirmationEmail(data: {
         <div class="info-row">
           <span class="label">📍 Adresse :</span> ${data.address}
         </div>
+        ${data.price ? `<div class="info-row" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb;"><span class="label">💰 Tarif :</span> ${(data.price / 100).toFixed(2)}€</div>` : ''}
+      </div>
+      
+      <div class="payment-box">
+        <h3 style="color: #1e40af; margin-top: 0;">💳 Modalités de Paiement</h3>
+        <p><strong>Paiement sur place :</strong></p>
+        <ul>
+          <li>Nous acceptons les espèces, cartes bancaires et virements</li>
+          <li>Veuillez préparer le montant exact ou une carte bancaire</li>
+          <li>Une facture vous sera remise à la fin de l'intervention</li>
+          <li>Aucun paiement d'avance n'est requis</li>
+        </ul>
+      </div>
+      
+      <div class="preparation-box">
+        <h3 style="color: #22c55e; margin-top: 0;">✅ À préparer avant l'intervention</h3>
+        <ul>
+          <li>Assurez-vous que l'accès à votre domicile est facile</li>
+          <li>Dégagez les zones à nettoyer si possible</li>
+          <li>Préparez un point d'eau accessible (si nécessaire pour le service)</li>
+          <li>Gardez votre téléphone à proximité pour toute question</li>
+          <li>Informez-nous de tout accès spécial ou restriction</li>
+        </ul>
       </div>
       
       <div style="text-align: center; margin: 30px 0;">
@@ -130,15 +170,20 @@ export function generateBookingConfirmationEmail(data: {
       
       <p><strong>Prochaines étapes :</strong></p>
       <ul>
-        <li>Notre équipe va examiner votre demande</li>
-        <li>Nous vous contacterons sous 24h pour confirmer le rendez-vous</li>
-        <li>Vous recevrez un SMS de rappel la veille de l'intervention</li>
+        <li>✓ Notre équipe va examiner votre demande</li>
+        <li>✓ Nous vous contacterons sous 24h pour confirmer le rendez-vous</li>
+        <li>✓ Vous recevrez un SMS de rappel 24h avant l'intervention</li>
+        <li>✓ Notre équipe arrivera à l'heure prévue avec tous les équipements</li>
       </ul>
+      
+      <p><strong>Besoin de modifier ou annuler ?</strong></p>
+      <p style="color: #ef4444; font-weight: bold;">⚠️ Attention : Les annulations moins de 24h avant le rendez-vous sont soumises à des frais de 25€.</p>
       
       <p>Si vous avez des questions ou souhaitez modifier votre réservation, n'hésitez pas à nous contacter :</p>
       <ul>
         <li>📞 Téléphone : <strong>06 17 21 22 30</strong></li>
         <li>📧 Email : <strong>serviceclient@procleanempire.com</strong></li>
+        <li>💬 WhatsApp : <strong>06 17 21 22 30</strong></li>
       </ul>
       
       ${getEmailSignature()}
@@ -151,22 +196,43 @@ export function generateBookingConfirmationEmail(data: {
   const text = `
 Bonjour ${data.name},
 
-Nous avons bien reçu votre demande de réservation et nous vous en remercions !
+Nous avons bien reçu votre demande de réservation et nous vous en remercions ! Voici les détails complets de votre intervention.
 
 DÉTAILS DE VOTRE RÉSERVATION :
 - Service : ${serviceName}
+${data.serviceOption ? `- Option : ${data.serviceOption}` : ''}
 - Date : ${data.date}
 - Heure : ${data.time}
 - Adresse : ${data.address}
+${data.price ? `- Tarif : ${(data.price / 100).toFixed(2)}€` : ''}
+
+MODALITÉS DE PAIEMENT :
+Paiement sur place :
+- Nous acceptons les espèces, cartes bancaires et virements
+- Veuillez préparer le montant exact ou une carte bancaire
+- Une facture vous sera remise à la fin de l'intervention
+- Aucun paiement d'avance n'est requis
+
+À PRÉPARER AVANT L'INTERVENTION :
+- Assurez-vous que l'accès à votre domicile est facile
+- Dégagez les zones à nettoyer si possible
+- Préparez un point d'eau accessible (si nécessaire)
+- Gardez votre téléphone à proximité
+- Informez-nous de tout accès spécial ou restriction
 
 PROCHAINES ÉTAPES :
-- Notre équipe va examiner votre demande
-- Nous vous contacterons sous 24h pour confirmer le rendez-vous
-- Vous recevrez un SMS de rappel la veille de l'intervention
+✓ Notre équipe va examiner votre demande
+✓ Nous vous contacterons sous 24h pour confirmer le rendez-vous
+✓ Vous recevrez un SMS de rappel 24h avant l'intervention
+✓ Notre équipe arrivera à l'heure prévue avec tous les équipements
+
+BESOIN DE MODIFIER OU ANNULER ?
+⚠️ Attention : Les annulations moins de 24h avant le rendez-vous sont soumises à des frais de 25€.
 
 CONTACT :
 - Téléphone : 06 17 21 22 30
 - Email : serviceclient@procleanempire.com
+- WhatsApp : 06 17 21 22 30
 - Site : procleanempire.com
 
 ProClean Empire

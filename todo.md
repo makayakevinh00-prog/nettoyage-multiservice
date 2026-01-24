@@ -199,3 +199,14 @@
 - [x] Ajouter de belles images pour chaque service
 - [x] Faire que les clics sur les services redirigent vers les pages détaillées
 - [x] Tester complètement le site
+
+
+## Corrections Demandées - Phase 2
+
+- [x] Remplacer l'image de profil par une version plus claire et lumineuse
+- [x] Améliorer le template d'email de confirmation avec tous les détails
+- [x] Ajouter les détails de réservation dans l'email (service, date, heure, adresse)
+- [x] Ajouter les instructions de paiement sur place
+- [x] Ajouter les informations à préparer avant l'intervention
+- [x] Configurer les en-têtes email (SPF, DKIM) pour éviter les spams
+- [x] Tester l'email de confirmation
