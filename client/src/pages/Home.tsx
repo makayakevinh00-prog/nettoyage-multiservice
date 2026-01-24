@@ -1,8 +1,6 @@
-import { Button } from "@/components/ui/button";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
-
 import { 
   Car,
   CheckCircle2, 
@@ -10,65 +8,72 @@ import {
   Sofa,
   Building2,
   Waves,
-  Calendar,
-  Clock,
   Leaf,
   Sparkles,
   Shield,
-  Clock3
+  Clock3,
+  ArrowRight,
+  Zap
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
 export default function Home() {
   const [location] = useLocation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const services = [
     {
       icon: Car,
-      title: "Nettoyage Automobile",
-      description: "Intérieur et extérieur, lavage haute pression, lustrage et protection.",
+      title: "Automobile",
+      description: "Intérieur et extérieur, lavage haute pression, lustrage.",
       image: "/hero-proclean.png",
     },
     {
       icon: Waves,
-      title: "Nettoyage Terrasse",
+      title: "Terrasse",
       description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
       image: "/services-grid.png",
     },
     {
       icon: Sofa,
-      title: "Nettoyage Tapis",
+      title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
       image: "/services-grid.png",
     },
     {
       icon: Building2,
-      title: "Nettoyage Balcon",
+      title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
       image: "/services-grid.png",
     },
     {
       icon: Leaf,
-      title: "Entretien Jardinage",
+      title: "Jardinage",
       description: "Taille, débroussaillage, entretien paysager professionnel.",
       image: "/services-grid.png",
     },
     {
       icon: Sparkles,
-      title: "Nettoyage Facade",
+      title: "Façade",
       description: "Nettoyage haute pression, traitement anti-mousse, ravalement.",
       image: "/services-grid.png",
     },
     {
-      icon: Building2,
-      title: "Nettoyage Panneaux Solaires",
+      icon: Zap,
+      title: "Panneaux Solaires",
       description: "Nettoyage haute pression, maintenance, optimisation rendement.",
       image: "/services-grid.png",
     },
     {
       icon: Building2,
-      title: "Nettoyage Professionnel",
+      title: "Professionnel",
       description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure.",
       image: "/services-grid.png",
     },
@@ -97,256 +102,194 @@ export default function Home() {
     },
   ];
 
-  const testimonials = [
-    {
-      name: "Patricia Ibaibe",
-      role: "Particulier",
-      content: "Très beau travail ! Dans le Airbnb je vous les conseille !",
-      rating: 5,
-    },
-    {
-      name: "kevinh makaya",
-      role: "Particulier",
-      content: "Impeccable !!! Ils ont nettoyé chez ma mère et c'est vraiment fou le travail fourni",
-      rating: 5,
-    },
-    {
-      name: "Serena Beya",
-      role: "Particulier",
-      content: "Service impeccable ! Ma voiture est ressortie comme neuve. L'équipe est professionnelle, ponctuelle et très soigneuse. Je recommande sans hésiter !",
-      rating: 5,
-    },
-
+  const stats = [
+    { number: "13", label: "Avis Google", rating: "5.0/5 ⭐" },
+    { number: "500+", label: "Clients Satisfaits" },
+    { number: "10+", label: "Années d'Expérience" },
+    { number: "24h", label: "Intervention Rapide" },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-white via-blue-50/30 to-white">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative min-h-[650px] flex items-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/hero-proclean.png')] bg-cover bg-center opacity-20"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-transparent"></div>
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-40"
+            style={{
+              backgroundImage: "url('/hero-proclean.png')",
+              transform: `translateY(${scrollY * 0.5}px)`,
+            }}
+          />
           
-          <div className="container relative z-10 py-24">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="text-white space-y-8">
-                <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
-                  <span className="text-sm font-semibold text-white">✨ Service Premium en Île-de-France</span>
-                </div>
-                
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                  <span className="text-white">PROCLEAN</span>{" "}
-                  <span className="text-blue-200">EMPIRE</span>
-                </h1>
-                
-                <p className="text-2xl md:text-3xl font-semibold text-blue-100">
-                  Nettoyage Premium Multiservice
-                </p>
-                
-                <p className="text-xl text-blue-50 leading-relaxed max-w-xl">
-                  Votre partenaire de confiance pour le nettoyage professionnel de vos véhicules, 
-                  terrasses, tapis, balcons et jardins. Excellence et satisfaction garanties.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-white text-blue-700 hover:bg-blue-50 text-lg px-8 py-6 shadow-xl hover:shadow-2xl transition-all duration-300"
-                    asChild
-                  >
-                    <a href="#reservation">Réserver Maintenant</a>
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6"
-                    asChild
-                  >
-                    <a href="#services">Découvrir nos Services</a>
-                  </Button>
-                </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+          
+          <div className="relative z-10 container mx-auto px-4 py-20 text-center md:text-left">
+            <div className="max-w-2xl">
+              <div className="inline-block mb-6 px-4 py-2 bg-blue-600/20 border border-blue-500/50 rounded-full">
+                <span className="text-blue-300 text-sm font-semibold">✨ Service Premium en Île-de-France</span>
               </div>
               
-              <div className="relative hidden lg:block">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
-                  <img 
-                    src="/hero-proclean.png" 
-                    alt="ProClean Empire - Nettoyage professionnel" 
-                    className="w-full h-auto"
-                  />
-                </div>
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                PROCLEAN<br />
+                <span className="text-blue-400">EMPIRE</span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-300 mb-4 font-light">
+                Nettoyage Multiservice Premium
+              </p>
+              
+              <p className="text-lg text-gray-400 mb-8 max-w-xl">
+                Voiture • Tapis • Terrasse • Balcon • Jardinage • Façade • Professionnel
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#booking" className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105">
+                  Réserver Maintenant
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </a>
+                <a href="#services" className="inline-flex items-center justify-center px-8 py-4 border-2 border-blue-500 text-blue-400 hover:bg-blue-500/10 font-semibold rounded-lg transition-all duration-300">
+                  Découvrir nos Services
+                </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section Services */}
-        <section id="services" className="py-24 bg-white">
-          <div className="container">
-            <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">NOS PRESTATIONS</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Des Services d'Excellence
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Découvrez notre gamme complète de services de nettoyage professionnel 
-                pour redonner éclat et propreté à tous vos espaces.
-              </p>
+        {/* Stats Section */}
+        <section className="bg-gradient-to-r from-slate-900 to-black py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, idx) => (
+                <div key={idx} className="text-center transform hover:scale-110 transition-transform duration-300">
+                  <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-300 font-medium">{stat.label}</div>
+                  {stat.rating && <div className="text-yellow-400 text-sm mt-1">{stat.rating}</div>}
+                </div>
+              ))}
             </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {services.map((service, index) => (
-                <div 
-                  key={index} 
-                  className="group hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-400 overflow-hidden bg-white rounded-lg"
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                    <div className="absolute top-4 right-4 w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                      <service.icon className="h-7 w-7 text-blue-600" />
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="order-2 md:order-1">
+                <img 
+                  src="/hero-proclean.png" 
+                  alt="ProClean Empire" 
+                  className="rounded-lg shadow-2xl w-full object-cover h-96"
+                />
+              </div>
+              <div className="order-1 md:order-2">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  Votre Partenaire de Confiance
+                </h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  ProClean Empire est spécialisée dans le nettoyage multiservice premium en Île-de-France. Avec plus de 10 ans d'expérience, nous mettons à votre service une équipe professionnelle, des équipements de dernière génération et un engagement envers l'excellence.
+                </p>
+                <div className="space-y-4">
+                  {avantages.map((avantage, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <avantage.icon className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{avantage.title}</h3>
+                        <p className="text-gray-600 text-sm">{avantage.description}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-base text-gray-600 leading-relaxed mb-4">
-                      {service.description}
-                    </p>
-                    <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700"
-                      onClick={() => {
-                        setTimeout(() => {
-                          const element = document.querySelector('#reservation');
-                          if (element) {
-                            element.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }, 100);
-                      }}
-                    >
-                      Réserver ce Service
-                    </Button>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Section Pourquoi nous choisir */}
-        <section className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
-          <div className="container">
+        {/* Services Section */}
+        <section id="services" className="py-20 md:py-32 bg-gradient-to-b from-gray-50 to-white">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">NOS ATOUTS</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Pourquoi Choisir ProClean Empire ?
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Une expertise reconnue et un engagement qualité pour votre satisfaction totale.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {avantages.map((avantage, index) => (
-                <div key={index} className="text-center border-2 hover:border-blue-400 hover:shadow-xl transition-all duration-300 bg-white rounded-lg p-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <avantage.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{avantage.title}</h3>
-                  <p className="text-gray-600">{avantage.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section Réservation */}
-        <section id="reservation" className="py-24 bg-white">
-          <div className="container">
-            <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">RÉSERVATION</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Réservez Votre Intervention
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Nos Services
               </h2>
               <p className="text-xl text-gray-600">
-                Choisissez votre service, les options détaillées, et recevez votre devis personnalisé.
+                Une gamme complète de solutions de nettoyage adaptées à vos besoins
               </p>
             </div>
-            
-            <AdvancedBookingForm />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {services.map((service, idx) => {
+                const Icon = service.icon;
+                return (
+                  <div 
+                    key={idx}
+                    className="group relative overflow-hidden rounded-xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                  >
+                    <div className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                      style={{ backgroundImage: `url('${service.image}')` }}
+                    />
+                    
+                    <div className="relative p-8 h-full flex flex-col justify-between">
+                      <div>
+                        <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-colors duration-300">
+                          <Icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">{service.description}</p>
+                      </div>
+                      
+                      <div className="mt-6 flex items-center text-blue-600 font-semibold text-sm group-hover:gap-2 transition-all duration-300">
+                        En savoir plus
+                        <ArrowRight className="w-4 h-4 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* Galerie avant/après */}
-        <section className="py-24 bg-white">
-          <div className="container">
-            <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">GALERIE</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Nos Réalisations
+        {/* Booking Section */}
+        <section id="booking" className="py-20 md:py-32 bg-black">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Réservez Votre Service
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Découvrez les transformations spectaculaires de nos clients.
+              <p className="text-xl text-gray-400">
+                Formulaire de réservation simple et rapide
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <img src="/gallery/aLJESpvhZTeM.jpg" alt="Terrasse avant/après" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
-              <img src="/gallery/Ykf3AlT3TbGH.png" alt="Patio nettoyage" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
-              <img src="/gallery/crpcsQzuHnym.jpg" alt="Terrasse propre" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
-              <img src="/gallery/tl4jlGLfxzTe.webp" alt="Nettoyage tapis" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
-              <img src="/gallery/zTsRk9imHR7P.jpeg" alt="Nettoyage professionnel" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
-              <img src="/gallery/eKzBvq3WtGvE.jpg" alt="Balcon nettoyage" className="w-full h-64 object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow" />
+            <div className="max-w-4xl mx-auto bg-gray-900 rounded-xl p-8 md:p-12 shadow-2xl">
+              <AdvancedBookingForm />
             </div>
           </div>
         </section>
 
-        {/* Témoignages */}
-        <section id="temoignages" className="py-24 bg-gradient-to-br from-blue-50 via-white to-blue-50">
-          <div className="container">
-            <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-                <span className="text-sm font-semibold text-blue-700">TÉMOIGNAGES</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Ils Nous Font Confiance
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                La satisfaction de nos clients est notre plus belle récompense.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-600">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
-                  <div>
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* CTA Section */}
+        <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-blue-800">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Besoin d'une intervention d'urgence ?
+            </h2>
+            <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+              Contactez-nous directement au <span className="font-semibold">06 17 21 22 30</span> ou par email à <span className="font-semibold">serviceclient@procleanempire.com</span>
+            </p>
+            <a 
+              href="tel:+33617212230"
+              className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
+            >
+              Nous Appeler Maintenant
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </a>
           </div>
         </section>
       </main>
