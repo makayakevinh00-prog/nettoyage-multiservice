@@ -4,9 +4,9 @@ import { Link } from "wouter";
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200">
+    <footer className="bg-slate-900 text-white">
       {/* Section avec Carte et Infos */}
-      <div className="border-b border-gray-200">
+      <div className="border-t border-slate-700">
         <div className="container py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Carte Google Maps */}
@@ -28,37 +28,37 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <img src={APP_LOGO} alt="ProClean Empire" className="h-16 w-auto" />
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900">ProClean <span className="text-blue-600">Empire</span></h2>
-                  <p className="text-gray-600 text-sm">Nettoyage Premium Multiservice</p>
+                  <h2 className="text-3xl font-bold text-white">ProClean <span className="text-orange-500">Empire</span></h2>
+                  <p className="text-gray-300 text-sm">Nettoyage Premium Multiservice</p>
                 </div>
               </div>
 
               {/* Adresse */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Où nous trouver</h3>
+                <h3 className="text-lg font-semibold text-orange-500">Où nous trouver</h3>
                 <div className="flex items-start space-x-3">
-                  <MapPin className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+                  <MapPin className="h-5 w-5 text-orange-500 mt-1 flex-shrink-0" />
                   <div className="text-sm">
-                    <p className="font-semibold text-gray-900">ProClean Empire SARL</p>
-                    <p className="text-gray-600">Île-de-France (75-95)</p>
-                    <p className="text-gray-500 text-xs mt-2">SIREN: 123 456 789</p>
+                    <p className="font-semibold text-white">ProClean Empire SARL</p>
+                    <p className="text-gray-300">Île-de-France (75-95)</p>
+                    <p className="text-gray-400 text-xs mt-2">SIREN: 123 456 789</p>
                   </div>
                 </div>
               </div>
 
               {/* Coordonnées */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Nous contacter</h3>
+                <h3 className="text-lg font-semibold text-orange-500">Nous contacter</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Phone className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                    <a href="tel:0617212230" className="hover:text-blue-600 transition-colors text-sm text-gray-700">
+                    <Phone className="h-5 w-5 text-orange-500 flex-shrink-0" />
+                    <a href="tel:0617212230" className="hover:text-orange-400 transition-colors text-sm text-gray-300">
                       06 17 21 22 30
                     </a>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Mail className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                    <a href="mailto:serviceclient@procleanempire.com" className="hover:text-blue-600 transition-colors text-sm text-gray-700">
+                    <Mail className="h-5 w-5 text-orange-500 flex-shrink-0" />
+                    <a href="mailto:serviceclient@procleanempire.com" className="hover:text-orange-400 transition-colors text-sm text-gray-300">
                       serviceclient@procleanempire.com
                     </a>
                   </div>
@@ -67,12 +67,12 @@ export default function Footer() {
 
               {/* Horaires */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">Horaires</h3>
-                <div className="text-sm space-y-1 text-gray-600">
-                  <p><strong className="text-gray-900">Lun - Ven:</strong> 8h - 19h</p>
-                  <p><strong className="text-gray-900">Samedi:</strong> 9h - 17h</p>
-                  <p><strong className="text-gray-900">Dimanche:</strong> Sur rendez-vous</p>
-                  <p className="text-blue-600 font-semibold mt-2">⭐ Intervention 7j/7 disponible</p>
+                <h3 className="text-lg font-semibold text-orange-500">Horaires</h3>
+                <div className="text-sm space-y-1 text-gray-300">
+                  <p><strong className="text-white">Lun - Ven:</strong> 8h - 19h</p>
+                  <p><strong className="text-white">Samedi:</strong> 9h - 17h</p>
+                  <p><strong className="text-white">Dimanche:</strong> Sur rendez-vous</p>
+                  <p className="text-orange-400 font-semibold mt-2">⭐ Intervention 7j/7 disponible</p>
                 </div>
               </div>
             </div>
@@ -81,30 +81,30 @@ export default function Footer() {
       </div>
 
       {/* Section Navigation et Réseaux */}
-      <div className="bg-gray-50 border-b border-gray-200">
+      <div className="bg-slate-950 border-b border-slate-700">
         <div className="container py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Navigation */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gray-900">Navigation</h3>
+              <h3 className="text-lg font-semibold mb-4 text-orange-500">Navigation</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <Link href="/" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Accueil
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <Link href="/#services" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/professionnels" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <Link href="/professionnels" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Professionnels
                   </Link>
                 </li>
                 <li>
-                  <a href="mailto:serviceclient@procleanempire.com" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <a href="mailto:serviceclient@procleanempire.com" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Contact
                   </a>
                 </li>
@@ -113,13 +113,13 @@ export default function Footer() {
 
             {/* Réseaux Sociaux */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gray-900">Suivez-nous</h3>
+              <h3 className="text-lg font-semibold mb-4 text-orange-500">Suivez-nous</h3>
               <div className="flex space-x-4">
                 <a 
                   href="https://www.facebook.com/procleanempire" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 transition-colors text-2xl font-bold"
+                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
                   aria-label="Facebook"
                   title="Facebook"
                 >
@@ -129,7 +129,7 @@ export default function Footer() {
                   href="https://www.tiktok.com/@procleanempire" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-gray-900 hover:text-gray-700 transition-colors text-2xl font-bold"
+                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
                   aria-label="TikTok"
                   title="TikTok"
                 >
@@ -139,7 +139,7 @@ export default function Footer() {
                   href="https://www.instagram.com/proclean_empire/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-pink-600 hover:text-pink-700 transition-colors text-2xl font-bold"
+                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
                   aria-label="Instagram"
                   title="Instagram"
                 >
@@ -149,7 +149,7 @@ export default function Footer() {
                   href="https://www.linkedin.com/company/proclean-empire/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-700 hover:text-blue-800 transition-colors text-lg font-bold"
+                  className="text-white hover:text-orange-400 transition-colors text-lg font-bold"
                   aria-label="LinkedIn"
                   title="LinkedIn"
                 >
@@ -160,20 +160,20 @@ export default function Footer() {
 
             {/* Mentions Légales */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gray-900">Légal</h3>
+              <h3 className="text-lg font-semibold mb-4 text-orange-500">Légal</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Mentions légales
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Politique de confidentialité
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-600 hover:text-blue-600 transition-colors">
+                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Conditions générales
                   </a>
                 </li>
@@ -184,8 +184,8 @@ export default function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="bg-white">
-        <div className="container py-6 text-center text-sm text-gray-600">
+      <div className="bg-slate-950">
+        <div className="container py-6 text-center text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} ProClean Empire. Tous droits réservés.</p>
           <p className="mt-2 text-xs">Nettoyage Premium Multiservice en Île-de-France</p>
         </div>
