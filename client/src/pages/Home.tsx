@@ -181,8 +181,7 @@ export default function Home() {
               
               {/* CTA Button */}
               <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
-                Demander mon devis gratuit
-                <ArrowRight className="ml-2 w-5 h-5" />
+                Demander mon devis gratuit →
               </a>
               
               {/* Secondary CTA */}
