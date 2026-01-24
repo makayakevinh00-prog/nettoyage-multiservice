@@ -212,7 +212,7 @@ export default function AdvancedBookingForm({
                     <SelectContent>
                       {selectedService.options.map((option) => (
                         <SelectItem key={option.id} value={option.id}>
-                          {option.name} {option.price !== "Demande de Devis" && `- ${formatPrice(option.price)}`}
+                          {option.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
