@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight, ChevronLeft, Calendar, Clock, User, Phone, Mail } from "lucide-react";
+import { ChevronRight, ChevronLeft, Calendar, Clock, User, Phone, Mail, MapPin, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 
@@ -102,22 +102,26 @@ export default function MultiStepBookingForm({
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-lg border border-blue-200">
+    <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex justify-between mb-2">
-          <span className="text-sm font-semibold text-gray-700">
-            Étape {step} sur 3
-          </span>
-          <span className="text-sm text-gray-600">
-            {step === 1 && "Service"}
-            {step === 2 && "Vos coordonnées"}
-            {step === 3 && "Date et heure"}
-          </span>
+        <div className="flex justify-between items-center mb-4">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Réservez votre service</h2>
+            <p className="text-gray-600 mt-1">
+              {step === 1 && "Étape 1 : Sélectionnez votre service"}
+              {step === 2 && "Étape 2 : Vos coordonnées"}
+              {step === 3 && "Étape 3 : Date et heure"}
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="text-4xl font-bold text-orange-500">{step}</span>
+            <span className="text-gray-600 ml-2">/3</span>
+          </div>
         </div>
-        <div className="w-full bg-gray-300 rounded-full h-2">
+        <div className="w-full bg-gray-300 rounded-full h-3">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            className="bg-gradient-to-r from-orange-400 to-orange-600 h-3 rounded-full transition-all duration-300"
             style={{ width: `${(step / 3) * 100}%` }}
           />
         </div>
@@ -126,8 +130,8 @@ export default function MultiStepBookingForm({
       {/* Step 1: Service Selection */}
       {step === 1 && (
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Quel service vous intéresse ?
+          <h3 className="text-xl font-bold text-gray-900 mb-6">
+            🧹 Quel service vous intéresse ?
           </h3>
 
           <div className="space-y-3">
@@ -164,8 +168,8 @@ export default function MultiStepBookingForm({
       {/* Step 2: Contact Information */}
       {step === 2 && (
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Vos coordonnées
+          <h3 className="text-xl font-bold text-gray-900 mb-6">
+            👤 Vos coordonnées
           </h3>
 
           <div>
@@ -218,8 +222,8 @@ export default function MultiStepBookingForm({
       {/* Step 3: Date, Time & Address */}
       {step === 3 && (
         <div className="space-y-4">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Quand et où ?
+          <h3 className="text-xl font-bold text-gray-900 mb-6">
+            📅 Quand et où ?
           </h3>
 
           <div>
@@ -269,6 +273,7 @@ export default function MultiStepBookingForm({
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <MapPin size={18} className="inline mr-2" />
               Adresse d'intervention
             </label>
             <input
@@ -283,6 +288,7 @@ export default function MultiStepBookingForm({
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <MessageSquare size={18} className="inline mr-2" />
               Informations supplémentaires (optionnel)
             </label>
             <textarea
@@ -298,7 +304,7 @@ export default function MultiStepBookingForm({
       )}
 
       {/* Navigation Buttons */}
-      <div className="flex gap-4 mt-8">
+      <div className="flex gap-4 mt-10 pt-6 border-t border-gray-200">
         <button
           onClick={handlePrev}
           disabled={step === 1}
@@ -335,9 +341,11 @@ export default function MultiStepBookingForm({
       </div>
 
       {/* Info Message */}
-      <p className="text-xs text-gray-600 mt-4 text-center">
-        ✓ Nous vous contacterons dans les 30 minutes pour confirmer votre réservation
-      </p>
+      <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+        <p className="text-sm text-green-800 text-center font-semibold">
+          ✓ Nous vous contacterons dans les 30 minutes pour confirmer votre réservation
+        </p>
+      </div>
     </div>
   );
 }
