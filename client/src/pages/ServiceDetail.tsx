@@ -202,7 +202,19 @@ export default function ServiceDetail() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button 
+                    className="w-full bg-blue-600 hover:bg-blue-700"
+                    onClick={() => {
+                      // Scroll to booking section
+                      const bookingSection = document.querySelector('#booking');
+                      if (bookingSection) {
+                        bookingSection.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        // If not on home page, navigate to home and scroll
+                        setLocation('/#booking');
+                      }
+                    }}
+                  >
                     {pkg.price === "Demande de Devis" ? "Demander un Devis" : "Réserver ce forfait"}
                   </Button>
                 </CardContent>
