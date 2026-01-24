@@ -236,32 +236,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20 md:py-32 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Avis Clients</h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, i) => (
-                <div key={i} className="bg-white rounded-lg p-8 shadow-md">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, j) => (
-                      <Star key={j} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4 italic">"{testimonial.content}"</p>
-                  <div>
-                    <p className="font-bold text-gray-900">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Google Reviews Section */}
         <GoogleReviews />
 
