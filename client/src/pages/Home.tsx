@@ -29,10 +29,15 @@ export default function Home() {
   const [prefilledService, setPrefilledService] = useState("");
   const [prefilledOption, setPrefilledOption] = useState("");
 
-  const scrollToBooking = () => {
+  const scrollToBooking = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Use setTimeout to ensure the scroll happens after any pending UI updates
+      setTimeout(() => {
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 0);
     }
   };
 
@@ -187,7 +192,11 @@ export default function Home() {
               </div>
               
               {/* CTA Button */}
-              <button onClick={scrollToBooking} className="inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg cursor-pointer border-none">
+              <button 
+                type="button"
+                onClick={scrollToBooking} 
+                className="relative z-20 inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg text-lg cursor-pointer border-none pointer-events-auto"
+              >
                 Demander mon devis gratuit →
               </button>
               
