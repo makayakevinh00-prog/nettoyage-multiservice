@@ -496,3 +496,12 @@
 - [ ] Vérifier l'intégration Google Calendar pour le propriétaire
 - [ ] Tester l'email de confirmation avec le prix
 - [ ] Tester l'ajout automatique à Google Calendar
+
+
+## BUG CRITIQUE - BOUTON DEMANDER DEVIS NON CLIQUABLE SUR MOBILE
+
+- [x] Le bouton "Demander mon devis gratuit" n'est pas cliquable sur mobile
+- [x] Vérifier le z-index du bouton et de la hero section
+- [x] Vérifier les éléments qui recouvrent le bouton
+- [x] Corriger le positionnement et l'ordre de stacking
+- [x] Tester sur iOS et Android

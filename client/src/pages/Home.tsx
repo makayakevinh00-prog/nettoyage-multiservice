@@ -159,7 +159,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/50" />
           
           {/* Content - Centered */}
-          <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="relative z-50 container mx-auto px-4 text-center">
             <div className="max-w-3xl mx-auto">
               {/* Main Title */}
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
@@ -195,7 +195,7 @@ export default function Home() {
               <button 
                 type="button"
                 onClick={scrollToBooking} 
-                className="relative z-20 inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg text-lg cursor-pointer border-none pointer-events-auto"
+                className="relative z-50 inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg text-lg cursor-pointer border-none pointer-events-auto touch-none select-none"
               >
                 Demander mon devis gratuit →
               </button>
