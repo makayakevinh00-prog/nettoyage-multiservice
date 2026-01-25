@@ -29,6 +29,13 @@ export default function Home() {
   const [prefilledService, setPrefilledService] = useState("");
   const [prefilledOption, setPrefilledOption] = useState("");
 
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
@@ -180,9 +187,9 @@ export default function Home() {
               </div>
               
               {/* CTA Button */}
-              <a href="#booking" className="inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg">
+              <button onClick={scrollToBooking} className="inline-flex items-center justify-center px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg text-lg cursor-pointer border-none">
                 Demander mon devis gratuit →
-              </a>
+              </button>
               
               {/* Secondary CTA */}
               <p className="text-gray-300 mt-6 text-sm">
