@@ -130,6 +130,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
 
         // Ajouter l'événement au calendrier du propriétaire
         try {
+          const priceText = totalPrice > 0 ? `\nPrix: ${totalPrice.toFixed(2)}€` : '';
           await addEventToOwnerCalendar({
             name: input.name,
             email: input.email,
@@ -138,8 +139,9 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             date: input.date,
             time: input.time,
             address: input.address,
-            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${input.message ? `\nNotes: ${input.message}` : ''}`,
+            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${priceText}${input.message ? `\nNotes: ${input.message}` : ''}`,
           });
+          console.log(`[Booking] Événement ajouté au calendrier du propriétaire pour ${input.name}`);
         } catch (calendarError) {
           console.error('Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
           // Ne pas bloquer la réservation si Google Calendar échoue
@@ -176,7 +178,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             address: input.address,
             message: input.message,
             serviceOptions: input.serviceOption ? JSON.stringify({ option: input.serviceOption, quantity: input.quantity }) : undefined,
-            totalPrice: 0, // Sera calculé plus tard
+            totalPrice: totalPrice,
             status: 'pending',
           });
           bookingId = result.insertId as number;
@@ -184,6 +186,17 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         } catch (dbError) {
           console.error('[Booking] Erreur lors de la création de la réservation:', dbError);
           // Ne pas bloquer la réservation si la base de données échoue
+        }
+
+        // Calculer le prix basé sur l'option sélectionnée
+        let totalPrice = 0;
+        let optionLabel = '';
+        if (input.serviceOption) {
+          const priceMatch = input.serviceOption.match(/^([\d.,]+)/);
+          if (priceMatch) {
+            totalPrice = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
+            optionLabel = input.serviceOption;
+          }
         }
 
         // Envoyer l'email de confirmation au client avec fichier .ics
@@ -194,6 +207,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             date: input.date,
             time: input.time,
             address: input.address,
+            serviceOption: optionLabel,
+            price: totalPrice,
           });
 
           // Générer le fichier .ics

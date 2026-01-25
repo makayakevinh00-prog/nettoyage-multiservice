@@ -486,3 +486,13 @@
 - [ ] Afficher les avis approuvés sur la page d'accueil
 - [ ] Ajouter un système de notation globale
 - [ ] Tester le système complet de feedback
+
+
+## BUGS CRITIQUES À CORRIGER - PRIX ET GOO## BUGS CRITIQUES À CORRIGER
+
+- [x] Le prix n'apparaît pas dans l'email de confirmation du client
+- [x] L'événement n'est pas synchronisé avec le Google Calendar du propriétaire
+- [ ] Vérifier la génération du prix dans le formulaire de réservation
+- [ ] Vérifier l'intégration Google Calendar pour le propriétaire
+- [ ] Tester l'email de confirmation avec le prix
+- [ ] Tester l'ajout automatique à Google Calendar
