@@ -143,7 +143,8 @@ ${booking.message ? `Notes: ${booking.message}` : ''}
 export async function addEventToOwnerCalendar(booking: BookingEvent): Promise<boolean> {
   try {
     const calendar = initializeCalendarService();
-    const ownerCalendarId = 'serviceclient@procleanempire.com';
+    // Utiliser l'email du propriétaire comme ID du calendrier (Google Calendar accepte les emails comme IDs)
+    const ownerCalendarId = process.env.OWNER_CALENDAR_ID || 'serviceclient@procleanempire.com';
 
     // Convertir la date et l'heure en format ISO
     const [year, month, day] = booking.date.split('-');
@@ -188,10 +189,23 @@ ${booking.message ? `Notes: ${booking.message}` : ''}
       },
     };
 
+    // Ajouter le propriétaire comme attendee pour qu'il reçoive l'invitation
+    const eventWithAttendees = {
+      ...event,
+      attendees: [
+        {
+          email: ownerCalendarId,
+          displayName: 'ProClean Empire',
+          responseStatus: 'accepted',
+        },
+      ],
+    };
+
     const response = await calendar.events.insert({
       calendarId: ownerCalendarId,
-      requestBody: event,
+      requestBody: eventWithAttendees,
       sendNotifications: true,
+      sendUpdates: 'all', // Envoyer les invitations à tous les attendees
     });
 
     console.log(`✅ Événement créé dans le calendrier du propriétaire: ${response.data.id}`);

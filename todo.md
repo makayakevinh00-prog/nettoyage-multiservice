@@ -440,3 +440,12 @@
 - [ ] Tester tous les formulaires et uploads
 - [ ] Vérifier les liens WhatsApp
 - [ ] Tester l'affichage des zones d'intervention
+
+## Amélioration Email et Calendrier - Phase 4
+
+- [x] Ajouter le prix total dans l'email de confirmation
+- [x] Afficher le prix dans la section "Détails de votre réservation"
+- [x] Synchroniser automatiquement les réservations avec le Google Calendar du propriétaire
+- [x] Ajouter l'événement au calendrier serviceclient@procleanempire.com automatiquement
+- [x] Tester l'affichage du prix dans l'email
+- [ ] Tester l'ajout automatique au calendrier du propriétaire
