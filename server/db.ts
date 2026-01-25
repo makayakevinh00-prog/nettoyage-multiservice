@@ -1,6 +1,6 @@
 import { eq, and, gte, lte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, bookings, InsertBooking, testimonials, InsertTestimonial } from "../drizzle/schema";
+import { InsertUser, users, bookings, InsertBooking, testimonials, InsertTestimonial, feedbacks, InsertFeedback, Feedback } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -232,6 +232,189 @@ export async function deleteTestimonial(id: number) {
     return result;
   } catch (error) {
     console.error("[Database] Failed to delete testimonial:", error);
+    throw error;
+  }
+}
+
+// Booking queries - Advanced
+export async function getBookingsByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get bookings: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(bookings)
+      .where(eq(bookings.userId, userId))
+      .orderBy(bookings.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get bookings by user:", error);
+    return [];
+  }
+}
+
+export async function getBookingsByEmail(email: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get bookings: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(bookings)
+      .where(eq(bookings.email, email))
+      .orderBy(bookings.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get bookings by email:", error);
+    return [];
+  }
+}
+
+export async function updateBooking(id: number, data: Partial<InsertBooking>) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot update booking: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .update(bookings)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(bookings.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to update booking:", error);
+    throw error;
+  }
+}
+
+export async function cancelBooking(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot cancel booking: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .update(bookings)
+      .set({ status: "cancelled", updatedAt: new Date() })
+      .where(eq(bookings.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to cancel booking:", error);
+    throw error;
+  }
+}
+
+// Feedback queries
+export async function createFeedback(data: InsertFeedback) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create feedback: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db.insert(feedbacks).values(data);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to create feedback:", error);
+    throw error;
+  }
+}
+
+export async function getFeedbackByBookingId(bookingId: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get feedback: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .select()
+      .from(feedbacks)
+      .where(eq(feedbacks.bookingId, bookingId))
+      .limit(1);
+    return result.length > 0 ? result[0] : undefined;
+  } catch (error) {
+    console.error("[Database] Failed to get feedback:", error);
+    return undefined;
+  }
+}
+
+export async function getApprovedFeedbacks() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get feedbacks: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(feedbacks)
+      .where(eq(feedbacks.isApproved, 1))
+      .orderBy(feedbacks.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get feedbacks:", error);
+    return [];
+  }
+}
+
+export async function getPendingFeedbacks() {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get pending feedbacks: database not available");
+    return [];
+  }
+  try {
+    const result = await db
+      .select()
+      .from(feedbacks)
+      .where(eq(feedbacks.isApproved, 0))
+      .orderBy(feedbacks.createdAt);
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to get pending feedbacks:", error);
+    return [];
+  }
+}
+
+export async function approveFeedback(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot approve feedback: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .update(feedbacks)
+      .set({ isApproved: 1 })
+      .where(eq(feedbacks.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to approve feedback:", error);
+    throw error;
+  }
+}
+
+export async function deleteFeedback(id: number) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot delete feedback: database not available");
+    return undefined;
+  }
+  try {
+    const result = await db
+      .delete(feedbacks)
+      .where(eq(feedbacks.id, id));
+    return result;
+  } catch (error) {
+    console.error("[Database] Failed to delete feedback:", error);
     throw error;
   }
 }

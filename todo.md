@@ -448,4 +448,41 @@
 - [x] Synchroniser automatiquement les réservations avec le Google Calendar du propriétaire
 - [x] Ajouter l'événement au calendrier serviceclient@procleanempire.com automatiquement
 - [x] Tester l'affichage du prix dans l'email
-- [ ] Tester l'ajout automatique au calendrier du propriétaire
+- [x] Tester l'ajout automatique au calendrier du propriétaire
+
+## Système de Feedback Post-Service - Phase 6
+
+- [x] Créer la table feedbacks en base de données
+- [x] Créer la page de formulaire de feedback (/feedback)
+- [x] Implémenter l'envoi automatique de feedback 24h après la prestation
+- [x] Ajouter un système de notation par étoiles
+- [x] Créer le scheduler pour envoyer les emails de feedback
+- [x] Ajouter le lien "Mes réservations" dans le header
+- [x] Sauvegarder les réservations en base de données avec userId et status
+
+
+## Gestion des Réservations Client - Phase 5
+
+- [x] Créer la page de gestion des réservations (/my-bookings)
+- [x] Ajouter l'authentification utilisateur pour accéder à ses réservations
+- [x] Afficher la liste des réservations avec tous les détails
+- [x] Implémenter la modification des réservations (date, heure, adresse)
+- [x] Implémenter l'annulation des réservations avec confirmation
+- [ ] Ajouter un statut de réservation (confirmée, en attente, annulée, complétée)
+- [ ] Ajouter une notification email lors de la modification/annulation
+- [ ] Créer une page détail pour chaque réservation
+- [ ] Ajouter un bouton d'accès aux réservations dans le header/menu
+- [ ] Tester le flux complet de gestion des réservations
+
+## Système de Feedback Post-Service - Phase 6
+
+- [ ] Créer la table de base de données pour les avis/feedbacks
+- [ ] Créer le formulaire de feedback avec note (1-5 étoiles) et commentaire
+- [ ] Implémenter l'envoi automatique du formulaire 24h après la prestation
+- [ ] Ajouter un lien de feedback dans l'email post-service
+- [ ] Créer une page de soumission du feedback
+- [ ] Ajouter les validations et règles de modération
+- [ ] Créer une page d'administration pour modérer les avis
+- [ ] Afficher les avis approuvés sur la page d'accueil
+- [ ] Ajouter un système de notation globale
+- [ ] Tester le système complet de feedback

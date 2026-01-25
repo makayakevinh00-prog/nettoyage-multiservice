@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { initializeReminderScheduler } from "../lib/reminderScheduler";
+import { startFeedbackScheduler } from "../lib/feedbackScheduler";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -92,6 +93,12 @@ async function startServer() {
       initializeReminderScheduler();
     } catch (error) {
       console.error('Erreur lors de l\'initialisation du système de rappel:', error);
+    }
+    // Initialiser le système d'envoi de feedback
+    try {
+      startFeedbackScheduler();
+    } catch (error) {
+      console.error('Erreur lors de l\'initialisation du système de feedback:', error);
     }
   });
 }

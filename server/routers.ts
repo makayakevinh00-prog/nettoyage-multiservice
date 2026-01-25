@@ -9,7 +9,7 @@ import { generateICSFile } from "./lib/calendar";
 import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleCalendar";
 import { syncBookingToHubSpot } from "./lib/hubspot";
 import { generateChatResponse } from "./lib/chatAI";
-import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial } from "./db";
+import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking } from "./db";
 import { storagePut } from "./storage";
 import Stripe from "stripe";
 
@@ -162,6 +162,30 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           // Ne pas bloquer la réservation si HubSpot échoue
         }
 
+        // Sauvegarder la réservation en base de données
+        let bookingId: number | undefined;
+        try {
+          const result = await createBooking({
+            userId: undefined, // Sera mis à jour si l'utilisateur est connecté
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service as any,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: input.message,
+            serviceOptions: input.serviceOption ? JSON.stringify({ option: input.serviceOption, quantity: input.quantity }) : undefined,
+            totalPrice: 0, // Sera calculé plus tard
+            status: 'pending',
+          });
+          bookingId = result.insertId as number;
+          console.log(`[Booking] Réservation créée avec ID: ${bookingId}`);
+        } catch (dbError) {
+          console.error('[Booking] Erreur lors de la création de la réservation:', dbError);
+          // Ne pas bloquer la réservation si la base de données échoue
+        }
+
         // Envoyer l'email de confirmation au client avec fichier .ics
         try {
           const confirmationEmail = generateBookingConfirmationEmail({
@@ -195,7 +219,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           // Ne pas bloquer la réservation si l'email échoue
         }
 
-        return { success: true };
+        return { success: true, bookingId };
       }),
 
     createPaymentIntent: publicProcedure
@@ -390,6 +414,159 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         } catch (error) {
           console.error('[Testimonials] Failed to get approved testimonials:', error);
           return [];
+        }
+      }),
+  }),
+
+  bookings: router({
+    getMyBookings: publicProcedure
+      .input(z.object({
+        email: z.string().email().optional(),
+      }))
+      .query(async ({ input, ctx }) => {
+        try {
+          // Si l'utilisateur est connecté, utiliser son ID
+          if (ctx.user && ctx.user.id) {
+            return await getBookingsByUserId(ctx.user.id);
+          }
+          // Sinon, utiliser l'email fourni
+          if (input.email) {
+            return await getBookingsByEmail(input.email);
+          }
+          return [];
+        } catch (error) {
+          console.error('[Bookings] Failed to get bookings:', error);
+          return [];
+        }
+      }),
+
+    updateBooking: publicProcedure
+      .input(z.object({
+        bookingId: z.number(),
+        date: z.string().optional(),
+        time: z.string().optional(),
+        address: z.string().optional(),
+        message: z.string().optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const result = await updateBooking(input.bookingId, {
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: input.message,
+          });
+          return { success: true, result };
+        } catch (error) {
+          console.error('[Bookings] Failed to update booking:', error);
+          throw new Error('Impossible de modifier la réservation');
+        }
+      }),
+
+    cancelBooking: publicProcedure
+      .input(z.object({
+        bookingId: z.number(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const result = await cancelBooking(input.bookingId);
+          return { success: true, result };
+        } catch (error) {
+          console.error('[Bookings] Failed to cancel booking:', error);
+          throw new Error('Impossible d\'annuler la réservation');
+        }
+      }),
+  }),
+
+  feedback: router({
+    submitFeedback: publicProcedure
+      .input(z.object({
+        bookingId: z.number(),
+        email: z.string().email(),
+        name: z.string().min(1).max(100),
+        rating: z.number().min(1).max(5),
+        comment: z.string().max(1000).optional(),
+        serviceQuality: z.number().min(1).max(5).optional(),
+        punctuality: z.number().min(1).max(5).optional(),
+        professionalism: z.number().min(1).max(5).optional(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const result = await createFeedback({
+            bookingId: input.bookingId,
+            email: input.email,
+            name: input.name,
+            rating: input.rating,
+            comment: input.comment,
+            serviceQuality: input.serviceQuality,
+            punctuality: input.punctuality,
+            professionalism: input.professionalism,
+          });
+          return { success: true, result };
+        } catch (error) {
+          console.error('[Feedback] Failed to submit feedback:', error);
+          throw new Error('Impossible de soumettre votre avis');
+        }
+      }),
+
+    getFeedbackByBooking: publicProcedure
+      .input(z.object({
+        bookingId: z.number(),
+      }))
+      .query(async ({ input }) => {
+        try {
+          return await getFeedbackByBookingId(input.bookingId);
+        } catch (error) {
+          console.error('[Feedback] Failed to get feedback:', error);
+          return null;
+        }
+      }),
+
+    getApproved: publicProcedure
+      .query(async () => {
+        try {
+          return await getApprovedFeedbacks();
+        } catch (error) {
+          console.error('[Feedback] Failed to get approved feedbacks:', error);
+          return [];
+        }
+      }),
+
+    getPending: adminProcedure
+      .query(async () => {
+        try {
+          return await getPendingFeedbacks();
+        } catch (error) {
+          console.error('[Feedback] Failed to get pending feedbacks:', error);
+          return [];
+        }
+      }),
+
+    approveFeedback: adminProcedure
+      .input(z.object({
+        feedbackId: z.number(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const result = await approveFeedback(input.feedbackId);
+          return { success: true, result };
+        } catch (error) {
+          console.error('[Feedback] Failed to approve feedback:', error);
+          throw new Error('Impossible d\'approuver l\'avis');
+        }
+      }),
+
+    deleteFeedback: adminProcedure
+      .input(z.object({
+        feedbackId: z.number(),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const result = await deleteFeedback(input.feedbackId);
+          return { success: true, result };
+        } catch (error) {
+          console.error('[Feedback] Failed to delete feedback:', error);
+          throw new Error('Impossible de supprimer l\'avis');
         }
       }),
   }),

@@ -28,6 +28,7 @@ export type InsertUser = typeof users.$inferInsert;
 // Table pour les réservations
 export const bookings = mysqlTable("bookings", {
   id: int("id").autoincrement().primaryKey(),
+  userId: int("userId"), // Lien vers l'utilisateur connecté (optionnel pour les réservations anonymes)
   name: varchar("name", { length: 100 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   phone: varchar("phone", { length: 20 }).notNull(),
@@ -41,6 +42,7 @@ export const bookings = mysqlTable("bookings", {
   totalPrice: int("totalPrice").notNull().default(0), // Prix en centimes (ex: 5000 = 50€)
   stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
   paymentStatus: mysqlEnum("paymentStatus", ["pending", "completed", "failed", "refunded"]).default("pending").notNull(),
+  status: mysqlEnum("status", ["pending", "confirmed", "completed", "cancelled"]).default("pending").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
@@ -80,3 +82,23 @@ export const testimonials = mysqlTable("testimonials", {
 
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = typeof testimonials.$inferInsert;
+
+// Table pour les avis/feedback post-service
+export const feedbacks = mysqlTable("feedbacks", {
+  id: int("id").autoincrement().primaryKey(),
+  bookingId: int("bookingId").notNull(), // Lien vers la réservation
+  userId: int("userId"), // Lien vers l'utilisateur si connecté
+  email: varchar("email", { length: 320 }).notNull(),
+  name: varchar("name", { length: 100 }).notNull(),
+  rating: int("rating").notNull(), // 1-5 stars
+  comment: text("comment"),
+  serviceQuality: int("serviceQuality"), // 1-5 pour la qualité du service
+  punctuality: int("punctuality"), // 1-5 pour la ponctualité
+  professionalism: int("professionalism"), // 1-5 pour le professionnalisme
+  isApproved: int("isApproved").default(0).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Feedback = typeof feedbacks.$inferSelect;
+export type InsertFeedback = typeof feedbacks.$inferInsert;
