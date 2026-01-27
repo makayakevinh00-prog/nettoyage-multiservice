@@ -517,3 +517,12 @@
 - [ ] Vérifier que les réservations sont sauvegardées en base de données
 - [ ] Vérifier que les emails de confirmation sont envoyés correctement
 - [ ] Vérifier que le calendrier Google du propriétaire reçoit les événements
+
+
+## CORRECTION ADRESSE EMAIL - PHASE CRITIQUE
+
+- [x] Remplacer paulinegabaud@gmail.com par serviceclient@procleanempire.com dans tous les fichiers
+- [x] Vérifier la configuration SMTP pour serviceclient@procleanempire.com
+- [x] Tester l'envoi d'emails à la nouvelle adresse
+- [x] Vérifier que les réponses automatiques sont bien envoyées au client
+- [x] Vérifier l'espace de stockage de serviceclient@procleanempire.com
