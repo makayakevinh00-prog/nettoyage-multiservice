@@ -505,3 +505,15 @@
 - [x] Vérifier les éléments qui recouvrent le bouton
 - [x] Corriger le positionnement et l'ordre de stacking
 - [x] Tester sur iOS et Android
+
+
+## AUDIT COMPLET - À VÉRIFIER IMMÉDIATEMENT
+
+- [ ] Vérifier que le prix s'affiche dans l'email de confirmation du client
+- [ ] Vérifier que l'événement s'ajoute automatiquement au Google Calendar du propriétaire
+- [ ] Vérifier que le bouton "Demander mon devis gratuit" est cliquable sur mobile
+- [ ] Vérifier que la page "Mes réservations" fonctionne correctement
+- [ ] Vérifier que le système de feedback post-service fonctionne
+- [ ] Vérifier que les réservations sont sauvegardées en base de données
+- [ ] Vérifier que les emails de confirmation sont envoyés correctement
+- [ ] Vérifier que le calendrier Google du propriétaire reçoit les événements
