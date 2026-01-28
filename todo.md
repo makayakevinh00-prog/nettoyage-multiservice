@@ -526,3 +526,13 @@
 - [x] Tester l'envoi d'emails à la nouvelle adresse
 - [x] Vérifier que les réponses automatiques sont bien envoyées au client
 - [x] Vérifier l'espace de stockage de serviceclient@procleanempire.com
+
+
+## INTÉGRATION HUBSPOT - PHASE 7
+
+- [ ] Configurer la clé API HubSpot
+- [ ] Créer les fonctions de synchronisation des réservations vers HubSpot
+- [ ] Créer les contacts HubSpot pour les clients
+- [ ] Créer les opportunités HubSpot pour les réservations
+- [ ] Ajouter les rappels et tâches HubSpot
+- [ ] Tester l'intégration complète

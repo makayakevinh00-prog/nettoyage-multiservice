@@ -148,6 +148,17 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         }
 
         // Synchroniser avec HubSpot CRM
+        // Calculer le prix basé sur l'option sélectionnée
+        let totalPrice = 0;
+        let optionLabel = '';
+        if (input.serviceOption) {
+          const priceMatch = input.serviceOption.match(/^([\d.,]+)/);
+          if (priceMatch) {
+            totalPrice = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
+            optionLabel = input.serviceOption;
+          }
+        }
+
         try {
           await syncBookingToHubSpot({
             name: input.name,
@@ -181,22 +192,13 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             totalPrice: totalPrice,
             status: 'pending',
           });
-          bookingId = result.insertId as number;
+          if (result && 'insertId' in result) {
+            bookingId = (result as any).insertId as number;
+          }
           console.log(`[Booking] Réservation créée avec ID: ${bookingId}`);
         } catch (dbError) {
           console.error('[Booking] Erreur lors de la création de la réservation:', dbError);
           // Ne pas bloquer la réservation si la base de données échoue
-        }
-
-        // Calculer le prix basé sur l'option sélectionnée
-        let totalPrice = 0;
-        let optionLabel = '';
-        if (input.serviceOption) {
-          const priceMatch = input.serviceOption.match(/^([\d.,]+)/);
-          if (priceMatch) {
-            totalPrice = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
-            optionLabel = input.serviceOption;
-          }
         }
 
         // Envoyer l'email de confirmation au client avec fichier .ics
