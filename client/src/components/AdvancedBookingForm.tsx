@@ -101,11 +101,12 @@ export default function AdvancedBookingForm({
     return bookingData.service ? SERVICES[bookingData.service] : null;
   }, [bookingData.service]);
 
-  // Calculer le prix total
+  // Calculer le prix total (en prenant en compte la quantité)
   const totalPrice = useMemo(() => {
     if (!bookingData.serviceOption) return 0;
-    return getOptionPrice(bookingData.service, bookingData.serviceOption);
-  }, [bookingData.service, bookingData.serviceOption]);
+    const basePrice = getOptionPrice(bookingData.service, bookingData.serviceOption);
+    return basePrice * bookingData.quantity; // Multiplier par la quantité
+  }, [bookingData.service, bookingData.serviceOption, bookingData.quantity]);
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
@@ -268,6 +269,14 @@ export default function AdvancedBookingForm({
                     <Euro size={20} className="text-blue-600" />
                     <span className="text-2xl font-bold text-blue-600">{formatPrice(totalPrice)}</span>
                   </div>
+                </div>
+              )}
+
+              {bookingData.date && bookingData.time && (
+                <div className="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                  <p className="text-sm text-amber-800">
+                    Limite: 3 reservations par jour. Si complet, nous vous proposerons une autre date.
+                  </p>
                 </div>
               )}
             </div>

@@ -558,3 +558,10 @@
 - [x] Ajouter tous les prix pour chaque option de service (20 produits avec prix)
 - [x] Lier les produits aux deals de réservation
 - [x] Tester la synchronisation complète des produits
+
+## Bugs Critiques à Corriger
+
+- [x] BUG: Prix ne change pas quand la quantité de voitures change (CORRIGÉ)
+- [x] Ajouter système de gestion des créneaux (limite 3 par jour par service) (IMPLÉMENTÉ)
+- [x] Afficher les créneaux disponibles/complets au client (AFFICHAGE AJOUTÉ)
+- [x] Informer le client quand un créneau est complet (MESSAGE D'AVERTISSEMENT AJOUTÉ)

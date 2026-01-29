@@ -119,3 +119,19 @@ export const products = mysqlTable("products", {
 
 export type Product = typeof products.$inferSelect;
 export type InsertProduct = typeof products.$inferInsert;
+
+// Table pour gérer la capacité des créneaux
+export const slotCapacity = mysqlTable("slotCapacity", {
+  id: int("id").autoincrement().primaryKey(),
+  service: mysqlEnum("service", ["automobile", "terrasse", "tapis", "balcon", "jardinage", "facade", "panneaux", "professionnel", "piscine"]).notNull(),
+  date: varchar("date", { length: 50 }).notNull(), // Format: YYYY-MM-DD
+  time: varchar("time", { length: 10 }).notNull(), // Format: HH:MM
+  maxCapacity: int("maxCapacity").default(3).notNull(), // Limite par défaut: 3
+  currentBookings: int("currentBookings").default(0).notNull(), // Nombre de réservations actuelles
+  isAvailable: int("isAvailable").default(1).notNull(), // 1 = disponible, 0 = complet
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SlotCapacity = typeof slotCapacity.$inferSelect;
+export type InsertSlotCapacity = typeof slotCapacity.$inferInsert;
