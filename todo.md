@@ -257,6 +257,14 @@
 
 ## Expansion des Services - Plus de 7 Services
 
+## URGENT: Bug Email Réservations
+
+- [x] URGENT: Corriger les emails envoyés à makayakevinh00@gmail.com au lieu de serviceclient@procleanempire.com
+- [x] Vérifier la configuration email dans le code
+- [x] Tester le flux complet de réservation
+
+## Expansion des Services - Plus de 7 Services
+
 - [ ] Ajouter Nettoyage de Vitres
 - [ ] Ajouter Nettoyage de Toiture
 - [ ] Ajouter Nettoyage de Piscine
