@@ -102,3 +102,20 @@ export const feedbacks = mysqlTable("feedbacks", {
 
 export type Feedback = typeof feedbacks.$inferSelect;
 export type InsertFeedback = typeof feedbacks.$inferInsert;
+// Table pour les produits/services
+export const products = mysqlTable("products", {
+  id: int("id").autoincrement().primaryKey(),
+  serviceKey: varchar("serviceKey", { length: 50 }).notNull(), // automobile, terrasse, etc.
+  serviceName: varchar("serviceName", { length: 100 }).notNull(), // Nettoyage Automobile
+  optionName: varchar("optionName", { length: 200 }).notNull(), // Nettoyage complet
+  description: text("description"), // Description détaillée
+  price: int("price").notNull(), // Prix en centimes (ex: 9000 = 90€)
+  currency: varchar("currency", { length: 3 }).default("EUR").notNull(),
+  sku: varchar("sku", { length: 100 }).notNull().unique(), // automobile-nettoyage-complet
+  isActive: int("isActive").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Product = typeof products.$inferSelect;
+export type InsertProduct = typeof products.$inferInsert;

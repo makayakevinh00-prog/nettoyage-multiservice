@@ -551,3 +551,10 @@
 - [ ] Créer les opportunités HubSpot pour les réservations
 - [ ] Ajouter les rappels et tâches HubSpot
 - [ ] Tester l'intégration complète
+
+## HubSpot Produits et Prix
+
+- [x] Créer les produits HubSpot pour chaque service (stockés en base de données)
+- [x] Ajouter tous les prix pour chaque option de service (20 produits avec prix)
+- [x] Lier les produits aux deals de réservation
+- [x] Tester la synchronisation complète des produits

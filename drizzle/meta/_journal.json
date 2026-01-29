@@ -43,6 +43,13 @@
       "when": 1769357403180,
       "tag": "0005_many_captain_stacy",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1769647945753,
+      "tag": "0006_rapid_hiroim",
+      "breakpoints": true
     }
   ]
 }
