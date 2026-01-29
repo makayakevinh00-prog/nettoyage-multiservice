@@ -263,6 +263,13 @@
 - [x] Vérifier la configuration email dans le code
 - [x] Tester le flux complet de réservation
 
+## HubSpot Integration - Synchronisation Réservations
+
+- [x] Configurer la clé API HubSpot
+- [x] Corriger la synchronisation pour utiliser les propriétés standard HubSpot
+- [x] Vérifier que tous les contacts sont créés dans HubSpot
+- [x] Tester la synchronisation avec tous les types de services
+
 ## Expansion des Services - Plus de 7 Services
 
 - [ ] Ajouter Nettoyage de Vitres

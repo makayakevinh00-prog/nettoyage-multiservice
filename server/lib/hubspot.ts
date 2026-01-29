@@ -67,7 +67,7 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
       return null;
     }
 
-    // Préparer les propriétés du contact
+    // Préparer les propriétés du contact (utiliser uniquement les propriétés standard HubSpot)
     const properties: Record<string, string> = {
       email: contact.email,
     };
@@ -75,10 +75,7 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
     if (contact.firstname) properties.firstname = contact.firstname;
     if (contact.lastname) properties.lastname = contact.lastname;
     if (contact.phone) properties.phone = contact.phone;
-    if (contact.service) properties.service = contact.service;
-    if (contact.booking_date) properties.booking_date = contact.booking_date;
-    if (contact.booking_time) properties.booking_time = contact.booking_time;
-    if (contact.booking_address) properties.booking_address = contact.booking_address;
+    // Note: booking_date, booking_time, booking_address, service sont stockés dans le deal, pas dans le contact
 
     // Chercher d'abord si le contact existe
     const searchResponse = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/contacts/search`, {
@@ -123,6 +120,9 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
       if (updateResponse.ok) {
         console.log(`✅ Contact HubSpot mis à jour: ${existingContact.id}`);
         return existingContact.id;
+      } else {
+        const errorData = await updateResponse.json() as any;
+        console.error(`❌ Erreur mise a jour contact: ${updateResponse.status}`, errorData);
       }
     } else {
       // Créer un nouveau contact
@@ -139,6 +139,9 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
         const data = await createResponse.json() as any;
         console.log(`✅ Contact HubSpot créé: ${data.id}`);
         return data.id;
+      } else {
+        const errorData = await createResponse.json() as any;
+        console.error(`❌ Erreur creation contact: ${createResponse.status}`, errorData);
       }
     }
 
@@ -166,7 +169,7 @@ export async function createHubSpotDeal(deal: HubSpotDeal): Promise<string | nul
 
     if (deal.amount) properties.amount = deal.amount;
     if (deal.closedate) properties.closedate = deal.closedate;
-    if (deal.service) properties.service = deal.service;
+    // Note: service est inclus dans dealname, pas comme propriété séparée
 
     const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/deals`, {
       method: 'POST',
