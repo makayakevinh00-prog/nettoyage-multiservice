@@ -575,3 +575,21 @@
 - [x] Optimiser le contenu pour les mots-clés locaux (Île-de-France) (FAIT)
 - [x] Ajouter les balises structurées (Schema.org) (FAIT)
 - [ ] Tester le SEO avec les outils Google
+
+## Sécurité du Site
+
+- [x] Implémenter HTTPS/SSL (certificat valide) (Géré par Manus)
+- [x] Ajouter les en-têtes de sécurité (X-Frame-Options, X-Content-Type-Options, etc.) (FAIT)
+- [x] Protection XSS (X-XSS-Protection header) (FAIT)
+- [x] Referrer Policy (strict-origin-when-cross-origin) (FAIT)
+- [x] Permissions Policy (géolocalisation, caméra, micro désactivés) (FAIT)
+- [ ] Chiffrer les données sensibles (emails, téléphones, adresses)
+- [ ] Ajouter la protection CSRF (Cross-Site Request Forgery)
+- [ ] Implémenter le rate limiting pour prévenir les attaques
+
+## Avis Trustpilot - Lien Direct
+
+- [x] Ajouter un lien direct vers la page Trustpilot (pas via Google) (FAIT)
+- [x] Créer une page dédiée "Avis clients" avec redirection Trustpilot (FAIT)
+- [x] Ajouter le widget Trustpilot avec les avis en temps réel (FAIT)
+- [x] Corriger le problème de confusion avec les autres ProClean (FAIT)

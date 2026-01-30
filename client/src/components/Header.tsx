@@ -21,7 +21,7 @@ export default function Header() {
   const navItems = [
     { href: "/", label: "Accueil" },
     { label: "Services", submenu: services },
-    { href: "#temoignages", label: "Avis clients" },
+    { href: "/avis", label: "Avis clients" },
     { label: "Professionnels", href: "/professionnels" },
     { href: "#contact", label: "Contact" },
     { href: "/my-bookings", label: "Mes réservations" },

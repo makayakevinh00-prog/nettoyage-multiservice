@@ -23,6 +23,7 @@ import ThankYou from "./pages/ThankYou";
 import WhatsAppButton from "./components/WhatsAppButton";
 import MyBookings from "./pages/MyBookings";
 import FeedbackForm from "./pages/FeedbackForm";
+import Reviews from "./pages/Reviews";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -52,6 +53,8 @@ function Router() {
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/my-bookings"} component={MyBookings} />
       <Route path={"/feedback"} component={FeedbackForm} />
+      <Route path={"/avis"} component={Reviews} />
+      <Route path={"/reviews"} component={Reviews} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
