@@ -569,6 +569,7 @@
 ## Logo et SEO - Amélioration Visibilité
 
 - [x] Remplacer le logo par le nouveau Logo-ProCleanEmpire.png (FAIT)
+- [x] Remplacer le favicon sur le navigateur et Google (FAIT)
 - [x] Optimiser les métadonnées SEO (title, description, keywords) (FAIT)
 - [x] Ajouter le lien Trustpilot avec widget d'avis (FAIT)
 - [x] Optimiser le contenu pour les mots-clés locaux (Île-de-France) (FAIT)
