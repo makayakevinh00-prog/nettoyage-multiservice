@@ -565,3 +565,12 @@
 - [x] Ajouter système de gestion des créneaux (limite 3 par jour par service) (IMPLÉMENTÉ)
 - [x] Afficher les créneaux disponibles/complets au client (AFFICHAGE AJOUTÉ)
 - [x] Informer le client quand un créneau est complet (MESSAGE D'AVERTISSEMENT AJOUTÉ)
+
+## Logo et SEO - Amélioration Visibilité
+
+- [x] Remplacer le logo par le nouveau Logo-ProCleanEmpire.png (FAIT)
+- [x] Optimiser les métadonnées SEO (title, description, keywords) (FAIT)
+- [x] Ajouter le lien Trustpilot avec widget d'avis (FAIT)
+- [x] Optimiser le contenu pour les mots-clés locaux (Île-de-France) (FAIT)
+- [x] Ajouter les balises structurées (Schema.org) (FAIT)
+- [ ] Tester le SEO avec les outils Google

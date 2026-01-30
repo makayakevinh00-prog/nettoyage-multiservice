@@ -293,7 +293,22 @@ export default function Home() {
         {/* Google Reviews Section */}
         <GoogleReviews />
 
-
+        {/* Trustpilot Reviews Section */}
+        <section className="py-20 md:py-32 bg-gradient-to-br from-blue-50 to-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Avis de nos clients</h2>
+              <p className="text-xl text-gray-600 mb-8">Lisez les avis verifies de nos clients sur Trustpilot</p>
+            </div>
+            <div className="flex justify-center">
+              <a href="https://www.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="inline-block">
+                <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                  <p className="text-blue-600 font-semibold">Lisez les avis marchands sur Trustpilot</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* Booking Section */}
         <section id="booking" className="py-20 md:py-32 bg-white animate-fadeIn">
