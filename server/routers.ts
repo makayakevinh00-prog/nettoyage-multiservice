@@ -111,43 +111,6 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           content: emailContent,
         });
 
-        // Ajouter l'événement à Google Calendar du client
-        try {
-          await addEventToGoogleCalendar({
-            name: input.name,
-            email: input.email,
-            phone: input.phone,
-            service: input.service,
-            date: input.date,
-            time: input.time,
-            address: input.address,
-            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${input.message ? `\nNotes: ${input.message}` : ''}`,
-          });
-        } catch (calendarError) {
-          console.error('Erreur lors de l\'ajout à Google Calendar du client:', calendarError);
-          // Ne pas bloquer la réservation si Google Calendar échoue
-        }
-
-        // Ajouter l'événement au calendrier du propriétaire
-        try {
-          const priceText = totalPrice > 0 ? `\nPrix: ${totalPrice.toFixed(2)}€` : '';
-          await addEventToOwnerCalendar({
-            name: input.name,
-            email: input.email,
-            phone: input.phone,
-            service: input.service,
-            date: input.date,
-            time: input.time,
-            address: input.address,
-            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${priceText}${input.message ? `\nNotes: ${input.message}` : ''}`,
-          });
-          console.log(`[Booking] Événement ajouté au calendrier du propriétaire pour ${input.name}`);
-        } catch (calendarError) {
-          console.error('Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
-          // Ne pas bloquer la réservation si Google Calendar échoue
-        }
-
-        // Synchroniser avec HubSpot CRM
         // Calculer le prix basé sur l'option sélectionnée
         let totalPrice = 0;
         let optionLabel = '';
@@ -159,7 +122,49 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           }
         }
 
+        // Ajouter l'événement à Google Calendar du client
         try {
+          console.log(`[GoogleCalendar] Ajout d'événement pour ${input.name}`);
+          await addEventToGoogleCalendar({
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${input.message ? `\nNotes: ${input.message}` : ''}`,
+          });
+          console.log(`[GoogleCalendar] ✅ Événement ajouté pour le client ${input.email}`);
+        } catch (calendarError) {
+          console.error('[GoogleCalendar] ❌ Erreur lors de l\'ajout à Google Calendar du client:', calendarError);
+          // Ne pas bloquer la réservation si Google Calendar échoue
+        }
+
+        // Ajouter l'événement au calendrier du propriétaire
+        try {
+          console.log(`[GoogleCalendar] Ajout d'événement propriétaire pour ${input.name}`);
+          const priceText = totalPrice > 0 ? `\nPrix: ${totalPrice.toFixed(2)}€` : '';
+          await addEventToOwnerCalendar({
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address,
+            message: `Quantité: ${input.quantity}${input.serviceOption ? `\nOption: ${input.serviceOption}` : ''}${priceText}${input.message ? `\nNotes: ${input.message}` : ''}`,
+          });
+          console.log(`[GoogleCalendar] ✅ Événement ajouté au calendrier du propriétaire pour ${input.name}`);
+        } catch (calendarError) {
+          console.error('[GoogleCalendar] ❌ Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
+          // Ne pas bloquer la réservation si Google Calendar échoue
+        }
+
+        // Synchroniser avec HubSpot CRM
+        try {
+          console.log(`[HubSpot] Synchronisation pour ${input.name}`);
+
           await syncBookingToHubSpot({
             name: input.name,
             email: input.email,
@@ -170,8 +175,9 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             address: input.address,
             message: input.message,
           });
+          console.log(`[HubSpot] ✅ Synchronisation réussie pour ${input.email}`);
         } catch (hubspotError) {
-          console.error('Erreur lors de la synchronisation HubSpot:', hubspotError);
+          console.error('[HubSpot] ❌ Erreur lors de la synchronisation HubSpot:', hubspotError);
           // Ne pas bloquer la réservation si HubSpot échoue
         }
 
