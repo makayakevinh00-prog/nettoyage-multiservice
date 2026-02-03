@@ -9,11 +9,11 @@ export interface BreadcrumbItem {
 }
 
 interface BreadcrumbProps {
-  items: BreadcrumbItem[];
+  items?: BreadcrumbItem[];
   className?: string;
 }
 
-export default function Breadcrumb({ items, className }: BreadcrumbProps) {
+export default function Breadcrumb({ items = [], className }: BreadcrumbProps) {
   return (
     <nav
       className={cn(
@@ -27,7 +27,7 @@ export default function Breadcrumb({ items, className }: BreadcrumbProps) {
         <span className="hidden sm:inline">Accueil</span>
       </Link>
 
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <div key={index} className="flex items-center gap-2">
           <ChevronRight size={16} className="text-gray-400" />
           {item.current ? (
