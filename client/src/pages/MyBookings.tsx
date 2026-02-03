@@ -7,7 +7,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { AlertCircle, Calendar, Clock, MapPin, Trash2, Edit2, CheckCircle2, XCircle } from "lucide-react";
+import { AlertCircle, Calendar, Clock, MapPin, Trash2, Edit2, CheckCircle2, XCircle, ArrowLeft } from "lucide-react";
+import { Link } from "wouter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 
@@ -117,6 +118,10 @@ export default function MyBookings() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
+        <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6 transition-colors">
+          <ArrowLeft size={20} />
+          <span>Retour à l'accueil</span>
+        </Link>
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Mes Réservations</h1>
           <p className="text-gray-600 mt-2">Gérez et suivez vos réservations ProClean Empire</p>

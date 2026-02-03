@@ -9,8 +9,8 @@ export default function Header() {
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   const services = [
-    { name: "Automobile", href: "/#booking", service: "automobile" },
-    { name: "Terrasse", href: "/#booking", service: "terrasse" },
+    { name: "Automobile", href: "/service-automobile", service: "automobile" },
+    { name: "Terrasse", href: "/service-terrasse", service: "terrasse" },
     { name: "Tapis & Canapés", href: "/#booking", service: "tapis" },
     { name: "Balcon", href: "/#booking", service: "balcon" },
     { name: "Façade", href: "/#booking", service: "facade" },
@@ -23,7 +23,7 @@ export default function Header() {
     { label: "Services", submenu: services },
     { href: "/avis", label: "Avis clients" },
     { label: "Professionnels", href: "/professionnels" },
-    { href: "#contact", label: "Contact" },
+    { href: "/contact", label: "Contact" },
     { href: "/my-bookings", label: "Mes réservations" },
   ];
 
