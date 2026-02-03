@@ -25,8 +25,6 @@ import MyBookings from "./pages/MyBookings";
 import FeedbackForm from "./pages/FeedbackForm";
 import Reviews from "./pages/Reviews";
 import LegalNotice from "./pages/LegalNotice";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -60,10 +58,6 @@ function Router() {
       <Route path="/reviews" component={Reviews} />
       <Route path="/mentions-legales" component={LegalNotice} />
       <Route path="/legal" component={LegalNotice} />
-      <Route path="/politique-confidentialite" component={PrivacyPolicy} />
-      <Route path="/privacy" component={PrivacyPolicy} />
-      <Route path="/conditions-generales" component={TermsOfService} />
-      <Route path="/cgv" component={TermsOfService} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
