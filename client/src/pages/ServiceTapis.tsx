@@ -1,6 +1,6 @@
-import { CheckCircle2, Star, AlertCircle, Zap } from "lucide-react";
+import { CheckCircle2, Star, AlertCircle, Zap, ArrowLeft, Sofa, Droplets, Sparkles, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 
 export default function ServiceTapis() {
   const [, navigate] = useLocation();
@@ -10,10 +10,34 @@ export default function ServiceTapis() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4">
+      {/* Header */}
+      <section className="py-12 bg-gradient-to-br from-blue-50 to-blue-100">
+        <div className="container max-w-5xl">
+          <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6 transition-colors">
+            <ArrowLeft size={20} />
+            <span>Retour à l'accueil</span>
+          </Link>
+          <div className="flex items-center gap-4 mb-6">
+            <Sofa className="w-12 h-12 text-blue-600" />
+            <h1 className="text-4xl font-bold text-gray-900">Nettoyage Tapis & Canapés</h1>
+          </div>
+          <p className="text-xl text-gray-700 max-w-2xl">
+            Redonnez vie à vos tapis et canapés avec notre service de nettoyage professionnel haute performance.
+          </p>
+        </div>
+      </section>
+
+      {/* Hero Section OLD */}
+      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4 hidden">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-4">Nettoyage Tapis & Canapé</h1>
           <p className="text-xl text-blue-100 mb-6">

@@ -29,6 +29,10 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
+import ServiceTapis from "./pages/ServiceTapis";
+import ServiceBalcon from "./pages/ServiceBalcon";
+import ServiceFacade from "./pages/ServiceFacade";
+import ServiceJardinage from "./pages/ServiceJardinage";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -68,6 +72,10 @@ function Router() {
       <Route path="/cgv" component={TermsOfService} />
       <Route path="/service-automobile" component={ServiceAutomobile} />
       <Route path="/service-terrasse" component={ServiceTerrasse} />
+      <Route path="/service-tapis" component={ServiceTapis} />
+      <Route path="/service-balcon" component={ServiceBalcon} />
+      <Route path="/service-facade" component={ServiceFacade} />
+      <Route path="/service-jardinage" component={ServiceJardinage} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
