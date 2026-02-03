@@ -123,6 +123,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         }
 
         // Ajouter l'événement à Google Calendar du client
+        // TEMPORAIREMENT DÉSACTIVÉ POUR TESTER
+        /*
         try {
           console.log(`[GoogleCalendar] Ajout d'événement pour ${input.name}`);
           await addEventToGoogleCalendar({
@@ -140,8 +142,12 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           console.error('[GoogleCalendar] ❌ Erreur lors de l\'ajout à Google Calendar du client:', calendarError);
           // Ne pas bloquer la réservation si Google Calendar échoue
         }
+        */
+        console.log('[GoogleCalendar] ⏭️  Désactivé temporairement pour tester');
 
         // Ajouter l'événement au calendrier du propriétaire
+        // TEMPORAIREMENT DÉSACTIVÉ POUR TESTER
+        /*
         try {
           console.log(`[GoogleCalendar] Ajout d'événement propriétaire pour ${input.name}`);
           const priceText = totalPrice > 0 ? `\nPrix: ${totalPrice.toFixed(2)}€` : '';
@@ -160,8 +166,12 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           console.error('[GoogleCalendar] ❌ Erreur lors de l\'ajout au calendrier du propriétaire:', calendarError);
           // Ne pas bloquer la réservation si Google Calendar échoue
         }
+        */
+        console.log('[GoogleCalendar] ⏭️  Calendrier propriétaire désactivé temporairement');
 
         // Synchroniser avec HubSpot CRM
+        // TEMPORAIREMENT DÉSACTIVÉ POUR TESTER
+        /*
         try {
           console.log(`[HubSpot] Synchronisation pour ${input.name}`);
 
@@ -180,6 +190,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           console.error('[HubSpot] ❌ Erreur lors de la synchronisation HubSpot:', hubspotError);
           // Ne pas bloquer la réservation si HubSpot échoue
         }
+        */
+        console.log("[HubSpot] ⏭️  Désactivé temporairement pour tester");
 
         // Sauvegarder la réservation en base de données
         let bookingId: number | undefined;
