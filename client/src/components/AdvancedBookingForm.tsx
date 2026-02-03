@@ -128,6 +128,8 @@ export default function AdvancedBookingForm({
       email: bookingData.email,
       phone: bookingData.phone,
       service: bookingData.service as any,
+      serviceOption: bookingData.serviceOption,
+      quantity: bookingData.quantity,
       date: bookingData.date,
       time: bookingData.time,
       address: bookingData.address,
