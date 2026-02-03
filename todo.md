@@ -388,6 +388,21 @@
 - [x] Tester tout le site complètement
 
 
+## Autocomplétion Google Maps pour Adresse
+
+- [x] Ajouter la clé API Google Maps (VITE_GOOGLE_MAPS_API_KEY)
+- [x] Ajouter autocomplétion Google Maps au champ Adresse du formulaire de réservation
+- [x] Implémenter les suggestions d'adresses en temps réel
+- [x] Valider les adresses sélectionnées
+- [ ] Tester l'autocomplétion avec différentes adresses
+
+## BUG: Page Mes Reservations ne montre aucune reservation
+
+- [x] Vérifier pourquoi les réservations ne s'affichent pas
+- [x] Corriger la requête tRPC pour récupérer les réservations
+- [x] Vérifier que les réservations sont bien enregistrées en base (ajout de facade et panneaux-solaires à l'enum)
+- [ ] Tester l'affichage des réservations après correction
+
 ## Prise de Rendez-vous dans le Chat IA
 
 - [ ] Créer un système de réservation conversationnel dans le chat IA

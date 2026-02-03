@@ -32,7 +32,7 @@ export const bookings = mysqlTable("bookings", {
   name: varchar("name", { length: 100 }).notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   phone: varchar("phone", { length: 20 }).notNull(),
-  service: mysqlEnum("service", ["automobile", "terrasse", "tapis", "balcon", "jardinage"]).notNull(),
+  service: mysqlEnum("service", ["automobile", "terrasse", "tapis", "balcon", "jardinage", "facade", "panneaux-solaires"]).notNull(),
   date: varchar("date", { length: 50 }).notNull(),
   time: varchar("time", { length: 10 }).notNull(),
   address: text("address").notNull(),

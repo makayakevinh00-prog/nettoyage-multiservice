@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import DateTimePicker from "@/components/DateTimePicker";
-import FrenchAddressAutocomplete from "@/components/FrenchAddressAutocomplete";
+import GoogleMapsAddressAutocomplete from "@/components/GoogleMapsAddressAutocomplete";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
@@ -298,9 +298,11 @@ export default function AdvancedBookingForm({
             <h3 className="text-lg font-semibold mb-4">Lieu d'Intervention</h3>
             <div>
               <Label htmlFor="booking-address">Adresse *</Label>
-              <FrenchAddressAutocomplete
+              <GoogleMapsAddressAutocomplete
                 value={bookingData.address}
                 onChange={(address) => setBookingData({ ...bookingData, address })}
+                placeholder="Entrez votre adresse (ex: 3 rue Stephane Charbonnier, 9580)"
+                required
               />
             </div>
           </div>
