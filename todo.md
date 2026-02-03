@@ -360,6 +360,12 @@
 - [x] Tester le système complet
 
 
+## BUG CRITIQUE - Erreur Trustpilot
+
+- [x] Corriger l'erreur `window.Trustpilot.loadDynamicScript is not a function`
+- [x] Remplacer par une section d'avis clients personnalisée
+- [x] Tester la page sans erreur
+
 ## Amélioration Ergonomie et Performance (Style Apple)
 
 - [x] Créer une navigation améliorée avec sous-menus intelligents
