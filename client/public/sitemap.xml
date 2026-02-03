@@ -4,7 +4,7 @@
   <!-- Page d'accueil -->
   <url>
     <loc>https://procleanempire.com/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -16,7 +16,7 @@
   <!-- Services principaux -->
   <url>
     <loc>https://procleanempire.com/#services</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -24,7 +24,7 @@
   <!-- Nettoyage Automobile -->
   <url>
     <loc>https://procleanempire.com/?service=automobile</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -36,7 +36,7 @@
   <!-- Nettoyage Terrasse -->
   <url>
     <loc>https://procleanempire.com/?service=terrasse</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -48,7 +48,7 @@
   <!-- Nettoyage Tapis -->
   <url>
     <loc>https://procleanempire.com/?service=tapis</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -56,7 +56,7 @@
   <!-- Nettoyage Balcon -->
   <url>
     <loc>https://procleanempire.com/?service=balcon</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -64,7 +64,7 @@
   <!-- Entretien Jardinage -->
   <url>
     <loc>https://procleanempire.com/?service=jardinage</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -72,7 +72,7 @@
   <!-- Nettoyage Façade -->
   <url>
     <loc>https://procleanempire.com/?service=facade</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -80,7 +80,7 @@
   <!-- Panneaux Solaires -->
   <url>
     <loc>https://procleanempire.com/?service=panneaux-solaires</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,7 +88,7 @@
   <!-- Services Professionnels -->
   <url>
     <loc>https://procleanempire.com/?service=professionnel</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -96,7 +96,7 @@
   <!-- Formulaire de réservation -->
   <url>
     <loc>https://procleanempire.com/#booking</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -104,8 +104,24 @@
   <!-- Contact -->
   <url>
     <loc>https://procleanempire.com/#contact</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-01-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  
+  <!-- Page Avis Clients -->
+  <url>
+    <loc>https://procleanempire.com/avis</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Page Mentions Légales -->
+  <url>
+    <loc>https://procleanempire.com/legal</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
