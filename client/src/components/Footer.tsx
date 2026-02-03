@@ -116,7 +116,7 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-orange-500">Suivez-nous</h3>
               <div className="flex space-x-4">
                 <a 
-                  href="https://www.facebook.com/procleanempire" 
+                  href="https://www.facebook.com/people/Proclean-Empire/61575993812750/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
@@ -146,14 +146,14 @@ export default function Footer() {
                   📷
                 </a>
                 <a 
-                  href="https://www.linkedin.com/company/proclean-empire/" 
+                  href="https://fr.trustpilot.com/review/procleanempire.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-white hover:text-orange-400 transition-colors text-lg font-bold"
-                  aria-label="LinkedIn"
-                  title="LinkedIn"
+                  aria-label="Trustpilot"
+                  title="Trustpilot"
                 >
-                  in
+                  ⭐
                 </a>
               </div>
             </div>
@@ -168,14 +168,14 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/politique-confidentialite" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Politique de confidentialité
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/conditions-generales" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Conditions générales
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
