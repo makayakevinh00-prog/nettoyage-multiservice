@@ -326,6 +326,100 @@ export default function Home() {
 
 
 
+        {/* Gallery Section - Avant/Après */}
+        <section className="py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nos Réalisations</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Découvrez les transformations spectaculaires réalisées par notre équipe
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Image 1: Before/After Car */}
+              <div className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-1">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <img 
+                    src="https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/VtLg6mjDUBCGbEryjVuH9i-img-1_1770118181000_na1fn_aGVyby1jbGVhbmluZy1iZWZvcmUtYWZ0ZXI.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L1Z0TGc2bWpEVUJDR2JFcnlqVnVIOWktaW1nLTFfMTc3MDExODE4MTAwMF9uYTFmbl9hR1Z5YnkxamJHVmhibWx1WnkxaVpXWnZjbVV0WVdaMFpYSS5qcGc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Ql2bAY1tPcZDd8MeaggrsfJ1a84OsDuuvALEm3v0W6pEf8d4DjklJUOVIyz~9m3VwiExdxi1ZjcOP7qN2oteAsEYaCTzARl0WRBLffyvUGwVGVMbMssgf4s~b46K94bN9YnLtsi2~SUfyHdqQ--p4a2i7mQVj~q8aWZ8Lhdc2~oCu1VJHYqmiJjYX-wNQetPldHHOOdIgIfpDXT~jNFE7ObvHNcSV1GA6OzlO767bKRwfGEv6F0jUdK5K9VHVzEm8-~qDxzTOoaNgpL7cDIyRLFV7a8ULm1sbZwhTGmwcqCc2Pnwpwl7XK4ONIOkvguaRktU5eoXxKsBGqXOyV9ajg__" 
+                    alt="Nettoyage Automobile Avant/Après"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Nettoyage Automobile</h3>
+                  <p className="text-gray-600">Transformation complète de votre véhicule avec nos services premium</p>
+                </div>
+              </div>
+
+              {/* Image 2: Team in Action */}
+              <div className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-2">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <img 
+                    src="https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/VtLg6mjDUBCGbEryjVuH9i-img-2_1770118182000_na1fn_dGVhbS1jbGVhbmluZy1hY3Rpb24.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L1Z0TGc2bWpEVUJDR2JFcnlqVnVIOWktaW1nLTJfMTc3MDExODE4MjAwMF9uYTFmbl9kR1ZoYlMxamJHVmhibWx1WnkxaFkzUnBiMjQuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=qOKBEB6-cQFycxo61Z1sizjTb48ykxIM3R-Tm-E~Hw27iPS-4cNw8OKt4waTqbe~XHMnEGJKGxhBnJhfwN1LxlTCIWKWxr87hjZmbGCa0GDN4EMTHU8j~1~Kv2RLzcAFJmi8ETZS-QYdvXyG7CC~XgfJHSkYG~ziYLkfBwBX7bEo2fmgdA5QxVEWpLRqSjcQ0O6u2a6wm0Y0XSrKEOrLfaYuB7KVIpQ3Urh~-lReYFHkv4GN4jIpcyIlMpdqMAqr-kR9refvtemFbgzp05ikUrtmEBgJOpMcMJKDaqxUQ5~CkZ~bvBDbreXNdHsYOSolCcu~Q4~rtCuCYdRuWzrNTg__" 
+                    alt="Équipe ProClean Empire en action"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Notre Équipe Professionnelle</h3>
+                  <p className="text-gray-600">Des experts formés et équipés pour tous vos besoins de nettoyage</p>
+                </div>
+              </div>
+
+              {/* Image 3: Carpet Cleaning */}
+              <div className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-3">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <img 
+                    src="https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/VtLg6mjDUBCGbEryjVuH9i-img-3_1770118177000_na1fn_Y2FycGV0LWNsZWFuaW5nLXRyYW5zZm9ybWF0aW9u.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L1Z0TGc2bWpEVUJDR2JFcnlqVnVIOWktaW1nLTNfMTc3MDExODE3NzAwMF9uYTFmbl9ZMkZ5Y0dWMExXTnNaV0Z1YVc1bkxYUnlZVzV6Wm05eWJXRjBhVzl1LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=jeiqzDQexb~qiHrO6lBSDGj2FI~QeXjqidHVGkH2wttiIc7NkTr6gDRXZVBbKofc7djh8z44eSoSMmZO5bONxDlk3CqjwGYEJv8qLC5ZfGeJtWKbBHyahx3dUa0tsCgmKFeJFCgnauaPaFgY-b3B2BiVjqxPswx3x7cL5SxbxvMpdqhvjOFZ6t6LF-ZK9PEG3S9-bMagCDaGR3eoWoLwR8V5bnEcw-Uw2YXTaQ5W9L6yeqR6Q0aORqF20Q7D~hoP4~VUTeZL-kmE2FV~zE7hnxm8keB6mBUPZnAPuC1-HRUCDevMZ~zLzWRm7-mfTtS~jHFwWVK0CLXM6TlWUtpqtg__" 
+                    alt="Nettoyage de Tapis Avant/Après"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Nettoyage Tapis & Canapés</h3>
+                  <p className="text-gray-600">Extraction professionnelle pour des résultats impeccables</p>
+                </div>
+              </div>
+
+              {/* Image 4: Terrace Restoration */}
+              <div className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-4">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <img 
+                    src="https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/VtLg6mjDUBCGbEryjVuH9i-img-4_1770118171000_na1fn_dGVycmFjZS1yZXN0b3JhdGlvbg.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L1Z0TGc2bWpEVUJDR2JFcnlqVnVIOWktaW1nLTRfMTc3MDExODE3MTAwMF9uYTFmbl9kR1Z5Y21GalpTMXlaWE4wYjNKaGRHbHZiZy5qcGc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xOTIwLGhfMTkyMC9mb3JtYXQsd2VicC9xdWFsaXR5LHFfODAiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=r9bvZQu-IwwSPYppLMpNBKLW7jMSDY6fLmA7U1XYITZBwZ5VRiy~Lc~NgtOFsMFP4MkHefGbYUIdXozLFaf~Ct3bbf~0d1uB40PaT3nQFPn7rxfkI9lLLb11W0ONt0LrkXSXoV~a9jxJ5L1bXSMnpjO25ZZ9ZlgDO5EOsT3POvH-Rdrty7vlfsD4YCAnSyUvhdTtokb63niTE37Hu0xbJNvavzzikbXJk9n4c94V2eB7gcBKQ6lPjSs-IyGcL3MIgpKluxHCoCHr-0zgV-0l-D0nQ1f9iJP~BFmse6aZCgpz1xjZjrxjYmp3XMgIIZdh7gS0WwNPntPtUn~ppzaMhw__" 
+                    alt="Nettoyage Terrasse Avant/Après"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Nettoyage Terrasse</h3>
+                  <p className="text-gray-600">Haute pression et traitement anti-mousse pour une terrasse comme neuve</p>
+                </div>
+              </div>
+
+              {/* Image 5: Equipment Showcase */}
+              <div className="group bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-5">
+                <div className="relative h-64 overflow-hidden bg-gray-200">
+                  <img 
+                    src="https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/VtLg6mjDUBCGbEryjVuH9i-img-5_1770118183000_na1fn_ZXF1aXBtZW50LXNob3djYXNl.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L1Z0TGc2bWpEVUJDR2JFcnlqVnVIOWktaW1nLTVfMTc3MDExODE4MzAwMF9uYTFmbl9aWEYxYVhCdFpXNTBMWE5vYjNkallYTmwuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=T35kxcZZx-E41eneLy~kdYaxSjHXhn8M00~74ahwgJPJubXO5GTWyglJSpbOfLnxPQd3pLU4-azb7UjpH1Ka0TcJYwZnu7RyDJZhRzyPCtFtXc8b6WsJXMYukxMdb61eFXU4zbh3BHvomqJjo0N73sXr0YX4-7KkGPpDSoBaJcGXvUS6T9riwbRaqGZcvggkuTQCxCTP9Vrn8~qZFPqOTVMZJlSigX2cvcPBrj9tVkLbNFvJjac6WvF-ky-pu1j0G2c81KzhkvQK0xNEUlmdhoXwmsxwAB3Nl~oU2oBCsoOP7yuoOJlE22OXxO9SEwQ6ojw9oPIJ0YBzqDn-KaJ1wQ__" 
+                    alt="Équipements Professionnels ProClean Empire"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Équipements Professionnels</h3>
+                  <p className="text-gray-600">Technologie de pointe pour des résultats garantis</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Testimonial Carousel Section */}
         <TestimonialCarousel />
 
