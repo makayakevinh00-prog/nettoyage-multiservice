@@ -659,3 +659,13 @@
 - [ ] Intégrer Breadcrumb sur pages de services
 - [ ] Ajouter AnimatedSection aux sections principales
 - [ ] Tester dark mode et animations sur mobile et desktop
+
+
+## Automatisation et Intégrations - Phase Finale
+
+- [ ] Configurer la mise à jour automatique du site chaque fin de semaine
+- [ ] Synchroniser les réservations avec HubSpot automatiquement
+- [ ] Ajouter les coordonnées des clients dans HubSpot
+- [ ] Créer un webhook pour capturer les réservations
+- [ ] Tester la synchronisation HubSpot
+- [ ] Tester le déploiement automatique
