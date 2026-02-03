@@ -8,30 +8,22 @@ export default function ServiceTerrasse() {
   const { user } = useAuth();
   const [, setLocation] = useLocation();
 
-  const packages = [
+  const services = [
     {
-      name: "Terrasse Petite (< 20m²)",
-      price: "80€",
-      description: "Nettoyage complet",
-      features: ["Nettoyage haute pression", "Démoussage", "Finition"],
+      name: "Nettoyage Haute Pression",
+      description: "Élimination complète de la saleté et des dépôts",
     },
     {
-      name: "Terrasse Moyenne (20-40m²)",
-      price: "140€",
-      description: "Nettoyage professionnel",
-      features: ["Nettoyage haute pression", "Démoussage", "Traitement anti-mousse"],
-    },
-    {
-      name: "Terrasse Grande (40-60m²)",
-      price: "200€",
-      description: "Service complet",
-      features: ["Nettoyage haute pression", "Démoussage", "Traitement protecteur", "Joints nettoyés"],
+      name: "Démoussage",
+      description: "Traitement spécifique pour éliminer la mousse",
     },
     {
       name: "Traitement Anti-Mousse",
-      price: "+30€",
-      description: "Protection longue durée",
-      features: ["Application protectrice", "Prévention de la mousse", "Durée 12 mois"],
+      description: "Protection durable contre la réapparition de la mousse",
+    },
+    {
+      name: "Nettoyage des Joints",
+      description: "Nettoyage profond des joints entre les dalles",
     },
   ];
 
@@ -109,37 +101,19 @@ export default function ServiceTerrasse() {
         </div>
       </section>
 
-      {/* Packages */}
+      {/* Services */}
       <section className="py-16">
-        <div className="container max-w-5xl">
-          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Nos Forfaits</h3>
+        <div className="container max-w-4xl">
+          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Nos Prestations</h3>
           <div className="grid md:grid-cols-2 gap-8">
-            {packages.map((pkg, idx) => (
-              <Card key={idx} className="hover:shadow-lg transition">
-                <CardHeader>
-                  <CardTitle className="text-xl">{pkg.name}</CardTitle>
-                  <CardDescription>{pkg.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-6">
-                    <div className="text-3xl font-bold text-blue-600 flex items-center gap-2">
-                      {pkg.price}
-                      <Euro size={24} />
-                    </div>
-                  </div>
-                  <ul className="space-y-2 mb-6">
-                    {pkg.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-gray-700">
-                        <CheckCircle2 size={16} className="text-green-600" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Réserver ce forfait
-                  </Button>
-                </CardContent>
-              </Card>
+            {services.map((service, idx) => (
+              <div key={idx} className="flex gap-4 p-6 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                <CheckCircle2 className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">{service.name}</h4>
+                  <p className="text-gray-700">{service.description}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>

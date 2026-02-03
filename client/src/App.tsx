@@ -27,6 +27,8 @@ import Reviews from "./pages/Reviews";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import ServiceAutomobile from "./pages/ServiceAutomobile";
+import ServiceTerrasse from "./pages/ServiceTerrasse";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -64,6 +66,8 @@ function Router() {
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/conditions-generales" component={TermsOfService} />
       <Route path="/cgv" component={TermsOfService} />
+      <Route path="/service-automobile" component={ServiceAutomobile} />
+      <Route path="/service-terrasse" component={ServiceTerrasse} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

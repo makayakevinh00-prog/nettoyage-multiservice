@@ -66,14 +66,14 @@ export default function Home() {
       title: "Automobile",
       description: "Intérieur et extérieur, lavage haute pression, lustrage.",
       image: "/service-automobile.jpg",
-      link: "/service/automobile",
+      link: "/service-automobile",
     },
     {
       icon: Waves,
       title: "Terrasse",
       description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
       image: "/hero-terrasse.jpg",
-      link: "/service/terrasse",
+      link: "/service-terrasse",
     },
     {
       icon: Sofa,
