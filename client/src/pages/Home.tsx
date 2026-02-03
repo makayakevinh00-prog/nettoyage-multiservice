@@ -145,7 +145,7 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section - Style La Providence */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
           {/* Background Image */}
           <div 
             className="absolute inset-0 bg-cover bg-center"

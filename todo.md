@@ -628,3 +628,9 @@
 - [x] Créer une page dédiée "Avis clients" avec redirection Trustpilot (FAIT)
 - [x] Ajouter le widget Trustpilot avec les avis en temps réel (FAIT)
 - [x] Corriger le problème de confusion avec les autres ProClean (FAIT)
+
+## BUG: Trop d'espace blanc en haut de la page
+
+- [x] Réduire le padding/margin en haut de la page (min-h-[calc(100vh-64px)])
+- [x] Vérifier que le header n'a pas de margin excessive
+- [ ] Tester le rendu sur mobile et desktop
