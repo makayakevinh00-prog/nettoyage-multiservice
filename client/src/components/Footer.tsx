@@ -39,9 +39,10 @@ export default function Footer() {
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-orange-500 mt-1 flex-shrink-0" />
                   <div className="text-sm">
-                    <p className="font-semibold text-white">ProClean Empire SARL</p>
-                    <p className="text-gray-300">Île-de-France (75-95)</p>
-                    <p className="text-gray-400 text-xs mt-2">SIREN: 123 456 789</p>
+                    <p className="font-semibold text-white">MAKAYA MATEVE KEVINH</p>
+                    <p className="text-gray-300">Pro Clean Empire - Micro-entreprise</p>
+                    <p className="text-gray-400 text-xs mt-2">SIREN: 891 283 954</p>
+                    <p className="text-gray-400 text-xs">3 Rue Stéphane Charbonnier, 95300 Pontoise</p>
                   </div>
                 </div>
               </div>

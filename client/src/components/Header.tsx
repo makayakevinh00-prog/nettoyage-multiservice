@@ -71,7 +71,7 @@ export default function Header() {
 
               {/* Desktop Submenu */}
               {item.submenu && (
-                <div className="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                <div className="absolute left-0 mt-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 pointer-events-none group-hover:pointer-events-auto">
                   {item.submenu.map((subitem, idx) => (
                     <a
                       key={`submenu-${idx}`}
@@ -94,17 +94,17 @@ export default function Header() {
 
         {/* Social Media Links */}
         <div className="hidden md:flex items-center gap-3 mr-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors" title="Facebook">
+          <a href="https://www.facebook.com/people/Proclean-Empire/61575993812750/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 transition-colors" title="Facebook">
             <span className="text-lg">f</span>
           </a>
-          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-700 transition-colors" title="TikTok">
+          <a href="https://www.tiktok.com/@procleanempire" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-700 transition-colors" title="TikTok">
             <span className="text-lg">♪</span>
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700 transition-colors" title="Instagram">
+          <a href="https://www.instagram.com/proclean_empire/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700 transition-colors" title="Instagram">
             <span className="text-lg">📷</span>
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-800 transition-colors" title="LinkedIn">
-            <span className="text-lg">in</span>
+          <a href="https://fr.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="text-yellow-500 hover:text-yellow-600 transition-colors" title="Trustpilot">
+            <span className="text-lg">⭐</span>
           </a>
         </div>
 
