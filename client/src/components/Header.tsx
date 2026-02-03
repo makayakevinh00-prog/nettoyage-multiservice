@@ -11,11 +11,11 @@ export default function Header() {
   const services = [
     { name: "Automobile", href: "/service-automobile", service: "automobile" },
     { name: "Terrasse", href: "/service-terrasse", service: "terrasse" },
-    { name: "Tapis & Canapés", href: "/#booking", service: "tapis" },
-    { name: "Balcon", href: "/#booking", service: "balcon" },
-    { name: "Façade", href: "/#booking", service: "facade" },
+    { name: "Tapis & Canapés", href: "/service-tapis", service: "tapis" },
+    { name: "Balcon", href: "/service-balcon", service: "balcon" },
+    { name: "Façade", href: "/service-facade", service: "facade" },
     { name: "Panneaux Solaires", href: "/#booking", service: "panneaux" },
-    { name: "Jardinage", href: "/#booking", service: "jardinage" },
+    { name: "Jardinage", href: "/service-jardinage", service: "jardinage" },
   ];
 
   const navItems = [
@@ -77,6 +77,10 @@ export default function Header() {
                       key={`submenu-${idx}`}
                       href={subitem.href}
                       onClick={(e) => {
+                        if (subitem.href.startsWith('/service-')) {
+                          // Laisser la navigation normale pour les pages de services
+                          return;
+                        }
                         e.preventDefault();
                         localStorage.setItem('prefilledService', (subitem as any).service || '');
                         window.location.href = '/#booking';
