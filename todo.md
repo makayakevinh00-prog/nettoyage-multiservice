@@ -405,6 +405,8 @@
 - [x] Nettoyer les fichiers problématiques
 - [x] Corriger les erreurs TypeScript
 - [x] Compiler le projet en production avec succès
+- [x] Créer les tests vitest pour les slots
+- [x] Publier le site en production
 
 ## Autocomplétion d'Adresses - API adresse.data.gouv.fr
 
