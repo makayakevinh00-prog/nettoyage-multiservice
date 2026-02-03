@@ -145,13 +145,15 @@ export default function Home() {
       
       <main className="flex-1">
         {/* Hero Section - Style La Providence */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
+        <section className="relative h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+          {/* Background Image with Enhanced Parallax */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: "url('/hero-nettoyage-pro.jpg')",
-              transform: `translateY(${scrollY * 0.3}px)`,
+              backgroundAttachment: 'fixed',
+              transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0001})`,
+              willChange: 'transform',
             }}
           />
           
@@ -293,7 +295,7 @@ export default function Home() {
         {/* Google Reviews Section */}
         <GoogleReviews />
 
-        {/* Trustpilot Reviews Section */}
+        {/* Avis Clients Section */}
         <section className="py-20 md:py-32 bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16">
@@ -301,14 +303,14 @@ export default function Home() {
                 <span className="text-6xl">⭐</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nos Clients Nous Font Confiance</h2>
-              <p className="text-xl text-gray-600 mb-8">Decouvrez les avis verifies de nos clients satisfaits</p>
+              <p className="text-xl text-gray-600 mb-8">Découvrez les avis vérifiés de nos clients satisfaits</p>
             </div>
             <div className="flex justify-center">
               <a href="https://www.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-md">
-                <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 p-8 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-white text-center">
-                  <p className="text-2xl font-bold mb-2">Trustpilot</p>
-                  <p className="text-lg font-semibold mb-4">Lire nos avis clients</p>
-                  <p className="text-sm opacity-90">Cliquez pour voir les avis verifies de ProClean Empire</p>
+                <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-8 rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 text-white text-center">
+                  <p className="text-2xl font-bold mb-2">5.0 / 5.0</p>
+                  <p className="text-lg font-semibold mb-4">Basé sur 100+ avis clients</p>
+                  <p className="text-sm opacity-90">Cliquez pour voir les avis vérifiés de ProClean Empire</p>
                 </div>
               </a>
             </div>

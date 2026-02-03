@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import DateTimePicker from "@/components/DateTimePicker";
-import FrenchAddressAutocomplete from "@/components/FrenchAddressAutocomplete";
+import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
@@ -298,7 +298,7 @@ export default function AdvancedBookingForm({
             <h3 className="text-lg font-semibold mb-4">Lieu d'Intervention</h3>
             <div>
               <Label htmlFor="booking-address">Adresse *</Label>
-              <FrenchAddressAutocomplete
+              <AddressAutocomplete
                 value={bookingData.address}
                 onChange={(address) => setBookingData({ ...bookingData, address })}
               />

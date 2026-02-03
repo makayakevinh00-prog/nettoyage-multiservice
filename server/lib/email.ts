@@ -50,7 +50,7 @@ export async function sendEmail(options: SendEmailOptions) {
 }
 
 function getEmailSignature() {
-  const logoUrl = 'https://procleanempire.com/proclean-logo.png';
+  const logoUrl = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ywQuoKWvwIKXjcMG.png';
   return `
     <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #1e40af; text-align: center;">
       <img src="${logoUrl}" alt="ProClean Empire" style="max-width: 150px; height: auto; margin-bottom: 15px;">

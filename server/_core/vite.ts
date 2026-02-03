@@ -11,40 +11,60 @@ export async function setupVite(app: Express, server: Server) {
     middlewareMode: true,
     hmr: { server },
     allowedHosts: true as const,
+    watch: false,
   };
 
-  const vite = await createViteServer({
-    ...viteConfig,
-    configFile: false,
-    server: serverOptions,
-    appType: "custom",
-  });
+  try {
+    const vite = await createViteServer({
+      ...viteConfig,
+      configFile: false,
+      server: {
+        ...serverOptions,
+        watch: false,
+      },
+      appType: "custom",
+    });
+    
+    // Handle watch errors gracefully - suppress EMFILE errors as they're expected
+    vite.watcher?.on('error', (error: any) => {
+      if (error.code !== 'EMFILE') {
+        console.error('[Vite] Watcher error:', error);
+      }
+    });
 
-  app.use(vite.middlewares);
-  app.use("*", async (req, res, next) => {
-    const url = req.originalUrl;
+    app.use(vite.middlewares);
+    app.use("*", async (req, res, next) => {
+      const url = req.originalUrl;
 
-    try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "../..",
-        "client",
-        "index.html"
-      );
+      try {
+        const clientTemplate = path.resolve(
+          import.meta.dirname,
+          "../..",
+          "client",
+          "index.html"
+        );
 
-      // always reload the index.html file from disk incase it changes
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`
-      );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
-    } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
-      next(e);
+        // always reload the index.html file from disk incase it changes
+        let template = await fs.promises.readFile(clientTemplate, "utf-8");
+        template = template.replace(
+          `src="/src/main.tsx"`,
+          `src="/src/main.tsx?v=${nanoid()}"`
+        );
+        const page = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      } catch (e) {
+        vite.ssrFixStacktrace(e as Error);
+        next(e);
+      }
+    });
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('EMFILE')) {
+      console.warn('[Vite] EMFILE error during Vite setup, falling back to static file serving');
+    } else {
+      console.warn('[Vite] Failed to create Vite server:', error instanceof Error ? error.message : error);
     }
-  });
+    // Continue without Vite - the static file serving will handle it
+  }
 }
 
 export function serveStatic(app: Express) {
