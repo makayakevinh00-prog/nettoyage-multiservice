@@ -406,6 +406,7 @@
 
 - [x] Uploader le logo ProClean Empire sur S3
 - [x] Remplacer le checkmark par le logo dans l'email de confirmation
+- [x] Remplacer l'URL du logo dans la signature d'email
 - [x] Garder le reste du design de l'email
 
 ## Prise de Rendez-vous dans le Chat IA
@@ -417,6 +418,14 @@
 - [x] Identifier le problème EMFILE (trop de fichiers ouverts)
 - [x] Nettoyer les processus
 - [x] Build du projet réussi
+
+## Autocomplétion d'Adresses - Correction Complète
+
+- [x] Créer nouveau composant AddressAutocomplete amélioré
+- [x] Ajouter route serveur /api/address-search pour éviter CORS
+- [x] Intégrer dans le formulaire de réservation
+- [x] Tester et valider le build
+- [x] Build production réussi
 - [ ] Implémenter les étapes de sélection (service, date, heure, adresse)
 - [ ] Ajouter des boutons interactifs pour les choix multiples
 - [ ] Valider les données avant confirmation
