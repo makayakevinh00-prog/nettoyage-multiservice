@@ -29,6 +29,7 @@ import ServiceTapis from "./pages/ServiceTapis";
 import ServiceBalcon from "./pages/ServiceBalcon";
 import ServiceFacade from "./pages/ServiceFacade";
 import ServiceJardinage from "./pages/ServiceJardinage";
+import Admin from "./pages/Admin";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -69,6 +70,7 @@ function Router() {
       <Route path="/service-balcon" component={ServiceBalcon} />
       <Route path="/service-facade" component={ServiceFacade} />
       <Route path="/service-jardinage" component={ServiceJardinage} />
+      <Route path={"/admin"} component={Admin} />
       <Route path={"/#booking"} component={Home} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

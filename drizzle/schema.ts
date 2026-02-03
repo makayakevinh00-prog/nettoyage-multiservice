@@ -135,3 +135,19 @@ export const slotCapacity = mysqlTable("slotCapacity", {
 
 export type SlotCapacity = typeof slotCapacity.$inferSelect;
 export type InsertSlotCapacity = typeof slotCapacity.$inferInsert;
+
+// Table pour les logs des intégrations
+export const integrationLogs = mysqlTable("integrationLogs", {
+  id: int("id").autoincrement().primaryKey(),
+  bookingId: int("bookingId").notNull(),
+  service: varchar("service", { length: 50 }).notNull(),
+  status: mysqlEnum("status", ["success", "error", "pending", "retry"]).notNull(),
+  message: text("message"),
+  details: text("details"),
+  externalId: varchar("externalId", { length: 255 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type IntegrationLog = typeof integrationLogs.$inferSelect;
+export type InsertIntegrationLog = typeof integrationLogs.$inferInsert;

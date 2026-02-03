@@ -10,6 +10,7 @@ import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleC
 import { syncBookingToHubSpot } from "./lib/hubspot";
 import { generateChatResponse } from "./lib/chatAI";
 import { isSlotAvailable, getAvailableSlots } from "./lib/slots";
+import { getAllBookings, getBookingById, getIntegrationLogsByBookingId, getAllIntegrationLogs, getBookingStats, getIntegrationStats } from "./db-admin";
 import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking } from "./db";
 import { storagePut } from "./storage";
 import Stripe from "stripe";
@@ -624,6 +625,84 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         } catch (error) {
           console.error('[Slots] Failed to get available slots:', error);
           return { slots: [] };
+        }
+      }),
+  }),
+
+  adminBookings: router({
+    getBookings: adminProcedure
+      .input(z.object({
+        limit: z.number().default(20),
+        offset: z.number().default(0),
+        status: z.string().optional(),
+        service: z.string().optional(),
+        dateFrom: z.string().optional(),
+        dateTo: z.string().optional(),
+      }))
+      .query(async ({ input }) => {
+        try {
+          return await getAllBookings(input.limit, input.offset, {
+            status: input.status,
+            service: input.service,
+            dateFrom: input.dateFrom,
+            dateTo: input.dateTo,
+          });
+        } catch (error) {
+          console.error('[Admin] Failed to get bookings:', error);
+          return { bookings: [], total: 0 };
+        }
+      }),
+
+    getBookingDetail: adminProcedure
+      .input(z.object({
+        bookingId: z.number(),
+      }))
+      .query(async ({ input }) => {
+        try {
+          const booking = await getBookingById(input.bookingId);
+          const logs = await getIntegrationLogsByBookingId(input.bookingId);
+          return { booking, logs };
+        } catch (error) {
+          console.error('[Admin] Failed to get booking detail:', error);
+          return { booking: null, logs: [] };
+        }
+      }),
+
+    getIntegrationLogs: adminProcedure
+      .input(z.object({
+        limit: z.number().default(50),
+        offset: z.number().default(0),
+        service: z.string().optional(),
+        status: z.string().optional(),
+        dateFrom: z.string().optional(),
+        dateTo: z.string().optional(),
+      }))
+      .query(async ({ input }) => {
+        try {
+          return await getAllIntegrationLogs(input.limit, input.offset, {
+            service: input.service,
+            status: input.status,
+            dateFrom: input.dateFrom,
+            dateTo: input.dateTo,
+          });
+        } catch (error) {
+          console.error('[Admin] Failed to get integration logs:', error);
+          return { logs: [], total: 0 };
+        }
+      }),
+
+    getStats: adminProcedure
+      .query(async () => {
+        try {
+          const bookingStats = await getBookingStats();
+          const integrationStats = await getIntegrationStats();
+          return { bookingStats, integrationStats };
+        } catch (error) {
+          console.error('[Admin] Failed to get stats:', error);
+          return {
+            bookingStats: { total: 0, pending: 0, confirmed: 0, completed: 0, cancelled: 0, totalRevenue: 0 },
+            integrationStats: { total: 0, success: 0, error: 0, pending: 0, retry: 0, byService: {} },
+          };
         }
       }),
   }),

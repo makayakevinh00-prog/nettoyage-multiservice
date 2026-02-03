@@ -683,3 +683,14 @@
 - [ ] Créer un webhook pour capturer les réservations
 - [ ] Tester la synchronisation HubSpot
 - [ ] Tester le déploiement automatique
+
+
+## Page d'Administration - Gestion des Réservations et Logs
+
+- [x] Créer la table de logs pour les intégrations
+- [x] Implémenter les procédures tRPC pour l'administration
+- [x] Créer la page d'administration avec tableau de bord
+- [x] Ajouter les filtres et pagination
+- [x] Ajouter les statistiques détaillées
+- [x] Corriger les erreurs de compilation
+- [x] Tester la compilation en production
