@@ -115,7 +115,8 @@ export function generateBookingConfirmationEmail(data: {
 <body>
   <div class="container">
     <div class="header">
-      <h1>✅ Réservation Confirmée</h1>
+      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ywQuoKWvwIKXjcMG.png" alt="ProClean Empire" style="max-width: 150px; height: auto; margin-bottom: 20px;">
+      <h1 style="margin-top: 0;">Réservation Confirmée</h1>
       <p>ProClean Empire - Nettoyage Premium</p>
     </div>
     <div class="content">

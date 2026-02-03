@@ -393,18 +393,30 @@
 - [x] Utiliser FrenchAddressAutocomplete avec API adresse.data.gouv.fr
 - [x] Implémenter les suggestions d'adresses en temps réel
 - [x] Valider les adresses sélectionnées
-- [ ] Tester l'autocomplétion avec différentes adresses
+- [x] Tester l'autocomplétion avec différentes adresses
 
 ## BUG: Page Mes Reservations ne montre aucune reservation
 
 - [x] Vérifier pourquoi les réservations ne s'affichent pas
 - [x] Corriger la requête tRPC pour récupérer les réservations
 - [x] Vérifier que les réservations sont bien enregistrées en base (ajout de facade et panneaux-solaires à l'enum)
-- [ ] Tester l'affichage des réservations après correction
+- [x] Tester l'affichage des réservations après correction
+
+## Mise à jour des Emails de Confirmation
+
+- [x] Uploader le logo ProClean Empire sur S3
+- [x] Remplacer le checkmark par le logo dans l'email de confirmation
+- [x] Garder le reste du design de l'email
 
 ## Prise de Rendez-vous dans le Chat IA
 
 - [ ] Créer un système de réservation conversationnel dans le chat IA
+
+## Correction Erreur EMFILE
+
+- [x] Identifier le problème EMFILE (trop de fichiers ouverts)
+- [x] Nettoyer les processus
+- [x] Build du projet réussi
 - [ ] Implémenter les étapes de sélection (service, date, heure, adresse)
 - [ ] Ajouter des boutons interactifs pour les choix multiples
 - [ ] Valider les données avant confirmation
