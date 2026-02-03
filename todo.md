@@ -642,3 +642,14 @@
 - [x] Créer composant Breadcrumb pour navigation améliorée
 - [ ] Intégrer Breadcrumb sur les pages de services
 - [ ] Tester les performances et le rendu
+
+## Améliorations UX - Phase 3
+
+- [x] Créer hook useInView pour animations scroll
+- [x] Créer composant AnimatedSection avec fade-in/slide-up
+- [x] Implémenter dark mode toggle dans le header
+- [x] Activer switchable sur ThemeProvider
+- [x] Ajouter classes dark au Header
+- [ ] Intégrer Breadcrumb sur pages de services
+- [ ] Ajouter AnimatedSection aux sections principales
+- [ ] Tester dark mode et animations sur mobile et desktop
