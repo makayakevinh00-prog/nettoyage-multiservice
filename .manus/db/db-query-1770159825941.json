@@ -1,0 +1,17 @@
+{
+  "query": "SELECT id, openId, name, email, role FROM users LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 46CLeJ8QCDbQeYz.root --database mWQNegFX82Wq6P3J8ww4RP --execute SELECT id, openId, name, email, role FROM users LIMIT 10;",
+  "rows": [
+    {
+      "id": "1",
+      "openId": "Y8UEK6wzfoBQXUF4t9rudC",
+      "name": "kevinh makaya",
+      "email": "makayakevinh00@gmail.com",
+      "role": "admin"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\topenId\tname\temail\trole\n1\tY8UEK6wzfoBQXUF4t9rudC\tkevinh makaya\tmakayakevinh00@gmail.com\tadmin\n",
+  "stderr": "",
+  "execution_time_ms": 391
+}

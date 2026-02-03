@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "wouter";
 import DarkModeToggle from "./DarkModeToggle";
-import { APP_LOGO } from "@/const";
+import { APP_LOGO, getLoginUrl } from "@/const";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  const { user, logout, isAuthenticated } = useAuth();
 
   const services = [
     { name: "Automobile", href: "/service-automobile", service: "automobile" },
@@ -104,14 +106,33 @@ export default function Header() {
         {/* CTA Button */}
         <div className="hidden lg:flex items-center gap-2">
           <DarkModeToggle />
-          <Button variant="outline" className="text-sm" asChild>
-            <Link href="/my-bookings">Mes réservations</Link>
-          </Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>
-            <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
-              Réserver
-            </a>
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Button variant="outline" className="text-sm" asChild>
+                <Link href="/my-bookings">Mes réservations</Link>
+              </Button>
+              {user?.role === 'admin' && (
+                <Button variant="outline" className="text-sm" asChild>
+                  <Link href="/admin">Admin</Link>
+                </Button>
+              )}
+              <Button variant="outline" className="text-sm" onClick={() => logout()}>
+                <LogOut size={16} className="mr-1" />
+                Déconnexion
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" className="text-sm" asChild>
+                <a href={getLoginUrl()}>Connexion</a>
+              </Button>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>
+                <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
+                  Réserver
+                </a>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -168,6 +189,35 @@ export default function Header() {
                 )}
               </div>
             ))}
+            <div className="border-t pt-4 mt-4 space-y-2">
+              {isAuthenticated ? (
+                <>
+                  <Link href="/my-bookings" className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors" onClick={() => setIsMenuOpen(false)}>
+                    Mes reservations
+                  </Link>
+                  {user?.role === 'admin' && (
+                    <Link href="/admin" className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors" onClick={() => setIsMenuOpen(false)}>
+                      Admin
+                    </Link>
+                  )}
+                  <Button variant="outline" className="w-full text-sm" onClick={() => { logout(); setIsMenuOpen(false); }}>
+                    <LogOut size={16} className="mr-1" />
+                    Deconnexion
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="outline" className="w-full text-sm" asChild>
+                    <a href={getLoginUrl()}>Connexion</a>
+                  </Button>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>
+                    <a href="#booking" onClick={(e) => { scrollToSection(e, "#booking"); setIsMenuOpen(false); }}>
+                      Reserver
+                    </a>
+                  </Button>
+                </>
+              )}
+            </div>
           </nav>
         </div>
       )}
