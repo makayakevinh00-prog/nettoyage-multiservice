@@ -634,3 +634,11 @@
 - [x] Réduire le padding/margin en haut de la page (min-h-[calc(100vh-64px)])
 - [x] Vérifier que le header n'a pas de margin excessive
 - [ ] Tester le rendu sur mobile et desktop
+
+## Améliorations UX - Phase 2
+
+- [x] Ajouter animation parallax au scroll sur l'image Hero (enhanced parallax avec scale)
+- [x] Créer composant OptimizedImage pour compression et formats WebP
+- [x] Créer composant Breadcrumb pour navigation améliorée
+- [ ] Intégrer Breadcrumb sur les pages de services
+- [ ] Tester les performances et le rendu

@@ -146,12 +146,14 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section - Style La Providence */}
         <section className="relative min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
+          {/* Background Image with Enhanced Parallax */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: "url('/hero-nettoyage-pro.jpg')",
-              transform: `translateY(${scrollY * 0.3}px)`,
+              backgroundAttachment: 'fixed',
+              transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0001})`,
+              willChange: 'transform',
             }}
           />
           
