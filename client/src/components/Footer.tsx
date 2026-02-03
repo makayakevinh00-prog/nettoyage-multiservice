@@ -104,9 +104,9 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a href="mailto:serviceclient@procleanempire.com" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/contact" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -163,9 +163,9 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-orange-500">Légal</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/mentions-legales" className="text-gray-300 hover:text-orange-400 transition-colors">
                     Mentions légales
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a href="#" className="text-gray-300 hover:text-orange-400 transition-colors">

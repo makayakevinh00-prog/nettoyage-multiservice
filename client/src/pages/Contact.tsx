@@ -1,7 +1,12 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import AdvancedContactForm from "@/components/AdvancedContactForm";
+import { useEffect } from "react";
 
 export default function Contact() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50">
       {/* Header */}
