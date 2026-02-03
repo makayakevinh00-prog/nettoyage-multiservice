@@ -388,10 +388,9 @@
 - [x] Tester tout le site complètement
 
 
-## Autocomplétion Google Maps pour Adresse
+## Autocomplétion d'Adresses - API adresse.data.gouv.fr
 
-- [x] Ajouter la clé API Google Maps (VITE_GOOGLE_MAPS_API_KEY)
-- [x] Ajouter autocomplétion Google Maps au champ Adresse du formulaire de réservation
+- [x] Utiliser FrenchAddressAutocomplete avec API adresse.data.gouv.fr
 - [x] Implémenter les suggestions d'adresses en temps réel
 - [x] Valider les adresses sélectionnées
 - [ ] Tester l'autocomplétion avec différentes adresses
