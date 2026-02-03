@@ -9,12 +9,6 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import { initializeReminderScheduler } from "../lib/reminderScheduler";
 import { startFeedbackScheduler } from "../lib/feedbackScheduler";
-import fetch from 'node-fetch';
-
-// Polyfill fetch si nécessaire
-if (!globalThis.fetch) {
-  globalThis.fetch = fetch as any;
-}
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -81,31 +75,6 @@ async function startServer() {
     }
   });
   
-  // Route d'autocomplétion d'adresses
-  app.get('/api/address-search', async (req, res) => {
-    try {
-      const query = req.query.q as string;
-      if (!query || query.length < 3) {
-        return res.json({ features: [] });
-      }
-
-      const response = await fetch(
-        `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`,
-        { headers: { 'Accept': 'application/json' } }
-      );
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error('Address search error:', error);
-      res.status(500).json({ features: [], error: 'Address search failed' });
-    }
-  });
-
   // tRPC API
   app.use(
     "/api/trpc",

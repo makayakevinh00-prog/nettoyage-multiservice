@@ -360,12 +360,6 @@
 - [x] Tester le système complet
 
 
-## BUG CRITIQUE - Erreur Trustpilot
-
-- [x] Corriger l'erreur `window.Trustpilot.loadDynamicScript is not a function`
-- [x] Remplacer par une section d'avis clients personnalisée
-- [x] Tester la page sans erreur
-
 ## Amélioration Ergonomie et Performance (Style Apple)
 
 - [x] Créer une navigation améliorée avec sous-menus intelligents
@@ -412,7 +406,6 @@
 
 - [x] Uploader le logo ProClean Empire sur S3
 - [x] Remplacer le checkmark par le logo dans l'email de confirmation
-- [x] Remplacer l'URL du logo dans la signature d'email
 - [x] Garder le reste du design de l'email
 
 ## Prise de Rendez-vous dans le Chat IA
@@ -424,14 +417,6 @@
 - [x] Identifier le problème EMFILE (trop de fichiers ouverts)
 - [x] Nettoyer les processus
 - [x] Build du projet réussi
-
-## Autocomplétion d'Adresses - Correction Complète
-
-- [x] Créer nouveau composant AddressAutocomplete amélioré
-- [x] Ajouter route serveur /api/address-search pour éviter CORS
-- [x] Intégrer dans le formulaire de réservation
-- [x] Tester et valider le build
-- [x] Build production réussi
 - [ ] Implémenter les étapes de sélection (service, date, heure, adresse)
 - [ ] Ajouter des boutons interactifs pour les choix multiples
 - [ ] Valider les données avant confirmation
@@ -634,28 +619,3 @@
 - [x] Créer une page dédiée "Avis clients" avec redirection Trustpilot (FAIT)
 - [x] Ajouter le widget Trustpilot avec les avis en temps réel (FAIT)
 - [x] Corriger le problème de confusion avec les autres ProClean (FAIT)
-
-## BUG: Trop d'espace blanc en haut de la page
-
-- [x] Réduire le padding/margin en haut de la page (min-h-[calc(100vh-64px)])
-- [x] Vérifier que le header n'a pas de margin excessive
-- [ ] Tester le rendu sur mobile et desktop
-
-## Améliorations UX - Phase 2
-
-- [x] Ajouter animation parallax au scroll sur l'image Hero (enhanced parallax avec scale)
-- [x] Créer composant OptimizedImage pour compression et formats WebP
-- [x] Créer composant Breadcrumb pour navigation améliorée
-- [ ] Intégrer Breadcrumb sur les pages de services
-- [ ] Tester les performances et le rendu
-
-## Améliorations UX - Phase 3
-
-- [x] Créer hook useInView pour animations scroll
-- [x] Créer composant AnimatedSection avec fade-in/slide-up
-- [x] Implémenter dark mode toggle dans le header
-- [x] Activer switchable sur ThemeProvider
-- [x] Ajouter classes dark au Header
-- [ ] Intégrer Breadcrumb sur pages de services
-- [ ] Ajouter AnimatedSection aux sections principales
-- [ ] Tester dark mode et animations sur mobile et desktop
