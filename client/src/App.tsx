@@ -15,7 +15,6 @@ import Blog from "./pages/Blog";
 import FAQ from "./pages/FAQ";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
-import ServiceTapis from "./pages/ServiceTapis";
 import ServiceAuto from "./pages/ServiceAuto";
 import ServiceExterieur from "./pages/ServiceExterieur";
 import BlogArticles from "./pages/BlogArticles";
@@ -54,7 +53,6 @@ function Router() {
       <Route path={"/faq"} component={FAQ} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
-      <Route path={"/service/tapis"} component={ServiceTapis} />
       <Route path={"/service/auto"} component={ServiceAuto} />
       <Route path={"/service/exterieur"} component={ServiceExterieur} />
       <Route path={"/blog"} component={BlogArticles} />
@@ -76,7 +74,8 @@ function Router() {
       <Route path="/service-balcon" component={ServiceBalcon} />
       <Route path="/service-facade" component={ServiceFacade} />
       <Route path="/service-jardinage" component={ServiceJardinage} />
-      <Route path="/404" component={NotFound} />
+      <Route path={"/#booking"} component={Home} />
+      <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
