@@ -1,0 +1,29 @@
+{
+  "query": "SELECT * FROM bookings WHERE name LIKE '%Kasongo%' OR email LIKE '%kasongo%' ORDER BY createdAt DESC LIMIT 10;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 46CLeJ8QCDbQeYz.root --database mWQNegFX82Wq6P3J8ww4RP --execute SELECT * FROM bookings WHERE name LIKE '%Kasongo%' OR email LIKE '%kasongo%' ORDER BY createdAt DESC LIMIT 10;",
+  "rows": [
+    {
+      "id": "120001",
+      "name": "Angèle Kasongo",
+      "email": "angele.kasongo@gmail.com",
+      "phone": "0768888775",
+      "service": "automobile",
+      "date": "2026-02-05",
+      "time": "08:00",
+      "address": "118 Boulevard Victor Hugo 93400 Saint-Ouen-sur-Seine",
+      "message": "Nettoyage complet Range Rover",
+      "stripePaymentIntentId": "NULL",
+      "paymentStatus": "pending",
+      "createdAt": "2026-02-03 21:53:40",
+      "updatedAt": "2026-02-03 21:53:40",
+      "serviceOptions": "NULL",
+      "totalPrice": "0",
+      "userId": "NULL",
+      "status": "pending"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\tphone\tservice\tdate\ttime\taddress\tmessage\tstripePaymentIntentId\tpaymentStatus\tcreatedAt\tupdatedAt\tserviceOptions\ttotalPrice\tuserId\tstatus\n120001\tAngèle Kasongo\tangele.kasongo@gmail.com\t0768888775\tautomobile\t2026-02-05\t08:00\t118 Boulevard Victor Hugo 93400 Saint-Ouen-sur-Seine\tNettoyage complet Range Rover\tNULL\tpending\t2026-02-03 21:53:40\t2026-02-03 21:53:40\tNULL\t0\tNULL\tpending\n",
+  "stderr": "",
+  "execution_time_ms": 667
+}
