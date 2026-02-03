@@ -20,7 +20,7 @@ export async function setupVite(app: Express, server: Server) {
       configFile: false,
       server: {
         ...serverOptions,
-        watch: false,
+        watch: null,
       },
       appType: "custom",
     });

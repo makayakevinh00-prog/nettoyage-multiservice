@@ -394,6 +394,18 @@
 - [x] Tester tout le site complètement
 
 
+## Gestion des Créneaux Horaires - Vérification Disponibilités
+
+- [x] Vérifier que les RDV sont bien enregistrés en base de données
+- [x] Créer une procédure tRPC pour vérifier les créneaux disponibles
+- [x] Implémenter la logique de vérification des doublons (plage de 4h)
+- [x] Ajouter l'affichage des créneaux disponibles dans le formulaire
+- [x] Réactiver Google Calendar et HubSpot avec meilleure gestion d'erreur
+- [x] Tester le système complet de gestion des créneaux
+- [x] Nettoyer les fichiers problématiques
+- [x] Corriger les erreurs TypeScript
+- [x] Compiler le projet en production avec succès
+
 ## Autocomplétion d'Adresses - API adresse.data.gouv.fr
 
 - [x] Utiliser FrenchAddressAutocomplete avec API adresse.data.gouv.fr

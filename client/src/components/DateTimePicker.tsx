@@ -2,7 +2,7 @@ import { useState } from "react";
 import { format, addDays, isBefore, startOfDay } from "date-fns";
 import { fr } from "date-fns/locale";
 import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
+import "react-day-picker/style.css";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar, Clock } from "lucide-react";

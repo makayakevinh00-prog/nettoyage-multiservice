@@ -11,13 +11,10 @@ import Footer from "./components/Footer";
 import ServiceDetail from "./pages/ServiceDetail";
 import Professionnels from "./pages/Professionnels";
 import Professionals from "./pages/Professionals";
-import Blog from "./pages/Blog";
-import FAQ from "./pages/FAQ";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import Contact from "./pages/Contact";
 import ServiceAuto from "./pages/ServiceAuto";
 import ServiceExterieur from "./pages/ServiceExterieur";
-import BlogArticles from "./pages/BlogArticles";
 import ThankYou from "./pages/ThankYou";
 import WhatsAppButton from "./components/WhatsAppButton";
 import MyBookings from "./pages/MyBookings";
@@ -50,12 +47,10 @@ function Router() {
       <Route path={"/service/panneaux"} component={ServiceDetail} />
       <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
-      <Route path={"/faq"} component={FAQ} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/service/auto"} component={ServiceAuto} />
       <Route path={"/service/exterieur"} component={ServiceExterieur} />
-      <Route path={"/blog"} component={BlogArticles} />
       <Route path={"/merci"} component={ThankYou} />
       <Route path={"/booking-confirmation"} component={BookingConfirmation} />
       <Route path={"/my-bookings"} component={MyBookings} />
