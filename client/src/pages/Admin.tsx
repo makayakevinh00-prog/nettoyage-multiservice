@@ -55,8 +55,8 @@ export default function Admin() {
   }
 
   // Récupérer les données
-  const { data: statsData } = trpc.admin.getStats.useQuery();
-  const { data: bookingsData } = trpc.admin.getBookings.useQuery({
+  const { data: statsData } = trpc.adminBookings.getStats.useQuery();
+  const { data: bookingsData } = trpc.adminBookings.getBookings.useQuery({
     limit: 20,
     offset: bookingPage * 20,
     status: filters.status || undefined,
@@ -64,11 +64,11 @@ export default function Admin() {
     dateFrom: filters.dateFrom || undefined,
     dateTo: filters.dateTo || undefined,
   });
-  const { data: logsData } = trpc.admin.getIntegrationLogs.useQuery({
+  const { data: logsData } = trpc.adminBookings.getIntegrationLogs.useQuery({
     limit: 50,
     offset: logsPage * 50,
   });
-  const { data: bookingDetail } = trpc.admin.getBookingDetail.useQuery(
+  const { data: bookingDetail } = trpc.adminBookings.getBookingDetail.useQuery(
     { bookingId: selectedBookingId! },
     { enabled: selectedBookingId !== null }
   );
