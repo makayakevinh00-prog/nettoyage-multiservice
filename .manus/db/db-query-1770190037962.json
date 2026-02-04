@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO bookings (name, email, phone, service, date, time, address, message, status, createdAt, updatedAt) VALUES ('Test Client', 'serviceclient@procleanempire.com', '+33612345678', 'automobile', '2026-02-05', '10:00', '123 Rue de Test, Paris', 'Réservation de test', 'confirmed', NOW(), NOW());",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 46CLeJ8QCDbQeYz.root --database mWQNegFX82Wq6P3J8ww4RP --execute INSERT INTO bookings (name, email, phone, service, date, time, address, message, status, createdAt, updatedAt) VALUES ('Test Client', 'serviceclient@procleanempire.com', '+33612345678', 'automobile', '2026-02-05', '10:00', '123 Rue de Test, Paris', 'Réservation de test', 'confirmed', NOW(), NOW());",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 360
+}
