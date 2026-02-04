@@ -450,9 +450,9 @@ Veuillez contacter le client pour confirmer le rendez-vous.
       }))
       .query(async ({ input, ctx }) => {
         try {
-          // Si l'utilisateur est connecté, utiliser son ID
-          if (ctx.user && ctx.user.id) {
-            return await getBookingsByUserId(ctx.user.id);
+          // Si l'utilisateur est connecté, utiliser son email
+          if (ctx.user && ctx.user.email) {
+            return await getBookingsByEmail(ctx.user.email);
           }
           // Sinon, utiliser l'email fourni
           if (input.email) {

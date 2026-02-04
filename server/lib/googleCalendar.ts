@@ -78,7 +78,7 @@ export async function addEventToGoogleCalendar(booking: BookingEvent): Promise<b
  */
 export async function addEventToOwnerCalendar(booking: BookingEvent): Promise<boolean> {
   try {
-    const ownerCalendarId = process.env.GOOGLE_CALENDAR_ID || 'serviceclient@procleanempire.com';
+    const ownerCalendarId = 'serviceclient@procleanempire.com';
     
     console.log(`[GoogleCalendar] Ajout d'événement au calendrier du propriétaire: ${ownerCalendarId}`);
     
