@@ -1,42 +1,33 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { Loader2 } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Input } from '@/components/ui/input';
 
 interface AddressSuggestion {
   id: string;
   label: string;
-  score: number;
+  score?: number;
 }
 
 interface AddressAutocompleteProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  required?: boolean;
-  id?: string;
-  className?: string;
 }
 
 export default function AddressAutocomplete({
   value,
   onChange,
-  placeholder = "Entrez votre adresse...",
-  required,
-  id,
-  className
+  placeholder = "Entrez votre adresse",
 }: AddressAutocompleteProps) {
   const [suggestions, setSuggestions] = useState<AddressSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const debounceTimer = useRef<NodeJS.Timeout | undefined>(undefined);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Fermer les suggestions quand on clique en dehors
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         setShowSuggestions(false);
       }
     };
@@ -57,7 +48,6 @@ export default function AddressAutocomplete({
     setError(null);
 
     try {
-      // Essayer d'abord avec le proxy serveur (plus fiable)
       const response = await fetch(`/api/address-search?q=${encodeURIComponent(query)}`, {
         method: 'GET',
         headers: {
@@ -66,7 +56,10 @@ export default function AddressAutocomplete({
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        // Si l'API échoue, on affiche juste un message d'aide
+        setSuggestions([]);
+        setShowSuggestions(false);
+        return;
       }
 
       const data = await response.json();
@@ -87,33 +80,25 @@ export default function AddressAutocomplete({
         setSuggestions([]);
       }
     } catch (err) {
-      console.error("Erreur lors de la recherche d'adresse:", err);
-      setError("Impossible de charger les suggestions");
+      // Silencieusement échouer - l'utilisateur peut toujours entrer son adresse manuellement
       setSuggestions([]);
-      
-      // Fallback : afficher un message d'aide
-      setShowSuggestions(true);
+      setShowSuggestions(false);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
-  // Debounce la recherche
-  useEffect(() => {
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    onChange(newValue);
+    
+    if (newValue.length >= 3) {
+      fetchSuggestions(newValue);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
     }
-
-    debounceTimer.current = setTimeout(() => {
-      fetchSuggestions(value);
-    }, 300);
-
-    return () => {
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
-      }
-    };
-  }, [value, fetchSuggestions]);
+  };
 
   const handleSelectSuggestion = (suggestion: AddressSuggestion) => {
     onChange(suggestion.label);
@@ -121,71 +106,48 @@ export default function AddressAutocomplete({
     setSuggestions([]);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-    setShowSuggestions(true);
-  };
-
   return (
-    <div ref={wrapperRef} className="relative w-full">
-      <div className="relative">
-        <Input
-          id={id}
-          type="text"
-          value={value}
-          onChange={handleInputChange}
-          onFocus={() => value.length >= 3 && setShowSuggestions(true)}
-          placeholder={placeholder}
-          required={required}
-          className={cn("pr-10", className)}
-          autoComplete="off"
-        />
-        
-        {isLoading && (
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <Loader2 className="h-5 w-5 text-blue-500 animate-spin" />
-          </div>
-        )}
-      </div>
+    <div ref={containerRef} className="relative w-full">
+      <Input
+        type="text"
+        value={value}
+        onChange={handleInputChange}
+        placeholder={placeholder}
+        className="w-full"
+        autoComplete="off"
+      />
 
-      {/* Dropdown des suggestions */}
       {showSuggestions && (
-        <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto">
-          {error ? (
-            <div className="px-4 py-3 text-sm text-gray-600">
-              <p className="mb-2">{error}</p>
-              <p className="text-xs text-gray-500">Vous pouvez continuer à saisir votre adresse manuellement</p>
+        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+          {isLoading && (
+            <div className="px-4 py-2 text-sm text-gray-500">
+              Chargement...
             </div>
-          ) : suggestions.length > 0 ? (
-            suggestions.map((suggestion) => (
-              <button
-                key={suggestion.id}
-                type="button"
-                onClick={() => handleSelectSuggestion(suggestion)}
-                className={cn(
-                  "w-full px-4 py-3 text-left hover:bg-blue-50 transition-colors",
-                  "border-b border-gray-100 last:border-b-0",
-                  "focus:bg-blue-50 focus:outline-none"
-                )}
-              >
-                <div className="text-sm font-medium text-gray-900">
+          )}
+
+          {error && (
+            <div className="px-4 py-2 text-sm text-red-500">
+              {error}
+            </div>
+          )}
+
+          {suggestions.length > 0 && (
+            <ul className="max-h-48 overflow-y-auto">
+              {suggestions.map((suggestion) => (
+                <li
+                  key={suggestion.id}
+                  onClick={() => handleSelectSuggestion(suggestion)}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                >
                   {suggestion.label}
-                </div>
-                {suggestion.score && (
-                  <div className="text-xs text-gray-500 mt-1">
-                    Pertinence: {Math.round(suggestion.score * 100)}%
-                  </div>
-                )}
-              </button>
-            ))
-          ) : value.length >= 3 ? (
-            <div className="px-4 py-3 text-sm text-gray-600">
-              <p>Aucune adresse trouvée pour "{value}"</p>
-              <p className="text-xs text-gray-500 mt-2">Vérifiez l'orthographe ou continuez la saisie</p>
-            </div>
-          ) : (
-            <div className="px-4 py-3 text-sm text-gray-500">
-              <p>Tapez au moins 3 caractères pour voir les suggestions</p>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {!isLoading && !error && suggestions.length === 0 && value.length >= 3 && (
+            <div className="px-4 py-2 text-sm text-gray-500">
+              Aucune suggestion trouvée. Vous pouvez entrer votre adresse manuellement.
             </div>
           )}
         </div>
