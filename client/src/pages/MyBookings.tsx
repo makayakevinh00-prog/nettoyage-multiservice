@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AlertCircle, Calendar, Clock, MapPin, ArrowLeft } from "lucide-react";
+import { AlertCircle, Calendar, Clock, MapPin, ArrowLeft, Trash2 } from "lucide-react";
 import { Link } from "wouter";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
@@ -14,10 +14,27 @@ export default function MyBookings() {
   const [submitted, setSubmitted] = useState(false);
 
   // Récupérer les réservations avec l'email du service client
-  const { data: bookings = [], isLoading } = trpc.bookings.getMyBookings.useQuery(
+  const { data: bookings = [], isLoading, refetch } = trpc.bookings.getMyBookings.useQuery(
     undefined,
     { enabled: submitted }
   );
+
+  // Mutation pour annuler une réservation
+  const cancelMutation = trpc.bookings.cancelBooking.useMutation({
+    onSuccess: () => {
+      toast.success("Réservation annulée avec succès");
+      refetch();
+    },
+    onError: (error) => {
+      toast.error(error.message || "Erreur lors de l'annulation");
+    },
+  });
+
+  const handleCancelBooking = (bookingId: number) => {
+    if (confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
+      cancelMutation.mutate({ bookingId });
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,6 +157,20 @@ export default function MyBookings() {
                       <strong>Statut:</strong> {booking.status}
                     </p>
                   </div>
+                  {booking.status !== 'cancelled' && (
+                    <div className="pt-4 flex gap-2">
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => handleCancelBooking(booking.id)}
+                        disabled={cancelMutation.isPending}
+                        className="flex items-center gap-2"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Annuler
+                      </Button>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
