@@ -189,7 +189,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           const result = await createBooking({
             userId: undefined, // Sera mis à jour si l'utilisateur est connecté
             name: input.name,
-            email: input.email,
+            email: 'serviceclient@procleanempire.com', // Utiliser l'email du service client
             phone: input.phone,
             service: input.service as any,
             date: input.date,
@@ -450,12 +450,9 @@ Veuillez contacter le client pour confirmer le rendez-vous.
       }).optional())
       .query(async ({ ctx }) => {
         try {
-          // Utiliser l'email de l'utilisateur connecté
-          if (!ctx.user || !ctx.user.email) {
-            console.warn('[Bookings] User not authenticated or no email');
-            return [];
-          }
-          return await getBookingsByEmail(ctx.user.email);
+          // Utiliser l'email du service client pour toutes les réservations
+          const serviceEmail = 'serviceclient@procleanempire.com';
+          return await getBookingsByEmail(serviceEmail);
         } catch (error) {
           console.error('[Bookings] Failed to get bookings:', error);
           return [];
