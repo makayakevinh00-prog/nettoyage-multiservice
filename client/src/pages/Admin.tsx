@@ -9,6 +9,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
+import { Link } from "wouter";
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -90,10 +91,17 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* En-tête */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Tableau de Bord Administration</h1>
-          <p className="text-gray-600">Gérez les réservations et consultez les logs des intégrations</p>
+        {/* En-tête avec bouton retour */}
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Tableau de Bord Administration</h1>
+            <p className="text-gray-600">Gérez les réservations et consultez les logs des intégrations</p>
+          </div>
+          <Link href="/">
+            <Button variant="outline" className="whitespace-nowrap">
+              ← Retour à l'accueil
+            </Button>
+          </Link>
         </div>
 
         {/* Statistiques */}
@@ -190,12 +198,12 @@ export default function Admin() {
                       <tbody>
                         {bookings.map((booking: any) => (
                           <tr key={booking.id} className="border-b hover:bg-gray-50">
-                            <td className="py-2 px-4">{booking.clientName}</td>
+                            <td className="py-2 px-4">{booking.name || booking.clientName || 'N/A'}</td>
                             <td className="py-2 px-4">{booking.service}</td>
                             <td className="py-2 px-4">
                               {format(new Date(booking.date), "dd/MM/yyyy HH:mm", { locale: fr })}
                             </td>
-                            <td className="py-2 px-4">{booking.totalPrice?.toFixed(2) || "N/A"}€</td>
+                            <td className="py-2 px-4">{((booking.totalPrice || 0) / 100).toFixed(2)}€</td>
                             <td className="py-2 px-4">
                               <Badge className={STATUS_COLORS[booking.status] || "bg-gray-100"}>
                                 {booking.status}

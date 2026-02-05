@@ -218,7 +218,7 @@ export async function getBookingStats() {
       confirmed: allBookings.filter((b) => b.status === "confirmed").length,
       completed: allBookings.filter((b) => b.status === "completed").length,
       cancelled: allBookings.filter((b) => b.status === "cancelled").length,
-      totalRevenue: allBookings.reduce((sum, b) => sum + (b.totalPrice || 0), 0),
+      totalRevenue: allBookings.reduce((sum, b) => sum + (b.totalPrice || 0), 0) / 100, // Convertir centimes en euros
     };
 
     return stats;
