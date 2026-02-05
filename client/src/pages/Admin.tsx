@@ -1,12 +1,11 @@
-import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { AlertCircle, CheckCircle2, Clock, XCircle } from "lucide-react";
 import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
@@ -19,36 +18,13 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 export default function Admin() {
+  // Tous les hooks DOIVENT être appelés au niveau du composant
   const { user, loading } = useAuth();
   const [bookingPage, setBookingPage] = useState(0);
   const [logsPage, setLogsPage] = useState(0);
   const utils = trpc.useUtils();
 
-  // Vérifier que l'utilisateur est admin
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Chargement...</p>
-      </div>
-    );
-  }
-
-  if (user?.role !== "admin") {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="text-red-600">Accès Refusé</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Vous n'avez pas les permissions pour accéder à cette page.</p>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  // Récupérer les données
+  // Récupérer les données (hooks toujours appelés)
   const { data: statsData, isLoading: statsLoading } = trpc.adminBookings.getStats.useQuery();
   const { data: bookingsData, isLoading: bookingsLoading } = trpc.adminBookings.getBookings.useQuery({
     limit: 20,
@@ -78,6 +54,31 @@ export default function Admin() {
     });
   };
 
+  // Vérifications conditionnelles APRÈS les hooks
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Chargement...</p>
+      </div>
+    );
+  }
+
+  if (user?.role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-red-600">Accès Refusé</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>Vous n'avez pas les permissions pour accéder à cette page.</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Préparer les données
   const stats = statsData || {
     bookingStats: { total: 0, pending: 0, confirmed: 0, completed: 0, cancelled: 0, totalRevenue: 0 },
     integrationStats: { total: 0, success: 0, error: 0, pending: 0, retry: 0, byService: {} },
@@ -147,7 +148,9 @@ export default function Admin() {
               <CardTitle className="text-sm font-medium text-gray-600">Revenu Total</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{(stats.bookingStats.totalRevenue / 100).toFixed(2)}€</div>
+              <div className="text-2xl font-bold text-green-700">
+                {stats.bookingStats.totalRevenue.toFixed(2)}€
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -161,7 +164,7 @@ export default function Admin() {
           </TabsList>
 
           {/* Onglet Réservations */}
-          <TabsContent value="bookings" className="space-y-4">
+          <TabsContent value="bookings" className="mt-4">
             <Card>
               <CardHeader>
                 <CardTitle>Réservations Récentes</CardTitle>
@@ -170,64 +173,45 @@ export default function Admin() {
                 {bookingsLoading ? (
                   <p>Chargement...</p>
                 ) : bookings.length === 0 ? (
-                  <p className="text-gray-500">Aucune réservation</p>
+                  <p className="text-gray-500">Aucune réservation trouvée</p>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b">
-                          <th className="text-left py-2 px-2">Client</th>
-                          <th className="text-left py-2 px-2">Service</th>
-                          <th className="text-left py-2 px-2">Date</th>
-                          <th className="text-left py-2 px-2">Revenu</th>
-                          <th className="text-left py-2 px-2">Statut</th>
-                          <th className="text-left py-2 px-2">Actions</th>
+                          <th className="text-left py-2 px-4">Client</th>
+                          <th className="text-left py-2 px-4">Service</th>
+                          <th className="text-left py-2 px-4">Date</th>
+                          <th className="text-left py-2 px-4">Prix</th>
+                          <th className="text-left py-2 px-4">Statut</th>
+                          <th className="text-left py-2 px-4">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                         {bookings.map((booking: any) => (
                           <tr key={booking.id} className="border-b hover:bg-gray-50">
-                            <td className="py-2 px-2">{booking.name}</td>
-                            <td className="py-2 px-2">{booking.service}</td>
-                            <td className="py-2 px-2">{booking.date}</td>
-                            <td className="py-2 px-2 font-semibold">{(booking.totalPrice / 100).toFixed(2)}€</td>
-                            <td className="py-2 px-2">
+                            <td className="py-2 px-4">{booking.clientName}</td>
+                            <td className="py-2 px-4">{booking.service}</td>
+                            <td className="py-2 px-4">
+                              {format(new Date(booking.date), "dd/MM/yyyy HH:mm", { locale: fr })}
+                            </td>
+                            <td className="py-2 px-4">{booking.totalPrice?.toFixed(2) || "N/A"}€</td>
+                            <td className="py-2 px-4">
                               <Badge className={STATUS_COLORS[booking.status] || "bg-gray-100"}>
                                 {booking.status}
                               </Badge>
                             </td>
-                            <td className="py-2 px-2 space-x-1">
-                              {booking.status === "pending" && (
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  onClick={() => handleStatusUpdate(booking.id, "confirmed")}
-                                  disabled={updateStatusMutation.isPending}
-                                >
-                                  Accepter
-                                </Button>
-                              )}
-                              {booking.status === "confirmed" && (
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  onClick={() => handleStatusUpdate(booking.id, "completed")}
-                                  disabled={updateStatusMutation.isPending}
-                                >
-                                  Terminer
-                                </Button>
-                              )}
-                              {booking.status !== "cancelled" && booking.status !== "completed" && (
-                                <Button
-                                  size="sm"
-                                  variant="outline"
-                                  className="text-red-600"
-                                  onClick={() => handleStatusUpdate(booking.id, "cancelled")}
-                                  disabled={updateStatusMutation.isPending}
-                                >
-                                  Annuler
-                                </Button>
-                              )}
+                            <td className="py-2 px-4">
+                              <select
+                                value={booking.status}
+                                onChange={(e) => handleStatusUpdate(booking.id, e.target.value)}
+                                className="text-xs border rounded px-2 py-1"
+                              >
+                                <option value="pending">En attente</option>
+                                <option value="confirmed">Confirmée</option>
+                                <option value="completed">Complétée</option>
+                                <option value="cancelled">Annulée</option>
+                              </select>
                             </td>
                           </tr>
                         ))}
@@ -235,21 +219,22 @@ export default function Admin() {
                     </table>
                   </div>
                 )}
-                <div className="flex justify-between mt-4">
-                  <Button onClick={() => setBookingPage(Math.max(0, bookingPage - 1))} disabled={bookingPage === 0}>
+                <div className="flex justify-between items-center mt-4">
+                  <Button
+                    onClick={() => setBookingPage(Math.max(0, bookingPage - 1))}
+                    disabled={bookingPage === 0}
+                  >
                     Précédent
                   </Button>
-                  <span className="text-sm text-gray-600">Page {bookingPage + 1}</span>
-                  <Button onClick={() => setBookingPage(bookingPage + 1)}>
-                    Suivant
-                  </Button>
+                  <span>Page {bookingPage + 1}</span>
+                  <Button onClick={() => setBookingPage(bookingPage + 1)}>Suivant</Button>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
           {/* Onglet Logs */}
-          <TabsContent value="logs" className="space-y-4">
+          <TabsContent value="logs" className="mt-4">
             <Card>
               <CardHeader>
                 <CardTitle>Logs Intégrations</CardTitle>
@@ -258,62 +243,80 @@ export default function Admin() {
                 {logsLoading ? (
                   <p>Chargement...</p>
                 ) : logs.length === 0 ? (
-                  <p className="text-gray-500">Aucun log</p>
+                  <p className="text-gray-500">Aucun log trouvé</p>
                 ) : (
-                  <div className="space-y-2">
+                  <div className="space-y-4">
                     {logs.map((log: any) => (
-                      <div key={log.id} className="border rounded p-3 flex items-start gap-3">
-                        {log.status === "success" && <CheckCircle2 className="w-5 h-5 text-green-600 mt-0.5" />}
-                        {log.status === "error" && <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />}
-                        {log.status === "pending" && <Clock className="w-5 h-5 text-yellow-600 mt-0.5" />}
-                        <div className="flex-1">
-                          <p className="font-medium">{log.service}</p>
-                          <p className="text-sm text-gray-600">{log.message}</p>
-                          <p className="text-xs text-gray-400">{format(new Date(log.createdAt), "PPpp", { locale: fr })}</p>
+                      <div key={log.id} className="border rounded p-4">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <p className="font-medium">{log.service}</p>
+                            <p className="text-sm text-gray-600">{log.eventType}</p>
+                            <p className="text-xs text-gray-500 mt-1">
+                              {format(new Date(log.createdAt), "dd/MM/yyyy HH:mm:ss", { locale: fr })}
+                            </p>
+                          </div>
+                          <Badge
+                            className={
+                              log.status === "success"
+                                ? "bg-green-100 text-green-800"
+                                : log.status === "error"
+                                ? "bg-red-100 text-red-800"
+                                : "bg-yellow-100 text-yellow-800"
+                            }
+                          >
+                            {log.status}
+                          </Badge>
                         </div>
+                        {log.message && <p className="text-sm mt-2 text-gray-700">{log.message}</p>}
                       </div>
                     ))}
                   </div>
                 )}
-                <div className="flex justify-between mt-4">
-                  <Button onClick={() => setLogsPage(Math.max(0, logsPage - 1))} disabled={logsPage === 0}>
+                <div className="flex justify-between items-center mt-4">
+                  <Button
+                    onClick={() => setLogsPage(Math.max(0, logsPage - 1))}
+                    disabled={logsPage === 0}
+                  >
                     Précédent
                   </Button>
-                  <span className="text-sm text-gray-600">Page {logsPage + 1}</span>
-                  <Button onClick={() => setLogsPage(logsPage + 1)}>
-                    Suivant
-                  </Button>
+                  <span>Page {logsPage + 1}</span>
+                  <Button onClick={() => setLogsPage(logsPage + 1)}>Suivant</Button>
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
 
           {/* Onglet Statistiques */}
-          <TabsContent value="stats" className="space-y-4">
+          <TabsContent value="stats" className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Statistiques Intégrations</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    <p className="text-sm"><span className="font-medium">Total:</span> {stats.integrationStats.total}</p>
-                    <p className="text-sm text-green-600"><span className="font-medium">Succès:</span> {stats.integrationStats.success}</p>
-                    <p className="text-sm text-red-600"><span className="font-medium">Erreurs:</span> {stats.integrationStats.error}</p>
-                    <p className="text-sm text-yellow-600"><span className="font-medium">En attente:</span> {stats.integrationStats.pending}</p>
-                  </div>
-                </CardContent>
-              </Card>
-
               <Card>
                 <CardHeader>
                   <CardTitle>Statistiques Réservations</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    <p className="text-sm"><span className="font-medium">Total:</span> {stats.bookingStats.total}</p>
-                    <p className="text-sm"><span className="font-medium">Taux de succès:</span> {stats.bookingStats.total > 0 ? Math.round((stats.bookingStats.completed / stats.bookingStats.total) * 100) : 0}%</p>
-                    <p className="text-sm"><span className="font-medium">Revenu moyen:</span> {stats.bookingStats.total > 0 ? ((stats.bookingStats.totalRevenue / 100) / stats.bookingStats.total).toFixed(2) : 0}€</p>
+                    <p>Total: {stats.bookingStats.total}</p>
+                    <p>En attente: {stats.bookingStats.pending}</p>
+                    <p>Confirmées: {stats.bookingStats.confirmed}</p>
+                    <p>Complétées: {stats.bookingStats.completed}</p>
+                    <p>Annulées: {stats.bookingStats.cancelled}</p>
+                    <p className="font-bold mt-4">Revenu: {stats.bookingStats.totalRevenue.toFixed(2)}€</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Statistiques Intégrations</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p>Total: {stats.integrationStats.total}</p>
+                    <p className="text-green-600">Succès: {stats.integrationStats.success}</p>
+                    <p className="text-red-600">Erreurs: {stats.integrationStats.error}</p>
+                    <p className="text-yellow-600">En attente: {stats.integrationStats.pending}</p>
+                    <p className="text-blue-600">Retry: {stats.integrationStats.retry}</p>
                   </div>
                 </CardContent>
               </Card>
