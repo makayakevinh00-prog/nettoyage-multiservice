@@ -445,6 +445,9 @@ Veuillez contacter le client pour confirmer le rendez-vous.
 
   bookings: router({
     getMyBookings: protectedProcedure
+      .input(z.object({
+        email: z.string().optional(),
+      }).optional())
       .query(async ({ ctx }) => {
         try {
           // Utiliser l'email du service client pour les réservations
