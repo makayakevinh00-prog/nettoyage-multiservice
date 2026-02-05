@@ -450,9 +450,12 @@ Veuillez contacter le client pour confirmer le rendez-vous.
       }).optional())
       .query(async ({ ctx }) => {
         try {
-          // Utiliser l'email du service client pour les réservations
-          const serviceEmail = 'serviceclient@procleanempire.com';
-          return await getBookingsByEmail(serviceEmail);
+          // Utiliser l'email de l'utilisateur connecté
+          if (!ctx.user || !ctx.user.email) {
+            console.warn('[Bookings] User not authenticated or no email');
+            return [];
+          }
+          return await getBookingsByEmail(ctx.user.email);
         } catch (error) {
           console.error('[Bookings] Failed to get bookings:', error);
           return [];
