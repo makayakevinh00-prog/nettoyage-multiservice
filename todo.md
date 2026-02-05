@@ -408,6 +408,15 @@
 - [x] Créer les tests vitest pour les slots
 - [x] Publier le site en production
 
+## Améliorations Admin - Temps Réel et Revenus
+
+- [x] Mettre à jour le logo quand l'utilisateur se connecte
+- [x] Ajouter les prix/revenus aux réservations
+- [x] Ajouter les boutons d'action (accepter/terminer) avec mise à jour en temps réel
+- [x] Afficher le revenu total en fonction des demandes clients
+- [x] Implémenter les mutations tRPC pour accepter/terminer les réservations
+- [x] Tester le système complet en temps réel
+
 ## Autocomplétion d'Adresses - API adresse.data.gouv.fr
 
 - [x] Utiliser FrenchAddressAutocomplete avec API adresse.data.gouv.fr

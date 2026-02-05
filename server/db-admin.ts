@@ -236,6 +236,28 @@ export async function getBookingStats() {
 }
 
 /**
+ * Met à jour le statut d'une réservation
+ */
+export async function updateBookingStatus(bookingId: number, status: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Admin] Database not available");
+    return false;
+  }
+
+  try {
+    await db
+      .update(bookings)
+      .set({ status: status as any })
+      .where(eq(bookings.id, bookingId));
+    return true;
+  } catch (error) {
+    console.error("[Admin] Failed to update booking status:", error);
+    return false;
+  }
+}
+
+/**
  * Récupère les statistiques des intégrations
  */
 export async function getIntegrationStats() {

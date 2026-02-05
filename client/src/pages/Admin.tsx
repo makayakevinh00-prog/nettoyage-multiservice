@@ -8,6 +8,7 @@ import { AlertCircle, CheckCircle2, Clock, XCircle } from "lucide-react";
 import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { toast } from "sonner";
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -20,6 +21,7 @@ export default function Admin() {
   const { user, loading } = useAuth();
   const [bookingPage, setBookingPage] = useState(0);
   const [logsPage, setLogsPage] = useState(0);
+  const utils = trpc.useUtils();
 
   // Vérifier que l'utilisateur est admin
   if (loading) {
@@ -55,6 +57,25 @@ export default function Admin() {
     limit: 50,
     offset: logsPage * 50,
   });
+
+  // Mutation pour mettre à jour le statut
+  const updateStatusMutation = trpc.adminBookings.updateStatus.useMutation({
+    onSuccess: () => {
+      toast.success("Statut mis à jour");
+      utils.adminBookings.getStats.invalidate();
+      utils.adminBookings.getBookings.invalidate();
+    },
+    onError: (error) => {
+      toast.error("Erreur lors de la mise à jour");
+    },
+  });
+
+  const handleStatusUpdate = (bookingId: number, status: string) => {
+    updateStatusMutation.mutate({
+      bookingId,
+      status: status as any,
+    });
+  };
 
   const stats = statsData || {
     bookingStats: { total: 0, pending: 0, confirmed: 0, completed: 0, cancelled: 0, totalRevenue: 0 },
@@ -125,7 +146,7 @@ export default function Admin() {
               <CardTitle className="text-sm font-medium text-gray-600">Revenu Total</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.bookingStats.totalRevenue}€</div>
+              <div className="text-2xl font-bold">{(stats.bookingStats.totalRevenue / 100).toFixed(2)}€</div>
             </CardContent>
           </Card>
         </div>
@@ -157,7 +178,9 @@ export default function Admin() {
                           <th className="text-left py-2 px-2">Client</th>
                           <th className="text-left py-2 px-2">Service</th>
                           <th className="text-left py-2 px-2">Date</th>
+                          <th className="text-left py-2 px-2">Revenu</th>
                           <th className="text-left py-2 px-2">Statut</th>
+                          <th className="text-left py-2 px-2">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -166,10 +189,44 @@ export default function Admin() {
                             <td className="py-2 px-2">{booking.name}</td>
                             <td className="py-2 px-2">{booking.service}</td>
                             <td className="py-2 px-2">{booking.date}</td>
+                            <td className="py-2 px-2 font-semibold">{(booking.totalPrice / 100).toFixed(2)}€</td>
                             <td className="py-2 px-2">
                               <Badge className={STATUS_COLORS[booking.status] || "bg-gray-100"}>
                                 {booking.status}
                               </Badge>
+                            </td>
+                            <td className="py-2 px-2 space-x-1">
+                              {booking.status === "pending" && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleStatusUpdate(booking.id, "confirmed")}
+                                  disabled={updateStatusMutation.isPending}
+                                >
+                                  Accepter
+                                </Button>
+                              )}
+                              {booking.status === "confirmed" && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={() => handleStatusUpdate(booking.id, "completed")}
+                                  disabled={updateStatusMutation.isPending}
+                                >
+                                  Terminer
+                                </Button>
+                              )}
+                              {booking.status !== "cancelled" && booking.status !== "completed" && (
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  className="text-red-600"
+                                  onClick={() => handleStatusUpdate(booking.id, "cancelled")}
+                                  disabled={updateStatusMutation.isPending}
+                                >
+                                  Annuler
+                                </Button>
+                              )}
                             </td>
                           </tr>
                         ))}
@@ -255,7 +312,7 @@ export default function Admin() {
                   <div className="space-y-2">
                     <p className="text-sm"><span className="font-medium">Total:</span> {stats.bookingStats.total}</p>
                     <p className="text-sm"><span className="font-medium">Taux de succès:</span> {stats.bookingStats.total > 0 ? Math.round((stats.bookingStats.completed / stats.bookingStats.total) * 100) : 0}%</p>
-                    <p className="text-sm"><span className="font-medium">Revenu moyen:</span> {stats.bookingStats.total > 0 ? (stats.bookingStats.totalRevenue / stats.bookingStats.total).toFixed(2) : 0}€</p>
+                    <p className="text-sm"><span className="font-medium">Revenu moyen:</span> {stats.bookingStats.total > 0 ? ((stats.bookingStats.totalRevenue / 100) / stats.bookingStats.total).toFixed(2) : 0}€</p>
                   </div>
                 </CardContent>
               </Card>

@@ -10,8 +10,8 @@ import { addEventToGoogleCalendar, addEventToOwnerCalendar } from "./lib/googleC
 import { syncBookingToHubSpot } from "./lib/hubspot";
 import { generateChatResponse } from "./lib/chatAI";
 import { isSlotAvailable, getAvailableSlots } from "./lib/slots";
-import { getAllBookings, getBookingById, getIntegrationLogsByBookingId, getAllIntegrationLogs, getBookingStats, getIntegrationStats } from "./db-admin";
-import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking } from "./db";
+import { getAllBookings, getBookingById, getIntegrationLogsByBookingId, getAllIntegrationLogs, getBookingStats, getIntegrationStats, updateBookingStatus } from "./db-admin";
+import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking, getDb } from "./db";
 import { storagePut } from "./storage";
 import Stripe from "stripe";
 
@@ -703,6 +703,25 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             bookingStats: { total: 0, pending: 0, confirmed: 0, completed: 0, cancelled: 0, totalRevenue: 0 },
             integrationStats: { total: 0, success: 0, error: 0, pending: 0, retry: 0, byService: {} },
           };
+        }
+      }),
+
+    updateStatus: adminProcedure
+      .input(z.object({
+        bookingId: z.number(),
+        status: z.enum(["pending", "confirmed", "completed", "cancelled"]),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          const success = await updateBookingStatus(input.bookingId, input.status);
+          if (success) {
+            return { success: true };
+          } else {
+            throw new Error("Impossible de mettre a jour le statut");
+          }
+        } catch (error) {
+          console.error("[Admin] Failed to update booking status:", error);
+          throw new Error("Impossible de mettre a jour le statut");
         }
       }),
   }),
