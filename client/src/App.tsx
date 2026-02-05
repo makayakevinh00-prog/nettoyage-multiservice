@@ -30,6 +30,7 @@ import ServiceBalcon from "./pages/ServiceBalcon";
 import ServiceFacade from "./pages/ServiceFacade";
 import ServiceJardinage from "./pages/ServiceJardinage";
 import Admin from "./pages/Admin";
+import ClientDashboard from "./pages/ClientDashboard";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -71,6 +72,7 @@ function Router() {
       <Route path="/service-facade" component={ServiceFacade} />
       <Route path="/service-jardinage" component={ServiceJardinage} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/client-dashboard"} component={ClientDashboard} />
       <Route path={"/#booking"} component={Home} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
@@ -89,7 +91,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider
         defaultTheme="light"
-        switchable
+        // switchable
       >
         <TooltipProvider>
           <Toaster />

@@ -1,7 +1,7 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router, adminProcedure } from "./_core/trpc";
+import { publicProcedure, router, adminProcedure, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
 import { notifyOwner } from "./_core/notification";
 import { sendEmail, generateBookingConfirmationEmail } from "./lib/email";
@@ -444,19 +444,12 @@ Veuillez contacter le client pour confirmer le rendez-vous.
   }),
 
   bookings: router({
-    getMyBookings: publicProcedure
-      .input(z.object({
-        email: z.string().email().optional(),
-      }))
-      .query(async ({ input, ctx }) => {
+    getMyBookings: protectedProcedure
+      .query(async ({ ctx }) => {
         try {
-          // Si l'utilisateur est connecté, utiliser son email
+          // Utiliser l'email de l'utilisateur connecté
           if (ctx.user && ctx.user.email) {
             return await getBookingsByEmail(ctx.user.email);
-          }
-          // Sinon, utiliser l'email fourni
-          if (input.email) {
-            return await getBookingsByEmail(input.email);
           }
           return [];
         } catch (error) {

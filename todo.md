@@ -703,3 +703,32 @@
 - [x] Ajouter les statistiques détaillées
 - [x] Corriger les erreurs de compilation
 - [x] Tester la compilation en production
+
+
+## Dashboard Client - Gestion des Réservations
+
+- [ ] Créer la page dashboard client (/client-dashboard)
+- [ ] Afficher les réservations du client
+- [ ] Ajouter les boutons pour modifier les réservations
+- [ ] Ajouter les boutons pour annuler les réservations
+- [ ] Afficher l'historique des réservations
+- [ ] Tester le dashboard client
+
+## Intégration Stripe - Paiements en Ligne
+
+- [ ] Configurer les clés Stripe (test et production)
+- [ ] Créer les produits/prix dans Stripe
+- [ ] Ajouter les boutons de paiement aux réservations
+- [ ] Gérer les webhooks Stripe
+- [ ] Tester les paiements en mode test
+- [ ] Documenter le processus de paiement
+
+
+## Corrections Urgentes - Emails et Affichage
+
+- [x] Corriger l'envoi des emails de confirmation aux clients
+- [x] Corriger l'affichage des réservations dans "Mes réservations"
+- [x] Vérifier que les clients reçoivent les emails en temps réel
+- [x] Tester l'affichage des réservations pour les clients connectés
+- [x] Créer le dashboard client pour voir et gérer les réservations
+- [x] Changer getMyBookings en protectedProcedure
