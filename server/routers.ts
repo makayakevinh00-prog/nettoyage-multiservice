@@ -233,11 +233,17 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           ] : undefined;
 
           await sendEmail({
-            to: 'serviceclient@procleanempire.com',
+            to: input.email,
             subject: '✅ Confirmation de réservation - ProClean Empire',
             html: confirmationEmail.html,
             text: confirmationEmail.text,
             attachments,
+          });
+          
+          // Envoyer aussi une notification au propriétaire
+          await notifyOwner({
+            title: `Confirmation d'envoi - ${input.name}`,
+            content: `Confirmation de réservation envoyée à ${input.email}`,
           });
         } catch (emailError) {
           console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
