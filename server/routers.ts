@@ -119,7 +119,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         if (input.serviceOption) {
           const priceMatch = input.serviceOption.match(/^([\d.,]+)/);
           if (priceMatch) {
-            totalPrice = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
+            const priceInEuros = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
+            totalPrice = Math.round(priceInEuros * 100); // Convertir en centimes
             optionLabel = input.serviceOption;
           }
         }
