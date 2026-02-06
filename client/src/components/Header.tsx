@@ -41,12 +41,17 @@ export default function Header() {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 shadow-sm dark:bg-gray-900/95 dark:border-gray-800">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link 
           href="/" 
+          onClick={scrollToTop}
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity cursor-pointer flex-shrink-0"
         >
           <img src={APP_LOGO} alt="ProClean Empire" className="h-10 w-auto" />

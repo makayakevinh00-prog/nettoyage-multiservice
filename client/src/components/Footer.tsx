@@ -3,6 +3,10 @@ import { APP_LOGO } from "@/const";
 import { Link } from "wouter";
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="bg-slate-900 text-white">
       {/* Section avec Carte et Infos */}
@@ -90,22 +94,22 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-orange-500">Navigation</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Accueil
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#services" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/#services" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/professionnels" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/professionnels" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Professionnels
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/contact" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Contact
                   </Link>
                 </li>

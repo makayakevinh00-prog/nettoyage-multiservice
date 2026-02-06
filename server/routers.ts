@@ -451,11 +451,13 @@ Veuillez contacter le client pour confirmer le rendez-vous.
 
   bookings: router({
     getMyBookings: publicProcedure
-      .query(async ({ ctx }) => {
+      .input(z.object({
+        email: z.string().email().optional(),
+      }).optional())
+      .query(async ({ input }) => {
         try {
-          // Utiliser l'email du service client pour toutes les réservations
-          const serviceEmail = 'serviceclient@procleanempire.com';
-          return await getBookingsByEmail(serviceEmail);
+          const email = input?.email || 'serviceclient@procleanempire.com';
+          return await getBookingsByEmail(email);
         } catch (error) {
           console.error('[Bookings] Failed to get bookings:', error);
           return [];

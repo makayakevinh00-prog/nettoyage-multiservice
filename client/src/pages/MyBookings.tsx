@@ -13,10 +13,10 @@ export default function MyBookings() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  // Récupérer les réservations avec l'email du service client
+  // Récupérer les réservations avec l'email du client
   const { data: bookings = [], isLoading, refetch } = trpc.bookings.getMyBookings.useQuery(
-    undefined,
-    { enabled: submitted }
+    { email: submitted ? email : undefined },
+    { enabled: submitted && !!email }
   );
 
   // Mutation pour annuler une réservation
@@ -121,7 +121,7 @@ export default function MyBookings() {
           </Card>
         ) : (
           <div className="space-y-4">
-            {bookings.map((booking: any) => (
+            {bookings.filter((booking: any) => booking.email === email).map((booking: any) => (
               <Card key={booking.id}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
