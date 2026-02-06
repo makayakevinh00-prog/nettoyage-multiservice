@@ -1,6 +1,8 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import AdvancedContactForm from "@/components/AdvancedContactForm";
 import { useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Contact() {
   useEffect(() => {
@@ -9,6 +11,14 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-gray-50">
+      <div className="bg-white border-b px-4 py-3">
+        <div className="max-w-6xl mx-auto">
+          <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+            <ArrowLeft size={20} />
+            <span>Retour</span>
+          </Link>
+        </div>
+      </div>
       {/* Header */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">

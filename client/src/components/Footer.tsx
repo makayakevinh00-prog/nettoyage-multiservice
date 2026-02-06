@@ -168,17 +168,17 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-4 text-orange-500">Légal</h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/mentions-legales" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/mentions-legales" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Mentions légales
                   </Link>
                 </li>
                 <li>
-                  <Link href="/politique-confidentialite" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/politique-confidentialite" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Politique de confidentialité
                   </Link>
                 </li>
                 <li>
-                  <Link href="/conditions-generales" className="text-gray-300 hover:text-orange-400 transition-colors">
+                  <Link href="/conditions-generales" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
                     Conditions générales
                   </Link>
                 </li>
