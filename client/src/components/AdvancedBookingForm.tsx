@@ -117,7 +117,7 @@ export default function AdvancedBookingForm({
       return;
     }
 
-    if (totalPrice === 0 && bookingData.serviceOption !== "jardinage-custom") {
+    if (totalPrice === 0 && bookingData.serviceOption !== "jardinage-custom" && bookingData.serviceOption !== "autre-custom") {
       toast.error("Veuillez sélectionner une option valide");
       return;
     }
