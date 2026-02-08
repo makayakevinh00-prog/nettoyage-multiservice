@@ -233,8 +233,20 @@ export const SERVICES: Record<string, Service> = {
     id: "autre",
     name: "Autre Service",
     description: "Autre service de nettoyage non listé",
-    basePrice: 0,
+    basePrice: 50,
     options: [
+      {
+        id: "autre-basic",
+        label: "50€ - Nettoyage standard",
+        price: 50,
+        description: "Nettoyage de base, prix à ajuster selon le service",
+      },
+      {
+        id: "autre-premium",
+        label: "100€ - Nettoyage premium",
+        price: 100,
+        description: "Nettoyage complet, prix à ajuster selon le service",
+      },
       {
         id: "autre-custom",
         label: "Sur devis (nous contacter)",
@@ -242,7 +254,7 @@ export const SERVICES: Record<string, Service> = {
         description: "Décrivez votre besoin dans le message",
       },
     ],
-    requiresSelection: false,
+    requiresSelection: true,
   },
 };
 
