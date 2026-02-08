@@ -228,6 +228,22 @@ export const SERVICES: Record<string, Service> = {
     ],
     requiresSelection: true,
   },
+
+  autre: {
+    id: "autre",
+    name: "Autre Service",
+    description: "Autre service de nettoyage non listé",
+    basePrice: 0,
+    options: [
+      {
+        id: "autre-custom",
+        label: "Sur devis (nous contacter)",
+        price: 0,
+        description: "Décrivez votre besoin dans le message",
+      },
+    ],
+    requiresSelection: false,
+  },
 };
 
 // Promotions temporaires
