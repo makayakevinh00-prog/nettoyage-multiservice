@@ -1,7 +1,10 @@
 /**
  * Google Calendar Integration
- * Ajoute automatiquement les réservations au calendrier du propriétaire
+ * Ajoute automatiquement les réservations au calendrier du propriétaire et du client
  */
+
+import { google } from 'googleapis';
+import { JWT } from 'google-auth-library';
 
 interface BookingEvent {
   name: string;
@@ -26,8 +29,38 @@ function getServiceDescription(service: string): string {
     jardinage: 'Entretien Jardinage',
     facade: 'Nettoyage Façade',
     'panneaux-solaires': 'Nettoyage Panneaux Solaires',
+    autre: 'Autre Service',
+    poubelle: 'Nettoyage Poubelle',
+    toit: 'Nettoyage Toit',
   };
   return serviceMap[service] || service;
+}
+
+/**
+ * Initialise le client Google Calendar
+ */
+function getGoogleCalendarClient() {
+  try {
+    const credentials = process.env.GOOGLE_CALENDAR_CREDENTIALS;
+    
+    if (!credentials) {
+      console.warn('[GoogleCalendar] GOOGLE_CALENDAR_CREDENTIALS not configured');
+      return null;
+    }
+
+    const credentialsObj = JSON.parse(credentials);
+    
+    const auth = new JWT({
+      email: credentialsObj.client_email,
+      key: credentialsObj.private_key,
+      scopes: ['https://www.googleapis.com/auth/calendar'],
+    });
+
+    return google.calendar({ version: 'v3', auth });
+  } catch (error) {
+    console.error('[GoogleCalendar] Erreur lors de l\'initialisation du client Google Calendar:', error);
+    return null;
+  }
 }
 
 /**
@@ -41,6 +74,12 @@ export async function addEventToGoogleCalendar(booking: BookingEvent): Promise<b
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
     if (!calendarId) {
       console.warn('[GoogleCalendar] GOOGLE_CALENDAR_ID not configured, skipping client calendar event');
+      return false;
+    }
+
+    const calendar = getGoogleCalendarClient();
+    if (!calendar) {
+      console.warn('[GoogleCalendar] Impossible d\'initialiser le client Google Calendar');
       return false;
     }
 
@@ -61,11 +100,42 @@ export async function addEventToGoogleCalendar(booking: BookingEvent): Promise<b
     // Durée de 2 heures par défaut
     const endTime = new Date(startTime.getTime() + 2 * 60 * 60 * 1000);
 
+    const event = {
+      summary: `ProClean Empire - ${getServiceDescription(booking.service)}`,
+      description: `Client: ${booking.name}\nTéléphone: ${booking.phone}\nAdresse: ${booking.address}${booking.message ? `\n\nInformations complémentaires:\n${booking.message}` : ""}`,
+      location: booking.address,
+      start: {
+        dateTime: startTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      end: {
+        dateTime: endTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      attendees: [
+        {
+          email: booking.email,
+          displayName: booking.name,
+          responseStatus: 'needsAction',
+        },
+      ],
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: 'email', minutes: 24 * 60 }, // Rappel 24h avant
+          { method: 'popup', minutes: 30 }, // Rappel 30min avant
+        ],
+      },
+    };
+
     console.log(`[GoogleCalendar] Événement: ${booking.name} - ${getServiceDescription(booking.service)} - ${startTime.toISOString()}`);
 
-    // Pour maintenant, on simule l'ajout à Google Calendar
-    // Dans une vraie implémentation, utiliser googleapis library
-    console.log(`✅ [GoogleCalendar] Événement simulé pour le client: ${booking.email}`);
+    await calendar.events.insert({
+      calendarId,
+      requestBody: event,
+    });
+
+    console.log(`✅ [GoogleCalendar] Événement ajouté au calendrier du client: ${booking.email}`);
     return true;
   } catch (error) {
     console.error('[GoogleCalendar] Erreur lors de l\'ajout de l\'événement au calendrier client:', error);
@@ -82,6 +152,12 @@ export async function addEventToOwnerCalendar(booking: BookingEvent): Promise<bo
     
     console.log(`[GoogleCalendar] Ajout d'événement au calendrier du propriétaire: ${ownerCalendarId}`);
     
+    const calendar = getGoogleCalendarClient();
+    if (!calendar) {
+      console.warn('[GoogleCalendar] Impossible d\'initialiser le client Google Calendar pour le propriétaire');
+      return false;
+    }
+
     // Convertir la date et l'heure en format ISO
     const [year, month, day] = booking.date.split('-');
     const [hours, minutes] = booking.time.split(':');
@@ -97,7 +173,7 @@ export async function addEventToOwnerCalendar(booking: BookingEvent): Promise<bo
     // Durée de 2 heures par défaut
     const endTime = new Date(startTime.getTime() + 2 * 60 * 60 * 1000);
 
-    const eventDetails = {
+    const event = {
       summary: `[RESERVATION] ${getServiceDescription(booking.service)} - ${booking.name}`,
       description: `
 Client: ${booking.name}
@@ -108,16 +184,29 @@ Adresse: ${booking.address}
 ${booking.message ? `Notes: ${booking.message}` : ''}
       `.trim(),
       location: booking.address,
-      startTime: startTime.toISOString(),
-      endTime: endTime.toISOString(),
-      timeZone: 'Europe/Paris',
+      start: {
+        dateTime: startTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      end: {
+        dateTime: endTime.toISOString(),
+        timeZone: 'Europe/Paris',
+      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: 'email', minutes: 24 * 60 }, // Rappel 24h avant
+          { method: 'notification', minutes: 30 }, // Rappel 30min avant
+        ],
+      },
     };
 
-    console.log(`✅ [GoogleCalendar] Événement pour propriétaire: ${eventDetails.summary}`);
-    console.log(`   Détails: ${JSON.stringify(eventDetails)}`);
+    await calendar.events.insert({
+      calendarId: ownerCalendarId,
+      requestBody: event,
+    });
 
-    // Pour maintenant, on simule l'ajout au calendrier du propriétaire
-    // Dans une vraie implémentation, utiliser googleapis library avec credentials Service Account
+    console.log(`✅ [GoogleCalendar] Événement ajouté au calendrier du propriétaire: ${event.summary}`);
     return true;
   } catch (error) {
     console.error('[GoogleCalendar] Erreur lors de l\'ajout au calendrier du propriétaire:', error);
@@ -137,8 +226,14 @@ export async function testGoogleCalendarConnection(): Promise<boolean> {
     console.log(`  - GOOGLE_CALENDAR_ID: ${calendarId ? '✅ Configuré' : '❌ Non configuré'}`);
     console.log(`  - GOOGLE_CALENDAR_CREDENTIALS: ${credentials ? '✅ Configuré' : '❌ Non configuré'}`);
 
-    if (!calendarId) {
-      console.error('❌ GOOGLE_CALENDAR_ID not configured');
+    if (!calendarId || !credentials) {
+      console.error('❌ Configuration Google Calendar incomplète');
+      return false;
+    }
+
+    const calendar = getGoogleCalendarClient();
+    if (!calendar) {
+      console.error('❌ Impossible d\'initialiser le client Google Calendar');
       return false;
     }
 
