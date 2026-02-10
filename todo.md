@@ -753,4 +753,5 @@
 - [x] Remettre l'image du nettoyeur avec équipement en image hero principale
 - [x] Ajouter les images manquantes sur les pages de services (Piscine, Automobile, Terrasse, etc.)
 - [x] Optimiser la fluidité du site avec lazy loading
+- [x] Corriger l'image hero qui ne s'affichait pas
 - [ ] Publier le site via le bouton "Publish" dans le Management UI
