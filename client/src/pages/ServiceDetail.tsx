@@ -29,7 +29,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/KFMLwvbBzizgvNlN.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/GLthMgVOljyOhROV.jpg",
     packages: [
       { name: "Balcon standard (jusqu'à 15m²)", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec garde-corps (15-30m²)", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
@@ -83,7 +83,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/NkeiePPJrURGOWty.jpg",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
