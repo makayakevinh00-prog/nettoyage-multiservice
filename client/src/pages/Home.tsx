@@ -73,7 +73,7 @@ export default function Home() {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/KFMLwvbBzizgvNlN.jpg",
+      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/LvfBBZgsEv0kPummcdsdyT-img-1_1770741954000_na1fn_YmFsY29uLW5ldHRveWFnZQ.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L0x2ZkJCWmdzRXYwa1B1bW1jZHNkeVQtaW1nLTFfMTc3MDc0MTk1NDAwMF9uYTFmbl9ZbUZzWTI5dUxXNWxkSFJ2ZVdGblpRLmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=UWCtReM1JVkA9Lj-R4nTFCkD9Xokk~i~h22BH~GS7NjQO5oS2r3hjA3uCe~6Z57V2scyTX8Rbscv0vISekolMmdmuWl7kUFtxJPybTNVtLM1g~3nugmpyJrEBepwx2gwDTJ9mWVAO7FIGxzVqyhEPrMXBZWFqt50tHdbzDJiwnhBGzaYCQQDI6ayv4cbPoRgx13I10JCViVCW8pH~r3eiktmggYwofcMq7bZRRm0FibnmN66xmWswuSTMpFVTlh~LHpOLXmZ2vq-aHg74Zd2hsqZsizgydeQdfNv1mpkT6PzOMZe3JiHEEgmxc3QZpjTlj6js9Dja5Ll4Z48ORdhJQ__",
       link: "/service/balcon",
     },
     {

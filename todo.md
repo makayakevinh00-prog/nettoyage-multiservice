@@ -757,3 +757,9 @@
 - [ ] Publier le site via le bouton "Publish" dans le Management UI
 
 - [x] Remplacer l'image hero par commercial-cleaning.jpeg (nettoyeur professionnel avec machine)
+
+
+## Corrections Urgentes - Balcon et Adresse
+
+- [x] Remplacer l'image du Balcon (actuellement image de façade) par une vraie image de balcon
+- [x] Retirer l'adresse du site interne (serviceclient@procleanempire.com ou autre adresse visible) - LAISSÉ TEL QUEL PAR L'UTILISATEUR
