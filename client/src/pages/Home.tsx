@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg')",
+              backgroundImage: "url('/hero-cleaning.jpeg')",
               backgroundAttachment: 'fixed',
             }}
           />
