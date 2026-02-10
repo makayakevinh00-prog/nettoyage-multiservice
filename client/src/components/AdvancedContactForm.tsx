@@ -21,7 +21,6 @@ const services = [
   "Nettoyage Jardinage",
   "Nettoyage Façade",
   "Nettoyage Piscine",
-  "Nettoyage Panneaux Solaires",
   "Autre"
 ];
 

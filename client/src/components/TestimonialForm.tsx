@@ -108,7 +108,6 @@ export function TestimonialForm() {
             <option value="Nettoyage Tapis">Nettoyage Tapis</option>
             <option value="Nettoyage Balcon">Nettoyage Balcon</option>
             <option value="Nettoyage Façade">Nettoyage Façade</option>
-            <option value="Panneaux Solaires">Panneaux Solaires</option>
             <option value="Entretien Jardinage">Entretien Jardinage</option>
             <option value="Nettoyage Professionnel">Nettoyage Professionnel</option>
           </select>

@@ -17,7 +17,6 @@ export default function Header() {
     { name: "Tapis & Canapés", href: "/service-tapis", service: "tapis" },
     { name: "Balcon", href: "/service-balcon", service: "balcon" },
     { name: "Façade", href: "/service-facade", service: "facade" },
-    { name: "Panneaux Solaires", href: "/#booking", service: "panneaux" },
     { name: "Jardinage", href: "/service-jardinage", service: "jardinage" },
   ];
 

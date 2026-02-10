@@ -73,7 +73,7 @@ export default function Home() {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-vitres.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/KFMLwvbBzizgvNlN.jpg",
       link: "/service/balcon",
     },
     {
