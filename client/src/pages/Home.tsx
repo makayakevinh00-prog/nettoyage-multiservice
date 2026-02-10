@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 
 import { 
   Car,
@@ -10,7 +11,9 @@ import {
   Leaf,
   Sparkles,
   Shield,
-  Droplets
+  Droplets,
+  Clock3,
+  Calendar
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
@@ -136,8 +139,6 @@ export default function Home() {
             style={{
               backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uqMDgriLrXWQkJGZ.jpg')",
               backgroundAttachment: 'fixed',
-              transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0001})`,
-              willChange: 'transform',
             }}
           />
           
@@ -227,14 +228,8 @@ export default function Home() {
                     href={service.link}
                     className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
-                    <div className="relative h-48 overflow-hidden bg-gray-200">
-                      <img 
-                        src={service.image} 
-                        alt={service.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-500 group-hover:via-blue-600 group-hover:to-blue-700 transition-all duration-300">
+                      <Icon className="w-20 h-20 text-white opacity-90" />
                     </div>
                     <div className="p-6">
                       <Icon className="w-8 h-8 text-blue-600 mb-3" />
@@ -278,7 +273,7 @@ export default function Home() {
         </section>
 
         {/* Google Reviews Section */}
-        <GoogleReviews />
+
 
         {/* Avis Clients Section */}
         <section className="py-20 md:py-32 bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
@@ -318,8 +313,7 @@ export default function Home() {
 
 
 
-        {/* Testimonial Carousel Section */}
-        <TestimonialCarousel />
+
 
 
       </main>
