@@ -227,14 +227,8 @@ export default function Home() {
                     href={service.link}
                     className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
-                    <div className="relative h-48 overflow-hidden bg-gray-200">
-                      <img 
-                        src={service.image} 
-                        alt={service.title}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-500 group-hover:via-blue-600 group-hover:to-blue-700 transition-all duration-300">
+                      <Icon className="w-20 h-20 text-white opacity-90" />
                     </div>
                     <div className="p-6">
                       <Icon className="w-8 h-8 text-blue-600 mb-3" />
