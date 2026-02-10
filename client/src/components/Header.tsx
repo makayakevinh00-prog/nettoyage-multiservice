@@ -116,15 +116,6 @@ export default function Header() {
               <Button variant="outline" className="text-sm" asChild>
                 <Link href="/my-bookings">Mes réservations</Link>
               </Button>
-              {user?.role === 'admin' && (
-                <Button variant="outline" className="text-sm" asChild>
-                  <Link href="/admin">Admin</Link>
-                </Button>
-              )}
-              <Button variant="outline" className="text-sm" onClick={() => logout()}>
-                <LogOut size={16} className="mr-1" />
-                Déconnexion
-              </Button>
             </>
           ) : (
             <>
@@ -198,17 +189,8 @@ export default function Header() {
               {isAuthenticated ? (
                 <>
                   <Link href="/my-bookings" className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors" onClick={() => setIsMenuOpen(false)}>
-                    Mes reservations
+                    Mes réservations
                   </Link>
-                  {user?.role === 'admin' && (
-                    <Link href="/admin" className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors" onClick={() => setIsMenuOpen(false)}>
-                      Admin
-                    </Link>
-                  )}
-                  <Button variant="outline" className="w-full text-sm" onClick={() => { logout(); setIsMenuOpen(false); }}>
-                    <LogOut size={16} className="mr-1" />
-                    Deconnexion
-                  </Button>
                 </>
               ) : (
                 <>

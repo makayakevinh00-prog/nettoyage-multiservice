@@ -52,49 +52,49 @@ export default function Home() {
       icon: Car,
       title: "Automobile",
       description: "Intérieur et extérieur, lavage haute pression, lustrage.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/DmAqVfApnyBngSLo.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg",
       link: "/service-automobile",
     },
     {
       icon: Waves,
       title: "Terrasse",
       description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/zVELyPfkmmHqTUWk.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/FQYJbTECnDZlFNor.jpg",
       link: "/service-terrasse",
     },
     {
       icon: Sofa,
       title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/PmDwBCJIyOEbuLVR.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZovvhiODgzWNOmRY.jpg",
       link: "/service/tapis",
     },
     {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/HycHgcqAfaRqxifW.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/hDrxBQBHYuRdKXrL.jpg",
       link: "/service/balcon",
     },
     {
       icon: Leaf,
       title: "Jardinage",
       description: "Entretien paysager, taille, débroussaillage professionnel.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/BAiIuENQjRzICgFG.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uIzIvyVRKCGOMcla.jpg",
       link: "/service/jardinage",
     },
     {
       icon: Building2,
       title: "Façade",
       description: "Nettoyage haute pression, traitement anti-mousse, joints.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/DWPZuACVNSqDnank.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZUIrqYxdLDBDKTCx.jpg",
       link: "/service/facade",
     },
     {
       icon: Droplets,
       title: "Piscine",
       description: "Nettoyage complet, traitement de l'eau, maintenance.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/KiRHqfEQKtcQhbUf.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eyjNfkUIjMFztDWi.jpg",
       link: "/service/piscine",
     },
   ];
@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uqMDgriLrXWQkJGZ.jpg')",
+              backgroundImage: "url('https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/ehpwm6NZYba3JTgrH3abwV-img-1_1770727338000_na1fn_aGVyby1wcm9jbGVhbi1mZW1tZQ.jpg')",
               backgroundAttachment: 'fixed',
             }}
           />
