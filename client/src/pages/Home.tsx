@@ -11,7 +11,8 @@ import {
   Sparkles,
   Shield,
   Droplets,
-  Clock3
+  Clock3,
+  Calendar
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
