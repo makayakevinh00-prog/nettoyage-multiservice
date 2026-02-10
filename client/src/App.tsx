@@ -31,6 +31,7 @@ import ServiceFacade from "./pages/ServiceFacade";
 import ServiceJardinage from "./pages/ServiceJardinage";
 import Admin from "./pages/Admin";
 import ClientDashboard from "./pages/ClientDashboard";
+import AdminHubSpot from "./pages/AdminHubSpot";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -74,6 +75,7 @@ function Router() {
       <Route path={"/admin"} component={Admin} />
       <Route path={"/client-dashboard"} component={ClientDashboard} />
       <Route path={"/#booking"} component={Home} />
+      <Route path={"/admin/hubspot"} component={AdminHubSpot} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
