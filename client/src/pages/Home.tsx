@@ -1,24 +1,51 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
+import GoogleReviews from "@/components/GoogleReviews";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 
 import { 
   Car,
   CheckCircle2, 
+  Star,
   Sofa,
   Building2,
   Waves,
   Leaf,
   Sparkles,
   Shield,
-  Droplets
+  Clock3,
+  Calendar,
+  Zap,
+  Droplets,
+  Trash2,
+  Video
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
 export default function Home() {
   const [location] = useLocation();
+  const [scrollY, setScrollY] = useState(0);
   const [prefilledService, setPrefilledService] = useState("");
   const [prefilledOption, setPrefilledOption] = useState("");
+
+  const scrollToBooking = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+      // Use setTimeout to ensure the scroll happens after any pending UI updates
+      setTimeout(() => {
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 0);
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const service = localStorage.getItem('prefilledService');
@@ -33,65 +60,54 @@ export default function Home() {
     }
   }, [location]);
 
-  const scrollToBooking = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const bookingSection = document.getElementById('booking');
-    if (bookingSection) {
-      setTimeout(() => {
-        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 0);
-    }
-  };
-
   const services = [
     {
       icon: Car,
       title: "Automobile",
       description: "Intérieur et extérieur, lavage haute pression, lustrage.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/uazK5zOOgjCyb9jZr1Eeso-img-1_1770721811000_na1fn_c2VydmljZS1hdXRvbW9iaWxl.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L3Vheks1ek9PZ2pDeWI5alpyMUVlc28taW1nLTFfMTc3MDcyMTgxMTAwMF9uYTFmbl9jMlZ5ZG1salpTMWhkWFJ2Ylc5aWFXeGwuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=dDxtKV0Yy3Nkq5owpW7vKvDal-HNyfgKLIa16HJRCO1hROr1tje0kpvcKZJ2O8K8gzncZdsX1i2oC9a00pUGgzuruq6DRfzvDu2-L8rrC6mapb0PutjNHEXjIoZ6GeX5mZr~x06VNrGLIWeMO4SLgFKsgGZM19QHHxV-pCUzNVetVQiusMozFJam3jr7pTmOhGMtAZDfGoaCTLDfnMVwfL6egrsXc9OZRBOYzNb5~-Liv~nQIyDn3~LLGwskI1dLUz~zjy6hqGLThJ1fguTSvRViWf241GsWfJ63rthTGri4xejHzCv91AKol31Qz0C6Kyl47vH39sL~BGzIrfJNzA__",
+      image: "/service-automobile.jpg",
       link: "/service-automobile",
     },
     {
       icon: Waves,
       title: "Terrasse",
       description: "Démoussage, nettoyage haute pression, traitement anti-mousse.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/uazK5zOOgjCyb9jZr1Eeso-img-2_1770721806000_na1fn_c2VydmljZS10ZXJyYXNzZQ.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L3Vheks1ek9PZ2pDeWI5alpyMUVlc28taW1nLTJfMTc3MDcyMTgwNjAwMF9uYTFmbl9jMlZ5ZG1salpTMTBaWEp5WVhOelpRLmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=CMPtGtb9nf8rk~osgaN2a4snGxuCGuOPRqsmR-ObtHt~7I8~tfOJfT4wErs0DfSkStCrulliTLDQoH5oYx-rNhafi1YHOhs8kAEAcF9xjc~muskubXKowjcv2s3wQMpAAJxr1a3k2M7VrJAoaEKvbBVPOk3pMDHVYdbn4rWw74p8XMLUBnD27DPZVhMQAhISRy7uTWlnQUH8xh7pa07vIc3iVHPI4U9ig~R0Rqhe6mLyPPF2qgq52w3KZfmYwwwSdGPp2vovzuQPBsWgSyCs3qMhZZpN9yPqUX00AIut5LKA5ridq3xdOng8b9MrW3x8SPNGfdEeXmQxfb7oEExkVw__",
+      image: "/hero-terrasse.jpg",
       link: "/service-terrasse",
     },
     {
       icon: Sofa,
       title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/uazK5zOOgjCyb9jZr1Eeso-img-3_1770721807000_na1fn_c2VydmljZS10YXBpcw.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L3Vheks1ek9PZ2pDeWI5alpyMUVlc28taW1nLTNfMTc3MDcyMTgwNzAwMF9uYTFmbl9jMlZ5ZG1salpTMTBZWEJwY3cuanBnP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=qzgPsaacA3PaMDMizYdSyJD1EqYT4rPbQlhg0XJF28R7v0yOPdLMSvS6cadV0NWcAt2Vm7yyjSobNDhIInkew-SHv0Uv1vxrlskqRiA~nSE0T9uagVDFrtpswHAY9EdqzERXfTlsOPMbWJI2Z0aBnMOl~gWGHIi9JoQ9fh9WJuearzFh9X8WS9YoZLW9NqxKn-QkrTWnkKK3lG5T6lGwkGKMre6qYr5PdW1hTgRLmnSDc~DkXJP8oJmEm9H5yYUjPHjpv-FQIQmXJ6emQrMaddGwPIsxbsgLGn5RjZf8xxcU1~On3oUzS0q68je0k8ldPFf5mFLRHMUQzTRiL-yUFA__",
+      image: "/hero-tapis.jpg",
       link: "/service/tapis",
     },
     {
       icon: Building2,
       title: "Balcon",
       description: "Nettoyage complet, joints, garde-corps et revêtements.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/uazK5zOOgjCyb9jZr1Eeso-img-4_1770721818000_na1fn_c2VydmljZS1iYWxjb24.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L3Vheks1ek9PZ2pDeWI5alpyMUVlc28taW1nLTRfMTc3MDcyMTgxODAwMF9uYTFmbl9jMlZ5ZG1salpTMWlZV3hqYjI0LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=aTyAYfqZVtJGDFWbqZkv6gdCvnzziOGXVhG3r3bKg23TmcBf5Amtu36blm1P05LFMR4w3ooQ9XgdaPBtNIaT~2-WKjVioFdeBxQrVFllhfMjuOnISVfwDskScoO2~OEpJfvq4-u-woOue0RD3loDYxbEl77hlLyWYhgs99LZHCMT1miCCtknUC-Lggy0RVXdFFAFx6WB17ZmDZ9EpTU30feTHsLJUvl494Z4937R4a4A8bIl9aSSQAPTFaF6vRpR0xJJW9SQUiOcRsFwFPG7iA-Vl78rROaz1~kNRmIFjxadBp5FEB1U~pWBMuSZO64SP0SOB9o3bd5c56U9SR66og__",
+      image: "/hero-balcon.jpg",
       link: "/service/balcon",
     },
     {
       icon: Leaf,
       title: "Jardinage",
       description: "Entretien paysager, taille, débroussaillage professionnel.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/uazK5zOOgjCyb9jZr1Eeso-img-5_1770721810000_na1fn_c2VydmljZS1qYXJkaW4.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L3Vheks1ek9PZ2pDeWI5alpyMUVlc28taW1nLTVfMTc3MDcyMTgxMDAwMF9uYTFmbl9jMlZ5ZG1salpTMXFZWEprYVc0LmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=V1WjsthzASVJe5fXidVMnhv2RZn8wPY4fnlCX8GOE4zKOTR8jji~eIBOqVP-dfIjXqtInky8a4Qsluc5yVFIxCujX4o2-9Z3iQrUfkgW4hFwaTcYsO3ji5Z62MesMfKCX6iUIjyTY~L9WCA-RCGPCW4LqAkODxdT-WTS3z~2yQei3XRh-wLzK8lnxw7PZZnXZvmcY77o-MymB9RbWTZyBqmLMGWbkaC4WSAJyvcsucAXV~0QTVhdLRp5POdg6JGLaGdi4xjVo3lv4g4NobLCZKODtBt4vtz~AdmLsAo34g5X1fNoJsIkRM13GhX9ElFX3eTUv8ka0ls3hVhRbnVBKg__",
+      image: "/hero-jardinage.jpg",
       link: "/service/jardinage",
     },
     {
       icon: Building2,
       title: "Façade",
       description: "Nettoyage haute pression, traitement anti-mousse, joints.",
-      image: "https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/CkXC4DehMufcRjN2as88Qq-img-1_1770721891000_na1fn_c2VydmljZS1mYWNhZGU.jpg?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvQlpJMjVwQXhjVDlrcm84dUMzZHFYVi9zYW5kYm94L0NrWEM0RGVoTXVmY1JqTjJhczg4UXEtaW1nLTFfMTc3MDcyMTg5MTAwMF9uYTFmbl9jMlZ5ZG1salpTMW1ZV05oWkdVLmpwZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=M7zZoXhlFG50E1RI4g~Bk9MyT4Nr353UXiDVbwt0zxgH5Y6l88q6ffAfXgqT2YSSRer25vaGONUaj9DlCjO0QIMD7A-l13ujGgmRDojidoMe3bZC-kGoqQa6hk4LJ7sjLYiiwbxQ0LgoZjaLEDPm58qzhEgayY3EZcAjKbySQqkOohbytAMJycJaUa~Fd2~ssHB8qTrUmOpYMVz5atQTinHFLMITVnv3m-wiD-qS5bUWh3XU6D3QOw~W-YBsxVmcjICS8d1qaDZfQHHJSWbzRVD~Lvwd~IGxJFkSXrM9vKZOxvViidn704~LF~LYTkyoQeD7sVemxqMi5oMmmpRfyA__",
+      image: "/hero-facade.jpg",
       link: "/service/facade",
     },
     {
       icon: Droplets,
       title: "Piscine",
       description: "Nettoyage complet, traitement de l'eau, maintenance.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/FThHkTLyfeTPCOPq.jpg",
+      image: "/service-piscine.jpg",
       link: "/service/piscine",
     },
   ];
@@ -134,7 +150,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uqMDgriLrXWQkJGZ.jpg')",
+              backgroundImage: "url('/hero-nettoyage-pro.jpg')",
               backgroundAttachment: 'fixed',
               transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0001})`,
               willChange: 'transform',
@@ -227,8 +243,13 @@ export default function Home() {
                     href={service.link}
                     className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-500 group-hover:via-blue-600 group-hover:to-blue-700 transition-all duration-300">
-                      <Icon className="w-20 h-20 text-white opacity-90" />
+                    <div className="relative h-48 overflow-hidden bg-gray-200">
+                      <img 
+                        src={service.image} 
+                        alt={service.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
                     </div>
                     <div className="p-6">
                       <Icon className="w-8 h-8 text-blue-600 mb-3" />

@@ -14,7 +14,6 @@ import { getAllBookings, getBookingById, getIntegrationLogsByBookingId, getAllIn
 import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking, getDb } from "./db";
 import { storagePut } from "./storage";
 import Stripe from "stripe";
-import { hubspotRouter } from "./routers/hubspot";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2025-12-15.clover",
@@ -726,8 +725,6 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         }
       }),
   }),
-
-  hubspot: hubspotRouter,
 });
 
 export type AppRouter = typeof appRouter;
