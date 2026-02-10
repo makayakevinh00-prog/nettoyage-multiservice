@@ -119,22 +119,32 @@ export default function ServiceDetail() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-96 overflow-hidden">
-        <img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
+      {service.image && (
+        <section className="relative h-96 overflow-hidden">
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center text-white">
+              <h2 className="text-5xl font-bold mb-4">{service.title} Premium</h2>
+              <p className="text-xl">{service.description}</p>
+            </div>
+          </div>
+        </section>
+      )}
+      {!service.image && (
+        <section className="relative py-16 bg-gradient-to-r from-blue-600 to-blue-700">
+          <div className="container max-w-4xl text-center text-white">
             <h2 className="text-5xl font-bold mb-4">{service.title} Premium</h2>
             <p className="text-xl">{service.description}</p>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Description */}
       <section className="py-16 bg-gray-50">
@@ -165,13 +175,15 @@ export default function ServiceDetail() {
                 </li>
               </ul>
             </div>
-            <div>
-              <img
-                src={service.image}
-                alt="Détail du service"
-                className="rounded-lg shadow-lg w-full h-80 object-cover"
-              />
-            </div>
+            {service.image && (
+              <div>
+                <img
+                  src={service.image}
+                  alt="Détail du service"
+                  className="rounded-lg shadow-lg w-full h-80 object-cover"
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
