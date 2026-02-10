@@ -19,7 +19,7 @@ const serviceDetails: Record<string, any> = {
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/RYxNXGgRANEfGLka.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/team-cleaning-carpet.jpg",
     packages: [
       { name: "Petit tapis (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
       { name: "Tapis moyen (120x170 à 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
@@ -50,7 +50,7 @@ const serviceDetails: Record<string, any> = {
   facade: {
     title: "Nettoyage Façade",
     description: "Nettoyage haute pression, traitement anti-mousse, joints",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/XhEPXlroPRMLRSOE.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-vitres.jpg",
     packages: [
       { name: "Petite façade (jusqu'à 50m²)", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
       { name: "Façade moyenne (50-150m²)", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
@@ -93,7 +93,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/lRfhqsLGGWgjBRMF.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-terrasse.jpg",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },

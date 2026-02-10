@@ -310,18 +310,15 @@ export default function Home() {
         {/* Booking Section */}
         <section id="booking" className="py-20 md:py-32 bg-white animate-fadeIn">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
                 <p className="text-xl text-gray-600 mb-8">Remplissez le formulaire ci-dessous pour demander un devis</p>
-                <AdvancedBookingForm 
-                  prefilledService={prefilledService}
-                  prefilledOption={prefilledOption}
-                />
               </div>
-              <div className="flex justify-center">
-                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/dpkcIiKcesCSoHbU.jpg" alt="ProClean Empire Team" className="rounded-lg shadow-2xl w-full max-w-md object-cover" />
-              </div>
+              <AdvancedBookingForm 
+                prefilledService={prefilledService}
+                prefilledOption={prefilledOption}
+              />
             </div>
           </div>
         </section>
