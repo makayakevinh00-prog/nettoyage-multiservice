@@ -83,7 +83,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
@@ -96,7 +96,7 @@ export default function ServiceDetail() {
   const [location, setLocation] = useLocation();
   
   // Extract service ID from URL path
-  const pathMatch = location.match(/\/service\/([a-z-]+)/);
+  const pathMatch = location.match(/\/service[\/-]([a-z-]+)/);
   const serviceId = pathMatch ? pathMatch[1].replace(/-/g, "") : "tapis";
   
   const service = serviceDetails[serviceId] || serviceDetails.tapis;
@@ -119,14 +119,14 @@ export default function ServiceDetail() {
       </div>
 
       {/* Hero Section */}
-      {service.image && (
+      {service.image?.trim() && (
         <section className="relative h-96 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
             className="w-full h-full object-cover"
-            loading="lazy"
             decoding="async"
+            onError={(e) => console.error('Image failed to load:', service.image, e)}
           />
           <div className="absolute inset-0 bg-black/40" />
           <div className="absolute inset-0 flex items-center justify-center">
@@ -137,7 +137,7 @@ export default function ServiceDetail() {
           </div>
         </section>
       )}
-      {!service.image && (
+      {!service.image?.trim() && (
         <section className="relative py-16 bg-gradient-to-r from-blue-600 to-blue-700">
           <div className="container max-w-4xl text-center text-white">
             <h2 className="text-5xl font-bold mb-4">{service.title} Premium</h2>
@@ -175,7 +175,7 @@ export default function ServiceDetail() {
                 </li>
               </ul>
             </div>
-            {service.image && (
+            {service.image?.trim() && (
               <div>
                 <img
                   src={service.image}

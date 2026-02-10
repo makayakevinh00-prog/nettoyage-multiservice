@@ -47,7 +47,7 @@ export default function ServiceTerrasse() {
       {/* Hero Section */}
       <section className="relative h-96 overflow-hidden">
         <img
-          src="/service-terrasse.jpg"
+          src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg"
           alt="Nettoyage Terrasse"
           className="w-full h-full object-cover"
         />
@@ -92,7 +92,7 @@ export default function ServiceTerrasse() {
             </div>
             <div>
               <img
-                src="/service-terrasse.jpg"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg"
                 alt="Détail du service"
                 className="rounded-lg shadow-lg w-full h-80 object-cover"
               />
