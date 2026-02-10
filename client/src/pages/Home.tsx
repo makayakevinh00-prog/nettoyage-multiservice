@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/pqpgHECmhdqffcdG.jpg')",
+              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/hero-nettoyeur-equipement.jpg')",
               backgroundAttachment: 'fixed',
             }}
           />
@@ -319,15 +319,7 @@ export default function Home() {
                   prefilledOption={prefilledOption}
                 />
               </div>
-              <div className="hidden md:flex justify-center">
-                <img 
-                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/FWUzjxduRAqDDniK.jpg" 
-                  alt="Sarah - Équipe ProClean Empire" 
-                  className="rounded-lg shadow-lg max-w-sm w-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+
             </div>
           </div>
         </section>
