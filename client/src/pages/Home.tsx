@@ -66,7 +66,7 @@ export default function Home() {
       icon: Sofa,
       title: "Tapis & Canapés",
       description: "Injection-extraction, détachage professionnel, séchage rapide.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ABEsSLuwlsSIKnrj.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/zHAPSTRRPawXxZsb.jpg",
       link: "/service/tapis",
     },
     {
@@ -80,7 +80,7 @@ export default function Home() {
       icon: Leaf,
       title: "Jardinage",
       description: "Entretien paysager, taille, débroussaillage professionnel.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eVmlBxgvEgtYvamA.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/sPjcGnTpdjqAvYrd.jpg",
       link: "/service/jardinage",
     },
     {

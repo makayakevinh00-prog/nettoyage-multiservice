@@ -19,7 +19,7 @@ const serviceDetails: Record<string, any> = {
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ABEsSLuwlsSIKnrj.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/zHAPSTRRPawXxZsb.jpg",
     packages: [
       { name: "Petit tapis (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
       { name: "Tapis moyen (120x170 à 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
@@ -39,7 +39,7 @@ const serviceDetails: Record<string, any> = {
   jardinage: {
     title: "Entretien Jardinage",
     description: "Taille, débroussaillage, entretien paysager professionnel",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-panneaux.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/sPjcGnTpdjqAvYrd.jpg",
     packages: [
       { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
       { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
@@ -73,7 +73,7 @@ const serviceDetails: Record<string, any> = {
   piscine: {
     title: "Nettoyage Piscine",
     description: "Nettoyage complet, traitement de l'eau, maintenance",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eVmlBxgvEgtYvamA.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/sprSdKxEQNuxSJgS.jpg",
     packages: [
       { name: "Nettoyage Simple", price: "Demande de Devis", features: ["Nettoyage bassin", "Nettoyage filtration", "Vérification pH"] },
       { name: "Maintenance Mensuelle", price: "Demande de Devis", features: ["Nettoyage régulier", "Traitement chimique", "Inspection"] },
