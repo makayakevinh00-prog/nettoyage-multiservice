@@ -41,13 +41,11 @@ export function generateQuoteEmail(data: QuoteEmailData) {
   const serviceNames: Record<string, string> = {
     automobile: "Nettoyage Automobile",
     terrasse: "Nettoyage Terrasse",
-    tapis: "Nettoyage Tapis & Canapés",
+    tapis: "Nettoyage Tapis & Canaпés",
     balcon: "Nettoyage Balcon",
     jardinage: "Entretien Jardinage",
     facade: "Nettoyage Façade",
-    toit: "Nettoyage Toit",
-    panneaux_solaires: "Nettoyage Panneaux Solaires",
-    poubelle: "Nettoyage Poubelle (Abonnement)",
+    piscine: "Nettoyage Piscine",
   };
 
   const serviceName = serviceNames[data.service] || data.service;

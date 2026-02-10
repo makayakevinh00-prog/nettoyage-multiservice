@@ -183,63 +183,16 @@ export const SERVICES: Record<string, Service> = {
     requiresSelection: false,
   },
 
-  toit: {
-    id: "toit",
-    name: "Nettoyage Toit",
-    description: "Nettoyage sécurisé de votre toit",
+  piscine: {
+    id: "piscine",
+    name: "Nettoyage Piscine",
+    description: "Nettoyage complet et maintenance de votre piscine",
     basePrice: 0, // Sur devis
     options: [
       {
-        id: "toit-custom",
+        id: "piscine-custom",
         label: "Sur devis (nous contacter)",
         price: 0,
-      },
-    ],
-    requiresSelection: false,
-  },
-
-  panneaux_solaires: {
-    id: "panneaux_solaires",
-    name: "Nettoyage Panneaux Solaires",
-    description: "Nettoyage professionnel de vos panneaux solaires",
-    basePrice: 0, // Sur devis
-    options: [
-      {
-        id: "panneaux-custom",
-        label: "Sur devis (nous contacter)",
-        price: 0,
-      },
-    ],
-    requiresSelection: false,
-  },
-
-  poubelle: {
-    id: "poubelle",
-    name: "Nettoyage Poubelle (Abonnement)",
-    description: "Nettoyage mensuel de vos bacs à poubelle",
-    basePrice: 50,
-    options: [
-      {
-        id: "poubelle-mensuel",
-        label: "1 passage par mois",
-        price: 50,
-        description: "Nettoyage régulier de vos bacs à poubelle",
-      },
-    ],
-    requiresSelection: true,
-  },
-
-  autre: {
-    id: "autre",
-    name: "Autre Service",
-    description: "Autre service de nettoyage non listé",
-    basePrice: 0,
-    options: [
-      {
-        id: "autre-custom",
-        label: "Sur devis (nous contacter)",
-        price: 0,
-        description: "Décrivez votre besoin dans le message",
       },
     ],
     requiresSelection: false,

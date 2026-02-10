@@ -45,14 +45,13 @@ export const SERVICES_CATALOG = {
       { name: "Traitement protecteur anti-mousse", price: 5000 }, // 50€
     ],
   },
-  panneaux: {
-    name: "Nettoyage Panneaux Solaires",
-    description: "Nettoyage haute pression, maintenance, optimisation rendement",
+  piscine: {
+    name: "Nettoyage Piscine",
+    description: "Nettoyage complet, traitement de l'eau, maintenance",
     options: [
-      { name: "Nettoyage simple (jusqu'à 20m²)", price: 10000 }, // 100€
-      { name: "Maintenance complète (20-50m²)", price: 20000 }, // 200€
-      { name: "Forfait annuel (4 nettoyages)", price: 30000 }, // 300€
-      { name: "Optimisation rendement", price: 10000 }, // 100€
+      { name: "Nettoyage simple", price: 10000 }, // 100€
+      { name: "Traitement complet", price: 20000 }, // 200€
+      { name: "Forfait mensuel", price: 30000 }, // 300€
     ],
   },
   terrasse: {

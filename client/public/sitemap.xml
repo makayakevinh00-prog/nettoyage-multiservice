@@ -77,14 +77,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Panneaux Solaires -->
-  <url>
-    <loc>https://procleanempire.com/?service=panneaux-solaires</loc>
-    <lastmod>2026-01-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
   <!-- Services Professionnels -->
   <url>
     <loc>https://procleanempire.com/?service=professionnel</loc>

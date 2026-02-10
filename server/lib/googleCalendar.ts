@@ -24,14 +24,11 @@ function getServiceDescription(service: string): string {
   const serviceMap: Record<string, string> = {
     automobile: 'Nettoyage Automobile',
     terrasse: 'Nettoyage Terrasse',
-    tapis: 'Nettoyage Tapis & Canapés',
+    tapis: 'Nettoyage Tapis & Canaпés',
     balcon: 'Nettoyage Balcon',
     jardinage: 'Entretien Jardinage',
     facade: 'Nettoyage Façade',
-    'panneaux-solaires': 'Nettoyage Panneaux Solaires',
-    autre: 'Autre Service',
-    poubelle: 'Nettoyage Poubelle',
-    toit: 'Nettoyage Toit',
+    piscine: 'Nettoyage Piscine',
   };
   return serviceMap[service] || service;
 }

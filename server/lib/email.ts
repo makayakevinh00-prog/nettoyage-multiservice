@@ -81,11 +81,11 @@ export function generateBookingConfirmationEmail(data: {
   const serviceNames: Record<string, string> = {
     automobile: "Nettoyage Automobile",
     terrasse: "Nettoyage Terrasse",
-    tapis: "Nettoyage Tapis & Canapés",
+    tapis: "Nettoyage Tapis & Canaпés",
     balcon: "Nettoyage Balcon",
     jardinage: "Entretien Jardinage",
     facade: "Nettoyage Façade",
-    panneaux: "Nettoyage Panneaux Solaires",
+    piscine: "Nettoyage Piscine",
     professionnel: "Nettoyage Professionnel",
   };
 

@@ -14,10 +14,11 @@ export default function Header() {
   const services = [
     { name: "Automobile", href: "/service-automobile", service: "automobile" },
     { name: "Terrasse", href: "/service-terrasse", service: "terrasse" },
-    { name: "Tapis & Canapés", href: "/service-tapis", service: "tapis" },
+    { name: "Tapis & Canaпés", href: "/service-tapis", service: "tapis" },
     { name: "Balcon", href: "/service-balcon", service: "balcon" },
     { name: "Façade", href: "/service-facade", service: "facade" },
     { name: "Jardinage", href: "/service-jardinage", service: "jardinage" },
+    { name: "Piscine", href: "/service-piscine", service: "piscine" },
   ];
 
   const navItems = [
