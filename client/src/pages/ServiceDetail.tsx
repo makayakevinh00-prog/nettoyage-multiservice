@@ -19,7 +19,7 @@ const serviceDetails: Record<string, any> = {
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/team-cleaning-carpet.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ABEsSLuwlsSIKnrj.jpg",
     packages: [
       { name: "Petit tapis (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
       { name: "Tapis moyen (120x170 à 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
@@ -29,7 +29,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/hDrxBQBHYuRdKXrL.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/XyDjaSogmJZCgDou.jpg",
     packages: [
       { name: "Balcon standard (jusqu'à 15m²)", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec garde-corps (15-30m²)", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
@@ -39,7 +39,7 @@ const serviceDetails: Record<string, any> = {
   jardinage: {
     title: "Entretien Jardinage",
     description: "Taille, débroussaillage, entretien paysager professionnel",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uIzIvyVRKCGOMcla.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-panneaux.jpg",
     packages: [
       { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
       { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
@@ -50,7 +50,7 @@ const serviceDetails: Record<string, any> = {
   facade: {
     title: "Nettoyage Façade",
     description: "Nettoyage haute pression, traitement anti-mousse, joints",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-vitres.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/oZbSazSBaoTildUX.jpg",
     packages: [
       { name: "Petite façade (jusqu'à 50m²)", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
       { name: "Façade moyenne (50-150m²)", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
@@ -58,21 +58,11 @@ const serviceDetails: Record<string, any> = {
       { name: "Traitement protecteur anti-mousse", price: "+50€", features: ["Protection 24 mois", "Anti-mousse", "Anti-pollution"] },
     ],
   },
-  panneaux: {
-    title: "Nettoyage Panneaux Solaires",
-    description: "Nettoyage haute pression, maintenance, optimisation rendement",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rXuhKKhirytGZqpP.jpg",
-    packages: [
-      { name: "Nettoyage simple (jusqu'à 20m²)", price: "100€", features: ["Nettoyage haute pression", "Inspection"] },
-      { name: "Maintenance complète (20-50m²)", price: "200€", features: ["Nettoyage", "Inspection électrique", "Maintenance"] },
-      { name: "Forfait annuel (4 nettoyages)", price: "300€", features: ["4 nettoyages/an", "Inspections régulières", "Maintenance"] },
-      { name: "Optimisation rendement", price: "+100€", features: ["Diagnostic complet", "Optimisation", "Rapport détaillé"] },
-    ],
-  },
+
   professionnel: {
     title: "Nettoyage Professionnel",
     description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/lQZVaObPrdMQDSDd.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/dyZuZViDNqqhdgRv.jpg",
     packages: [
       { name: "Bureau Petit", price: "Demande de Devis", features: ["Nettoyage complet", "Finition premium"] },
       { name: "Bureau Moyen", price: "Demande de Devis", features: ["Nettoyage en profondeur", "Traitement surfaces"] },
@@ -83,7 +73,7 @@ const serviceDetails: Record<string, any> = {
   piscine: {
     title: "Nettoyage Piscine",
     description: "Nettoyage complet, traitement de l'eau, maintenance",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eyjNfkUIjMFztDWi.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eVmlBxgvEgtYvamA.jpg",
     packages: [
       { name: "Nettoyage Simple", price: "Demande de Devis", features: ["Nettoyage bassin", "Nettoyage filtration", "Vérification pH"] },
       { name: "Maintenance Mensuelle", price: "Demande de Devis", features: ["Nettoyage régulier", "Traitement chimique", "Inspection"] },
@@ -93,7 +83,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-terrasse.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
