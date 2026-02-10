@@ -27,7 +27,6 @@ export default function Header() {
     { href: "/avis", label: "Avis clients" },
     { label: "Professionnels", href: "/professionnels" },
     { href: "/contact", label: "Contact" },
-    { href: "/my-bookings", label: "Mes réservations" },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -111,24 +110,11 @@ export default function Header() {
         {/* CTA Button */}
         <div className="hidden lg:flex items-center gap-2">
           <DarkModeToggle />
-          {isAuthenticated ? (
-            <>
-              <Button variant="outline" className="text-sm" asChild>
-                <Link href="/my-bookings">Mes réservations</Link>
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button variant="outline" className="text-sm" asChild>
-                <a href={getLoginUrl()}>Connexion</a>
-              </Button>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>
-                <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
-                  Réserver
-                </a>
-              </Button>
-            </>
-          )}
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white text-sm" asChild>
+            <a href="#booking" onClick={(e) => scrollToSection(e, "#booking")}>
+              Réserver
+            </a>
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}

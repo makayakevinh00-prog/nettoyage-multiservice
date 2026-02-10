@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/ehpwm6NZYba3JTgrH3abwV-img-1_1770727338000_na1fn_aGVyby1wcm9jbGVhbi1mZW1tZQ.jpg')",
+              backgroundImage: "url('https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/Pye8QnDoLvo5QL6ssHTG2D-img-1_1770727688000_na1fn_aGVyby1uZXR0b3lldXItZXF1aXBlbWVudA.jpg')",
               backgroundAttachment: 'fixed',
             }}
           />
@@ -310,14 +310,23 @@ export default function Home() {
         {/* Booking Section */}
         <section id="booking" className="py-20 md:py-32 bg-white animate-fadeIn">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
-              <p className="text-xl text-gray-600">Remplissez le formulaire ci-dessous pour demander un devis</p>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Réservez Votre Service</h2>
+                <p className="text-xl text-gray-600 mb-8">Remplissez le formulaire ci-dessous pour demander un devis</p>
+                <AdvancedBookingForm 
+                  prefilledService={prefilledService}
+                  prefilledOption={prefilledOption}
+                />
+              </div>
+              <div className="hidden md:flex justify-center">
+                <img 
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/oMXSuoVoJavrjtIb.jpg" 
+                  alt="Equipe ProClean Empire" 
+                  className="rounded-lg shadow-lg max-w-sm w-full object-cover"
+                />
+              </div>
             </div>
-            <AdvancedBookingForm 
-              prefilledService={prefilledService}
-              prefilledOption={prefilledOption}
-            />
           </div>
         </section>
 
