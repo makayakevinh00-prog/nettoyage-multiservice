@@ -72,6 +72,7 @@ function Router() {
       <Route path="/service-balcon" component={ServiceBalcon} />
       <Route path="/service-facade" component={ServiceFacade} />
       <Route path="/service-jardinage" component={ServiceJardinage} />
+      <Route path="/service-exterieur" component={ServiceExterieur} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/client-dashboard"} component={ClientDashboard} />
       <Route path={"/#booking"} component={Home} />

@@ -13,20 +13,10 @@ export default function ServiceExterieur() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4">Nettoyage Extérieur Professionnel</h1>
-          <p className="text-xl text-blue-100 mb-6">
-            Terrasses, façades, toitures, piscines : redonnez éclat à vos espaces extérieurs
-          </p>
-          <div className="flex gap-4">
-            <Button onClick={handleReserve} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3">
-              Réserver maintenant
-            </Button>
-            <a href="https://wa.me/33617212230" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg">
-              💬 WhatsApp
-            </a>
-          </div>
+      <section className="relative h-96 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center">
+        <div className="text-center text-white px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Nettoyage Extérieur Professionnel</h1>
+          <p className="text-lg md:text-xl">Terrasses, façades, toitures, piscines : redonnez éclat à vos espaces extérieurs</p>
         </div>
       </section>
 

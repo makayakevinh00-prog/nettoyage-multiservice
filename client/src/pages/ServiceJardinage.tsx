@@ -42,20 +42,21 @@ export default function ServiceJardinage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <section className="py-12 bg-gradient-to-br from-green-50 to-green-100">
+      {/* Hero Section */}
+      <section className="relative h-96 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center">
+        <div className="text-center text-white px-4">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Jardinage & Entretien Paysager</h1>
+          <p className="text-lg md:text-xl">Entretenez votre jardin avec nos services professionnels</p>
+        </div>
+      </section>
+
+      {/* Back Link */}
+      <section className="py-6 bg-gray-50">
         <div className="container max-w-5xl">
-          <Link href="/" className="flex items-center gap-2 text-green-600 hover:text-green-700 mb-6 transition-colors">
+          <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
             <ArrowLeft size={20} />
             <span>Retour à l'accueil</span>
           </Link>
-          <div className="flex items-center gap-4 mb-6">
-            <Leaf className="w-12 h-12 text-green-600" />
-            <h1 className="text-4xl font-bold text-gray-900">Jardinage & Entretien Paysager</h1>
-          </div>
-          <p className="text-xl text-gray-700 max-w-2xl">
-            Entretenez votre jardin avec nos services professionnels de jardinage et paysagisme.
-          </p>
         </div>
       </section>
 

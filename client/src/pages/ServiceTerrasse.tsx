@@ -45,18 +45,10 @@ export default function ServiceTerrasse() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-96 overflow-hidden">
-        <img
-          src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/rPOrxYmzanxOtBXU.jpg"
-          alt="Nettoyage Terrasse"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white">
-            <h2 className="text-5xl font-bold mb-4">Nettoyage Terrasse Premium</h2>
-            <p className="text-xl">Retrouvez une terrasse impeccable et protégée</p>
-          </div>
+      <section className="relative h-96 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center">
+        <div className="text-center text-white px-4">
+          <h2 className="text-5xl md:text-6xl font-bold mb-4">Nettoyage Terrasse Premium</h2>
+          <p className="text-lg md:text-xl">Retrouvez une terrasse impeccable et protégée</p>
         </div>
       </section>
 
