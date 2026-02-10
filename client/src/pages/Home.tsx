@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/commercial-cleaning.jpeg')",
+              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZaLXBaclDvmmBzAs.jpg')",
               backgroundAttachment: 'fixed',
             }}
           />
@@ -319,7 +319,9 @@ export default function Home() {
                   prefilledOption={prefilledOption}
                 />
               </div>
-
+              <div className="flex justify-center">
+                <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/dpkcIiKcesCSoHbU.jpg" alt="ProClean Empire Team" className="rounded-lg shadow-2xl w-full max-w-md object-cover" />
+              </div>
             </div>
           </div>
         </section>
