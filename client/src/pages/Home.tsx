@@ -243,11 +243,15 @@ export default function Home() {
                     href={service.link}
                     className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
-                    <div className="relative h-48 overflow-hidden bg-gray-200">
+                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center">
                       <img 
                         src={service.image} 
                         alt={service.title}
                         loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"><span class="text-white text-2xl font-bold">${service.title}</span></div>`;
+                        }}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </div>
