@@ -83,7 +83,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/NkeiePPJrURGOWty.jpg",
+    image: "",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
