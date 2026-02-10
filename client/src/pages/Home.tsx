@@ -94,7 +94,7 @@ export default function Home() {
       icon: Droplets,
       title: "Piscine",
       description: "Nettoyage complet, traitement de l'eau, maintenance.",
-      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-panneaux.jpg",
+      image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/sprSdKxEQNuxSJgS.jpg",
       link: "/service/piscine",
     },
   ];
