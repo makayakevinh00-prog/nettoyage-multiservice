@@ -95,16 +95,7 @@ export default function Reviews() {
       content: "Entretien paysager complet. Taille, débroussaillage, nettoyage. Tout est parfait. Équipe très compétente.",
       service: "Jardinage",
     },
-    {
-      id: 10,
-      name: "Nathalie T.",
-      location: "Paris 12e",
-      date: "Avril 2024",
-      rating: 5,
-      title: "Panneaux solaires brillants",
-      content: "Nettoyage des panneaux solaires très professionnel. Rendement amélioré selon mon installateur. Parfait !",
-      service: "Nettoyage Panneaux Solaires",
-    },
+
     {
       id: 11,
       name: "Christophe L.",

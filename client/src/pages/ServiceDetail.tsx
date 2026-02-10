@@ -29,7 +29,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/XyDjaSogmJZCgDou.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/service-vitres.jpg",
     packages: [
       { name: "Balcon standard (jusqu'à 15m²)", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec garde-corps (15-30m²)", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
