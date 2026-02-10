@@ -137,7 +137,7 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('/hero-cleaning.jpeg')",
+              backgroundImage: "url('/commercial-cleaning.jpeg')",
               backgroundAttachment: 'fixed',
             }}
           />

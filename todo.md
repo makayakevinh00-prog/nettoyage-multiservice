@@ -755,3 +755,5 @@
 - [x] Optimiser la fluidité du site avec lazy loading
 - [x] Corriger l'image hero qui ne s'affichait pas
 - [ ] Publier le site via le bouton "Publish" dans le Management UI
+
+- [x] Remplacer l'image hero par commercial-cleaning.jpeg (nettoyeur professionnel avec machine)
