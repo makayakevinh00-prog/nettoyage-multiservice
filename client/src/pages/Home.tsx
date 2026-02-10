@@ -138,8 +138,6 @@ export default function Home() {
             style={{
               backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uqMDgriLrXWQkJGZ.jpg')",
               backgroundAttachment: 'fixed',
-              transform: `translateY(${scrollY * 0.5}px) scale(${1 + scrollY * 0.0001})`,
-              willChange: 'transform',
             }}
           />
           
@@ -274,7 +272,7 @@ export default function Home() {
         </section>
 
         {/* Google Reviews Section */}
-        <GoogleReviews />
+
 
         {/* Avis Clients Section */}
         <section className="py-20 md:py-32 bg-gradient-to-br from-yellow-50 via-white to-yellow-50">
