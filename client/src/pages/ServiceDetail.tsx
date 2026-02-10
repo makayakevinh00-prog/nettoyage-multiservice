@@ -9,7 +9,7 @@ const serviceDetails: Record<string, any> = {
   automobile: {
     title: "Nettoyage Automobile",
     description: "Lavage intérieur et extérieur, lustrage, protection",
-    image: "/proclean-voiture-lavage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg",
     packages: [
       { name: "Nettoyage intérieur + extérieur", price: "70€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
       { name: "Nettoyage complet", price: "90€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
@@ -19,7 +19,7 @@ const serviceDetails: Record<string, any> = {
   tapis: {
     title: "Nettoyage Tapis & Canapés",
     description: "Forfait ensemble : injection-extraction, détachage professionnel, séchage rapide. Réservation sur devis",
-    image: "/proclean-tapis-aspiration.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZovvhiODgzWNOmRY.jpg",
     packages: [
       { name: "Petit tapis (60x110 ou 80x150 cm)", price: "50€", features: ["Nettoyage injection-extraction", "Détachage", "Séchage rapide"] },
       { name: "Tapis moyen (120x170 à 170x240 cm)", price: "70€", features: ["Nettoyage complet", "Détachage professionnel", "Séchage"] },
@@ -29,7 +29,7 @@ const serviceDetails: Record<string, any> = {
   balcon: {
     title: "Nettoyage Balcon",
     description: "Nettoyage complet, joints, garde-corps et revêtements",
-    image: "/proclean-balcon-nettoyage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/hDrxBQBHYuRdKXrL.jpg",
     packages: [
       { name: "Balcon standard (jusqu'à 15m²)", price: "50€", features: ["Nettoyage haute pression", "Finition brillante"] },
       { name: "Balcon avec garde-corps (15-30m²)", price: "70€", features: ["Nettoyage complet", "Nettoyage garde-corps", "Joints"] },
@@ -39,7 +39,7 @@ const serviceDetails: Record<string, any> = {
   jardinage: {
     title: "Entretien Jardinage",
     description: "Taille, débroussaillage, entretien paysager professionnel",
-    image: "/proclean_jardinage_1.png",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/uIzIvyVRKCGOMcla.jpg",
     packages: [
       { name: "Taille Haies", price: "Demande de Devis", features: ["Taille professionnelle", "Évacuation des débris"] },
       { name: "Débroussaillage", price: "Demande de Devis", features: ["Débroussaillage complet", "Nettoyage du terrain"] },
@@ -50,7 +50,7 @@ const serviceDetails: Record<string, any> = {
   facade: {
     title: "Nettoyage Façade",
     description: "Nettoyage haute pression, traitement anti-mousse, joints",
-    image: "/proclean-facade-nettoyage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZUIrqYxdLDBDKTCx.jpg",
     packages: [
       { name: "Petite façade (jusqu'à 50m²)", price: "150€", features: ["Nettoyage haute pression", "Traitement anti-mousse"] },
       { name: "Façade moyenne (50-150m²)", price: "300€", features: ["Nettoyage complet", "Traitement protecteur", "Joints"] },
@@ -61,7 +61,7 @@ const serviceDetails: Record<string, any> = {
   panneaux: {
     title: "Nettoyage Panneaux Solaires",
     description: "Nettoyage haute pression, maintenance, optimisation rendement",
-    image: "/proclean-panneaux-solaires.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZUIrqYxdLDBDKTCx.jpg",
     packages: [
       { name: "Nettoyage simple (jusqu'à 20m²)", price: "100€", features: ["Nettoyage haute pression", "Inspection"] },
       { name: "Maintenance complète (20-50m²)", price: "200€", features: ["Nettoyage", "Inspection électrique", "Maintenance"] },
@@ -72,7 +72,7 @@ const serviceDetails: Record<string, any> = {
   professionnel: {
     title: "Nettoyage Professionnel",
     description: "Bureaux, espaces commerciaux, nettoyage complet sur mesure",
-    image: "/proclean-canape-nettoyage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZovvhiODgzWNOmRY.jpg",
     packages: [
       { name: "Bureau Petit", price: "Demande de Devis", features: ["Nettoyage complet", "Finition premium"] },
       { name: "Bureau Moyen", price: "Demande de Devis", features: ["Nettoyage en profondeur", "Traitement surfaces"] },
@@ -83,7 +83,7 @@ const serviceDetails: Record<string, any> = {
   piscine: {
     title: "Nettoyage Piscine",
     description: "Nettoyage complet, traitement de l'eau, maintenance",
-    image: "/proclean-piscine-nettoyage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/eyjNfkUIjMFztDWi.jpg",
     packages: [
       { name: "Nettoyage Simple", price: "Demande de Devis", features: ["Nettoyage bassin", "Nettoyage filtration", "Vérification pH"] },
       { name: "Maintenance Mensuelle", price: "Demande de Devis", features: ["Nettoyage régulier", "Traitement chimique", "Inspection"] },
@@ -93,7 +93,7 @@ const serviceDetails: Record<string, any> = {
   terrasse: {
     title: "Nettoyage Terrasse",
     description: "Démoussage, nettoyage haute pression, traitement anti-mousse",
-    image: "/proclean-terrasse-nettoyage.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/FQYJbTECnDZlFNor.jpg",
     packages: [
       { name: "Terrasse petite (jusqu'à 20m²)", price: "80€", features: ["Nettoyage haute pression", "Démoussage"] },
       { name: "Terrasse moyenne (20-40m²)", price: "140€", features: ["Nettoyage complet", "Traitement anti-mousse", "Joints"] },
@@ -134,6 +134,8 @@ export default function ServiceDetail() {
           src={service.image}
           alt={service.title}
           className="w-full h-full object-cover"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center">

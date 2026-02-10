@@ -751,4 +751,6 @@
 - [x] Remplacer l'image hero avec la photo de Sarah (team-profile-bright.jpg)
 - [x] Retirer l'image de Sarah de la section réservation
 - [x] Remettre l'image du nettoyeur avec équipement en image hero principale
+- [x] Ajouter les images manquantes sur les pages de services (Piscine, Automobile, Terrasse, etc.)
+- [x] Optimiser la fluidité du site avec lazy loading
 - [ ] Publier le site via le bouton "Publish" dans le Management UI
