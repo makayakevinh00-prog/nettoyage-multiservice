@@ -137,13 +137,13 @@ export default function Home() {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{
-              backgroundImage: "url('https://private-us-east-1.manuscdn.com/sessionFile/BZI25pAxcT9kro8uC3dqXV/sandbox/Pye8QnDoLvo5QL6ssHTG2D-img-1_1770727688000_na1fn_aGVyby1uZXR0b3lldXItZXF1aXBlbWVudA.jpg')",
+              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/UHIImTRQlHROHuGU.jpg')",
               backgroundAttachment: 'fixed',
             }}
           />
           
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/40" />
           
           {/* Content - Centered */}
           <div className="relative z-50 container mx-auto px-4 text-center">
