@@ -22,10 +22,8 @@ export async function getAllBookings(
   }
 
   try {
-    let query = db.select().from(bookings);
-
     // Appliquer les filtres
-    const conditions = [];
+    const conditions: any[] = [];
     if (filters?.status) {
       conditions.push(eq(bookings.status, filters.status as any));
     }
@@ -39,22 +37,21 @@ export async function getAllBookings(
       conditions.push(lte(bookings.date, filters.dateTo));
     }
 
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
-    }
+    // Construire la clause where
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
     // Récupérer le total
-    const allBookings = await query;
+    const allBookings = await (db.select().from(bookings).where(whereClause as any) as any);
     const total = allBookings.length;
 
     // Appliquer la pagination et le tri
-    const result = await db
+    const result = await (db
       .select()
       .from(bookings)
-      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .where(whereClause as any)
       .orderBy(desc(bookings.createdAt))
       .limit(limit)
-      .offset(offset);
+      .offset(offset) as any);
 
     return { bookings: result, total };
   } catch (error) {
@@ -150,7 +147,7 @@ export async function getAllIntegrationLogs(
   }
 
   try {
-    const conditions = [];
+    const conditions: any[] = [];
     if (filters?.service) {
       conditions.push(eq(integrationLogs.service, filters.service));
     }
@@ -164,27 +161,22 @@ export async function getAllIntegrationLogs(
       conditions.push(lte(integrationLogs.createdAt, new Date(filters.dateTo)));
     }
 
+    // Construire la clause where
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
     // Récupérer le total
-    let countQuery = db.select().from(integrationLogs);
-    if (conditions.length > 0) {
-      countQuery = countQuery.where(and(...conditions));
-    }
-    const allLogs = await countQuery;
+    const allLogs = await (db.select().from(integrationLogs).where(whereClause as any) as any);
     const total = allLogs.length;
 
     // Récupérer les logs avec pagination
-    let query = db
+    const result = await (db
       .select()
       .from(integrationLogs)
+      .where(whereClause as any)
       .orderBy(desc(integrationLogs.createdAt))
       .limit(limit)
-      .offset(offset);
+      .offset(offset) as any);
 
-    if (conditions.length > 0) {
-      query = query.where(and(...conditions));
-    }
-
-    const result = await query;
     return { logs: result, total };
   } catch (error) {
     console.error("[Admin] Failed to get integration logs:", error);

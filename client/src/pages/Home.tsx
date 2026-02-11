@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 
 import { 
   Car,
