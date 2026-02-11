@@ -158,7 +158,8 @@ export default function Home() {
             className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/ZaLXBaclDvmmBzAs.jpg')",
-              backgroundAttachment: 'fixed',
+              backgroundAttachment: 'scroll',
+              backgroundPosition: 'center 30%',
             }}
           />
           
@@ -169,7 +170,7 @@ export default function Home() {
           <div className="relative z-50 container mx-auto px-4 text-center">
             <div className="max-w-3xl mx-auto">
               {/* Main Title */}
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Le nettoyage professionnel qui redonne vie à vos biens
               </h1>
               
@@ -248,7 +249,7 @@ export default function Home() {
                     href={service.link}
                     className={`group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-slideUp stagger-${(i % 5) + 1}`}
                   >
-                    <div className="relative h-48 overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-500 group-hover:via-blue-600 group-hover:to-blue-700 transition-all duration-300">
+                    <div className="relative h-56 md:h-48 overflow-hidden bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 flex items-center justify-center group-hover:from-blue-500 group-hover:via-blue-600 group-hover:to-blue-700 transition-all duration-300">
                       {service.image ? (
                         <img
                           src={service.image}
