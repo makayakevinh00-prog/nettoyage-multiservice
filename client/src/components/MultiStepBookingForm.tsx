@@ -281,7 +281,7 @@ export default function MultiStepBookingForm({
               name="address"
               value={formData.address}
               onChange={handleInputChange}
-              placeholder="123 Rue de la Paix, 75000 Paris"
+              placeholder="Ex: 123 Rue de la Paix, 75000 Paris"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

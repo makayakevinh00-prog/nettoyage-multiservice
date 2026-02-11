@@ -39,14 +39,14 @@ export default function Footer() {
 
               {/* Adresse */}
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-orange-500">Où nous trouver</h3>
+                <h3 className="text-lg font-semibold text-orange-500">À propos</h3>
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 text-orange-500 mt-1 flex-shrink-0" />
                   <div className="text-sm">
-                    <p className="font-semibold text-white">MAKAYA MATEVE KEVINH</p>
-                    <p className="text-gray-300">Pro Clean Empire - Micro-entreprise</p>
-                    <p className="text-gray-400 text-xs mt-2">SIREN: 891 283 954</p>
-                    <p className="text-gray-400 text-xs">3 Rue Stéphane Charbonnier, 95300 Pontoise</p>
+                    <p className="font-semibold text-white">ProClean Empire</p>
+                    <p className="text-gray-300">Service de nettoyage professionnel</p>
+                    <p className="text-gray-400 text-xs mt-2">Intervenant en Île-de-France</p>
+                    <p className="text-gray-400 text-xs">Micro-entreprise certifiée</p>
                   </div>
                 </div>
               </div>

@@ -57,7 +57,7 @@ export default function TermsOfService() {
             <h2 className="text-2xl font-bold mb-4 text-slate-800">Nous contacter</h2>
             <p className="text-slate-700">Email : serviceclient@procleanempire.com</p>
             <p className="text-slate-700">Téléphone : 06 17 21 22 30</p>
-            <p className="text-slate-700">Adresse : 3 RUE STEPHANE CHARBONNIER, 95300 PONTOISE</p>
+            <p className="text-slate-700">Zone d'intervention : Île-de-France</p>
           </div>
         </section>
 

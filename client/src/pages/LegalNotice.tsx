@@ -24,7 +24,7 @@ export default function LegalNotice() {
             <p><strong>Raison sociale :</strong> MAKAYA MATEVE KEVINH</p>
             <p><strong>Nom commercial :</strong> Pro Clean Empire</p>
             <p><strong>Forme juridique :</strong> Entrepreneur Individuel (EI) - Micro-entreprise</p>
-            <p><strong>Siège social :</strong> 3 RUE STEPHANE CHARBONNIER, 95300 PONTOISE</p>
+            <p><strong>Zone d'intervention :</strong> Île-de-France</p>
             <p><strong>SIREN :</strong> 891 283 954</p>
             <p><strong>SIRET :</strong> 891 283 954 00024</p>
             <p><strong>N° TVA intracommunautaire :</strong> FR23891283954</p>
