@@ -149,11 +149,11 @@ export default function ServiceTerrasse() {
             Contactez-nous dès maintenant pour un devis gratuit et une intervention rapide
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Réserver Maintenant
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
+              <a href="/#booking?service=terrasse">Réserver Maintenant</a>
             </Button>
-            <Button size="lg" variant="outline">
-              Demander un Devis
+            <Button size="lg" variant="outline" asChild>
+              <a href="/#booking?service=terrasse">Demander un Devis</a>
             </Button>
           </div>
         </div>

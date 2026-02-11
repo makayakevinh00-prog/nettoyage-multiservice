@@ -6,7 +6,7 @@ export default function ServiceAuto() {
   const [, navigate] = useLocation();
 
   const handleReserve = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=auto");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

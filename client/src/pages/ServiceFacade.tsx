@@ -36,7 +36,7 @@ export default function ServiceFacade() {
   ];
 
   const scrollToBooking = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=facade");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

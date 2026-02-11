@@ -6,11 +6,12 @@ export default function ServiceTapis() {
   const [, navigate] = useLocation();
 
   const handleReserve = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=tapis");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToBooking = () => {
+    navigate("/#booking?service=tapis");
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
       bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });

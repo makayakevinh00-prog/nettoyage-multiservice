@@ -87,7 +87,7 @@ export default function ServiceAutomobile() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-6" asChild>
-              <Link href="/#booking">Réserver Maintenant</Link>
+              <Link href="/#booking?service=automobile">Réserver Maintenant</Link>
             </Button>
             <Button variant="outline" className="border-white text-white hover:bg-white/10 text-lg px-8 py-6" asChild>
               <a href="tel:0617212230">Appeler: 06 17 21 22 30</a>

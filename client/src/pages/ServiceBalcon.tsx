@@ -36,7 +36,7 @@ export default function ServiceBalcon() {
   ];
 
   const scrollToBooking = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=balcon");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

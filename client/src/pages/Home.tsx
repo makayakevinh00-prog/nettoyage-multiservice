@@ -24,11 +24,31 @@ export default function Home() {
   const [prefilledOption, setPrefilledOption] = useState("");
 
   useEffect(() => {
-    const service = localStorage.getItem('prefilledService');
+    // Lire le paramètre service depuis le hash ou la query string
+    let serviceParam = null;
+    
+    // Essayer de lire depuis le hash (#booking?service=automobile)
+    const hash = window.location.hash;
+    if (hash.includes('service=')) {
+      const hashParams = new URLSearchParams(hash.substring(hash.indexOf('?')));
+      serviceParam = hashParams.get('service');
+    }
+    
+    // Sinon, essayer la query string (?service=automobile)
+    if (!serviceParam) {
+      const queryParams = new URLSearchParams(window.location.search);
+      serviceParam = queryParams.get('service');
+    }
+    
+    // Vérifier aussi le localStorage pour la compatibilité
+    const service = serviceParam || localStorage.getItem('prefilledService');
     const option = localStorage.getItem('prefilledOption');
+    
     if (service) {
       setPrefilledService(service);
-      localStorage.removeItem('prefilledService');
+      if (!serviceParam) {
+        localStorage.removeItem('prefilledService');
+      }
     }
     if (option) {
       setPrefilledOption(option);
@@ -43,7 +63,7 @@ export default function Home() {
     if (bookingSection) {
       setTimeout(() => {
         bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 0);
+      }, 200);
     }
   };
 

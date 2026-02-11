@@ -36,7 +36,7 @@ export default function ServiceJardinage() {
   ];
 
   const scrollToBooking = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=jardinage");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

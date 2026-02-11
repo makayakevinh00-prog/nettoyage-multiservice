@@ -6,7 +6,7 @@ export default function ServiceExterieur() {
   const [, navigate] = useLocation();
 
   const handleReserve = () => {
-    navigate("/#booking");
+    navigate("/#booking?service=exterieur");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

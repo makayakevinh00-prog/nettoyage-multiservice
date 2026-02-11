@@ -64,7 +64,7 @@ export default function AdvancedBookingForm({
 
   // Mettre a jour les donnees pre-remplies quand elles changent
   useEffect(() => {
-    if (prefilledService) {
+    if (prefilledService && bookingData.service !== prefilledService) {
       setBookingData(prev => ({
         ...prev,
         service: prefilledService,
@@ -190,7 +190,7 @@ export default function AdvancedBookingForm({
             <div className="space-y-4">
               <div>
                 <Label htmlFor="service">Service souhaité *</Label>
-                <Select value={bookingData.service} onValueChange={(value) => {
+                <Select value={bookingData.service || ""} onValueChange={(value) => {
                   setBookingData({ ...bookingData, service: value, serviceOption: "" });
                 }}>
                   <SelectTrigger id="service">
