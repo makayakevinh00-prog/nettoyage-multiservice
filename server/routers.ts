@@ -235,7 +235,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           ] : undefined;
 
           await sendEmail({
-            to: 'serviceclient@procleanempire.com',
+            to: input.email,
             subject: '✅ Confirmation de réservation - ProClean Empire',
             html: confirmationEmail.html,
             text: confirmationEmail.text,
