@@ -191,7 +191,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           const result = await createBooking({
             userId: undefined, // Sera mis à jour si l'utilisateur est connecté
             name: input.name,
-            email: 'serviceclient@procleanempire.com', // Utiliser l'email du service client
+            email: input.email, // Utiliser l'email du client
             phone: input.phone,
             service: input.service as any,
             date: input.date,
