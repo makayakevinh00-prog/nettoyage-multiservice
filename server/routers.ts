@@ -248,6 +248,42 @@ Veuillez contacter le client pour confirmer le rendez-vous.
           
           console.log(`[SendBooking] ✅ Email envoyé avec succès à ${input.email}`);
           
+          // Envoyer aussi un email de notification au propriétaire
+          try {
+            console.log(`[SendBooking] Envoi de l'email de notification au propriétaire...`);
+            
+            const ownerEmailContent = `
+<h2>📅 Nouvelle Réservation - ProClean Empire</h2>
+
+<p><strong>Client:</strong> ${input.name}</p>
+<p><strong>Email:</strong> ${input.email}</p>
+<p><strong>Téléphone:</strong> ${input.phone}</p>
+
+<p><strong>Service:</strong> ${serviceNames[input.service] || input.service}</p>
+<p><strong>Date:</strong> ${input.date}</p>
+<p><strong>Heure:</strong> ${input.time}</p>
+<p><strong>Adresse:</strong> ${input.address}</p>
+
+${input.message ? `<p><strong>Informations complémentaires:</strong><br>${input.message}</p>` : ''}
+
+${totalPrice > 0 ? `<p><strong>Prix estimé:</strong> ${(totalPrice / 100).toFixed(2)}€</p>` : ''}
+
+<p>---</p>
+<p>Cette réservation a été envoyée depuis le site ProClean Empire.</p>
+            `.trim();
+            
+            await sendEmail({
+              to: 'serviceclient@procleanempire.com',
+              subject: `📅 Nouvelle réservation - ${input.name} (${input.date} à ${input.time})`,
+              html: ownerEmailContent,
+              text: `Nouvelle réservation de ${input.name} pour le ${input.date} à ${input.time}`,
+            });
+            
+            console.log(`[SendBooking] ✅ Email de notification envoyé au propriétaire`);
+          } catch (ownerEmailError) {
+            console.error('❌ Erreur lors de l\'envoi de l\'email au propriétaire:', ownerEmailError);
+          }
+          
           // Envoyer aussi une notification au propriétaire
           await notifyOwner({
             title: `Confirmation d'envoi - ${input.name}`,
