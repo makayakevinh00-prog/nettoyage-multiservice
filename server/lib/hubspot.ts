@@ -301,7 +301,11 @@ export async function syncBookingToHubSpot(bookingData: {
   message?: string;
 }): Promise<{ contactId: string | null; dealId: string | null }> {
   try {
+    console.log(`[HubSpot] Début de la synchronisation pour ${bookingData.email}`);
+    console.log(`[HubSpot] Clé API configurée: ${!!HUBSPOT_API_KEY}`);
+    
     // Créer ou mettre à jour le contact
+    console.log(`[HubSpot] Création/mise à jour du contact...`);
     const contactId = await createOrUpdateHubSpotContact({
       email: bookingData.email,
       firstname: bookingData.name.split(' ')[0],
@@ -313,7 +317,10 @@ export async function syncBookingToHubSpot(bookingData: {
       booking_address: bookingData.address,
     });
 
+    console.log(`[HubSpot] Contact ID: ${contactId}`);
+    
     // Créer un deal pour la réservation avec le prix total
+    console.log(`[HubSpot] Création du deal...`);
     const dealId = await createHubSpotDeal({
       dealname: `${bookingData.service} - ${bookingData.name}`,
       dealstage: 'negotiation', // Stage de négociation
@@ -341,9 +348,13 @@ export async function syncBookingToHubSpot(bookingData: {
       });
     }
 
+    console.log(`[HubSpot] Deal ID: ${dealId}`);
+    console.log(`[HubSpot] ✅ Synchronisation terminée (Contact: ${contactId}, Deal: ${dealId})`);
+    
     return { contactId, dealId };
   } catch (error) {
     console.error('❌ Erreur lors de la synchronisation avec HubSpot:', error);
+    console.error('[HubSpot] Détails complets:', JSON.stringify(error, null, 2));
     return { contactId: null, dealId: null };
   }
 }
