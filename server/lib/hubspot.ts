@@ -67,16 +67,16 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
       return null;
     }
 
-    // Préparer les propriétés du contact au format API v3 (array de { name, value })
-    const propertiesArray: Array<{ name: string; value: string }> = [
-      { name: 'email', value: contact.email },
-    ];
+    // Préparer les propriétés du contact au format v1 (object avec name: value)
+    const properties: Record<string, string> = {
+      email: contact.email,
+    };
 
-    if (contact.firstname) propertiesArray.push({ name: 'firstname', value: contact.firstname });
-    if (contact.lastname) propertiesArray.push({ name: 'lastname', value: contact.lastname });
-    if (contact.phone) propertiesArray.push({ name: 'phone', value: contact.phone });
+    if (contact.firstname) properties.firstname = contact.firstname;
+    if (contact.lastname) properties.lastname = contact.lastname;
+    if (contact.phone) properties.phone = contact.phone;
 
-    console.log(`[HubSpot] Propriétés du contact: ${JSON.stringify(propertiesArray)}`);
+    console.log(`[HubSpot] Propriétés du contact: ${JSON.stringify(properties)}`);
 
     // Chercher d'abord si le contact existe
     const searchResponse = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/contacts/search`, {
@@ -115,7 +115,7 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
             'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ properties: propertiesArray }),
+          body: JSON.stringify({ properties }),
         }
       );
 
@@ -123,8 +123,9 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
         console.log(`✅ Contact HubSpot mis à jour: ${existingContact.id}`);
         return existingContact.id;
       } else {
-        const errorData = await updateResponse.json() as any;
-        console.error(`❌ Erreur mise à jour contact: ${updateResponse.status}`, errorData);
+        console.error(`❌ Erreur mise à jour contact: ${updateResponse.status} ${updateResponse.statusText}`);
+        const errorText = await updateResponse.text();
+        console.error(`[HubSpot] Corps de la réponse:`, errorText);
       }
     } else {
       // Créer un nouveau contact
@@ -135,7 +136,7 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
           'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ properties: propertiesArray }),
+        body: JSON.stringify({ properties }),
       });
 
       if (createResponse.ok) {
@@ -172,13 +173,13 @@ export async function createHubSpotDeal(deal: HubSpotDeal): Promise<string | nul
       return null;
     }
 
-    const propertiesArray: Array<{ name: string; value: string | number }> = [
-      { name: 'dealname', value: deal.dealname },
-      { name: 'dealstage', value: deal.dealstage },
-    ];
+    const properties: Record<string, string | number> = {
+      dealname: deal.dealname,
+      dealstage: deal.dealstage,
+    };
 
-    if (deal.amount) propertiesArray.push({ name: 'amount', value: deal.amount });
-    if (deal.closedate) propertiesArray.push({ name: 'closedate', value: deal.closedate });
+    if (deal.amount) properties.amount = deal.amount;
+    if (deal.closedate) properties.closedate = deal.closedate;
 
     const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/deals`, {
       method: 'POST',
@@ -186,7 +187,7 @@ export async function createHubSpotDeal(deal: HubSpotDeal): Promise<string | nul
         'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ properties: propertiesArray }),
+      body: JSON.stringify({ properties }),
     });
 
     if (response.ok) {
@@ -194,8 +195,9 @@ export async function createHubSpotDeal(deal: HubSpotDeal): Promise<string | nul
       console.log(`✅ Deal HubSpot créé: ${data.id}`);
       return data.id;
     } else {
-      const errorData = await response.json() as any;
-      console.error(`❌ Erreur création deal: ${response.status}`, errorData);
+      console.error(`❌ Erreur création deal: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`[HubSpot] Réponse:`, errorText);
     }
 
     return null;
@@ -261,6 +263,14 @@ export async function createTask(
       return null;
     }
 
+    const properties: Record<string, string> = {
+      hs_task_title: taskData.hs_task_title,
+      hs_task_body: taskData.hs_task_body,
+      hs_task_due_date: new Date(taskData.hs_task_due_date).getTime().toString(),
+      hs_task_status: taskData.hs_task_status,
+      hs_task_priority: taskData.hs_task_priority,
+    };
+
     const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/tasks`, {
       method: 'POST',
       headers: {
@@ -268,13 +278,7 @@ export async function createTask(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        properties: [
-          { name: 'hs_task_title', value: taskData.hs_task_title },
-          { name: 'hs_task_body', value: taskData.hs_task_body },
-          { name: 'hs_task_due_date', value: new Date(taskData.hs_task_due_date).getTime().toString() },
-          { name: 'hs_task_status', value: taskData.hs_task_status },
-          { name: 'hs_task_priority', value: taskData.hs_task_priority },
-        ],
+        properties,
         associations: [
           {
             type: 'contact_to_task',
