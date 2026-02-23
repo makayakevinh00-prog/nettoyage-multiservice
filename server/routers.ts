@@ -174,9 +174,11 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             email: input.email,
             phone: input.phone,
             service: input.service,
+            serviceOption: input.serviceOption,
             date: input.date,
             time: input.time,
             address: input.address,
+            totalPrice: totalPrice / 100, // Convertir en euros
             message: input.message,
           });
           console.log(`[HubSpot] ✅ Synchronisation réussie pour ${input.email}`);

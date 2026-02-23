@@ -339,7 +339,7 @@ export async function syncBookingToHubSpot(bookingData: {
     console.log(`[HubSpot] Création du deal...`);
     const dealId = await createHubSpotDeal({
       dealname: `${bookingData.service} - ${bookingData.name}`,
-      dealstage: 'negotiation', // Stage de négociation
+      dealstage: 'appointmentscheduled', // Stage rendez-vous planifié
       amount: bookingData.totalPrice || 0, // Montant du devis
       closedate: new Date(bookingData.date).getTime(),
       service: bookingData.service,
