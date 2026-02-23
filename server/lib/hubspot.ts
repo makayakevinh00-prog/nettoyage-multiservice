@@ -143,9 +143,15 @@ export async function createOrUpdateHubSpotContact(contact: HubSpotContact): Pro
         console.log(`✅ Contact HubSpot créé: ${data.id}`);
         return data.id;
       } else {
-        const errorData = await createResponse.json() as any;
-        console.error(`❌ Erreur création contact: ${createResponse.status}`, errorData);
-        console.error(`[HubSpot] Réponse d'erreur complète:`, errorData);
+        console.error(`❌ Erreur création contact: ${createResponse.status} ${createResponse.statusText}`);
+        const errorText = await createResponse.text();
+        console.error(`[HubSpot] Corps de la réponse:`, errorText);
+        try {
+          const errorData = JSON.parse(errorText);
+          console.error(`[HubSpot] Erreur JSON:`, JSON.stringify(errorData, null, 2));
+        } catch (e) {
+          console.error(`[HubSpot] Impossible de parser comme JSON`);
+        }
       }
     }
 
