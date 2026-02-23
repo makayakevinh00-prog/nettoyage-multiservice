@@ -25,6 +25,8 @@ export interface SendEmailOptions {
 
 export async function sendEmail(options: SendEmailOptions) {
   try {
+    console.log(`[Email] Envoi d'email a ${options.to} avec le sujet: ${options.subject}`);
+    
     const info = await transporter.sendMail({
       from: '"ProClean Empire" <serviceclient@procleanempire.com>',
       to: options.to,
@@ -41,10 +43,10 @@ export async function sendEmail(options: SendEmailOptions) {
       },
     });
 
-    console.log('Email envoyé:', info.messageId);
+    console.log(`✅ Email envoyé avec succès à ${options.to} (ID: ${info.messageId})`);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email:', error);
+    console.error(`❌ Erreur lors de l'envoi de l'email à ${options.to}:`, error);
     throw error;
   }
 }

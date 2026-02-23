@@ -213,6 +213,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
 
         // Envoyer l'email de confirmation au client avec fichier .ics
         try {
+          console.log(`[SendBooking] Préparation de l'email de confirmation pour ${input.email}`);
+          
           const confirmationEmail = generateBookingConfirmationEmail({
             name: input.name,
             service: input.service,
@@ -234,6 +236,8 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             },
           ] : undefined;
 
+          console.log(`[SendBooking] Envoi de l'email à ${input.email}...`);
+          
           await sendEmail({
             to: input.email,
             subject: '✅ Confirmation de réservation - ProClean Empire',
@@ -242,13 +246,16 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             attachments,
           });
           
+          console.log(`[SendBooking] ✅ Email envoyé avec succès à ${input.email}`);
+          
           // Envoyer aussi une notification au propriétaire
           await notifyOwner({
             title: `Confirmation d'envoi - ${input.name}`,
             content: `Confirmation de réservation envoyée à ${input.email}`,
           });
         } catch (emailError) {
-          console.error('Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
+          console.error('❌ Erreur lors de l\'envoi de l\'email de confirmation:', emailError);
+          console.error('Détails de l\'erreur:', JSON.stringify(emailError, null, 2));
           // Ne pas bloquer la réservation si l'email échoue
         }
 
