@@ -80,10 +80,14 @@ export default function AdvancedBookingForm({
     }
   );
 
+  // Mettre à jour les créneaux disponibles
   useEffect(() => {
     setAvailableSlots(slots);
+  }, [slots]);
+
+  useEffect(() => {
     setIsLoadingSlots(isLoadingSlotsQuery);
-  }, [slots, isLoadingSlotsQuery]);
+  }, [isLoadingSlotsQuery]);
 
   // Mettre a jour les donnees pre-remplies quand elles changent
   useEffect(() => {
