@@ -396,6 +396,39 @@ export async function syncBookingToHubSpot(bookingData: {
 
     console.log(`[HubSpot] Contact ID: ${contactId}`);
     
+    // Ajouter les détails de la réservation dans les notes du contact
+    if (contactId) {
+      const notes = `
+📄 RÉSERVATION PROCLEAN EMPIRE
+
+🔗 Service: ${bookingData.service}
+📊 Option: ${bookingData.serviceOption || 'Non spécifiée'}
+📅 Date: ${bookingData.date}
+🕒 Heure: ${bookingData.time}
+📍 Adresse: ${bookingData.address}
+💵 Prix total: ${bookingData.totalPrice ? bookingData.totalPrice.toFixed(2) + '€' : 'Non déterminé'}
+🗒 Notes client: ${bookingData.message || 'Aucune note'}
+      `.trim();
+      
+      try {
+        await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/contacts/${contactId}`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            properties: {
+              notes: notes,
+            },
+          }),
+        });
+        console.log(`[HubSpot] ✅ Notes ajoutées au contact`);
+      } catch (notesError) {
+        console.error('[HubSpot] Erreur lors de l\'ajout des notes:', notesError);
+      }
+    }
+    
     // Créer un deal pour la réservation avec le prix total
     console.log(`[HubSpot] Création du deal...`);
     const dealId = await createHubSpotDeal({
