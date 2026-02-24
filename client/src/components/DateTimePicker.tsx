@@ -120,16 +120,29 @@ export default function DateTimePicker({
           </PopoverTrigger>
           <PopoverContent className="w-80 p-2" align="start">
             <div className="grid gap-1 max-h-80 overflow-y-auto">
-              {TIME_SLOTS.map((slot) => (
-                <Button
-                  key={slot.value}
-                  variant={selectedTime === slot.value ? "default" : "ghost"}
-                  className="justify-start"
-                  onClick={() => handleTimeSelect(slot.value)}
-                >
-                  {slot.label}
-                </Button>
-              ))}
+              {isLoadingSlots && <p className="text-center text-sm text-gray-500 py-2">Chargement...</p>}
+              {!isLoadingSlots && availableSlots.length === 0 && (
+                <p className="text-center text-sm text-red-500 py-2">Aucun creneau disponible</p>
+              )}
+              {TIME_SLOTS.map((slot) => {
+                const isAvailable = availableSlots.includes(slot.value);
+                return (
+                  <Button
+                    key={slot.value}
+                    variant={selectedTime === slot.value ? "default" : "ghost"}
+                    disabled={!isAvailable}
+                    className={cn(
+                      "justify-start",
+                      !isAvailable && "opacity-50 cursor-not-allowed"
+                    )}
+                    onClick={() => isAvailable && handleTimeSelect(slot.value)}
+                    title={!isAvailable ? "Ce creneau est complet" : ""}
+                  >
+                    <span>{slot.label}</span>
+                    {!isAvailable && <span className="ml-auto text-xs text-red-500">Complet</span>}
+                  </Button>
+                );
+              })}
             </div>
           </PopoverContent>
         </Popover>
