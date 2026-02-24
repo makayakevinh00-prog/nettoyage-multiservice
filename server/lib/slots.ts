@@ -4,7 +4,7 @@ import { eq, and, gte, lte } from "drizzle-orm";
 import { isTimeSlotOccupied } from "./googleCalendar";
 
 /**
- * Vérifie si un créneau est disponible (max 3 réservations par créneau de 2h)
+ * Vérifie si un créneau est disponible (vérification Google Calendar + max 3 réservations par créneau de 2h)
  */
 export async function isSlotAvailable(
   service: string,
@@ -18,12 +18,14 @@ export async function isSlotAvailable(
   }
 
   try {
-    // DÉSACTIVÉ TEMPORAIREMENT: Vérifier si le créneau est occupé dans Google Calendar
-    // const isOccupiedInCalendar = await isTimeSlotOccupied(date, time);
-    // if (isOccupiedInCalendar) {
-    //   console.log(`[Slots] Créneau ${time} occupé dans Google Calendar`);
-    //   return false;
-    // }
+    // Vérifier si le créneau est occupé dans Google Calendar
+    console.log(`[Slots] Verification Google Calendar pour ${date} a ${time}`);
+    const isOccupiedInCalendar = await isTimeSlotOccupied(date, time);
+    if (isOccupiedInCalendar) {
+      console.log(`[Slots] Creneau ${time} occupe dans Google Calendar`);
+      return false;
+    }
+    console.log(`[Slots] Creneau ${time} libre dans Google Calendar`);
 
     // Convertir l'heure en minutes pour calculer la plage
     const [hours, minutes] = time.split(":").map(Number);
@@ -59,20 +61,20 @@ export async function isSlotAvailable(
       );
 
     console.log(
-      `[Slots] Vérification pour ${service} le ${date} à ${time}: ${existingBookings.length} réservation(s) trouvée(s)`
+      `[Slots] Verification pour ${service} le ${date} a ${time}: ${existingBookings.length} reservation(s) trouvee(s)`
     );
 
     // Si 3 réservations ou plus dans la plage, le créneau est complet
     return existingBookings.length < 3;
   } catch (error) {
-    console.error("[Slots] Erreur lors de la vérification du créneau:", error);
+    console.error("[Slots] Erreur lors de la verification du creneau:", error);
     return true; // Par défaut, permettre la réservation en cas d'erreur
   }
 }
 
 /**
  * Récupère les créneaux disponibles pour un service et une date
- * Limite à 3 réservations max par créneau de 2h
+ * Limite à 3 réservations max par créneau de 2h + vérification Google Calendar
  */
 export async function getAvailableSlots(
   service: string,
@@ -97,11 +99,11 @@ export async function getAvailableSlots(
     }
 
     console.log(
-      `[Slots] ${availableSlots.length}/${timeSlots2h.length} créneaux disponibles pour ${service} le ${date}`
+      `[Slots] ${availableSlots.length}/${timeSlots2h.length} creneaux disponibles pour ${service} le ${date}`
     );
     return availableSlots;
   } catch (error) {
-    console.error("[Slots] Erreur lors de la récupération des créneaux:", error);
+    console.error("[Slots] Erreur lors de la recuperation des creneaux:", error);
     return ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
   }
 }
