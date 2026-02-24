@@ -245,6 +245,67 @@ export async function associateContactToDeal(contactId: string, dealId: string):
 }
 
 /**
+ * Cru00e9e un ru00e9sumu00e9 de ru00e9union HubSpot
+ * Enregistre le rendez-vous sur le compte du client avec date/heure
+ */
+export async function createMeetingSummary(
+  contactId: string,
+  meetingData: {
+    title: string;
+    description: string;
+    startTime: string; // ISO format: 2026-02-24T14:30:00Z
+  }
+): Promise<string | null> {
+  try {
+    if (!HUBSPOT_API_KEY) {
+      console.error('HUBSPOT_API_KEY environment variable is not set');
+      return null;
+    }
+
+    // Cru00e9er une tache pour enregistrer le rendez-vous avec date/heure
+    const properties: Record<string, string> = {
+      hs_task_title: meetingData.title,
+      hs_task_body: meetingData.description,
+      hs_task_due_date: new Date(meetingData.startTime).getTime().toString(),
+      hs_task_status: 'NOT_STARTED',
+      hs_task_priority: 'HIGH',
+    };
+
+    const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/tasks`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        properties,
+        associations: [
+          {
+            type: 'contact_to_task',
+            id: contactId,
+          },
+        ],
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json() as any;
+      console.log(`u2705 Ru00e9sumu00e9 de ru00e9union HubSpot cru00e9: ${data.id}`);
+      return data.id;
+    } else {
+      console.error(`u274c Erreur cru00e9ation ru00e9sumu00e9 ru00e9union: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`[HubSpot] Ru00e9ponse:`, errorText);
+    }
+
+    return null;
+  } catch (error) {
+    console.error('u274c Erreur lors de la cru00e9ation du ru00e9sumu00e9 ru00e9union HubSpot:', error);
+    return null;
+  }
+}
+
+/**
  * Crée une tâche (task) HubSpot pour le rappel
  */
 export async function createTask(
