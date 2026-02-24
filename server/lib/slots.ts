@@ -19,12 +19,11 @@ export async function isSlotAvailable(
 
   try {
     // Vérifier si le créneau est occupé dans Google Calendar
-    // TODO: Réactiver une fois Google Calendar configuré
-    // const isOccupiedInCalendar = await isTimeSlotOccupied(date, time);
-    // if (isOccupiedInCalendar) {
-    //   console.log(`[Slots] Créneau ${time} occupé dans Google Calendar`);
-    //   return false;
-    // }
+    const isOccupiedInCalendar = await isTimeSlotOccupied(date, time);
+    if (isOccupiedInCalendar) {
+      console.log(`[Slots] Créneau ${time} occupé dans Google Calendar`);
+      return false;
+    }
 
     // Convertir l'heure en minutes pour calculer la plage
     const [hours, minutes] = time.split(":").map(Number);
