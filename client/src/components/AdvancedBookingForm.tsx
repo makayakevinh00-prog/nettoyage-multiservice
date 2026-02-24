@@ -66,6 +66,25 @@ export default function AdvancedBookingForm({
   });
 
   const [showSummary, setShowSummary] = useState(false);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
+
+  // Charger les créneaux disponibles quand la date change
+  useEffect(() => {
+    if (bookingData.date && bookingData.service) {
+      setIsLoadingSlots(true);
+      trpc.contact.getAvailableSlots.query({
+        service: bookingData.service,
+        date: bookingData.date,
+      }).then(slots => {
+        setAvailableSlots(slots);
+        setIsLoadingSlots(false);
+      }).catch(error => {
+        console.error('Erreur lors de la récupération des créneaux:', error);
+        setIsLoadingSlots(false);
+      });
+    }
+  }, [bookingData.date, bookingData.service]);
 
   // Mettre a jour les donnees pre-remplies quand elles changent
   useEffect(() => {
@@ -77,6 +96,13 @@ export default function AdvancedBookingForm({
       }));
     }
   }, [prefilledService, prefilledOption]);
+
+  // Réinitialiser le créneau quand les créneaux disponibles changent
+  useEffect(() => {
+    if (availableSlots.length > 0 && bookingData.time && !availableSlots.includes(bookingData.time)) {
+      setBookingData(prev => ({ ...prev, time: '' }));
+    }
+  }, [availableSlots]);
 
   const sendBookingMutation = trpc.contact.sendBooking.useMutation({
     onSuccess: () => {
@@ -470,12 +496,14 @@ export default function AdvancedBookingForm({
           {/* Date et Heure */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Date et Heure</h3>
-            <DateTimePicker
-              selectedDate={bookingData.date}
-              selectedTime={bookingData.time}
-              onDateChange={(date) => setBookingData({ ...bookingData, date })}
-              onTimeChange={(time) => setBookingData({ ...bookingData, time })}
-            />
+        <DateTimePicker
+          selectedDate={bookingData.date}
+          selectedTime={bookingData.time}
+          onDateChange={(date) => setBookingData(prev => ({ ...prev, date }))}
+          onTimeChange={(time) => setBookingData(prev => ({ ...prev, time }))}
+          availableSlots={availableSlots}
+          isLoadingSlots={isLoadingSlots}
+        />
           </div>
 
           {/* Lieu d'Intervention */}

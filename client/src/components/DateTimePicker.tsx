@@ -13,9 +13,11 @@ interface DateTimePickerProps {
   selectedTime: string;
   onDateChange: (date: string) => void;
   onTimeChange: (time: string) => void;
+  availableSlots?: string[];
+  isLoadingSlots?: boolean;
 }
 
-const TIME_SLOTS = [
+const TIME_SLOTS_ALL = [
   { value: "08:00", label: "8h00 - Matin" },
   { value: "09:00", label: "9h00 - Matin" },
   { value: "10:00", label: "10h00 - Matin" },
@@ -29,11 +31,18 @@ const TIME_SLOTS = [
   { value: "18:00", label: "18h00 - Soir" },
 ];
 
+// Filtrer les créneaux disponibles
+const TIME_SLOTS = availableSlots.length > 0 
+  ? TIME_SLOTS_ALL.filter(slot => availableSlots.includes(slot.value))
+  : TIME_SLOTS_ALL;
+
 export default function DateTimePicker({
   selectedDate,
   selectedTime,
   onDateChange,
   onTimeChange,
+  availableSlots = [],
+  isLoadingSlots = false,
 }: DateTimePickerProps) {
   const [isDateOpen, setIsDateOpen] = useState(false);
   const [isTimeOpen, setIsTimeOpen] = useState(false);

@@ -66,6 +66,21 @@ Cette demande a été envoyée depuis le site ProClean Empire.
         return { success: true };
       }),
 
+    getAvailableSlots: publicProcedure
+      .input(z.object({
+        service: z.string(),
+        date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+      }))
+      .query(async ({ input }) => {
+        try {
+          const slots = await getAvailableSlots(input.service, input.date);
+          return slots;
+        } catch (error) {
+          console.error('[getAvailableSlots] Erreur:', error);
+          return ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
+        }
+      }),
+
     sendBooking: publicProcedure
       .input(z.object({
         name: z.string().min(1).max(100).trim(),
