@@ -31,11 +31,6 @@ const TIME_SLOTS_ALL = [
   { value: "18:00", label: "18h00 - Soir" },
 ];
 
-// Filtrer les créneaux disponibles
-const TIME_SLOTS = availableSlots.length > 0 
-  ? TIME_SLOTS_ALL.filter(slot => availableSlots.includes(slot.value))
-  : TIME_SLOTS_ALL;
-
 export default function DateTimePicker({
   selectedDate,
   selectedTime,
@@ -46,6 +41,11 @@ export default function DateTimePicker({
 }: DateTimePickerProps) {
   const [isDateOpen, setIsDateOpen] = useState(false);
   const [isTimeOpen, setIsTimeOpen] = useState(false);
+
+  // Filtrer les créneaux disponibles
+  const TIME_SLOTS = availableSlots.length > 0 
+    ? TIME_SLOTS_ALL.filter(slot => availableSlots.includes(slot.value))
+    : TIME_SLOTS_ALL;
 
   const parsedDate = selectedDate ? new Date(selectedDate) : undefined;
   const today = startOfDay(new Date());
