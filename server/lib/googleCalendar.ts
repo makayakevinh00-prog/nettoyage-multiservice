@@ -241,3 +241,82 @@ export async function testGoogleCalendarConnection(): Promise<boolean> {
     return false;
   }
 }
+
+
+/**
+ * Récupère les événements du calendrier du propriétaire pour une date donnée
+ */
+export async function getOwnerCalendarEvents(date: string): Promise<Array<{ start: string; end: string }>> {
+  try {
+    const ownerCalendarId = 'serviceclient@procleanempire.com';
+    
+    const calendar = getGoogleCalendarClient();
+    if (!calendar) {
+      console.warn('[GoogleCalendar] Impossible d\'initialiser le client Google Calendar pour récupérer les événements');
+      return [];
+    }
+
+    // Convertir la date en format ISO pour la requête
+    const [year, month, day] = date.split('-');
+    const startOfDay = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 0, 0, 0);
+    const endOfDay = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 23, 59, 59);
+
+    console.log(`[GoogleCalendar] Récupération des événements pour ${date}`);
+
+    const response = await calendar.events.list({
+      calendarId: ownerCalendarId,
+      timeMin: startOfDay.toISOString(),
+      timeMax: endOfDay.toISOString(),
+      singleEvents: true,
+      orderBy: 'startTime',
+    });
+
+    const events = response.data.items || [];
+    console.log(`[GoogleCalendar] ${events.length} événement(s) trouvé(s) pour ${date}`);
+
+    return events.map(event => ({
+      start: event.start?.dateTime || event.start?.date || '',
+      end: event.end?.dateTime || event.end?.date || '',
+    }));
+  } catch (error) {
+    console.error('[GoogleCalendar] Erreur lors de la récupération des événements:', error);
+    return [];
+  }
+}
+
+/**
+ * Vérifie si un créneau est occupé dans Google Calendar
+ */
+export async function isTimeSlotOccupied(date: string, time: string): Promise<boolean> {
+  try {
+    const events = await getOwnerCalendarEvents(date);
+    
+    if (events.length === 0) {
+      return false;
+    }
+
+    // Convertir le créneau demandé en format ISO
+    const [year, month, day] = date.split('-');
+    const [hours, minutes] = time.split(':');
+    
+    const slotStart = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hours), parseInt(minutes));
+    const slotEnd = new Date(slotStart.getTime() + 2 * 60 * 60 * 1000); // Créneau de 2h
+
+    // Vérifier si le créneau chevauche un événement existant
+    for (const event of events) {
+      const eventStart = new Date(event.start);
+      const eventEnd = new Date(event.end);
+
+      // Chevauchement si : slotStart < eventEnd ET slotEnd > eventStart
+      if (slotStart < eventEnd && slotEnd > eventStart) {
+        console.log(`[GoogleCalendar] Créneau ${time} occupé par un événement`);
+        return true;
+      }
+    }
+
+    return false;
+  } catch (error) {
+    console.error('[GoogleCalendar] Erreur lors de la vérification du créneau:', error);
+    return false; // Par défaut, permettre la réservation en cas d'erreur
+  }
+}
