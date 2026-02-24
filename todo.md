@@ -763,3 +763,19 @@
 
 - [x] Remplacer l'image du Balcon (actuellement image de façade) par une vraie image de balcon
 - [x] Retirer l'adresse du site interne (serviceclient@procleanempire.com ou autre adresse visible) - LAISSÉ TEL QUEL PAR L'UTILISATEUR
+
+## PHASE ACTUELLE - Correction des Créneaux "Complet"
+
+- [x] Désactiver Google Calendar temporairement pour déboguer
+- [x] Tester que les créneaux s'affichent correctement (08:00, 10:00, 12:00, 14:00, 16:00, 18:00)
+- [ ] Tester une réservation complète (formulaire → HubSpot)
+- [ ] Implémenter approche alternative Google Calendar (calendrier public ou OAuth2)
+
+
+## PHASE ACTUELLE - Correction des Créneaux "Complet"
+
+- [x] Désactiver Google Calendar temporairement pour déboguer
+- [x] Tester que les créneaux s'affichent correctement (08:00, 10:00, 12:00, 14:00, 16:00, 18:00)
+- [x] Tester une réservation complète (formulaire → HubSpot) - ✅ Réservation créée, emails envoyés
+- [ ] Vérifier que HubSpot a reçu les données
+- [ ] Implémenter approche alternative Google Calendar (calendrier public ou OAuth2)
