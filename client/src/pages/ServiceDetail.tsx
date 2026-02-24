@@ -11,9 +11,13 @@ const serviceDetails: Record<string, any> = {
     description: "Lavage intérieur et extérieur, lustrage, protection",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg",
     packages: [
-      { name: "Nettoyage intérieur + extérieur", price: "70€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
-      { name: "Nettoyage complet", price: "90€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
-      { name: "SUV", price: "120€", features: ["Lavage haute pression", "Lustrage intensif", "Protection céramique", "Finition premium"] },
+      { name: "Nettoyage extérieur uniquement", price: "30€", features: ["Lavage extérieur complet", "Séchage professionnel", "Finition brillante"] },
+      { name: "Nettoyage intérieur uniquement", price: "60€", features: ["Nettoyage intérieur complet", "Aspirateur professionnel", "Désodorisation"] },
+      { name: "Nettoyage intérieur + extérieur (sans siège)", price: "90€", features: ["Lavage extérieur complet", "Nettoyage intérieur", "Séchage professionnel"] },
+      { name: "Nettoyage complet", price: "110€", features: ["Lavage complet", "Lustrage professionnel", "Protection brillance"] },
+      { name: "SUV - Nettoyage intérieur + extérieur", price: "150€", features: ["Lavage haute pression", "Nettoyage intérieur complet", "Finition premium"] },
+      { name: "SUV - Nettoyage complet avec démantage de siège", price: "220€", features: ["Lavage haute pression", "Démantage de siège", "Nettoyage intérieur profond", "Protection céramique"] },
+      { name: "Option Polissage", price: "+180€", features: ["Polissage professionnel", "Protection brillance", "Finition premium"] },
     ],
   },
   tapis: {
