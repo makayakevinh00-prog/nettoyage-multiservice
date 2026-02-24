@@ -412,18 +412,20 @@ export async function syncBookingToHubSpot(bookingData: {
     }
 
     // Créer une tâche de rappel pour 24h avant
-    if (contactId) {
-      const reminderDate = new Date(bookingData.date);
-      reminderDate.setDate(reminderDate.getDate() - 1);
-
-      await createTask(contactId, {
-        hs_task_title: `Rappel : ${bookingData.service} - ${bookingData.name}`,
-        hs_task_body: `Rendez-vous demain à ${bookingData.time} pour ${bookingData.service} à ${bookingData.address}`,
-        hs_task_due_date: reminderDate.toISOString().split('T')[0],
-        hs_task_status: 'NOT_STARTED',
-        hs_task_priority: 'HIGH',
-      });
-    }
+    // TODO: HubSpot requiert le champ 'to' obligatoire pour les tâches
+    // À implémenter avec une approche alternative (webhooks, etc.)
+    // if (contactId) {
+    //   const reminderDate = new Date(bookingData.date);
+    //   reminderDate.setDate(reminderDate.getDate() - 1);
+    //
+    //   await createTask(contactId, {
+    //     hs_task_title: `Rappel : ${bookingData.service} - ${bookingData.name}`,
+    //     hs_task_body: `Rendez-vous demain à ${bookingData.time} pour ${bookingData.service} à ${bookingData.address}`,
+    //     hs_task_due_date: reminderDate.toISOString().split('T')[0],
+    //     hs_task_status: 'NOT_STARTED',
+    //     hs_task_priority: 'HIGH',
+    //   });
+    // }
 
     console.log(`[HubSpot] Deal ID: ${dealId}`);
     console.log(`[HubSpot] ✅ Synchronisation terminée (Contact: ${contactId}, Deal: ${dealId})`);
