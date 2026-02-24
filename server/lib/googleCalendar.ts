@@ -248,7 +248,7 @@ export async function testGoogleCalendarConnection(): Promise<boolean> {
  */
 export async function getOwnerCalendarEvents(date: string): Promise<Array<{ start: string; end: string }>> {
   try {
-    const ownerCalendarId = process.env.GOOGLE_CALENDAR_ID || 'serviceclient@procleanempire.com';
+    const ownerCalendarId = process.env.GOOGLE_CALENDAR_ID || 'primary';
     
     const calendar = getGoogleCalendarClient();
     if (!calendar) {
@@ -261,7 +261,7 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
     const startOfDay = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 0, 0, 0);
     const endOfDay = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 23, 59, 59);
 
-    console.log(`[GoogleCalendar] Récupération des événements pour ${date}`);
+    console.log(`[GoogleCalendar] Récupération des événements pour ${date} (calendarId: ${ownerCalendarId})`);
 
     const response = await calendar.events.list({
       calendarId: ownerCalendarId,
@@ -273,6 +273,11 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
 
     const events = response.data.items || [];
     console.log(`[GoogleCalendar] ${events.length} événement(s) trouvé(s) pour ${date}`);
+    
+    // Afficher les événements trouvés
+    events.forEach((event, index) => {
+      console.log(`  [${index + 1}] ${event.summary}: ${event.start?.dateTime || event.start?.date} - ${event.end?.dateTime || event.end?.date}`);
+    });
 
     return events.map(event => ({
       start: event.start?.dateTime || event.start?.date || '',
@@ -280,6 +285,10 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
     }));
   } catch (error) {
     console.error('[GoogleCalendar] Erreur lors de la récupération des événements:', error);
+    // Afficher plus de détails sur l'erreur
+    if (error instanceof Error) {
+      console.error('[GoogleCalendar] Détails de l\'erreur:', error.message);
+    }
     return [];
   }
 }
@@ -289,6 +298,10 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
  */
 export async function isTimeSlotOccupied(date: string, time: string): Promise<boolean> {
   try {
+    // TEMPORAIREMENT DÉSACTIVÉ POUR DÉBOGUER
+    console.log(`[GoogleCalendar] isTimeSlotOccupied désactivé temporairement pour ${date} ${time}`);
+    return false; // Toujours retourner false (créneau libre) pour tester
+    
     const events = await getOwnerCalendarEvents(date);
     
     if (events.length === 0) {
