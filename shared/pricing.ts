@@ -58,7 +58,7 @@ export const SERVICES: Record<string, Service> = {
       },
       {
         id: "auto-suv-complet",
-        label: "220€ - SUV nettoyage complet avec démantage de siège",
+        label: "220€ - Nettoyage complet avec démantage des sièges",
         price: 220,
         description: "Lavage haute pression, démantage de siège, nettoyage intérieur profond, protection céramique",
       },
