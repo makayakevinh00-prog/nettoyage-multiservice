@@ -49,6 +49,7 @@ export default function AdvancedBookingForm({
     time: string;
     address: string;
     message: string;
+    selectedAddons: string[]; // IDs des addons sélectionnés
   }>({
     name: prefilledName || user?.name || "",
     email: prefilledEmail || user?.email || "",
@@ -60,6 +61,7 @@ export default function AdvancedBookingForm({
     time: "",
     address: "",
     message: "",
+    selectedAddons: [],
   });
 
   // Mettre a jour les donnees pre-remplies quand elles changent
@@ -87,6 +89,7 @@ export default function AdvancedBookingForm({
         time: "",
         address: "",
         message: "",
+        selectedAddons: [],
       });
       onSuccess?.();
     },
@@ -101,12 +104,24 @@ export default function AdvancedBookingForm({
     return bookingData.service ? SERVICES[bookingData.service] : null;
   }, [bookingData.service]);
 
-  // Calculer le prix total (en prenant en compte la quantité)
+  // Calculer le prix total (en prenant en compte la quantité et les addons)
   const totalPrice = useMemo(() => {
     if (!bookingData.serviceOption) return 0;
     const basePrice = getOptionPrice(bookingData.service, bookingData.serviceOption);
-    return basePrice * bookingData.quantity; // Multiplier par la quantité
-  }, [bookingData.service, bookingData.serviceOption, bookingData.quantity]);
+    let total = basePrice * bookingData.quantity;
+    
+    // Ajouter le prix des addons sélectionnés
+    if (selectedService?.addons && bookingData.selectedAddons.length > 0) {
+      bookingData.selectedAddons.forEach(addonId => {
+        const addon = selectedService.addons?.find(a => a.id === addonId);
+        if (addon) {
+          total += addon.price * bookingData.quantity; // Multiplier par la quantité aussi
+        }
+      });
+    }
+    
+    return total;
+  }, [bookingData.service, bookingData.serviceOption, bookingData.quantity, bookingData.selectedAddons, selectedService]);
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,12 +138,19 @@ export default function AdvancedBookingForm({
     }
 
     // Envoyer la réservation
+    const addonsLabel = bookingData.selectedAddons.length > 0 
+      ? ` + ${bookingData.selectedAddons.map(id => {
+          const addon = selectedService?.addons?.find(a => a.id === id);
+          return addon?.label || '';
+        }).join(', ')}`
+      : '';
+    
     sendBookingMutation.mutate({
       name: bookingData.name,
       email: bookingData.email,
       phone: bookingData.phone,
       service: bookingData.service as any,
-      serviceOption: bookingData.serviceOption,
+      serviceOption: bookingData.serviceOption + addonsLabel,
       quantity: bookingData.quantity,
       date: bookingData.date,
       time: bookingData.time,
@@ -261,6 +283,43 @@ export default function AdvancedBookingForm({
                       </button>
                     </div>
                   </div>
+
+                  {/* Options supplémentaires */}
+                  {selectedService.addons && selectedService.addons.length > 0 && (
+                    <div className="border-t pt-4">
+                      <Label className="text-base font-semibold mb-3 block">Options supplémentaires</Label>
+                      <div className="space-y-3">
+                        {selectedService.addons.map((addon) => (
+                          <div key={addon.id} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-gray-50">
+                            <input
+                              type="checkbox"
+                              id={addon.id}
+                              checked={bookingData.selectedAddons.includes(addon.id)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setBookingData({
+                                    ...bookingData,
+                                    selectedAddons: [...bookingData.selectedAddons, addon.id]
+                                  });
+                                } else {
+                                  setBookingData({
+                                    ...bookingData,
+                                    selectedAddons: bookingData.selectedAddons.filter(id => id !== addon.id)
+                                  });
+                                }
+                              }}
+                              className="w-4 h-4 cursor-pointer"
+                            />
+                            <label htmlFor={addon.id} className="flex-1 cursor-pointer">
+                              <div className="font-medium text-gray-900">{addon.label}</div>
+                              {addon.description && <div className="text-sm text-gray-600">{addon.description}</div>}
+                            </label>
+                            <span className="font-semibold text-blue-600">+{formatPrice(addon.price)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
 

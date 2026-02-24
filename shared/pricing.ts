@@ -16,6 +16,7 @@ export interface Service {
   basePrice?: number; // Prix de base si pas d'options
   options: ServiceOption[];
   requiresSelection: boolean; // Si l'utilisateur doit choisir une option
+  addons?: ServiceOption[]; // Options supplémentaires optionnelles
 }
 
 // Tarifs en euros
@@ -61,14 +62,16 @@ export const SERVICES: Record<string, Service> = {
         price: 220,
         description: "Lavage haute pression, démantage de siège, nettoyage intérieur profond, protection céramique",
       },
+    ],
+    requiresSelection: true,
+    addons: [
       {
         id: "auto-polissage",
-        label: "+180€ - Option Polissage",
+        label: "Polissage professionnel",
         price: 180,
         description: "Polissage professionnel, protection brillance, finition premium",
       },
     ],
-    requiresSelection: true,
   },
 
   tapis: {
