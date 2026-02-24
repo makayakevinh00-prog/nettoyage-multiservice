@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,10 +16,9 @@ import AddressAutocomplete from "@/components/AddressAutocomplete";
 import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
-import { Euro } from "lucide-react";
+import { Euro, ChevronLeft } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useState, useMemo, useEffect } from "react";
-import { ChevronLeft } from "lucide-react";
 
 interface AdvancedBookingFormProps {
   onSuccess?: () => void;
