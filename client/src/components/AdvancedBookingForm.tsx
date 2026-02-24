@@ -66,11 +66,9 @@ export default function AdvancedBookingForm({
   });
 
   const [showSummary, setShowSummary] = useState(false);
-  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
-  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
 
   // Charger les créneaux disponibles quand la date change
-  const { data: slots = [], isLoading: isLoadingSlotsQuery } = trpc.contact.getAvailableSlots.useQuery(
+  const { data: availableSlots = [], isLoading: isLoadingSlots } = trpc.contact.getAvailableSlots.useQuery(
     {
       service: bookingData.service,
       date: bookingData.date,
@@ -79,15 +77,6 @@ export default function AdvancedBookingForm({
       enabled: !!(bookingData.date && bookingData.service),
     }
   );
-
-  // Mettre à jour les créneaux disponibles
-  useEffect(() => {
-    setAvailableSlots(slots);
-  }, [slots]);
-
-  useEffect(() => {
-    setIsLoadingSlots(isLoadingSlotsQuery);
-  }, [isLoadingSlotsQuery]);
 
   // Mettre a jour les donnees pre-remplies quand elles changent
   useEffect(() => {
@@ -102,10 +91,10 @@ export default function AdvancedBookingForm({
 
   // Réinitialiser le créneau quand les créneaux disponibles changent
   useEffect(() => {
-    if (availableSlots.length > 0 && bookingData.time && !availableSlots.includes(bookingData.time)) {
+    if (availableSlots && availableSlots.length > 0 && bookingData.time && !availableSlots.includes(bookingData.time)) {
       setBookingData(prev => ({ ...prev, time: '' }));
     }
-  }, [availableSlots]);
+  }, [availableSlots, bookingData.time]);
 
   const sendBookingMutation = trpc.contact.sendBooking.useMutation({
     onSuccess: () => {
