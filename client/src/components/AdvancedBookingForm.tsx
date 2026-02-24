@@ -18,6 +18,8 @@ import { trpc } from "@/lib/trpc";
 import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
 import { Euro } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useState, useMemo, useEffect } from "react";
+import { ChevronLeft } from "lucide-react";
 
 interface AdvancedBookingFormProps {
   onSuccess?: () => void;
@@ -63,6 +65,8 @@ export default function AdvancedBookingForm({
     message: "",
     selectedAddons: [],
   });
+
+  const [showSummary, setShowSummary] = useState(false);
 
   // Mettre a jour les donnees pre-remplies quand elles changent
   useEffect(() => {
@@ -137,6 +141,11 @@ export default function AdvancedBookingForm({
       return;
     }
 
+    // Afficher le récapitulatif au lieu d'envoyer directement
+    setShowSummary(true);
+  };
+
+  const handleConfirmBooking = () => {
     // Envoyer la réservation
     const addonsLabel = bookingData.selectedAddons.length > 0 
       ? ` + ${bookingData.selectedAddons.map(id => {
@@ -158,6 +167,122 @@ export default function AdvancedBookingForm({
       message: bookingData.message
     });
   };
+
+  // Si on affiche le récapitulatif
+  if (showSummary) {
+    const optionLabel = selectedService?.options.find(o => o.id === bookingData.serviceOption)?.label || bookingData.serviceOption;
+    const addonsInfo = bookingData.selectedAddons
+      .map(id => selectedService?.addons?.find(a => a.id === id))
+      .filter(Boolean);
+
+    return (
+      <Card className="max-w-2xl mx-auto">
+        <CardHeader>
+          <div className="flex items-center gap-2 mb-4">
+            <button
+              onClick={() => setShowSummary(false)}
+              className="p-2 hover:bg-gray-100 rounded-lg transition"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div>
+              <CardTitle>Récapitulatif de votre réservation</CardTitle>
+              <CardDescription>Vérifiez tous les détails avant de confirmer</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Informations client */}
+          <div className="border-b pb-4">
+            <h3 className="font-semibold mb-3 text-lg">Vos informations</h3>
+            <div className="space-y-2 text-sm">
+              <p><span className="font-medium">Nom:</span> {bookingData.name}</p>
+              <p><span className="font-medium">Email:</span> {bookingData.email}</p>
+              <p><span className="font-medium">Téléphone:</span> {bookingData.phone}</p>
+            </div>
+          </div>
+
+          {/* Détails du service */}
+          <div className="border-b pb-4">
+            <h3 className="font-semibold mb-3 text-lg">Détails du service</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="font-medium text-gray-900">{selectedService?.name}</p>
+                  <p className="text-sm text-gray-600">{optionLabel}</p>
+                </div>
+                <p className="font-semibold text-blue-600">{formatPrice(getOptionPrice(bookingData.service, bookingData.serviceOption))}</p>
+              </div>
+              
+              {bookingData.quantity > 1 && (
+                <p className="text-sm text-gray-600">Quantité: {bookingData.quantity}x</p>
+              )}
+
+              {addonsInfo.length > 0 && (
+                <div className="mt-3 pt-3 border-t">
+                  <p className="text-sm font-medium mb-2">Options supplémentaires:</p>
+                  {addonsInfo.map((addon) => addon && (
+                    <div key={addon.id} className="flex justify-between text-sm">
+                      <span>{addon.label}</span>
+                      <span className="text-blue-600">+{formatPrice(addon.price)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Date et adresse */}
+          <div className="border-b pb-4">
+            <h3 className="font-semibold mb-3 text-lg">Rendez-vous</h3>
+            <div className="space-y-2 text-sm">
+              <p><span className="font-medium">Date:</span> {new Date(bookingData.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p><span className="font-medium">Heure:</span> {bookingData.time}</p>
+              <p><span className="font-medium">Adresse:</span> {bookingData.address}</p>
+            </div>
+          </div>
+
+          {/* Notes */}
+          {bookingData.message && (
+            <div className="border-b pb-4">
+              <h3 className="font-semibold mb-2 text-lg">Notes</h3>
+              <p className="text-sm text-gray-700">{bookingData.message}</p>
+            </div>
+          )}
+
+          {/* Prix total */}
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <div className="flex items-center justify-between">
+              <span className="font-semibold text-gray-700 text-lg">Prix total:</span>
+              <div className="flex items-center gap-2">
+                <Euro size={24} className="text-blue-600" />
+                <span className="text-3xl font-bold text-blue-600">{formatPrice(totalPrice)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Boutons */}
+          <div className="flex gap-3 pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowSummary(false)}
+              className="flex-1"
+            >
+              Modifier
+            </Button>
+            <Button
+              onClick={handleConfirmBooking}
+              disabled={sendBookingMutation.isPending}
+              className="flex-1"
+            >
+              {sendBookingMutation.isPending ? 'En cours...' : 'Confirmer la réservation'}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="max-w-2xl mx-auto">
