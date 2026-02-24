@@ -298,10 +298,13 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
  */
 export async function isTimeSlotOccupied(date: string, time: string): Promise<boolean> {
   try {
-    // TEMPORAIREMENT DÉSACTIVÉ POUR DÉBOGUER
-    console.log(`[GoogleCalendar] isTimeSlotOccupied désactivé temporairement pour ${date} ${time}`);
-    return false; // Toujours retourner false (créneau libre) pour tester
+    // DÉSACTIVÉ - Google Calendar credentials ne fonctionnent pas correctement
+    // Pour l'instant, tous les créneaux sont considérés comme libres
+    console.log(`[GoogleCalendar] isTimeSlotOccupied DÉSACTIVÉ - retournant false pour ${date} ${time}`);
+    return false; // Toujours retourner false (créneau libre)
     
+    // Code commenté - à réactiver quand Google Calendar sera configuré correctement
+    /*
     const events = await getOwnerCalendarEvents(date);
     
     if (events.length === 0) {
@@ -328,6 +331,7 @@ export async function isTimeSlotOccupied(date: string, time: string): Promise<bo
     }
 
     return false;
+    */
   } catch (error) {
     console.error('[GoogleCalendar] Erreur lors de la vérification du créneau:', error);
     return false; // Par défaut, permettre la réservation en cas d'erreur
