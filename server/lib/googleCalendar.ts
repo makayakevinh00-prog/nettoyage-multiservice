@@ -297,43 +297,7 @@ export async function getOwnerCalendarEvents(date: string): Promise<Array<{ star
  * Vérifie si un créneau est occupé dans Google Calendar
  */
 export async function isTimeSlotOccupied(date: string, time: string): Promise<boolean> {
-  try {
-    // DÉSACTIVÉ - Google Calendar credentials ne fonctionnent pas correctement
-    // Pour l'instant, tous les créneaux sont considérés comme libres
-    console.log(`[GoogleCalendar] isTimeSlotOccupied DÉSACTIVÉ - retournant false pour ${date} ${time}`);
-    return false; // Toujours retourner false (créneau libre)
-    
-    // Code commenté - à réactiver quand Google Calendar sera configuré correctement
-    /*
-    const events = await getOwnerCalendarEvents(date);
-    
-    if (events.length === 0) {
-      return false;
-    }
-
-    // Convertir le créneau demandé en format ISO
-    const [year, month, day] = date.split('-');
-    const [hours, minutes] = time.split(':');
-    
-    const slotStart = new Date(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(hours), parseInt(minutes));
-    const slotEnd = new Date(slotStart.getTime() + 2 * 60 * 60 * 1000); // Créneau de 2h
-
-    // Vérifier si le créneau chevauche un événement existant
-    for (const event of events) {
-      const eventStart = new Date(event.start);
-      const eventEnd = new Date(event.end);
-
-      // Chevauchement si : slotStart < eventEnd ET slotEnd > eventStart
-      if (slotStart < eventEnd && slotEnd > eventStart) {
-        console.log(`[GoogleCalendar] Créneau ${time} occupé par un événement`);
-        return true;
-      }
-    }
-
-    return false;
-    */
-  } catch (error) {
-    console.error('[GoogleCalendar] Erreur lors de la vérification du créneau:', error);
-    return false; // Par défaut, permettre la réservation en cas d'erreur
-  }
+  // DÉSACTIVÉ COMPLÈTEMENT - Google Calendar n'est pas utilisé
+  // Tous les créneaux sont toujours considérés comme libres
+  return false; // Toujours retourner false (créneau libre)
 }
