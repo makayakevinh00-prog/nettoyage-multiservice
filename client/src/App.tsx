@@ -38,6 +38,7 @@ function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/en"} component={Home} />
 
       <Route path={"/service/tapis"} component={ServiceDetail} />
       <Route path={"/service/balcon"} component={ServiceDetail} />

@@ -19,6 +19,8 @@ import { SERVICES, getOptionPrice, formatPrice } from "@shared/pricing";
 import { Euro, ChevronLeft } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useState, useMemo, useEffect } from "react";
+import { format, parse } from "date-fns";
+import { fr } from "date-fns/locale";
 
 interface AdvancedBookingFormProps {
   onSuccess?: () => void;
@@ -158,8 +160,8 @@ export default function AdvancedBookingForm({
       return;
     }
 
-    // Afficher le récapitulatif au lieu d'envoyer directement
-    setShowSummary(true);
+    // Envoyer directement la réservation sans afficher le récapitulatif
+    handleConfirmBooking();
   };
 
   const handleConfirmBooking = () => {
@@ -253,7 +255,7 @@ export default function AdvancedBookingForm({
           <div className="border-b pb-4">
             <h3 className="font-semibold mb-3 text-lg">Rendez-vous</h3>
             <div className="space-y-2 text-sm">
-              <p><span className="font-medium">Date:</span> {new Date(bookingData.date).toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              <p><span className="font-medium">Date:</span> {bookingData.date ? format(parse(bookingData.date, 'yyyy-MM-dd', new Date()), 'EEEE d MMMM yyyy', { locale: fr }) : 'Non sélectionnée'}</p>
               <p><span className="font-medium">Heure:</span> {bookingData.time}</p>
               <p><span className="font-medium">Adresse:</span> {bookingData.address}</p>
             </div>

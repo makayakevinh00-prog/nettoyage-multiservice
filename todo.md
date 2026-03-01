@@ -186,9 +186,15 @@
 - [x] Ajouter les balises canonical pour éviter les doublons
 - [x] Optimiser les titres et descriptions pour chaque page
 - [x] Ajouter les mots-clés locaux (Île-de-France, villes)
-- [ ] Tester avec Google Search Console
+- [x] Tester avec Google Search Console
 - [ ] Revendiquer Google My Business
 - [ ] Créer un blog avec contenu SEO
+
+## Correction Erreurs Soft 404 - Google Search Console
+
+- [x] Corriger erreur Soft 404 : ajouter route /en vers page d'accueil
+- [ ] Soumettre la correction à Google Search Console
+- [ ] Attendre que Google réindexe la page /en
 
 
 ## Améliorations Demandées par l'Utilisateur
