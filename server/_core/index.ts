@@ -55,6 +55,11 @@ async function startServer() {
     const host = req.get('host') || '';
     const protocol = req.get('x-forwarded-proto') || req.protocol || 'https';
     
+    // Rediriger /en vers / pour éviter l'erreur Soft 404
+    if (req.path === '/en') {
+      return res.redirect(301, '/');
+    }
+    
     // Rediriger www vers non-www
     if (host.startsWith('www.')) {
       const newHost = host.replace('www.', '');

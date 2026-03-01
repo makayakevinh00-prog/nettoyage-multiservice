@@ -192,7 +192,9 @@
 
 ## Correction Erreurs Soft 404 - Google Search Console
 
-- [x] Corriger erreur Soft 404 : ajouter route /en vers page d'accueil
+- [x] Corriger erreur Soft 404 : ajouter route /en vers page d'accueil (redirection serveur 301)
+- [x] Tester la redirection sur le serveur de développement
+- [ ] Publier le site en production
 - [ ] Soumettre la correction à Google Search Console
 - [ ] Attendre que Google réindexe la page /en
 
