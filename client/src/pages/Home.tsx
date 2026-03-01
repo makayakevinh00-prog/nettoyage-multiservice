@@ -13,7 +13,8 @@ import {
   Shield,
   Droplets,
   Clock3,
-  Calendar
+  Calendar,
+  Star
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
@@ -216,6 +217,78 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Why Choose Us Section */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Pourquoi Choisir ProClean Empire ?</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Nous sommes l'entreprise de nettoyage professionnel de référence en Île-de-France depuis plus de 5 ans</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <CheckCircle2 className="w-8 h-8 text-green-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Expertise Professionnelle</h3>
+                  <p className="text-gray-700">Plus de 5 ans d'expérience dans le nettoyage professionnel. Notre équipe maîtrise tous les types de nettoyage : automobile, terrasse, tapis, balcon, façade, jardinage et piscine.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Shield className="w-8 h-8 text-blue-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Certifications & Assurances</h3>
+                  <p className="text-gray-700">Entreprise certifiée et assurée. Nous respectons les normes de sécurité et d'hygiène les plus strictes pour garantir votre satisfaction.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Sparkles className="w-8 h-8 text-yellow-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Matériel Professionnel</h3>
+                  <p className="text-gray-700">Nous utilisons le matériel de nettoyage de dernière génération pour des résultats impeccables et durables en toutes circonstances.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Leaf className="w-8 h-8 text-green-600" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Éco-Responsable</h3>
+                  <p className="text-gray-700">Produits de nettoyage écologiques et respectueux de l'environnement. Nous minimisons notre impact écologique tout en garantissant l'efficacité.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Clock3 className="w-8 h-8 text-orange-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Intervention Rapide</h3>
+                  <p className="text-gray-700">Devis gratuit sous 30 minutes. Intervention rapide à domicile dans toute l'Île-de-France. Disponible 7j/7 pour vos urgences.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Star className="w-8 h-8 text-blue-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Satisfaction Garantie</h3>
+                  <p className="text-gray-700">5.0/5 ⭐ sur la base de 100+ avis clients vérifiés. Votre satisfaction est notre priorité absolue.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Stats Section */}
         <section className="bg-gradient-to-r from-slate-900 to-black py-16 md:py-24">
           <div className="container mx-auto px-4">
@@ -324,6 +397,43 @@ export default function Home() {
                   <p className="text-sm opacity-90">Cliquez pour voir les avis vérifiés de ProClean Empire</p>
                 </div>
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section - SEO Optimization */}
+        <section className="py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Questions Fréquemment Posées</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">Trouvez les réponses à vos questions sur nos services de nettoyage professionnel en Île-de-France</p>
+            </div>
+
+            <div className="max-w-3xl mx-auto space-y-6">
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Quels services de nettoyage proposez-vous à Paris et en Île-de-France ?</h3>
+                <p className="text-gray-700">ProClean Empire propose une gamme complète de services de nettoyage professionnel : nettoyage automobile (intérieur et extérieur), nettoyage de terrasse, nettoyage de tapis et canapés, nettoyage de balcon, nettoyage de jardinage, nettoyage de façade, et nettoyage de piscine. Nous intervenons à Paris, 93, 95 et partout en Île-de-France.</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Quel est le délai pour obtenir un devis gratuit ?</h3>
+                <p className="text-gray-700">Nous vous proposons un devis gratuit sous 30 minutes. Il suffit de remplir notre formulaire de réservation en ligne ou de nous appeler au 06 17 21 22 30. Notre équipe vous contactera rapidement pour discuter de vos besoins en nettoyage.</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Êtes-vous disponible le week-end et les jours fériés ?</h3>
+                <p className="text-gray-700">Oui, ProClean Empire est disponible 7 jours sur 7, y compris les week-ends et jours fériés. Nous comprenons que vos besoins en nettoyage ne s'arrêtent pas en semaine. Contactez-nous pour planifier votre intervention au moment qui vous convient le mieux.</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Utilisez-vous des produits écologiques et respectueux de l'environnement ?</h3>
+                <p className="text-gray-700">Absolument ! ProClean Empire est engagée dans une démarche éco-responsable. Nous utilisons des produits de nettoyage respectueux de l'environnement et des techniques professionnelles qui minimisent l'impact écologique tout en garantissant des résultats impeccables.</p>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Quelle est votre zone d'intervention en Île-de-France ?</h3>
+                <p className="text-gray-700">ProClean Empire intervient dans toute l'Île-de-France, notamment à Paris (75), Hauts-de-Seine (92), Seine-Saint-Denis (93), Val-de-Marne (94), Val-d'Oise (95), Seine-et-Marne (77), Essonne (91) et Yvelines (78). Nous proposons une intervention rapide à domicile dans votre secteur.</p>
+              </div>
             </div>
           </div>
         </section>

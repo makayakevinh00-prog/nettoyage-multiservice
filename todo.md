@@ -787,3 +787,15 @@
 - [x] Tester une réservation complète (formulaire → HubSpot) - ✅ Réservation créée, emails envoyés
 - [ ] Vérifier que HubSpot a reçu les données
 - [ ] Implémenter approche alternative Google Calendar (calendrier public ou OAuth2)
+
+
+## Optimisation SEO Page d'Accueil - Phase 2 (COMPLÉTÉE)
+
+- [x] Optimiser Title SEO avec mots-clés locaux (Paris, 93, 95, Auto, Terrasse, Tapis)
+- [x] Optimiser Meta description avec détails et localisation
+- [x] Ajouter section "Pourquoi nous choisir" avec 6 avantages clés
+- [x] Ajouter FAQ SEO avec 5 questions pertinentes et mots-clés locaux
+- [x] Ajouter contenu riche (800+ mots) pour améliorer le classement
+- [ ] Ajouter textes ALT sur toutes les images des services
+- [ ] Publier les changements en production
+- [ ] Soumettre le sitemap à Google Search Console
