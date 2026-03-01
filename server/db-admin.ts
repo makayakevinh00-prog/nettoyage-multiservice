@@ -40,7 +40,7 @@ export async function getAllBookings(
     }
 
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     // Récupérer le total
@@ -165,7 +165,7 @@ export async function getAllIntegrationLogs(
     }
 
     // Récupérer le total
-    let countQuery = db.select().from(integrationLogs);
+    let countQuery: any = db.select().from(integrationLogs);
     if (conditions.length > 0) {
       countQuery = countQuery.where(and(...conditions));
     }
@@ -181,7 +181,7 @@ export async function getAllIntegrationLogs(
       .offset(offset);
 
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      query = query.where(and(...conditions)) as any;
     }
 
     const result = await query;

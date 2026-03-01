@@ -1,153 +1,316 @@
-import { useAuth } from "@/_core/hooks/useAuth";
+import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowLeft, Leaf, Droplets, Sparkles, Shield } from "lucide-react";
-import { Link, useLocation } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Leaf, CheckCircle2, Shield, Sparkles, Clock3, MapPin } from "lucide-react";
+import { useState } from "react";
 
 export default function ServiceJardinage() {
-  const { user } = useAuth();
-  const [, navigate] = useLocation();
-
-  const services = [
-    {
-      name: "Taille de Haies",
-      description: "Taille professionnelle et mise en forme de vos haies",
-    },
-    {
-      name: "Débroussaillage",
-      description: "Élimination complète des mauvaises herbes et broussailles",
-    },
-    {
-      name: "Entretien Paysager",
-      description: "Entretien régulier de vos espaces verts",
-    },
-    {
-      name: "Nettoyage Jardin",
-      description: "Nettoyage en profondeur de votre jardin",
-    },
-  ];
-
-  const avantages = [
-    "Équipes expérimentées et professionnelles",
-    "Équipements modernes et performants",
-    "Intervention rapide et efficace",
-    "Résultats garantis",
-    "Devis gratuit et sans engagement",
-    "Satisfaction garantie",
-  ];
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   const scrollToBooking = () => {
-    navigate("/#booking?service=jardinage");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const bookingSection = document.getElementById('booking-section');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
+  const faqs = [
+    {
+      question: "Quel est le prix du nettoyage et entretien de jardin à Paris et en Île-de-France ?",
+      answer: "Les tarifs dépendent de la surface et du type d'entretien : petit jardin (moins de 50m²) à partir de 80€, moyen (50-100m²) à partir de 150€, grand (plus de 100m²) sur devis. Forfaits mensuels disponibles avec réduction. Devis gratuit sous 30 minutes."
+    },
+    {
+      question: "Quels services d'entretien de jardin proposez-vous ?",
+      answer: "Tonte de gazon, taille de haies, élagage, débroussaillage, nettoyage allées, élimination mousse, traitement anti-mousse, compostage. Tous les travaux de jardinage professionnel. Devis personnalisé selon vos besoins."
+    },
+    {
+      question: "Utilisez-vous des produits écologiques pour le jardin ?",
+      answer: "Oui ! Nous privilégions les méthodes écologiques et les produits naturels. Pas de pesticides agressifs. Respect de l'environnement et de la biodiversité. Produits certifiés écologiques."
+    },
+    {
+      question: "Pouvez-vous entretenir mon jardin régulièrement ?",
+      answer: "Oui ! Nous proposons des forfaits d'entretien régulier : hebdomadaire, bimensuel ou mensuel. Tarifs réduits pour les contrats d'entretien. Équipe stable et fiable."
+    },
+    {
+      question: "Êtes-vous disponible pour un entretien urgent ?",
+      answer: "Oui, nous sommes disponibles 7j/7 incluant les week-ends. Contactez-nous au 06 17 21 22 30 pour une intervention rapide. Créneaux de dépannage disponibles."
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="relative h-96 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 flex items-center justify-center">
-        <div className="text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Jardinage & Entretien Paysager</h1>
-          <p className="text-lg md:text-xl">Entretenez votre jardin avec nos services professionnels</p>
-        </div>
-      </section>
-
-      {/* Back Link */}
-      <section className="py-6 bg-gray-50">
-        <div className="container max-w-5xl">
-          <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
-            <ArrowLeft size={20} />
-            <span>Retour à l'accueil</span>
-          </Link>
-        </div>
-      </section>
-
-      {/* Description */}
-      <section className="py-16">
-        <div className="container max-w-4xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 text-gray-900">Pourquoi nous choisir ?</h2>
-              <p className="text-gray-700 mb-4">
-                Nos équipes de paysagistes expérimentées prennent soin de votre jardin avec professionnalisme. 
-                Nous effectuons la taille, le débroussaillage et l'entretien régulier.
-              </p>
-              <p className="text-gray-700 mb-6">
-                Chaque intervention est adaptée à votre jardin et à vos besoins spécifiques.
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header />
+      
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative h-[500px] flex items-center justify-center overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: "url('https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg')",
+              backgroundPosition: 'center 30%',
+            }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+          
+          <div className="relative z-50 container mx-auto px-4 text-center">
+            <div className="max-w-3xl mx-auto">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+                Nettoyage et Entretien de Jardin Professionnel
+              </h1>
+              <p className="text-2xl text-orange-400 mb-8 font-semibold">
+                Jardinage, tonte, taille en Île-de-France
               </p>
               <Button 
                 onClick={scrollToBooking}
-                className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-10 py-4 text-lg rounded-full"
               >
-                Réserver maintenant
+                Demander mon devis gratuit
               </Button>
             </div>
-            <div className="bg-green-50 p-8 rounded-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <Leaf className="w-6 h-6 text-green-600" />
-                <h3 className="text-lg font-semibold">Expertise Paysagère</h3>
-              </div>
-              <p className="text-gray-700 mb-6">
-                Nos équipes connaissent tous les types de plantes et d'espaces verts.
+          </div>
+        </section>
+
+        {/* Introduction Section */}
+        <section className="py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Service de Nettoyage et Entretien de Jardin à Paris et Île-de-France
+              </h2>
+              <p className="text-xl text-gray-700 mb-6">
+                ProClean Empire propose un service complet d'entretien de jardin professionnel. Tonte de gazon, taille de haies, élagage, débroussaillage et nettoyage pour un jardin impeccable.
               </p>
-              <div className="flex items-center gap-3">
-                <Sparkles className="w-6 h-6 text-green-600" />
-                <h3 className="text-lg font-semibold">Équipements Modernes</h3>
-              </div>
-              <p className="text-gray-700">
-                Nous utilisons les meilleurs équipements pour un travail de qualité.
+              <p className="text-lg text-gray-700 mb-6">
+                Avec plus de 5 ans d'expérience, nous intervenons sur tous types de jardins : petits, grands, terrasses végétalisées. Nos techniques professionnelles garantissent un jardin bien entretenu. Produits écologiques et respectueux de l'environnement.
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Services */}
-      <section className="py-16">
-        <div className="container max-w-4xl">
-          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Nos Prestations</h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            {services.map((service, idx) => (
-              <div key={idx} className="flex gap-4 p-6 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-1" />
+        {/* Services Offered */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-16 text-center">
+              Nos Prestations d'Entretien de Jardin
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <Card className="hover:shadow-lg transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Leaf className="w-6 h-6 text-green-500" />
+                    Tonte de Gazon
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 mb-4">
+                    Tonte régulière de votre gazon avec matériel professionnel haute performance.
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Tonte régulière
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Matériel professionnel
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Évacuation résidus
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="w-6 h-6 text-yellow-500" />
+                    Taille de Haies
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 mb-4">
+                    Taille professionnelle de haies, arbustes et buissons pour un jardin bien structuré.
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Taille précise
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Tous types haies
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Évacuation débris
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="w-6 h-6 text-blue-500" />
+                    Élagage et Débroussaillage
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 mb-4">
+                    Élagage d'arbres et débroussaillage professionnel pour un jardin dégagé.
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Élagage sécurisé
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Débroussaillage
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Évacuation bois
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="hover:shadow-lg transition-all">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock3 className="w-6 h-6 text-orange-500" />
+                    Entretien Régulier
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 mb-4">
+                    Forfaits d'entretien régulier pour maintenir votre jardin impeccable toute l'année.
+                  </p>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Entretien mensuel
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Tarifs réduits
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-green-500" />
+                      Équipe stable
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section className="py-20 md:py-32 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-16 text-center">
+              Pourquoi Choisir ProClean Empire pour Entretenir Votre Jardin ?
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <CheckCircle2 className="w-8 h-8 text-green-500" />
+                </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">{service.name}</h4>
-                  <p className="text-gray-700">{service.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Expertise Jardinage</h3>
+                  <p className="text-gray-700">Spécialistes de l'entretien de jardin depuis 5 ans. Tous types de jardins. Techniques professionnelles adaptées à chaque saison.</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Avantages */}
-      <section className="py-16 bg-green-50">
-        <div className="container max-w-4xl">
-          <h3 className="text-3xl font-bold mb-12 text-center text-gray-900">Nos Avantages</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {avantages.map((avantage, idx) => (
-              <div key={idx} className="flex items-start gap-3">
-                <Shield className="w-5 h-5 text-green-600 flex-shrink-0 mt-1" />
-                <p className="text-gray-700">{avantage}</p>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Sparkles className="w-8 h-8 text-yellow-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Matériel Professionnel</h3>
+                  <p className="text-gray-700">Équipement de dernière génération. Tondeuses, taille-haies, débroussailleuses professionnelles pour un travail de qualité.</p>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="container max-w-4xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Prêt à entretenir votre jardin ?</h2>
-          <p className="text-xl text-gray-700 mb-8">
-            Contactez-nous pour un devis gratuit et sans engagement.
-          </p>
-          <Button 
-            onClick={scrollToBooking}
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg text-lg"
-          >
-            Demander un devis
-          </Button>
-        </div>
-      </section>
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <Shield className="w-8 h-8 text-blue-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Produits Écologiques</h3>
+                  <p className="text-gray-700">Respect de l'environnement et de la biodiversité. Produits naturels et écologiques. Pas de pesticides agressifs.</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <MapPin className="w-8 h-8 text-red-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Intervention Rapide</h3>
+                  <p className="text-gray-700">Devis gratuit sous 30 minutes. Intervention rapide à domicile en Île-de-France. Disponible 7j/7.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 md:py-32 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-16 text-center">
+              Questions Fréquemment Posées sur l'Entretien de Jardin
+            </h2>
+
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faqs.map((faq, index) => (
+                <div 
+                  key={index}
+                  className="border border-gray-200 rounded-lg overflow-hidden hover:border-orange-500 transition-all"
+                >
+                  <button
+                    onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                    className="w-full px-6 py-4 text-left font-bold text-gray-900 hover:bg-gray-50 transition-all flex justify-between items-center"
+                  >
+                    <span>{faq.question}</span>
+                    <span className="text-orange-500">{expandedFaq === index ? '−' : '+'}</span>
+                  </button>
+                  {expandedFaq === index && (
+                    <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 text-gray-700">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="booking-section" className="py-20 md:py-32 bg-gradient-to-r from-orange-500 to-orange-600">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Prêt à Entretenir Votre Jardin ?
+            </h2>
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
+              Demandez votre devis gratuit dès maintenant. Intervention rapide à domicile en Île-de-France, 7j/7.
+            </p>
+            <Button 
+              onClick={() => window.location.href = '/?service=jardinage'}
+              className="bg-white hover:bg-gray-100 text-orange-600 font-bold px-10 py-4 text-lg rounded-full"
+            >
+              Réserver mon entretien de jardin
+            </Button>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
