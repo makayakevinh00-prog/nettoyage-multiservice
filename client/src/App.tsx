@@ -32,6 +32,11 @@ import ServiceJardinage from "./pages/ServiceJardinage";
 import Admin from "./pages/Admin";
 import ClientDashboard from "./pages/ClientDashboard";
 import AdminHubSpot from "./pages/AdminHubSpot";
+import Blog from "./pages/Blog";
+import BlogArticleTerrasse from "./pages/BlogArticleTerrasse";
+import BlogArticleEcologie from "./pages/BlogArticleEcologie";
+import BlogArticlePiscine from "./pages/BlogArticlePiscine";
+import BlogArticleAuto from "./pages/BlogArticleAuto";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -78,6 +83,11 @@ function Router() {
       <Route path={"/client-dashboard"} component={ClientDashboard} />
       <Route path={"/#booking"} component={Home} />
       <Route path={"/admin/hubspot"} component={AdminHubSpot} />
+      <Route path={"/blog"} component={Blog} />
+      <Route path={"/blog/terrasse"} component={BlogArticleTerrasse} />
+      <Route path={"/blog/ecologie"} component={BlogArticleEcologie} />
+      <Route path={"/blog/piscine"} component={BlogArticlePiscine} />
+      <Route path={"/blog/automobile"} component={BlogArticleAuto} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
