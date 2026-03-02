@@ -79,6 +79,7 @@ export function generateBookingConfirmationEmail(data: {
   address: string;
   serviceOption?: string;
   price?: number;
+  quantity?: number;
 }) {
   const serviceNames: Record<string, string> = {
     automobile: "Nettoyage Automobile",
@@ -132,6 +133,7 @@ export function generateBookingConfirmationEmail(data: {
           <span class="label">🧹 Service :</span> ${serviceName}
         </div>
         ${data.serviceOption ? `<div class="info-row"><span class="label">📦 Option :</span> ${data.serviceOption}</div>` : ''}
+        ${data.quantity && data.quantity > 1 ? `<div class="info-row"><span class="label">📊 Quantité :</span> ${data.quantity}x</div>` : ''}
         <div class="info-row">
           <span class="label">📅 Date :</span> ${data.date}
         </div>
@@ -141,7 +143,7 @@ export function generateBookingConfirmationEmail(data: {
         <div class="info-row">
           <span class="label">📍 Adresse :</span> ${data.address}
         </div>
-        ${data.price ? `<div class="info-row" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb;"><span class="label">💰 Tarif :</span> ${(data.price / 100).toFixed(2)}€</div>` : ''}
+        ${data.price ? `<div class="info-row" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e5e7eb;"><span class="label">💰 Tarif Total :</span> <strong style="color: #1e40af; font-size: 18px;">${(data.price / 100).toFixed(2)}€</strong></div>` : ''}
       </div>
       
       <div class="payment-box">
@@ -203,10 +205,11 @@ Nous avons bien reçu votre demande de réservation et nous vous en remercions !
 DÉTAILS DE VOTRE RÉSERVATION :
 - Service : ${serviceName}
 ${data.serviceOption ? `- Option : ${data.serviceOption}` : ''}
+${data.quantity && data.quantity > 1 ? `- Quantité : ${data.quantity}x` : ''}
 - Date : ${data.date}
 - Heure : ${data.time}
 - Adresse : ${data.address}
-${data.price ? `- Tarif : ${(data.price / 100).toFixed(2)}€` : ''}
+${data.price ? `- Tarif Total : ${(data.price / 100).toFixed(2)}€` : ''}
 
 MODALITÉS DE PAIEMENT :
 Paiement sur place :

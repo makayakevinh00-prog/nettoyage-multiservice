@@ -13,6 +13,7 @@ import { isSlotAvailable, getAvailableSlots } from "./lib/slots";
 import { getAllBookings, getBookingById, getIntegrationLogsByBookingId, getAllIntegrationLogs, getBookingStats, getIntegrationStats, updateBookingStatus } from "./db-admin";
 import { createTestimonial, getApprovedTestimonials, getPendingTestimonials, approveTestimonial, deleteTestimonial, getBookingsByUserId, getBookingsByEmail, updateBooking, cancelBooking, createFeedback, getFeedbackByBookingId, getApprovedFeedbacks, getPendingFeedbacks, approveFeedback, deleteFeedback, createBooking, getDb } from "./db";
 import { storagePut } from "./storage";
+import { SERVICES } from "@shared/pricing";
 import Stripe from "stripe";
 import { hubspotRouter } from "./routers/hubspot";
 
@@ -132,12 +133,18 @@ Veuillez contacter le client pour confirmer le rendez-vous.
         // Calculer le prix basé sur l'option sélectionnée
         let totalPrice = 0;
         let optionLabel = '';
-        if (input.serviceOption) {
-          const priceMatch = input.serviceOption.match(/^([\d.,]+)/);
-          if (priceMatch) {
-            const priceInEuros = parseFloat(priceMatch[1].replace(',', '.')) * input.quantity;
-            totalPrice = Math.round(priceInEuros * 100); // Convertir en centimes
-            optionLabel = input.serviceOption;
+        let optionPrice = 0;
+        
+        if (input.serviceOption && input.service) {
+          const service = SERVICES[input.service];
+          if (service) {
+            // Chercher l'option dans la structure de pricing
+            const option = service.options.find((o: any) => o.id === input.serviceOption);
+            if (option) {
+              optionPrice = option.price;
+              optionLabel = option.label;
+              totalPrice = Math.round(optionPrice * input.quantity * 100); // Convertir en centimes
+            }
           }
         }
 
@@ -240,6 +247,7 @@ Veuillez contacter le client pour confirmer le rendez-vous.
             address: input.address,
             serviceOption: optionLabel,
             price: totalPrice,
+            quantity: input.quantity,
           });
 
           // Générer le fichier .ics
