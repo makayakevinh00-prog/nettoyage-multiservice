@@ -5,6 +5,7 @@ import { ArrowLeft, CheckCircle2, Euro, Clock, Sparkles, Share2, Facebook, Twitt
 import { useLocation, useSearch } from "wouter";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 
+
 const serviceDetails: Record<string, any> = {
   automobile: {
     title: "Nettoyage Automobile",

@@ -91,6 +91,18 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* Trustpilot Badge */}
+        <a 
+          href="https://fr.trustpilot.com/review/procleanempire.com" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hidden sm:flex items-center gap-1 px-3 py-1 bg-yellow-50 dark:bg-yellow-900/20 rounded-full hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors"
+          title="Voir nos avis Trustpilot"
+        >
+          <span className="text-yellow-500">⭐</span>
+          <span className="text-xs font-semibold text-yellow-700 dark:text-yellow-400">4.1/5</span>
+        </a>
+
         {/* Social Icons */}
         <div className="hidden md:flex items-center gap-3">
           <a href="https://www.facebook.com/people/Proclean-Empire/61575993812750/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors" title="Facebook">
@@ -102,9 +114,7 @@ export default function Header() {
           <a href="https://www.instagram.com/proclean_empire/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700 dark:text-pink-400 dark:hover:text-pink-300 transition-colors" title="Instagram">
             <span className="text-lg">📷</span>
           </a>
-          <a href="https://fr.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="text-yellow-500 hover:text-yellow-600 dark:text-yellow-400 dark:hover:text-yellow-300 transition-colors" title="Trustpilot">
-            <span className="text-lg">⭐</span>
-          </a>
+
         </div>
 
         {/* CTA Button */}

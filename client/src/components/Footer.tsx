@@ -113,6 +113,11 @@ export default function Footer() {
                     Contact
                   </Link>
                 </li>
+                <li>
+                  <a href="https://fr.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-1">
+                    <span>⭐</span> Avis Trustpilot
+                  </a>
+                </li>
               </ul>
             </div>
 
