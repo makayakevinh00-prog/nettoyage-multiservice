@@ -477,7 +477,13 @@ export default function AdvancedBookingForm({
                 </div>
               )}
 
-
+              {bookingData.date && bookingData.time && (
+                <div className="bg-amber-50 p-3 rounded-lg border border-amber-200">
+                  <p className="text-sm text-amber-800">
+                    Limite: 10 reservations par creneau de 2h. Si complet, nous vous proposerons une autre date.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
