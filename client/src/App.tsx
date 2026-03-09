@@ -44,17 +44,6 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/en"} component={Home} />
-
-      <Route path={"/service/tapis"} component={ServiceDetail} />
-      <Route path={"/service/balcon"} component={ServiceDetail} />
-      <Route path={"/service/jardinage"} component={ServiceDetail} />
-      <Route path={"/service/facade"} component={ServiceDetail} />
-      <Route path={"/service/panneaux-solaires"} component={ServiceDetail} />
-      <Route path={"/service/automobile"} component={ServiceDetail} />
-      <Route path={"/service/piscine"} component={ServiceDetail} />
-      <Route path={"/service/terrasse"} component={ServiceDetail} />
-      <Route path={"/service/panneaux"} component={ServiceDetail} />
-      <Route path={"/service"} component={ServiceDetail} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
@@ -78,8 +67,7 @@ function Router() {
       <Route path="/service-balcon" component={ServiceBalcon} />
       <Route path="/service-facade" component={ServiceFacade} />
       <Route path="/service-jardinage" component={ServiceJardinage} />
-      <Route path="/service-piscine" component={ServiceExterieur} />
-      <Route path="/service-exterieur" component={ServiceExterieur} />
+      <Route path={"/service-piscine"} component={ServiceExterieur} />
       <Route path={"/admin"} component={Admin} />
       <Route path={"/client-dashboard"} component={ClientDashboard} />
       <Route path={"/#booking"} component={Home} />

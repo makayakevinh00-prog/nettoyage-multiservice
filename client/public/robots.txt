@@ -3,11 +3,31 @@
 
 User-agent: *
 Allow: /
+Allow: /service-*
+Allow: /blog
+Allow: /avis
+Allow: /reviews
+Allow: /pourquoi-nous
+Allow: /professionnels
+Allow: /contact
+Allow: /mentions-legales
+Allow: /politique-confidentialite
+Allow: /conditions-generales
+
+# Bloquer les pages qui ne doivent pas être indexées
 Disallow: /api/
+Disallow: /admin
 Disallow: /admin/
+Disallow: /client-dashboard
+Disallow: /my-bookings
+Disallow: /booking-confirmation
+Disallow: /merci
+Disallow: /feedback
+Disallow: /thank-you
 Disallow: /*.json$
 Disallow: /*?*sort=
 Disallow: /*?*filter=
+Disallow: /*?*
 
 # Google-specific
 User-agent: Googlebot

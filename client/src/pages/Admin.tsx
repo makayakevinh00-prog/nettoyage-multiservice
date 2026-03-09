@@ -1,4 +1,5 @@
 import { trpc } from "@/lib/trpc";
+import { useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
 import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
 
 const STATUS_COLORS: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -19,6 +21,17 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 export default function Admin() {
+  // Ajouter la balise noindex pour éviter l'indexation
+  useEffect(() => {
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.setAttribute('name', 'robots');
+      document.head.appendChild(metaRobots);
+    }
+    metaRobots.setAttribute('content', 'noindex, nofollow');
+  }, []);
+
   // Tous les hooks DOIVENT être appelés au niveau du composant
   const { user, loading } = useAuth();
   const [bookingPage, setBookingPage] = useState(0);
