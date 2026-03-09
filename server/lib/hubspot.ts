@@ -444,21 +444,26 @@ export async function syncBookingToHubSpot(bookingData: {
       await associateContactToDeal(contactId, dealId);
     }
 
-    // Créer une tâche de rappel pour 24h avant
-    // TODO: HubSpot requiert le champ 'to' obligatoire pour les tâches
-    // À implémenter avec une approche alternative (webhooks, etc.)
-    // if (contactId) {
-    //   const reminderDate = new Date(bookingData.date);
-    //   reminderDate.setDate(reminderDate.getDate() - 1);
-    //
-    //   await createTask(contactId, {
-    //     hs_task_title: `Rappel : ${bookingData.service} - ${bookingData.name}`,
-    //     hs_task_body: `Rendez-vous demain à ${bookingData.time} pour ${bookingData.service} à ${bookingData.address}`,
-    //     hs_task_due_date: reminderDate.toISOString().split('T')[0],
-    //     hs_task_status: 'NOT_STARTED',
-    //     hs_task_priority: 'HIGH',
-    //   });
-    // }
+    // Créer une tâche HubSpot avec la date du rendez-vous
+    if (contactId) {
+      try {
+        const taskDate = bookingData.date; // Format: YYYY-MM-DD
+        
+        const taskId = await createTask(contactId, {
+          hs_task_title: `📅 ${bookingData.service} - ${bookingData.name}`,
+          hs_task_body: `⏰ Heure: ${bookingData.time}\n📍 Adresse: ${bookingData.address}\n🔧 Option: ${bookingData.serviceOption || 'Non spécifiée'}\n💶 Prix: ${bookingData.totalPrice ? bookingData.totalPrice.toFixed(2) + '€' : 'Non déterminé'}\n\n📝 Notes: ${bookingData.message || 'Aucune note'}`,
+          hs_task_due_date: taskDate,
+          hs_task_status: 'NOT_STARTED',
+          hs_task_priority: 'HIGH',
+        });
+        
+        if (taskId) {
+          console.log(`[HubSpot] ✅ Tâche créée avec succès: ${taskId}`);
+        }
+      } catch (taskError) {
+        console.error('[HubSpot] Erreur lors de la création de la tâche:', taskError);
+      }
+    }
 
     console.log(`[HubSpot] Deal ID: ${dealId}`);
     console.log(`[HubSpot] ✅ Synchronisation terminée (Contact: ${contactId}, Deal: ${dealId})`);
