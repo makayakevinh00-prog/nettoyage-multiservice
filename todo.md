@@ -391,6 +391,7 @@
 
 ## BUGS CRITIQUES À CORRIGER IMMÉDIATEMENT
 
+- [x] BUG URGENT: "Tout est complet" - Le système de réservation affiche ce message et empêche les clients de prendre des rendez-vous
 - [x] Corriger erreur page Balcon (ne s'affiche pas)
 - [x] Corriger erreur page Tapis (ne s'affiche pas)
 - [x] Corriger erreur page Terrasse (ne s'affiche pas)

@@ -1,0 +1,118 @@
+{
+  "query": "SELECT id, name, email, service, date, time, status FROM bookings WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND status = 'pending' ORDER BY date, time;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 46CLeJ8QCDbQeYz.root --database mWQNegFX82Wq6P3J8ww4RP --execute SELECT id, name, email, service, date, time, status FROM bookings WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND status = 'pending' ORDER BY date, time;",
+  "rows": [
+    {
+      "id": "660001",
+      "name": "Marie Dupont",
+      "email": "marie.dupont@email.com",
+      "service": "terrasse",
+      "date": "2026-03-05",
+      "time": "10:00",
+      "status": "pending"
+    },
+    {
+      "id": "690001",
+      "name": "Kevinh",
+      "email": "kevinh_m@yahoo.com",
+      "service": "automobile",
+      "date": "2026-03-09",
+      "time": "12:00",
+      "status": "pending"
+    },
+    {
+      "id": "630001",
+      "name": "Kevinh Makaya Mateve",
+      "email": "kevinh_m@yahoo.com",
+      "service": "automobile",
+      "date": "2026-03-10",
+      "time": "10:00",
+      "status": "pending"
+    },
+    {
+      "id": "720001",
+      "name": "Mrick",
+      "email": "mrick839@gmail.com",
+      "service": "automobile",
+      "date": "2026-03-10",
+      "time": "10:00",
+      "status": "pending"
+    },
+    {
+      "id": "540001",
+      "name": "Kevinh",
+      "email": "kevinh_m@yahoo.com",
+      "service": "automobile",
+      "date": "2026-03-11",
+      "time": "12:00",
+      "status": "pending"
+    },
+    {
+      "id": "570001",
+      "name": "kevinh",
+      "email": "kevinh_m@yahoo.com",
+      "service": "tapis",
+      "date": "2026-03-17",
+      "time": "10:00",
+      "status": "pending"
+    },
+    {
+      "id": "600001",
+      "name": "Kevinh",
+      "email": "kevinh_m@yahho.com",
+      "service": "automobile",
+      "date": "2026-03-18",
+      "time": "10:00",
+      "status": "pending"
+    },
+    {
+      "id": "720002",
+      "name": "Mrick",
+      "email": "mrick839@gmail.com",
+      "service": "automobile",
+      "date": "2026-03-18",
+      "time": "12:00",
+      "status": "pending"
+    },
+    {
+      "id": "600002",
+      "name": "kevinh",
+      "email": "kevinh_m@yahho.com",
+      "service": "automobile",
+      "date": "2026-03-19",
+      "time": "08:00",
+      "status": "pending"
+    },
+    {
+      "id": "360007",
+      "name": "Amaria Lepingue",
+      "email": "serviceclient@procleanempire.com",
+      "service": "tapis",
+      "date": "2026-03-28",
+      "time": "13:00",
+      "status": "pending"
+    },
+    {
+      "id": "360009",
+      "name": "Amaria Lepingue",
+      "email": "amarialepingues@gmail.com",
+      "service": "terrasse",
+      "date": "2026-03-28",
+      "time": "14:00",
+      "status": "pending"
+    },
+    {
+      "id": "360001",
+      "name": "Amaria Lepingue",
+      "email": "serviceclient@procleanempire.com",
+      "service": "tapis",
+      "date": "2026-03-28",
+      "time": "15:00",
+      "status": "pending"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tname\temail\tservice\tdate\ttime\tstatus\n660001\tMarie Dupont\tmarie.dupont@email.com\tterrasse\t2026-03-05\t10:00\tpending\n690001\tKevinh\tkevinh_m@yahoo.com\tautomobile\t2026-03-09\t12:00\tpending\n630001\tKevinh Makaya Mateve\tkevinh_m@yahoo.com\tautomobile\t2026-03-10\t10:00\tpending\n720001\tMrick\tmrick839@gmail.com\tautomobile\t2026-03-10\t10:00\tpending\n540001\tKevinh\tkevinh_m@yahoo.com\tautomobile\t2026-03-11\t12:00\tpending\n570001\tkevinh\tkevinh_m@yahoo.com\ttapis\t2026-03-17\t10:00\tpending\n600001\tKevinh\tkevinh_m@yahho.com\tautomobile\t2026-03-18\t10:00\tpending\n720002\tMrick\tmrick839@gmail.com\tautomobile\t2026-03-18\t12:00\tpending\n600002\tkevinh\tkevinh_m@yahho.com\tautomobile\t2026-03-19\t08:00\tpending\n360007\tAmaria Lepingue\tserviceclient@procleanempire.com\ttapis\t2026-03-28\t13:00\tpending\n360009\tAmaria Lepingue\tamarialepingues@gmail.com\tterrasse\t2026-03-28\t14:00\tpending\n360001\tAmaria Lepingue\tserviceclient@procleanempire.com\ttapis\t2026-03-28\t15:00\tpending\n",
+  "stderr": "",
+  "execution_time_ms": 424
+}

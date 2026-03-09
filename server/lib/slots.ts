@@ -64,8 +64,8 @@ export async function isSlotAvailable(
       `[Slots] Verification pour ${service} le ${date} a ${time}: ${existingBookings.length} reservation(s) trouvee(s)`
     );
 
-    // Si 3 réservations ou plus dans la plage, le créneau est complet
-    return existingBookings.length < 3;
+    // Si 10 réservations ou plus dans la plage, le créneau est complet
+    return existingBookings.length < 10;
   } catch (error) {
     console.error("[Slots] Erreur lors de la verification du creneau:", error);
     return true; // Par défaut, permettre la réservation en cas d'erreur
@@ -88,6 +88,7 @@ export async function getAvailableSlots(
 
   try {
     // Créneaux de 2h : 08:00-10:00, 10:00-12:00, 12:00-14:00, 14:00-16:00, 16:00-18:00, 18:00-20:00
+    // Limite: 10 réservations par créneau de 2h pour plus de flexibilité
     const timeSlots2h = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
     const availableSlots: string[] = [];
 
