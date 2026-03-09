@@ -306,6 +306,70 @@ export async function createMeetingSummary(
 }
 
 /**
+ * Crée une réunion (engagement) HubSpot avec date et heure
+ */
+export async function createHubSpotMeeting(
+  contactId: string,
+  meetingData: {
+    title: string;
+    description: string;
+    startTime: string; // ISO format: 2026-02-24T14:30:00Z
+    endTime?: string; // ISO format
+  }
+): Promise<string | null> {
+  try {
+    if (!HUBSPOT_API_KEY) {
+      console.error('HUBSPOT_API_KEY environment variable is not set');
+      return null;
+    }
+
+    // Créer une réunion (engagement) HubSpot
+    const properties: Record<string, string | number> = {
+      hs_engagement_type: 'MEETING',
+      hs_meeting_title: meetingData.title,
+      hs_meeting_body: meetingData.description,
+      hs_meeting_start_time: new Date(meetingData.startTime).getTime().toString(),
+    };
+
+    if (meetingData.endTime) {
+      properties.hs_meeting_end_time = new Date(meetingData.endTime).getTime().toString();
+    }
+
+    const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/meetings`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        properties,
+        associations: [
+          {
+            type: 'contact_to_meeting',
+            id: contactId,
+          },
+        ],
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json() as any;
+      console.log(`✅ Réunion HubSpot créée: ${data.id}`);
+      return data.id;
+    } else {
+      console.error(`❌ Erreur création réunion: ${response.status}`);
+      const errorText = await response.text();
+      console.error(`[HubSpot] Réponse:`, errorText);
+    }
+
+    return null;
+  } catch (error) {
+    console.error('❌ Erreur lors de la création de la réunion HubSpot:', error);
+    return null;
+  }
+}
+
+/**
  * Crée une tâche (task) HubSpot pour le rappel
  */
 export async function createTask(
@@ -442,6 +506,33 @@ export async function syncBookingToHubSpot(bookingData: {
     // Associer le contact au deal
     if (contactId && dealId) {
       await associateContactToDeal(contactId, dealId);
+    }
+
+    // Créer une réunion HubSpot avec la date et l'heure du rendez-vous
+    if (contactId) {
+      try {
+        // Convertir la date et l'heure en format ISO
+        const [hours, minutes] = bookingData.time.split(':').map(Number);
+        const meetingDate = new Date(bookingData.date);
+        meetingDate.setHours(hours, minutes, 0, 0);
+        const startTime = meetingDate.toISOString();
+        
+        // Fin de la réunion: 2 heures plus tard
+        const endTime = new Date(meetingDate.getTime() + 2 * 60 * 60 * 1000).toISOString();
+        
+        const meetingId = await createHubSpotMeeting(contactId, {
+          title: `${bookingData.service} - ${bookingData.name}`,
+          description: `Réservation ProClean Empire\n\nService: ${bookingData.service}\nAdresse: ${bookingData.address}\nOption: ${bookingData.serviceOption || 'Non spécifiée'}\nPrix: ${bookingData.totalPrice ? bookingData.totalPrice.toFixed(2) + '€' : 'Non déterminé'}\n\nNotes: ${bookingData.message || 'Aucune note'}`,
+          startTime,
+          endTime,
+        });
+        
+        if (meetingId) {
+          console.log(`[HubSpot] ✅ Réunion créée avec succès: ${meetingId}`);
+        }
+      } catch (meetingError) {
+        console.error('[HubSpot] Erreur lors de la création de la réunion:', meetingError);
+      }
     }
 
     // Créer une tâche de rappel pour 24h avant
