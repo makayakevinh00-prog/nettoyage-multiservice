@@ -817,3 +817,13 @@
 ## 🐛 Bugs à corriger - Mars 2026
 
 - [x] Section "Avis Vérifiés Trustpilot" vide - Les avis ne se chargent pas
+
+## 🎯 Amélioration Ergonomie - Mars 2026
+
+- [ ] Navigation intelligente - Les clics ramènent au contenu pertinent
+- [ ] Bouton "Réserver" accessible depuis n'importe où (sticky ou flottant)
+- [ ] Ancres (#) pour chaque section (services, formulaire, etc.)
+- [ ] Scroll fluide vers le formulaire de réservation
+- [ ] Tests complets pour vérifier l'absence de bugs
+- [ ] Animations smooth et transitions rapides
+- [ ] Vérifier la fluidité sur mobile et desktop
