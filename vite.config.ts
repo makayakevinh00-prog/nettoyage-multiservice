@@ -24,6 +24,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
+    minify: 'esbuild',
+    assetsInlineLimit: 4096,
   },
   server: {
     host: true,

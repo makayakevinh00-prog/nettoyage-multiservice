@@ -805,3 +805,11 @@
 
 - [x] Rendre le logo transparent (supprimer le contour blanc)
 - [x] Mettre à jour l'email de contact: contact@procleanempire.com
+
+## ⚡ Optimisation de Vitesse - Mars 2026
+
+- [x] Compresser toutes les images (JPEG, PNG, WebP)
+- [x] Implémenter le lazy loading pour les images
+- [x] Ajouter les attributs width/height aux images
+- [x] Optimiser les fichiers CSS et JavaScript
+- [x] Mettre en cache les ressources statiques
