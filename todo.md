@@ -813,3 +813,7 @@
 - [x] Ajouter les attributs width/height aux images
 - [x] Optimiser les fichiers CSS et JavaScript
 - [x] Mettre en cache les ressources statiques
+
+## 🐛 Bugs à corriger - Mars 2026
+
+- [x] Section "Avis Vérifiés Trustpilot" vide - Les avis ne se chargent pas
