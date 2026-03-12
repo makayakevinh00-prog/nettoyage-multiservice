@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
           <div className="bg-slate-50 p-6 rounded-lg">
             <h2 className="text-2xl font-bold mb-4 text-slate-800">2. RESPONSABLE DU TRAITEMENT</h2>
             <p className="text-slate-700"><strong>M. Kevinh MAKAYA MATEVE</strong></p>
-            <p className="text-slate-700">Email : serviceclient@procleanempire.com</p>
+            <p className="text-slate-700">Email : contact@procleanempire.com</p>
             <p className="text-slate-700">Téléphone : 06 17 21 22 30</p>
           </div>
 
@@ -52,12 +52,12 @@ export default function PrivacyPolicy() {
           <div className="bg-slate-50 p-6 rounded-lg">
             <h2 className="text-2xl font-bold mb-4 text-slate-800">6. VOS DROITS (RGPD)</h2>
             <p className="text-slate-700">Vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition à vos données.</p>
-            <p className="text-slate-700 mt-2">Pour exercer vos droits : serviceclient@procleanempire.com</p>
+            <p className="text-slate-700 mt-2">Pour exercer vos droits : contact@procleanempire.com</p>
           </div>
 
           <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
             <h2 className="text-2xl font-bold mb-4 text-slate-800">Nous contacter</h2>
-            <p className="text-slate-700">Email : serviceclient@procleanempire.com</p>
+            <p className="text-slate-700">Email : contact@procleanempire.com</p>
             <p className="text-slate-700">Téléphone : 06 17 21 22 30</p>
           </div>
         </section>

@@ -174,7 +174,7 @@ describe('Reminder System', () => {
       expect(result).toBe(true);
       expect(emailModule.sendEmail).toHaveBeenCalledWith(
         expect.objectContaining({
-          to: 'serviceclient@procleanempire.com',
+          to: 'contact@procleanempire.com',
           subject: expect.stringContaining('Rendez-vous de demain'),
         })
       );

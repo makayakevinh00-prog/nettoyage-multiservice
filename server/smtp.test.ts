@@ -2,13 +2,13 @@ import { describe, it, expect } from 'vitest';
 import nodemailer from 'nodemailer';
 
 describe('SMTP Configuration Test', () => {
-  it('should validate SMTP credentials for serviceclient@procleanempire.com', async () => {
+  it('should validate SMTP credentials for contact@procleanempire.com', async () => {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
       auth: {
-        user: 'serviceclient@procleanempire.com',
+        user: 'contact@procleanempire.com',
         pass: process.env.GMAIL_APP_PASSWORD || '',
       },
     });

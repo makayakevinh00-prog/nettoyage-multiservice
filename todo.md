@@ -800,3 +800,8 @@
 - [ ] Ajouter textes ALT sur toutes les images des services
 - [ ] Publier les changements en production
 - [ ] Soumettre le sitemap à Google Search Console
+
+## 🎨 Changements UI/UX demandés - Mars 2026
+
+- [x] Rendre le logo transparent (supprimer le contour blanc)
+- [x] Mettre à jour l'email de contact: contact@procleanempire.com

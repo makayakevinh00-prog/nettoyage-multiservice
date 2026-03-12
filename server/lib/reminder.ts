@@ -148,7 +148,7 @@ Assurez-vous que votre équipe est bien préparée pour ces interventions.
     `;
     
     await sendEmail({
-      to: 'serviceclient@procleanempire.com',
+      to: 'contact@procleanempire.com',
       subject: `📋 Rendez-vous de demain (${bookings.length} intervention${bookings.length > 1 ? 's' : ''})`,
       html,
       text,

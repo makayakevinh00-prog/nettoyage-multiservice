@@ -298,7 +298,7 @@ ${totalPrice > 0 ? `<p><strong>Prix estimé:</strong> ${(totalPrice / 100).toFix
             `.trim();
             
             await sendEmail({
-              to: 'serviceclient@procleanempire.com',
+              to: 'contact@procleanempire.com',
               subject: `📅 Nouvelle réservation - ${input.name} (${input.date} à ${input.time})`,
               html: ownerEmailContent,
               text: `Nouvelle réservation de ${input.name} pour le ${input.date} à ${input.time}`,
@@ -526,7 +526,7 @@ ${totalPrice > 0 ? `<p><strong>Prix estimé:</strong> ${(totalPrice / 100).toFix
       }).optional())
       .query(async ({ input }) => {
         try {
-          const email = input?.email || 'serviceclient@procleanempire.com';
+          const email = input?.email || 'contact@procleanempire.com';
           return await getBookingsByEmail(email);
         } catch (error) {
           console.error('[Bookings] Failed to get bookings:', error);

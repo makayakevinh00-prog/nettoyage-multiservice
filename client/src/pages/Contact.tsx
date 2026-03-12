@@ -55,8 +55,8 @@ export default function Contact() {
                 </div>
               </div>
               <h3 className="font-bold text-gray-900 mb-2">Email</h3>
-              <a href="mailto:serviceclient@procleanempire.com" className="text-blue-600 hover:text-blue-700 font-semibold break-all">
-                serviceclient@procleanempire.com
+              <a href="mailto:contact@procleanempire.com" className="text-blue-600 hover:text-blue-700 font-semibold break-all">
+                contact@procleanempire.com
               </a>
               <p className="text-sm text-gray-600 mt-2">Réponse en 30 min</p>
             </div>

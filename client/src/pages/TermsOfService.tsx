@@ -44,7 +44,7 @@ export default function TermsOfService() {
           <div className="bg-slate-50 p-6 rounded-lg">
             <h2 className="text-2xl font-bold mb-4 text-slate-800">6. RÉCLAMATIONS</h2>
             <p className="text-slate-700">Délai : <strong>48h</strong> après la prestation.</p>
-            <p className="text-slate-700">Adresse : serviceclient@procleanempire.com</p>
+            <p className="text-slate-700">Adresse : contact@procleanempire.com</p>
           </div>
 
           <div className="bg-slate-50 p-6 rounded-lg">
@@ -55,7 +55,7 @@ export default function TermsOfService() {
 
           <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
             <h2 className="text-2xl font-bold mb-4 text-slate-800">Nous contacter</h2>
-            <p className="text-slate-700">Email : serviceclient@procleanempire.com</p>
+            <p className="text-slate-700">Email : contact@procleanempire.com</p>
             <p className="text-slate-700">Téléphone : 06 17 21 22 30</p>
             <p className="text-slate-700">Zone d'intervention : Île-de-France</p>
           </div>

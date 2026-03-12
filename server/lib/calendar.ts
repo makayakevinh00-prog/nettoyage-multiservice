@@ -32,7 +32,7 @@ export function generateICSFile(booking: BookingData): string | null {
       location: booking.address,
       status: "CONFIRMED",
       busyStatus: "BUSY",
-      organizer: { name: "ProClean Empire", email: "serviceclient@procleanempire.com" },
+      organizer: { name: "ProClean Empire", email: "contact@procleanempire.com" },
       attendees: [
         {
           name: booking.name,

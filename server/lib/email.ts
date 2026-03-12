@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'serviceclient@procleanempire.com',
+    user: 'contact@procleanempire.com',
     pass: process.env.GMAIL_APP_PASSWORD || '', // À configurer dans les secrets
   },
 });
@@ -28,7 +28,7 @@ export async function sendEmail(options: SendEmailOptions) {
     console.log(`[Email] Envoi d'email a ${options.to} avec le sujet: ${options.subject}`);
     
     const info = await transporter.sendMail({
-      from: '"ProClean Empire" <serviceclient@procleanempire.com>',
+      from: '"ProClean Empire" <contact@procleanempire.com>',
       to: options.to,
       subject: options.subject,
       text: options.text,
@@ -39,7 +39,7 @@ export async function sendEmail(options: SendEmailOptions) {
         'X-Priority': '3',
         'Importance': 'normal',
         'X-MSMail-Priority': 'Normal',
-        'List-Unsubscribe': '<mailto:serviceclient@procleanempire.com?subject=unsubscribe>',
+        'List-Unsubscribe': '<mailto:contact@procleanempire.com?subject=unsubscribe>',
       },
     });
 
@@ -61,7 +61,7 @@ function getEmailSignature() {
       <p style="margin: 5px 0; color: #6b7280; font-size: 13px;">Île-de-France</p>
       <div style="margin-top: 15px; font-size: 13px; color: #6b7280;">
         <p style="margin: 3px 0;">📞 <strong>06 17 21 22 30</strong></p>
-        <p style="margin: 3px 0;">📧 <strong>serviceclient@procleanempire.com</strong></p>
+        <p style="margin: 3px 0;">📧 <strong>contact@procleanempire.com</strong></p>
         <p style="margin: 3px 0;">🌐 <strong>procleanempire.com</strong></p>
       </div>
       <p style="margin-top: 15px; font-size: 11px; color: #9ca3af; font-style: italic;">
@@ -186,7 +186,7 @@ export function generateBookingConfirmationEmail(data: {
       <p>Si vous avez des questions ou souhaitez modifier votre réservation, n'hésitez pas à nous contacter :</p>
       <ul>
         <li>📞 Téléphone : <strong>06 17 21 22 30</strong></li>
-        <li>📧 Email : <strong>serviceclient@procleanempire.com</strong></li>
+        <li>📧 Email : <strong>contact@procleanempire.com</strong></li>
         <li>💬 WhatsApp : <strong>06 17 21 22 30</strong></li>
       </ul>
       
@@ -235,7 +235,7 @@ BESOIN DE MODIFIER OU ANNULER ?
 
 CONTACT :
 - Téléphone : 06 17 21 22 30
-- Email : serviceclient@procleanempire.com
+- Email : contact@procleanempire.com
 - WhatsApp : 06 17 21 22 30
 - Site : procleanempire.com
 
@@ -322,7 +322,7 @@ export function generateReminderEmail(data: {
       <p>Si vous avez besoin de modifier ou d'annuler votre rendez-vous, contactez-nous au plus tôt :</p>
       <ul>
         <li>📞 Téléphone : <strong>06 17 21 22 30</strong></li>
-        <li>📧 Email : <strong>serviceclient@procleanempire.com</strong></li>
+        <li>📧 Email : <strong>contact@procleanempire.com</strong></li>
       </ul>
       
       ${signature}
@@ -350,7 +350,7 @@ CONSEILS AVANT L'INTERVENTION :
 
 Si vous avez besoin de modifier ou d'annuler votre rendez-vous, contactez-nous au plus tôt :
 - Téléphone : 06 17 21 22 30
-- Email : serviceclient@procleanempire.com
+- Email : contact@procleanempire.com
 
 ProClean Empire
 Nettoyage Premium Multiservice

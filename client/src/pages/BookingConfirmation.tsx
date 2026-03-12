@@ -255,8 +255,8 @@ Merci d'avoir choisi ProClean Empire !
               06 17 21 22 30
             </a>
             {" "}ou{" "}
-            <a href="mailto:serviceclient@procleanempire.com" className="text-blue-600 hover:underline">
-              serviceclient@procleanempire.com
+            <a href="mailto:contact@procleanempire.com" className="text-blue-600 hover:underline">
+              contact@procleanempire.com
             </a>
           </p>
         </div>

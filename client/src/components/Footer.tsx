@@ -63,8 +63,8 @@ export default function Footer() {
                   </div>
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-orange-500 flex-shrink-0" />
-                    <a href="mailto:serviceclient@procleanempire.com" className="hover:text-orange-400 transition-colors text-sm text-gray-300">
-                      serviceclient@procleanempire.com
+                    <a href="mailto:contact@procleanempire.com" className="hover:text-orange-400 transition-colors text-sm text-gray-300">
+                      contact@procleanempire.com
                     </a>
                   </div>
                 </div>

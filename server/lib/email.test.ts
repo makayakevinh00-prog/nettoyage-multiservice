@@ -3,7 +3,7 @@ import { generateBookingConfirmationEmail, generateReminderEmail } from './email
 
 describe('Email Configuration and Sending', () => {
   describe('Email Address Configuration', () => {
-    it('should use serviceclient@procleanempire.com in booking confirmation', () => {
+    it('should use contact@procleanempire.com in booking confirmation', () => {
       const bookingEmail = generateBookingConfirmationEmail({
         name: 'Test User',
         service: 'automobile',
@@ -12,8 +12,8 @@ describe('Email Configuration and Sending', () => {
         address: '123 Rue de Test, Paris',
       });
 
-      expect(bookingEmail.html).toContain('serviceclient@procleanempire.com');
-      expect(bookingEmail.text).toContain('serviceclient@procleanempire.com');
+      expect(bookingEmail.html).toContain('contact@procleanempire.com');
+      expect(bookingEmail.text).toContain('contact@procleanempire.com');
     });
 
     it('should NOT use makayakevinh00@gmail.com in booking confirmation', () => {
@@ -39,8 +39,8 @@ describe('Email Configuration and Sending', () => {
         price: 7000, // 70€
       });
 
-      expect(bookingEmail.html).toContain('serviceclient@procleanempire.com');
-      expect(bookingEmail.text).toContain('serviceclient@procleanempire.com');
+      expect(bookingEmail.html).toContain('contact@procleanempire.com');
+      expect(bookingEmail.text).toContain('contact@procleanempire.com');
       expect(bookingEmail.html).toContain('70.00€');
     });
 
@@ -53,8 +53,8 @@ describe('Email Configuration and Sending', () => {
         address: '123 Rue de Test, Paris',
       });
 
-      expect(reminderEmail.html).toContain('serviceclient@procleanempire.com');
-      expect(reminderEmail.text).toContain('serviceclient@procleanempire.com');
+      expect(reminderEmail.html).toContain('contact@procleanempire.com');
+      expect(reminderEmail.text).toContain('contact@procleanempire.com');
     });
   });
 

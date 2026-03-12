@@ -33,7 +33,7 @@ export default function LegalNotice() {
             
             <div className="border-t border-slate-200 pt-4 mt-4">
               <p className="font-semibold text-slate-900 mb-2">Contact :</p>
-              <p><strong>Email :</strong> <a href="mailto:serviceclient@procleanempire.com" className="text-blue-600 hover:underline">serviceclient@procleanempire.com</a></p>
+              <p><strong>Email :</strong> <a href="mailto:contact@procleanempire.com" className="text-blue-600 hover:underline">contact@procleanempire.com</a></p>
               <p><strong>Téléphone :</strong> <a href="tel:+33617212230" className="text-blue-600 hover:underline">06 17 21 22 30</a></p>
             </div>
 
@@ -98,7 +98,7 @@ export default function LegalNotice() {
 
             <div>
               <p className="font-semibold text-slate-900 mb-2">Pour exercer vos droits, contactez-nous :</p>
-              <p><strong>Email :</strong> <a href="mailto:serviceclient@procleanempire.com" className="text-blue-600 hover:underline">serviceclient@procleanempire.com</a></p>
+              <p><strong>Email :</strong> <a href="mailto:contact@procleanempire.com" className="text-blue-600 hover:underline">contact@procleanempire.com</a></p>
             </div>
           </div>
         </section>

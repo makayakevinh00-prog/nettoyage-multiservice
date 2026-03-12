@@ -14,7 +14,7 @@ function getEmailSignature() {
       <p style="margin: 5px 0; color: #6b7280; font-size: 13px;">Île-de-France</p>
       <div style="margin-top: 15px; font-size: 13px; color: #6b7280;">
         <p style="margin: 3px 0;">📞 <strong>06 17 21 22 30</strong></p>
-        <p style="margin: 3px 0;">📧 <strong>serviceclient@procleanempire.com</strong></p>
+        <p style="margin: 3px 0;">📧 <strong>contact@procleanempire.com</strong></p>
         <p style="margin: 3px 0;">🌐 <strong>procleanempire.com</strong></p>
       </div>
       <p style="margin-top: 15px; font-size: 11px; color: #9ca3af; font-style: italic;">
@@ -135,7 +135,7 @@ export function generateQuoteEmail(data: QuoteEmailData) {
       <p><strong>Des questions ?</strong> Contactez-nous :</p>
       <ul style="margin: 10px 0; padding-left: 20px;">
         <li>📞 Téléphone : <strong>06 17 21 22 30</strong></li>
-        <li>📧 Email : <strong>serviceclient@procleanempire.com</strong></li>
+        <li>📧 Email : <strong>contact@procleanempire.com</strong></li>
         <li>💬 Chat : Disponible sur notre site web</li>
       </ul>
 
@@ -177,7 +177,7 @@ PROCHAINES ÉTAPES :
 
 DES QUESTIONS ?
 - Téléphone : 06 17 21 22 30
-- Email : serviceclient@procleanempire.com
+- Email : contact@procleanempire.com
 - Chat : Disponible sur notre site web
 
 ProClean Empire

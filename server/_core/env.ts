@@ -9,7 +9,7 @@ export const ENV = {
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
   googleCalendarCredentials: process.env.GOOGLE_CALENDAR_CREDENTIALS ?? "",
   googleCalendarId: process.env.GOOGLE_CALENDAR_ID ?? "",
-  gmailUser: process.env.GMAIL_APP_PASSWORD ? "serviceclient@procleanempire.com" : "",
+  gmailUser: process.env.GMAIL_APP_PASSWORD ? "contact@procleanempire.com" : "",
   gmailAppPassword: process.env.GMAIL_APP_PASSWORD ?? "",
-  ownerEmail: "serviceclient@procleanempire.com",
+  ownerEmail: "contact@procleanempire.com",
 };
