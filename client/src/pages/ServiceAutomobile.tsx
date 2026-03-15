@@ -1,11 +1,16 @@
-import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, CheckCircle2, Shield, Sparkles, Clock3, MapPin } from "lucide-react";
 import { useState } from "react";
+import { ServiceHelmet } from "@/components/ServiceHelmet";
+import Header from "@/components/Header";
 
 export default function ServiceAutomobile() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  const serviceTitle = "Nettoyage Automobile Professionnel";
+  const serviceDescription = "Service de nettoyage automobile professionnel a Paris et Ile-de-France. Lavage interieur et exterieur, lustrage, protection. Intervention a domicile. Devis gratuit.";
+  const serviceKeywords = "nettoyage automobile Paris, nettoyage voiture Ile-de-France, lavage automobile professionnel, nettoyage interieur exterieur, lustrage voiture, detailing automobile";
 
   const scrollToBooking = () => {
     const bookingSection = document.getElementById('booking-section');
@@ -39,6 +44,13 @@ export default function ServiceAutomobile() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <ServiceHelmet
+        title={serviceTitle}
+        description={serviceDescription}
+        keywords={serviceKeywords}
+        canonical="https://procleanempire.com/service-automobile"
+        image="https://files.manuscdn.com/user_upload_by_module/session_file/310519663223121429/EjnzEtAMpiePukrT.jpg"
+      />
       <Header />
       
       <main className="flex-1">

@@ -827,3 +827,24 @@
 - [ ] Tests complets pour vérifier l'absence de bugs
 - [ ] Animations smooth et transitions rapides
 - [ ] Vérifier la fluidité sur mobile et desktop
+
+
+## Optimisation SEO Avancée - Phase 4
+
+- [x] Améliorer les meta descriptions pour chaque page
+- [x] Ajouter des mots-clés stratégiques (Île-de-France, nettoyage automobile, etc.)
+- [x] Optimiser le schema structuré (LocalBusiness, Service, AggregateRating)
+- [x] Créer sitemap.xml dynamique avec toutes les pages
+- [x] Créer robots.txt optimisé
+- [x] Ajouter des pages de service détaillées avec contenu unique
+- [ ] Optimiser les images pour le SEO (alt text, compression)
+- [x] Ajouter des balises structurées pour les services
+- [ ] Améliorer la vitesse du site (Core Web Vitals)
+- [x] Ajouter des breadcrumbs pour la navigation
+- [x] Créer des URL amies (slugs optimisés)
+- [ ] Ajouter des liens internes stratégiques
+- [x] Optimiser les balises Heading (H1, H2, H3)
+- [x] Ajouter du contenu riche (FAQ, guides, conseils)
+- [ ] Configurer Google Search Console
+- [ ] Soumettre le sitemap à Google
+- [ ] Monitorer les performances SEO
