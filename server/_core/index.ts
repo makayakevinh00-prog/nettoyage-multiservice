@@ -11,6 +11,7 @@ import { serveStatic, setupVite } from "./vite";
 import { initializeReminderScheduler } from "../lib/reminderScheduler";
 import { startFeedbackScheduler } from "../lib/feedbackScheduler";
 import fetch from 'node-fetch';
+import { securityHeaders, additionalSecurityHeaders, csrfProtection, sanitizeInput, securityLogger } from "./security";
 
 // Polyfill fetch si nécessaire
 if (!globalThis.fetch) {
@@ -40,15 +41,10 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
   
-  // SECURITE: En-tetes de securite
-  app.use((req, res, next) => {
-    res.setHeader('X-Frame-Options', 'DENY');
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-    res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
-    next();
-  });
+  // SECURITE: Middleware Helmet pour les headers de securite
+  app.use(securityHeaders());
+  app.use(additionalSecurityHeaders);
+  app.use(securityLogger);
   
   // Redirections pour eviter les doublons (www, https)
   app.use((req, res, next) => {
@@ -77,6 +73,10 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  
+  // SECURITE: Sanitiser les donnees et protection CSRF
+  app.use(sanitizeInput);
+  app.use(csrfProtection);
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   

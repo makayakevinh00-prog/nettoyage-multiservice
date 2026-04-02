@@ -848,3 +848,23 @@
 - [ ] Configurer Google Search Console
 - [ ] Soumettre le sitemap à Google
 - [ ] Monitorer les performances SEO
+
+
+## Sécurité du Site - Phase 5
+
+- [x] Ajouter les headers de sécurité HTTP (CSP, X-Frame-Options, X-Content-Type-Options)
+- [x] Implémenter la protection CSRF sur les formulaires
+- [x] Ajouter la validation côté serveur pour tous les formulaires
+- [x] Configurer le rate limiting sur les endpoints critiques
+- [x] Ajouter la sanitisation des données
+- [x] Implémenter la protection contre les XSS
+- [x] Configurer la politique de confidentialité (RGPD)
+- [x] Ajouter les mentions légales complètes
+- [x] Implémenter le consentement aux cookies
+- [x] Ajouter la protection des données sensibles
+- [x] Configurer les logs de sécurité
+- [ ] Ajouter la détection des anomalies
+- [ ] Tester la sécurité avec des outils (OWASP ZAP, Burp Suite)
+- [x] Vérifier la conformité RGPD
+- [x] Configurer les sauvegardes automatiques
+- [x] Ajouter le monitoring de sécurité
