@@ -60,11 +60,16 @@ export default function Home() {
   const scrollToBooking = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Attendre que le DOM soit prêt
     const bookingSection = document.getElementById('booking');
     if (bookingSection) {
-      setTimeout(() => {
+      // Utiliser requestAnimationFrame pour s'assurer que le scroll se fait après le rendu
+      requestAnimationFrame(() => {
         bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200);
+      });
+    } else {
+      console.warn('[ScrollToBooking] Section booking non trouvée');
     }
   };
 

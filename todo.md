@@ -868,3 +868,10 @@
 - [x] Vérifier la conformité RGPD
 - [x] Configurer les sauvegardes automatiques
 - [x] Ajouter le monitoring de sécurité
+
+
+## Bugs à Corriger - Phase 6
+
+- [x] Bug du bouton "Demander mon devis" - ne scroll pas vers le formulaire, fait un refresh
+- [x] Vérifier les liens d'ancrage (#booking, #contact, etc.)
+- [x] Tester sur mobile et desktop
