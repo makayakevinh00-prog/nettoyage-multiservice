@@ -875,3 +875,17 @@
 - [x] Bug du bouton "Demander mon devis" - ne scroll pas vers le formulaire, fait un refresh
 - [x] Vérifier les liens d'ancrage (#booking, #contact, etc.)
 - [x] Tester sur mobile et desktop
+
+
+## Système d'Abonnement Automobile - Phase 7
+
+- [x] Créer le schéma de base de données pour les abonnements
+- [x] Implémenter les procédures tRPC pour les abonnements
+- [x] Créer la page d'abonnement avec les 2 formules (Express 30€, Confort 60€)
+- [x] Intégrer Stripe pour le paiement initial et les prélèvements mensuels
+- [x] Créer l'espace client pour gérer l'abonnement
+- [x] Ajouter les options à la carte (shampoing sièges, traitement anti-odeurs, etc.)
+- [x] Implémenter le webhook Stripe pour les prélèvements mensuels
+- [ ] Créer les emails de confirmation et de renouvellement
+- [x] Tester le système d'abonnement complet
+- [ ] Publier le système d'abonnement

@@ -151,3 +151,55 @@ export const integrationLogs = mysqlTable("integrationLogs", {
 
 export type IntegrationLog = typeof integrationLogs.$inferSelect;
 export type InsertIntegrationLog = typeof integrationLogs.$inferInsert;
+
+// Table pour les abonnements automobiles
+export const autoSubscriptions = mysqlTable("autoSubscriptions", {
+  id: int("id").autoincrement().primaryKey(),
+  userId: int("userId").notNull(), // Lien vers l'utilisateur
+  plan: mysqlEnum("plan", ["express", "confort"]).notNull(), // Express (30€) ou Confort (60€)
+  monthlyPrice: int("monthlyPrice").notNull(), // Prix en centimes (3000 = 30€, 6000 = 60€)
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).notNull(), // ID client Stripe
+  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }).notNull(), // ID abonnement Stripe
+  status: mysqlEnum("status", ["active", "paused", "cancelled", "expired"]).default("active").notNull(),
+  currentBillingCycleStart: timestamp("currentBillingCycleStart"),
+  currentBillingCycleEnd: timestamp("currentBillingCycleEnd"),
+  nextBillingDate: timestamp("nextBillingDate"),
+  cancellationDate: timestamp("cancellationDate"),
+  cancellationReason: text("cancellationReason"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AutoSubscription = typeof autoSubscriptions.$inferSelect;
+export type InsertAutoSubscription = typeof autoSubscriptions.$inferInsert;
+
+// Table pour les options d'abonnement
+export const subscriptionOptions = mysqlTable("subscriptionOptions", {
+  id: int("id").autoincrement().primaryKey(),
+  subscriptionId: int("subscriptionId").notNull(), // Lien vers l'abonnement
+  optionName: varchar("optionName", { length: 200 }).notNull(), // Ex: "Shampoing sièges"
+  optionPrice: int("optionPrice").notNull(), // Prix en centimes
+  quantity: int("quantity").default(1).notNull(),
+  addedDate: timestamp("addedDate").defaultNow().notNull(),
+  appliedForMonth: varchar("appliedForMonth", { length: 7 }).notNull(), // Format: YYYY-MM
+});
+
+export type SubscriptionOption = typeof subscriptionOptions.$inferSelect;
+export type InsertSubscriptionOption = typeof subscriptionOptions.$inferInsert;
+
+// Table pour les factures d'abonnement
+export const subscriptionInvoices = mysqlTable("subscriptionInvoices", {
+  id: int("id").autoincrement().primaryKey(),
+  subscriptionId: int("subscriptionId").notNull(), // Lien vers l'abonnement
+  stripeInvoiceId: varchar("stripeInvoiceId", { length: 255 }).notNull().unique(),
+  amount: int("amount").notNull(), // Montant en centimes
+  status: mysqlEnum("status", ["draft", "open", "paid", "void", "uncollectible"]).notNull(),
+  paidDate: timestamp("paidDate"),
+  dueDate: timestamp("dueDate"),
+  pdfUrl: varchar("pdfUrl", { length: 500 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SubscriptionInvoice = typeof subscriptionInvoices.$inferSelect;
+export type InsertSubscriptionInvoice = typeof subscriptionInvoices.$inferInsert;
