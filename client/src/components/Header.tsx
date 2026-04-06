@@ -23,7 +23,6 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: "Accueil" },
-    { href: "/abonnements-auto", label: "🚗 Abonnements Auto", highlight: true },
     { label: "Services", submenu: services },
     { href: "/avis", label: "Avis clients" },
     { label: "Professionnels", href: "/professionnels" },
@@ -83,11 +82,7 @@ export default function Header() {
               ) : (
                 <Link
                   href={item.href || "/"}
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
-                    (item as any).highlight
-                      ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg hover:from-blue-700 hover:to-blue-600 shadow-md"
-                      : "text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
-                  }`}
+                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400 transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -178,16 +173,12 @@ export default function Header() {
                 ) : (
                   <Link
                     href={item.href || "/"}
-                    className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                      (item as any).highlight
-                        ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600"
-                        : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700"
-                    }`}
+                    className="block px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.label}
                   </Link>
-                )
+                )}
               </div>
             ))}
             <div className="border-t pt-4 mt-4 space-y-2">

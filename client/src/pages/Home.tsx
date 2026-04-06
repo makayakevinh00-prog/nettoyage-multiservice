@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import AdvancedBookingForm from "@/components/AdvancedBookingForm";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import SubscriptionsSection from "@/components/SubscriptionsSection";
 
 import { 
   Car,
@@ -222,9 +221,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Subscriptions Section */}
-        <SubscriptionsSection />
 
         {/* Why Choose Us Section */}
         <section className="py-20 md:py-32 bg-white">

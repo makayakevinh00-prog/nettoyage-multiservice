@@ -16,7 +16,6 @@ import { storagePut } from "./storage";
 import { SERVICES } from "@shared/pricing";
 import Stripe from "stripe";
 import { hubspotRouter } from "./routers/hubspot";
-import { subscriptionsRouter } from "./routers/subscriptions";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2026-02-25.clover",
@@ -797,7 +796,6 @@ ${totalPrice > 0 ? `<p><strong>Prix estimé:</strong> ${(totalPrice / 100).toFix
   }),
 
   hubspot: hubspotRouter,
-  subscriptions: subscriptionsRouter,
 });
 
 export type AppRouter = typeof appRouter;

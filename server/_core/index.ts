@@ -182,37 +182,6 @@ async function startServer() {
     res.send(sitemap);
   });
 
-  // Endpoint pour créer une session Stripe d'abonnement
-  app.post('/api/stripe/create-subscription', express.json(), async (req, res) => {
-    try {
-      const { plan } = req.body;
-      const user = (req as any).user;
-      
-      if (!user) {
-        return res.status(401).json({ error: 'Non authentifié' });
-      }
-
-      if (!['express', 'confort'].includes(plan)) {
-        return res.status(400).json({ error: 'Plan invalide' });
-      }
-
-      const { createSubscriptionCheckoutSession } = await import('../lib/stripeSubscriptions');
-      const session = await createSubscriptionCheckoutSession(
-        user.id,
-        user.email,
-        user.name,
-        plan,
-        `${req.get('origin')}/abonnements-auto?success=true`,
-        `${req.get('origin')}/abonnements-auto?cancelled=true`
-      );
-
-      res.json({ clientSecret: session.url });
-    } catch (error) {
-      console.error('[Stripe] Error creating subscription session:', error);
-      res.status(500).json({ error: 'Erreur lors de la création de la session' });
-    }
-  });
-
   // tRPC API
   app.use(
     "/api/trpc",

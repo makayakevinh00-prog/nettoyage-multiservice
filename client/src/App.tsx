@@ -37,9 +37,6 @@ import BlogArticleTerrasse from "./pages/BlogArticleTerrasse";
 import BlogArticleEcologie from "./pages/BlogArticleEcologie";
 import BlogArticlePiscine from "./pages/BlogArticlePiscine";
 import BlogArticleAuto from "./pages/BlogArticleAuto";
-import SubscriptionsAuto from "./pages/SubscriptionsAuto";
-import SubscriptionManagement from "./pages/SubscriptionManagement";
-import FloatingSubscriptionCTA from "./components/FloatingSubscriptionCTA";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -79,10 +76,8 @@ function Router() {
       <Route path={"/blog/terrasse"} component={BlogArticleTerrasse} />
       <Route path={"/blog/ecologie"} component={BlogArticleEcologie} />
       <Route path={"/blog/piscine"} component={BlogArticlePiscine} />
-      <Route path="/blog/automobile" component={BlogArticleAuto} />
-      <Route path="/abonnements-auto" component={SubscriptionsAuto} />
-      <Route path="/mon-abonnement" component={SubscriptionManagement} />
-      <Route path="/404" component={NotFound} />
+      <Route path={"/blog/automobile"} component={BlogArticleAuto} />
+      <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
@@ -106,7 +101,6 @@ function App() {
           <Router />
           <Footer />
           <WhatsAppButton />
-          <FloatingSubscriptionCTA />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

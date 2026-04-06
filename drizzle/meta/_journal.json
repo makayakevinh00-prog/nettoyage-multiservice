@@ -71,13 +71,6 @@
       "when": 1770159225030,
       "tag": "0009_shiny_shinko_yamashiro",
       "breakpoints": true
-    },
-    {
-      "idx": 10,
-      "version": "5",
-      "when": 1775512347146,
-      "tag": "0010_worthless_talos",
-      "breakpoints": true
     }
   ]
 }
