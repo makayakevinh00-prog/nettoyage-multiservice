@@ -889,3 +889,14 @@
 - [ ] Créer les emails de confirmation et de renouvellement
 - [x] Tester le système d'abonnement complet
 - [ ] Publier le système d'abonnement
+
+
+## Mise en Avant de l'Abonnement Auto - Phase 8
+
+- [x] Ajouter un bouton "Abonnements" dans le menu principal (Header)
+- [x] Créer une section abonnements sur la page d'accueil (juste après le hero)
+- [x] Ajouter un CTA flottant "Découvrir nos abonnements" en bas à droite
+- [x] Mettre les abonnements en avant avant les services classiques
+- [x] Simplifier l'accès avec un clic = page d'abonnement
+- [x] Tester sur mobile et desktop
+- [ ] Publier les changements

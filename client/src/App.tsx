@@ -39,6 +39,7 @@ import BlogArticlePiscine from "./pages/BlogArticlePiscine";
 import BlogArticleAuto from "./pages/BlogArticleAuto";
 import SubscriptionsAuto from "./pages/SubscriptionsAuto";
 import SubscriptionManagement from "./pages/SubscriptionManagement";
+import FloatingSubscriptionCTA from "./components/FloatingSubscriptionCTA";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -105,6 +106,7 @@ function App() {
           <Router />
           <Footer />
           <WhatsAppButton />
+          <FloatingSubscriptionCTA />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
