@@ -164,6 +164,43 @@ export default function AdvancedBookingForm({
     handleConfirmBooking();
   };
 
+  // ── Synchronisation CRM ProClean Empire ──────────────────────────────────
+  const syncToCRM = async (data: {
+    name: string; email: string; phone: string; service: string;
+    serviceOption: string; date: string; time: string; address: string;
+    message: string; bookingType?: string; subscriptionPlan?: string;
+  }) => {
+    const CRM_URL = "https://procleanapp-6r8venuv.manus.space";
+    try {
+      const nameParts = data.name.trim().split(" ");
+      const firstName = nameParts[0] || data.name;
+      const lastName = nameParts.slice(1).join(" ") || "";
+      await fetch(`${CRM_URL}/api/webhooks/booking`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: data.email,
+          phone: data.phone,
+          service: data.service,
+          serviceOption: data.serviceOption,
+          date: data.date,
+          time: data.time,
+          address: data.address,
+          message: data.message,
+          bookingType: data.bookingType || "one_time",
+          subscriptionPlan: data.subscriptionPlan || "",
+          source: "procleanempire.com",
+        }),
+      });
+      console.log("[CRM] Réservation synchronisée avec succès");
+    } catch (err) {
+      // Non bloquant : la réservation principale est déjà envoyée
+      console.warn("[CRM] Synchronisation échouée (non bloquant)", err);
+    }
+  };
+
   const handleConfirmBooking = () => {
     // Envoyer la réservation
     const addonsLabel = bookingData.selectedAddons.length > 0 
@@ -172,8 +209,8 @@ export default function AdvancedBookingForm({
           return addon?.label || '';
         }).join(', ')}`
       : '';
-    
-    sendBookingMutation.mutate({
+
+    const mutationPayload = {
       name: bookingData.name,
       email: bookingData.email,
       phone: bookingData.phone,
@@ -184,6 +221,22 @@ export default function AdvancedBookingForm({
       time: bookingData.time,
       address: bookingData.address,
       message: bookingData.message
+    };
+    
+    // 1. Envoyer au backend procleanempire.com (principal)
+    sendBookingMutation.mutate(mutationPayload);
+
+    // 2. Synchroniser avec le CRM ProClean Empire (en parallèle, non bloquant)
+    syncToCRM({
+      name: bookingData.name,
+      email: bookingData.email,
+      phone: bookingData.phone,
+      service: bookingData.service,
+      serviceOption: bookingData.serviceOption + addonsLabel,
+      date: bookingData.date,
+      time: bookingData.time,
+      address: bookingData.address,
+      message: bookingData.message,
     });
   };
 
