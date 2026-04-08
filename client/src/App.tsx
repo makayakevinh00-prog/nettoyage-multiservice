@@ -60,6 +60,7 @@ function Router() {
       <Route path={"/account-management"} component={AccountManagement} />
       <Route path={"/support"} component={Support} />
       <Route path={"/404"} component={NotFound} />
+      <Route path="/offres" component={Offres} />
       <Route path="/reservation" component={Reservation} />
       <Route path="/payment" component={Payment} />
       <Route path="/payment-success" component={PaymentSuccess} />

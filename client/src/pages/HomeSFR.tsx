@@ -101,7 +101,7 @@ export default function HomeSFR() {
                 Abonnements Automatiques
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Comme SFR, choisissez votre formule et profitez du nettoyage sans vous en soucier
+                Choisissez votre formule et profitez du nettoyage sans vous en soucier
               </p>
             </div>
 
