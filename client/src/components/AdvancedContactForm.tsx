@@ -11,6 +11,8 @@ interface FormData {
   city: string;
   description: string;
   photo: File | null;
+  preferredDate?: string;
+  preferredTime?: string;
 }
 
 const services = [
@@ -43,7 +45,9 @@ export default function AdvancedContactForm() {
     serviceType: "",
     city: "",
     description: "",
-    photo: null
+    photo: null,
+    preferredDate: "",
+    preferredTime: ""
   });
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
@@ -105,7 +109,9 @@ export default function AdvancedContactForm() {
         serviceType: "",
         city: "",
         description: "",
-        photo: null
+        photo: null,
+        preferredDate: "",
+        preferredTime: ""
       });
       setPhotoPreview(null);
       setSubmitted(true);
@@ -233,6 +239,34 @@ export default function AdvancedContactForm() {
               </option>
             ))}
           </select>
+        </div>
+
+        {/* Date préférée */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Date préférée (optionnel)
+          </label>
+          <input
+            type="date"
+            name="preferredDate"
+            value={formData.preferredDate || ""}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
+        </div>
+
+        {/* Heure préférée */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Heure préférée (optionnel)
+          </label>
+          <input
+            type="time"
+            name="preferredTime"
+            value={formData.preferredTime || ""}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+          />
         </div>
       </div>
 

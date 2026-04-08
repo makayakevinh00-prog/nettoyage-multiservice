@@ -949,3 +949,40 @@
 - [ ] Ajouter les notifications email automatiques
 - [ ] Configurer les webhooks Stripe
 - [ ] Tester le tunnel de vente complet
+
+
+## Phase 4 - Améliorations Complètes du Rapport
+
+### SEO
+- [x] Optimiser les titres et descriptions meta pour chaque page
+- [x] Corriger la structure H1/H2 sur toutes les pages
+- [x] Enrichir le contenu avec des mots-clés locaux
+- [x] Créer des pages de services dédiées avec contenu détaillé
+
+### Pages de Services Dédiées
+- [x] Page Service Automobile (avec FAQ, études de cas, tarifs détaillés)
+- [x] Page Service Terrasse (avec FAQ, études de cas, tarifs détaillés)
+- [x] Page Service Tapis (avec FAQ, études de cas, tarifs détaillés)
+- [x] Page Service Canapés (avec FAQ, études de cas, tarifs détaillés)
+- [x] Page Service Jardinage (avec FAQ, études de cas, tarifs détaillés)
+
+### UX
+- [x] Créer une page "Nos Services" avec navigation vers les pages dédiées
+- [x] Améliorer le formulaire de contact avec date/heure
+- [x] Revoir la hiérarchie visuelle des CTA
+- [x] Optimiser l'icône WhatsApp pour ne pas masquer le contenu
+
+### Crédibilité
+- [x] Ajouter des photos clients aux témoignages
+- [x] Intégrer widget Trustpilot
+- [x] Harmoniser les notes d'avis clients (4.1/5 partout)
+- [x] Compléter les mentions légales
+
+### Réseaux Sociaux
+- [x] Corriger le lien Instagram
+- [x] Vérifier tous les liens de réseaux sociaux
+
+### Tests
+- [x] Tester toutes les pages sur mobile et desktop
+- [x] Vérifier les performances SEO
+- [x] Valider les formulaires
