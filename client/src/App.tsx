@@ -53,7 +53,8 @@ function Router() {
   // Afficher la page de maintenance au lieu de la page d'accueil
   return (
     <Switch>
-      <Route path="/" component={Maintenance} />
+      <Route path="/" component={HomeSFR} />
+      <Route path="/maintenance" component={Maintenance} />
       <Route path="/home" component={Home} />
       <Route path={"/services"} component={Services} />
       <Route path={"/account-management"} component={AccountManagement} />
