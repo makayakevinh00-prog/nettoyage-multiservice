@@ -23,6 +23,7 @@ import Reviews from "./pages/Reviews";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import Maintenance from "./pages/Maintenance";
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceTapis from "./pages/ServiceTapis";
@@ -37,12 +38,13 @@ import BlogArticleTerrasse from "./pages/BlogArticleTerrasse";
 import BlogArticleEcologie from "./pages/BlogArticleEcologie";
 import BlogArticlePiscine from "./pages/BlogArticlePiscine";
 import BlogArticleAuto from "./pages/BlogArticleAuto";
-
 function Router() {
   // make sure to consider if you need authentication for certain routes
+  // Afficher la page de maintenance au lieu de la page d'accueil
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
+      <Route path="/" component={Maintenance} />
+      <Route path="/home" component={Home} />
       <Route path={"/en"} component={Home} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
