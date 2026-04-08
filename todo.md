@@ -935,3 +935,17 @@
 ### Publication
 - [ ] Sauvegarder le checkpoint final
 - [ ] Publier le site complet
+
+
+## Phase 3 - Transformation SFR Complète
+
+- [x] Créer la page "Nos Offres" avec tous les services et tarifs
+- [x] Implémenter le système de réservation avec formulaire complet
+- [x] Ajouter les options upsell (désinfection, vitres, urgence 24h)
+- [x] Intégrer les paiements Stripe pour abonnements et prestations
+- [x] Créer l'espace client pour gérer les abonnements
+- [x] Créer la page de succès de paiement
+- [x] Ajouter le dashboard client avec abonnements et historique
+- [ ] Ajouter les notifications email automatiques
+- [ ] Configurer les webhooks Stripe
+- [ ] Tester le tunnel de vente complet

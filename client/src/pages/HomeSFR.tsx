@@ -68,7 +68,7 @@ export default function HomeSFR() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-8 py-6"
-                  onClick={scrollToBooking}
+                  onClick={() => navigate("/reservation")}
                 >
                   📅 Réserver Maintenant
                 </Button>

@@ -16,6 +16,7 @@ import { storagePut } from "./storage";
 import { SERVICES } from "@shared/pricing";
 import Stripe from "stripe";
 import { hubspotRouter } from "./routers/hubspot";
+import { paymentRouter } from "./routers/payment";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
   apiVersion: "2026-02-25.clover",
@@ -23,6 +24,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
 
 export const appRouter = router({
   system: systemRouter,
+  payment: paymentRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {

@@ -40,6 +40,11 @@ import BlogArticleTerrasse from "./pages/BlogArticleTerrasse";
 import BlogArticleEcologie from "./pages/BlogArticleEcologie";
 import BlogArticlePiscine from "./pages/BlogArticlePiscine";
 import BlogArticleAuto from "./pages/BlogArticleAuto";
+import Offres from "./pages/Offres";
+import Reservation from "./pages/Reservation";
+import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import ClientDashboardNew from "./pages/ClientDashboardNew";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   // Afficher la page de maintenance au lieu de la page d'accueil
@@ -47,7 +52,11 @@ function Router() {
     <Switch>
       <Route path="/" component={HomeSFR} />
       <Route path="/home" component={Home} />
-      <Route path="/offres" component={HomeSFR} />
+      <Route path="/offres" component={Offres} />
+      <Route path="/reservation" component={Reservation} />
+      <Route path="/payment" component={Payment} />
+      <Route path="/payment-success" component={PaymentSuccess} />
+      <Route path="/client-dashboard-new" component={ClientDashboardNew} />
       <Route path="/professionnels" component={ProfessionalsSFR} />
       <Route path="/pro" component={ProfessionalsSFR} />
       <Route path="/en" component={Home} />
