@@ -875,3 +875,63 @@
 - [x] Bug du bouton "Demander mon devis" - ne scroll pas vers le formulaire, fait un refresh
 - [x] Vérifier les liens d'ancrage (#booking, #contact, etc.)
 - [x] Tester sur mobile et desktop
+
+
+## Phase 3 - Transformation SFR (Machine de Vente Automatique)
+
+### Planification et Structure
+- [ ] Créer la structure de la nouvelle page d'accueil (design SFR)
+- [ ] Planifier le tunnel de vente (max 3 étapes)
+- [ ] Structurer les abonnements vs prestations ponctuelles
+
+### Page d'Accueil SFR
+- [x] Créer la nouvelle homepage avec design moderne SFR
+- [x] Message clair : "Nettoyage professionnel pour entreprises et particuliers"
+- [x] Présentation des offres principales
+- [x] CTA 1 : "Choisir un abonnement"
+- [x] CTA 2 : "Réserver maintenant"
+- [x] Ajouter les messages d'urgence (places limitées, intervention 24h)
+
+### Page "Nos Offres"
+- [ ] Créer la page avec 2 catégories : Abonnements vs Prestations ponctuelles
+- [ ] Section Abonnements : Express 30€/mois, Confort 60€/mois
+- [ ] Section Prestations ponctuelles : tous les services (automobile, tapis, terrasse, jardinage)
+- [ ] Afficher les tarifs détaillés pour chaque service
+- [ ] Ajouter les options upsell pour chaque prestation
+
+### Système de Réservation Avancé
+- [ ] Implémenter le choix du service (dropdown avec tous les services)
+- [ ] Ajouter la sélection date/heure
+- [ ] Implémenter les options upsell (désinfection, vitres, urgence 24h, etc.)
+- [ ] Calcul automatique du prix en temps réel
+- [ ] Afficher le résumé avant paiement
+
+### Paiement Stripe Complet
+- [ ] Configurer les paiements pour les abonnements mensuels
+- [ ] Configurer les paiements pour les prestations ponctuelles
+- [ ] Implémenter les webhooks Stripe pour les confirmations
+- [ ] Ajouter les factures automatiques par email
+
+### Espace Client
+- [ ] Créer la page de connexion client
+- [ ] Afficher les abonnements actifs
+- [ ] Permettre de modifier/résilier l'abonnement
+- [ ] Afficher l'historique des prestations
+- [ ] Afficher les factures téléchargeables
+
+### Messages d'Urgence & Psychologie
+- [ ] Ajouter "Places limitées cette semaine"
+- [ ] Ajouter "Intervention sous 24h"
+- [ ] Ajouter les avis clients visibles
+- [ ] Ajouter les images avant/après
+
+### Optimisation et Tests
+- [ ] Tester le tunnel de vente complet
+- [ ] Vérifier le calcul des prix
+- [ ] Tester les paiements Stripe
+- [ ] Tester sur mobile et desktop
+- [ ] Optimiser les performances
+
+### Publication
+- [ ] Sauvegarder le checkpoint final
+- [ ] Publier le site complet

@@ -24,6 +24,7 @@ import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Maintenance from "./pages/Maintenance";
+import HomeSFR from "./pages/HomeSFR";
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceTapis from "./pages/ServiceTapis";
@@ -43,8 +44,9 @@ function Router() {
   // Afficher la page de maintenance au lieu de la page d'accueil
   return (
     <Switch>
-      <Route path="/" component={Maintenance} />
+      <Route path="/" component={HomeSFR} />
       <Route path="/home" component={Home} />
+      <Route path="/offres" component={HomeSFR} />
       <Route path={"/en"} component={Home} />
       <Route path={"/professionnels"} component={Professionnels} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
@@ -78,7 +80,8 @@ function Router() {
       <Route path={"/blog/terrasse"} component={BlogArticleTerrasse} />
       <Route path={"/blog/ecologie"} component={BlogArticleEcologie} />
       <Route path={"/blog/piscine"} component={BlogArticlePiscine} />
-      <Route path={"/blog/automobile"} component={BlogArticleAuto} />
+            <Route path="/blog/auto" component={BlogArticleAuto} />
+      <Route path="/maintenance" component={Maintenance} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
