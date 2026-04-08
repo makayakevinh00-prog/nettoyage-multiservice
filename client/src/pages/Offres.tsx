@@ -155,7 +155,7 @@ export default function Offres() {
                         </li>
                       </ul>
 
-                      <Button className="w-full bg-blue-500 hover:bg-blue-600" size="lg">
+                      <Button className="w-full bg-blue-500 hover:bg-blue-600" size="lg" onClick={() => navigate('/payment')}>
                         Souscrire
                       </Button>
                     </CardContent>
@@ -207,7 +207,7 @@ export default function Offres() {
                         </li>
                       </ul>
 
-                      <Button className="w-full bg-blue-600 hover:bg-blue-700" size="lg">
+                      <Button className="w-full bg-blue-600 hover:bg-blue-700" size="lg" onClick={() => navigate('/payment')}>
                         Souscrire Maintenant
                       </Button>
                     </CardContent>
