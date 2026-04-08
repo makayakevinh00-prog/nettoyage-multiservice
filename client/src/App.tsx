@@ -25,6 +25,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Maintenance from "./pages/Maintenance";
 import HomeSFR from "./pages/HomeSFR";
+import ProfessionalsSFR from "./pages/ProfessionalsSFR";
 import ServiceAutomobile from "./pages/ServiceAutomobile";
 import ServiceTerrasse from "./pages/ServiceTerrasse";
 import ServiceTapis from "./pages/ServiceTapis";
@@ -47,8 +48,10 @@ function Router() {
       <Route path="/" component={HomeSFR} />
       <Route path="/home" component={Home} />
       <Route path="/offres" component={HomeSFR} />
-      <Route path={"/en"} component={Home} />
-      <Route path={"/professionnels"} component={Professionnels} />
+      <Route path="/professionnels" component={ProfessionalsSFR} />
+      <Route path="/pro" component={ProfessionalsSFR} />
+      <Route path="/en" component={Home} />
+      <Route path="/professionals" component={Professionals} />
       <Route path={"/pourquoi-nous"} component={WhyChooseUs} />
       <Route path={"/contact"} component={Contact} />
       <Route path={"/service/auto"} component={ServiceAuto} />

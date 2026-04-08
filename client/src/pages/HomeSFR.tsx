@@ -31,14 +31,20 @@ export default function HomeSFR() {
 
       <main className="flex-1">
         {/* Hero Section - Inspiré SFR */}
-        <section className="relative min-h-[600px] flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
-          </div>
+        <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/hero-sfr_d1f00761.png)',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover'
+            }}
+          ></div>
+          {/* Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-blue-900/70 to-slate-900/60"></div>
 
-          <div className="container relative z-10 py-20 text-center">
+          <div className="container relative z-20 py-20 text-center">
             <div className="max-w-3xl mx-auto">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
                 Nettoyage <span className="text-blue-400">Premium</span>
@@ -220,14 +226,44 @@ export default function HomeSFR() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { icon: "🚗", title: "Automobile", desc: "Intérieur, extérieur, détailing", price: "À partir de 70€" },
-                { icon: "🛋️", title: "Canapés", desc: "Petit, moyen, grand format", price: "À partir de 40€" },
-                { icon: "🧶", title: "Tapis", desc: "Injection-extraction pro", price: "À partir de 35€" },
-                { icon: "☀️", title: "Terrasse", desc: "Nettoyage haute pression", price: "À partir de 90€" },
+                { 
+                  icon: "🚗", 
+                  title: "Automobile", 
+                  desc: "Intérieur, extérieur, détailing", 
+                  price: "À partir de 70€",
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-auto-clean-TE8uYdCBKLVfwsK7uX5zUJ.webp"
+                },
+                { 
+                  icon: "🛋️", 
+                  title: "Canapés", 
+                  desc: "Petit, moyen, grand format", 
+                  price: "À partir de 40€",
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-couch-clean-X86WemSDtvmaiVMLkdb9bD.webp"
+                },
+                { 
+                  icon: "🧶", 
+                  title: "Tapis", 
+                  desc: "Injection-extraction pro", 
+                  price: "À partir de 35€",
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-carpet-clean-aoZP5vsE6eKLgY835yUVLr.webp"
+                },
+                { 
+                  icon: "☀️", 
+                  title: "Terrasse", 
+                  desc: "Nettoyage haute pression", 
+                  price: "À partir de 90€",
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-terrace-clean-6cTaVATdxhhRQvzUWKyrvc.webp"
+                },
               ].map((service, i) => (
-                <Card key={i} className="hover:shadow-lg transition-all cursor-pointer group">
+                <Card key={i} className="hover:shadow-lg transition-all cursor-pointer group overflow-hidden">
+                  <div className="relative h-48 overflow-hidden bg-gray-200">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
                   <CardContent className="p-6 text-center">
-                    <div className="text-4xl mb-4">{service.icon}</div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
                     <p className="text-gray-600 text-sm mb-4">{service.desc}</p>
                     <p className="text-blue-600 font-bold mb-4">{service.price}</p>
@@ -273,10 +309,10 @@ export default function HomeSFR() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                Réserver Maintenant
+                Prêt à Commencer ?
               </h2>
               <p className="text-xl text-gray-600">
-                Choisissez votre service et réservez en 3 étapes simples
+                Réservez votre prestation en 3 clics
               </p>
             </div>
 
