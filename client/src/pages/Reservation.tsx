@@ -15,6 +15,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
 import { useLocation } from "wouter";
+import InteractiveCalendar from "@/components/InteractiveCalendar";
 
 export default function Reservation() {
   const [, navigate] = useLocation();
@@ -32,6 +33,7 @@ export default function Reservation() {
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   // Services avec prestations et options
   const services = {
@@ -131,6 +133,11 @@ export default function Reservation() {
       if (option) price += option.price;
     });
     setTotalPrice(price);
+  };
+
+  const handleDateTimeSelect = (date: string, time: string) => {
+    setFormData({ ...formData, date, time });
+    setShowCalendar(false);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -257,33 +264,29 @@ export default function Reservation() {
                   </div>
                 )}
 
-                {/* Date & Time */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="date" className="text-base font-semibold mb-2 block">
-                      Date
-                    </Label>
-                    <Input
-                      id="date"
-                      type="date"
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="time" className="text-base font-semibold mb-2 block">
-                      Heure
-                    </Label>
-                    <Input
-                      id="time"
-                      type="time"
-                      value={formData.time}
-                      onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                      required
-                    />
-                  </div>
+                {/* Date & Time with Interactive Calendar */}
+                <div>
+                  <Label className="text-base font-semibold mb-3 block">Date et heure</Label>
+                  <button
+                    type="button"
+                    onClick={() => setShowCalendar(!showCalendar)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-left bg-white hover:bg-gray-50 font-medium"
+                  >
+                    {formData.date && formData.time
+                      ? `${formData.date} à ${formData.time}`
+                      : "Cliquez pour sélectionner une date et heure"}
+                  </button>
                 </div>
+
+                {showCalendar && (
+                  <div>
+                    <InteractiveCalendar
+                      onDateTimeSelect={handleDateTimeSelect}
+                      minDate={new Date()}
+                      maxDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
+                    />
+                  </div>
+                )}
 
                 {/* Contact Info */}
                 <div>

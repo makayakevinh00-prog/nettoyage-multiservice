@@ -46,6 +46,8 @@ import Payment from "./pages/Payment";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import ClientDashboardNew from "./pages/ClientDashboardNew";
 import Services from "./pages/Services";
+import AccountManagement from "./pages/AccountManagement";
+import Support from "./pages/Support";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   // Afficher la page de maintenance au lieu de la page d'accueil
@@ -53,8 +55,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Maintenance} />
       <Route path="/home" component={Home} />
-      <Route path="/services" component={Services} />
-      <Route path="/offres" component={Offres} />
+      <Route path={"/services"} component={Services} />
+      <Route path={"/account-management"} component={AccountManagement} />
+      <Route path={"/support"} component={Support} />
+      <Route path={"/404"} component={NotFound} />
       <Route path="/reservation" component={Reservation} />
       <Route path="/payment" component={Payment} />
       <Route path="/payment-success" component={PaymentSuccess} />

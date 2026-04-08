@@ -986,3 +986,39 @@
 - [x] Tester toutes les pages sur mobile et desktop
 - [x] Vérifier les performances SEO
 - [x] Valider les formulaires
+
+
+## Phase 5 - Optimisation Complète du Tunnel de Vente
+
+### Calendrier Interactif
+- [x] Créer un composant calendrier avec disponibilités en temps réel
+- [x] Intégrer la validation des créneaux disponibles
+- [x] Afficher les créneaux bloqués/disponibles visuellement
+- [x] Permettre la sélection de plusieurs dates (pour les abonnements)
+
+### Système de Notifications
+- [x] Configurer les emails de confirmation de réservation
+- [x] Ajouter les rappels SMS 24h avant l'intervention
+- [x] Créer les emails de confirmation de paiement
+- [x] Ajouter les notifications de changement d'abonnement
+- [ ] Intégrer Google Calendar automatiquement
+- [ ] Envoyer les invitations Google Calendar aux clients
+
+### Gestion de Compte Avancée
+- [x] Permettre de modifier la fréquence d'abonnement
+- [x] Permettre d'annuler l'abonnement avec raison
+- [x] Gérer les informations de paiement (ajouter/modifier/supprimer carte)
+- [x] Afficher l'historique détaillé des paiements
+- [ ] Permettre de télécharger les factures
+
+### Support Intégré
+- [x] Créer un formulaire de support/contact dans le dashboard
+- [x] Ajouter un chat en ligne pour les questions urgentes
+- [x] Créer une FAQ interactive
+- [ ] Ajouter un système de tickets de support
+
+### Tests & Optimisation
+- [x] Tester le tunnel complet de bout en bout
+- [x] Optimiser les performances du calendrier
+- [x] Valider les notifications email/SMS
+- [x] Tester la gestion de compte sur mobile
