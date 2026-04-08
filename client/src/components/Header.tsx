@@ -152,7 +152,7 @@ export default function Header() {
                       {item.label}
                       <ChevronDown 
                         size={16}
-                        className={`transform transition-transform ${openSubmenu === item.label ? "rotate-180" : ""}`}
+                        className={openSubmenu === item.label ? "transform transition-transform rotate-180" : "transform transition-transform"}
                       />
                     </button>
                     {openSubmenu === item.label && (

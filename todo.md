@@ -875,3 +875,15 @@
 - [x] Bug du bouton "Demander mon devis" - ne scroll pas vers le formulaire, fait un refresh
 - [x] Vérifier les liens d'ancrage (#booking, #contact, etc.)
 - [x] Tester sur mobile et desktop
+
+
+## Refonte du Site (Modèle SFR) - Phase 9
+
+- [x] Refondre la page d'accueil avec abonnements en avant
+- [ ] Créer la page "Nos offres" avec 2 catégories
+- [ ] Optimiser le tunnel de réservation (max 3 étapes)
+- [ ] Ajouter les options à la carte (upsell)
+- [ ] Créer l'espace client pour gérer l'abonnement
+- [ ] Optimiser le design mobile et la vitesse
+- [ ] Tester et valider le flux complet
+- [ ] Publier la nouvelle version
