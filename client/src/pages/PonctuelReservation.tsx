@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useNavigate } from "wouter";
+import { useLocation } from "wouter";
 import { toast } from "sonner";
 
 const SERVICES = {
@@ -32,7 +32,7 @@ const ALL_OPTIONS = [
 ];
 
 export default function PonctuelReservation() {
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const [selectedService, setSelectedService] = useState<keyof typeof SERVICES | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 

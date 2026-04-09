@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useNavigate } from "wouter";
+import { useLocation } from "wouter";
 import { toast } from "sonner";
 
 const SUBSCRIPTION_PLANS = {
@@ -47,7 +47,7 @@ const ALL_OPTIONS = [
 ];
 
 export default function SubscriptionPage() {
-  const navigate = useNavigate();
+  const [, navigate] = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<keyof typeof SUBSCRIPTION_PLANS | null>(null);
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 
