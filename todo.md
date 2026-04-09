@@ -1058,3 +1058,4 @@
 - [x] Synchronisation HubSpot : créer contact + opportunité après réservation payée
 - [x] Supprimer toutes les références à SFR dans le site (textes, descriptions)
 - [x] Corriger les coordonnées : tél 06 17 21 22 30, email contact@procleanempire.com partout
+- [ ] Remplacer les images des cartes de services sur la page d'accueil par de plus belles images

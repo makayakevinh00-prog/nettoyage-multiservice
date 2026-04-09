@@ -39,6 +39,8 @@ export const paymentRouter = router({
     .input(ReservationSchema)
     .mutation(async ({ input, ctx }) => {
       try {
+        console.log("[Stripe] Création session pour:", input.service, input.prestation, input.totalPrice);
+        
         const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
           {
             price_data: {
@@ -55,28 +57,36 @@ export const paymentRouter = router({
           },
         ];
 
-        const session = await stripe.checkout.sessions.create({
-          payment_method_types: ["card"],
-          line_items: lineItems,
-          mode: "payment",
-          success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/reservation`,
-          customer_email: input.email,
-          payment_intent_data: {
-            statement_descriptor: "PROCLEAN EMPIRE",
-          },
-          metadata: {
-            service: input.service,
-            prestation: input.prestation,
-            date: input.date,
-            time: input.time,
-            name: input.name,
-            phone: input.phone,
-            address: input.address || "",
-            message: input.message || "",
-            type: "reservation",
-          },
-        });
+        const startTime = Date.now();
+        const session = await Promise.race([
+          stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: lineItems,
+            mode: "payment",
+            success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/reservation`,
+            customer_email: input.email,
+            payment_intent_data: {
+              statement_descriptor: "PROCLEAN EMPIRE",
+            },
+            metadata: {
+              service: input.service,
+              prestation: input.prestation,
+              date: input.date,
+              time: input.time,
+              name: input.name,
+              phone: input.phone,
+              address: input.address || "",
+              message: input.message || "",
+              type: "reservation",
+            },
+          }),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Timeout création session Stripe")), 15000)
+          ),
+        ]);
+        
+        console.log(`[Stripe] Session créée en ${Date.now() - startTime}ms:`, session.id);
 
         return {
           sessionId: session.id,
@@ -84,7 +94,7 @@ export const paymentRouter = router({
         };
       } catch (error) {
         console.error("Erreur lors de la création de la session Stripe:", error);
-        throw new Error("Impossible de créer la session de paiement");
+        throw new Error("Impossible de créer la session de paiement. Veuillez réessayer.");
       }
     }),
 
@@ -93,6 +103,8 @@ export const paymentRouter = router({
     .input(SubscriptionSchema)
     .mutation(async ({ input, ctx }) => {
       try {
+        console.log("[Stripe] Création session abonnement:", input.plan);
+        
         const planDetails = {
           express: {
             name: "Abonnement Express",
@@ -108,39 +120,47 @@ export const paymentRouter = router({
 
         const plan = planDetails[input.plan];
 
-        const session = await stripe.checkout.sessions.create({
-          payment_method_types: ["card"],
-          line_items: [
-            {
-              price_data: {
-                currency: "eur",
-                product_data: {
-                  name: plan.name,
-                  description: plan.description,
+        const startTime = Date.now();
+        const session = await Promise.race([
+          stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            line_items: [
+              {
+                price_data: {
+                  currency: "eur",
+                  product_data: {
+                    name: plan.name,
+                    description: plan.description,
+                  },
+                  unit_amount: plan.price,
+                  recurring: {
+                    interval: "month",
+                    interval_count: 1,
+                  },
                 },
-                unit_amount: plan.price,
-                recurring: {
-                  interval: "month",
-                  interval_count: 1,
-                },
+                quantity: 1,
               },
-              quantity: 1,
+            ],
+            mode: "subscription",
+            success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/subscription-success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/offres`,
+            customer_email: input.email,
+            subscription_data: {
+              description: "Abonnement ProClean Empire",
             },
-          ],
-          mode: "subscription",
-          success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/subscription-success?session_id={CHECKOUT_SESSION_ID}`,
-          cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/offres`,
-          customer_email: input.email,
-          subscription_data: {
-            description: "Abonnement ProClean Empire",
-          },
-          metadata: {
-            plan: input.plan,
-            name: input.name,
-            phone: input.phone,
-            type: "subscription",
-          },
-        });
+            metadata: {
+              plan: input.plan,
+              name: input.name,
+              phone: input.phone,
+              type: "subscription",
+            },
+          }),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Timeout création session Stripe")), 15000)
+          ),
+        ]);
+
+        console.log(`[Stripe] Session abonnement créée en ${Date.now() - startTime}ms:`, session.id);
 
         return {
           sessionId: session.id,
@@ -148,7 +168,7 @@ export const paymentRouter = router({
         };
       } catch (error) {
         console.error("Erreur lors de la création de la session Stripe:", error);
-        throw new Error("Impossible de créer la session de paiement");
+        throw new Error("Impossible de créer la session de paiement. Veuillez réessayer.");
       }
     }),
 
