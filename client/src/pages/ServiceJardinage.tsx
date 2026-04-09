@@ -8,10 +8,7 @@ export default function ServiceJardinage() {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   const scrollToBooking = () => {
-    const bookingSection = document.getElementById('booking-section');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.location.href = '/reservation-jardinage';
   };
 
   const faqs = [
@@ -303,7 +300,7 @@ export default function ServiceJardinage() {
               Demandez votre devis gratuit dès maintenant. Intervention rapide à domicile en Île-de-France, 7j/7.
             </p>
             <Button 
-              onClick={() => window.location.href = '/?service=jardinage'}
+              onClick={() => window.location.href = '/reservation-jardinage'}
               className="bg-white hover:bg-gray-100 text-orange-600 font-bold px-10 py-4 text-lg rounded-full"
             >
               Réserver mon entretien de jardin

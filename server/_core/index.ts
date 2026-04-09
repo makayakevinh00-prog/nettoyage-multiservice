@@ -94,7 +94,8 @@ async function startServer() {
     }
     
     try {
-      const event = (require('stripe')).webhooks.constructEvent(req.body, sig, webhookSecret);
+      const Stripe = require('stripe');
+      const event = Stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
       
       if (event.id.startsWith('evt_test_')) {
         console.log('[Webhook] Test event detected');
@@ -102,6 +103,161 @@ async function startServer() {
       }
       
       console.log('[Webhook] Event type:', event.type);
+
+      // Traiter les événements de paiement réussi
+      if (event.type === 'checkout.session.completed') {
+        const session = event.data.object;
+        const metadata = session.metadata || {};
+        
+        console.log('[Webhook] Checkout session completed:', session.id);
+        console.log('[Webhook] Metadata:', JSON.stringify(metadata));
+
+        try {
+          const { sendEmail, generateBookingConfirmationEmail } = await import('../lib/email');
+          const { notifyOwner } = await import('./notification');
+          const { generateICSFile } = await import('../lib/calendar');
+          const { addEventToGoogleCalendar } = await import('../lib/googleCalendar');
+          const { syncReservationToHubSpot } = await import('../lib/hubspot-admin');
+
+          if (metadata.type === 'reservation' && metadata.name && session.customer_email) {
+            // Email de confirmation au client
+            const confirmationEmail = generateBookingConfirmationEmail({
+              name: metadata.name,
+              service: metadata.service || 'Nettoyage',
+              date: metadata.date || 'À confirmer',
+              time: metadata.time || 'À confirmer',
+              address: metadata.address || 'À confirmer',
+              price: session.amount_total || undefined,
+            });
+
+            const bookingData = {
+              name: metadata.name,
+              email: session.customer_email,
+              phone: metadata.phone || '',
+              service: metadata.service || '',
+              date: metadata.date || '',
+              time: metadata.time || '',
+              address: metadata.address || '',
+              message: metadata.message || '',
+            };
+
+            // Générer le fichier ICS
+            let attachments;
+            try {
+              const icsContent = generateICSFile(bookingData);
+              if (icsContent) {
+                attachments = [{
+                  filename: 'rendez-vous-proclean.ics',
+                  content: icsContent,
+                  contentType: 'text/calendar',
+                }];
+              }
+            } catch (icsError) {
+              console.error('[Webhook] Erreur ICS:', icsError);
+            }
+
+            await sendEmail({
+              to: session.customer_email,
+              subject: '\u2705 Votre réservation est confirmée - ProClean Empire',
+              html: confirmationEmail.html,
+              text: confirmationEmail.text,
+              attachments,
+            });
+            console.log('[Webhook] Email de confirmation envoyé à', session.customer_email);
+
+            // Ajouter à Google Calendar
+            try {
+              await addEventToGoogleCalendar(bookingData);
+              console.log('[Webhook] Événement ajouté à Google Calendar');
+            } catch (calendarError) {
+              console.error('[Webhook] Erreur Google Calendar:', calendarError);
+            }
+
+            // Notifier le propriétaire
+            const totalEuros = session.amount_total ? (session.amount_total / 100).toFixed(2) : '?';
+            await notifyOwner({
+              title: `\u2705 Paiement reçu - ${metadata.service || 'Réservation'} - ${totalEuros}€`,
+              content: `Nouvelle réservation payée !\n\n👤 Client: ${metadata.name}\n📧 Email: ${session.customer_email}\n📞 Tél: ${metadata.phone || 'N/A'}\n🧹 Service: ${metadata.service || 'N/A'}\n📅 Date: ${metadata.date || 'N/A'}\n🕐 Heure: ${metadata.time || 'N/A'}\n📍 Adresse: ${metadata.address || 'N/A'}\n💰 Montant: ${totalEuros}€\n\n💬 Message: ${metadata.message || 'Aucun'}`,
+            });
+            console.log('[Webhook] Notification propriétaire envoyée');
+
+            // Synchroniser avec HubSpot
+            try {
+              await syncReservationToHubSpot({
+                name: metadata.name,
+                email: session.customer_email,
+                phone: metadata.phone || '',
+                service: metadata.service || '',
+                prestation: metadata.prestation || '',
+                date: metadata.date || '',
+                time: metadata.time || '',
+                address: metadata.address || '',
+                amount: session.amount_total || 0,
+                message: metadata.message || '',
+                type: 'reservation',
+              });
+              console.log('[Webhook] Sync HubSpot réservation terminée');
+            } catch (hubspotError) {
+              console.error('[Webhook] Erreur sync HubSpot:', hubspotError);
+            }
+          }
+
+          if (metadata.type === 'subscription' && metadata.name && session.customer_email) {
+            // Notification pour les abonnements
+            await notifyOwner({
+              title: `\u2705 Nouvel abonnement - ${metadata.plan || 'N/A'}`,
+              content: `Nouvel abonnement souscrit !\n\n👤 Client: ${metadata.name}\n📧 Email: ${session.customer_email}\n📞 Tél: ${metadata.phone || 'N/A'}\n📦 Plan: ${metadata.plan || 'N/A'}`,
+            });
+
+            await sendEmail({
+              to: session.customer_email,
+              subject: '\u2705 Votre abonnement ProClean Empire est activé !',
+              html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <div style="background: linear-gradient(135deg, #1e40af, #1e3a8a); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+                  <h1>Abonnement Activé !</h1>
+                  <p>ProClean Empire - Nettoyage Premium</p>
+                </div>
+                <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px;">
+                  <p>Bonjour <strong>${metadata.name}</strong>,</p>
+                  <p>Votre abonnement <strong>${metadata.plan === 'express' ? 'Express' : 'Confort'}</strong> est maintenant actif !</p>
+                  <p>Nous vous contacterons prochainement pour planifier votre première intervention.</p>
+                  <p>Pour toute question :</p>
+                  <ul>
+                    <li>📞 06 17 21 22 30</li>
+                    <li>📧 contact@procleanempire.com</li>
+                  </ul>
+                  <p>Merci pour votre confiance !</p>
+                </div>
+              </div>`,
+              text: `Bonjour ${metadata.name}, votre abonnement ${metadata.plan === 'express' ? 'Express' : 'Confort'} est maintenant actif ! Nous vous contacterons prochainement pour planifier votre première intervention. Contact: 06 17 21 22 30 / contact@procleanempire.com`,
+            });
+            console.log('[Webhook] Email abonnement envoyé à', session.customer_email);
+
+            // Synchroniser abonnement avec HubSpot
+            try {
+              await syncReservationToHubSpot({
+                name: metadata.name,
+                email: session.customer_email,
+                phone: metadata.phone || '',
+                service: 'Abonnement',
+                date: new Date().toLocaleDateString('fr-FR'),
+                time: '',
+                address: '',
+                amount: session.amount_total || 0,
+                message: '',
+                type: 'subscription',
+                plan: metadata.plan || '',
+              });
+              console.log('[Webhook] Sync HubSpot abonnement terminée');
+            } catch (hubspotError) {
+              console.error('[Webhook] Erreur sync HubSpot abonnement:', hubspotError);
+            }
+          }
+        } catch (processingError) {
+          console.error('[Webhook] Erreur traitement checkout.session.completed:', processingError);
+        }
+      }
+
       res.json({received: true});
     } catch (error) {
       console.error('Webhook error:', error);

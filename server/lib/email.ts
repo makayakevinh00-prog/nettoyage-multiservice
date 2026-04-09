@@ -84,7 +84,7 @@ export function generateBookingConfirmationEmail(data: {
   const serviceNames: Record<string, string> = {
     automobile: "Nettoyage Automobile",
     terrasse: "Nettoyage Terrasse",
-    tapis: "Nettoyage Tapis & Canaпés",
+    tapis: "Nettoyage Tapis & Canapés",
     balcon: "Nettoyage Balcon",
     jardinage: "Entretien Jardinage",
     facade: "Nettoyage Façade",

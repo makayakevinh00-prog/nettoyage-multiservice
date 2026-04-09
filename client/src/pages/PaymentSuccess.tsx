@@ -135,7 +135,7 @@ export default function PaymentSuccess() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-600">Téléphone</p>
-                  <p className="font-semibold text-gray-900">+33 (0)1 XX XX XX XX</p>
+                  <p className="font-semibold text-gray-900">06 17 21 22 30</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-600">Email</p>

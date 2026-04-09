@@ -30,7 +30,7 @@ export default function HomeSFR() {
       <Header />
 
       <main className="flex-1">
-        {/* Hero Section - Inspiré SFR */}
+        {/* Hero Section */}
         <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
           {/* Background Image */}
           <div 
@@ -231,28 +231,32 @@ export default function HomeSFR() {
                   title: "Automobile", 
                   desc: "Intérieur, extérieur, détailing", 
                   price: "À partir de 70€",
-                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-auto-clean-TE8uYdCBKLVfwsK7uX5zUJ.webp"
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-auto-clean-TE8uYdCBKLVfwsK7uX5zUJ.webp",
+                  link: "/reservation-ponctuelle"
                 },
                 { 
                   icon: "🛋️", 
                   title: "Canapés", 
                   desc: "Petit, moyen, grand format", 
                   price: "À partir de 40€",
-                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-couch-clean-X86WemSDtvmaiVMLkdb9bD.webp"
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-couch-clean-X86WemSDtvmaiVMLkdb9bD.webp",
+                  link: "/reservation-tapis"
                 },
                 { 
                   icon: "🧶", 
                   title: "Tapis", 
                   desc: "Injection-extraction pro", 
                   price: "À partir de 35€",
-                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-carpet-clean-aoZP5vsE6eKLgY835yUVLr.webp"
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-carpet-clean-aoZP5vsE6eKLgY835yUVLr.webp",
+                  link: "/reservation-tapis"
                 },
                 { 
                   icon: "☀️", 
                   title: "Terrasse", 
                   desc: "Nettoyage haute pression", 
                   price: "À partir de 90€",
-                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-terrace-clean-6cTaVATdxhhRQvzUWKyrvc.webp"
+                  image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663223121429/mWQNegFX82Wq6P3J8ww4RP/service-terrace-clean-6cTaVATdxhhRQvzUWKyrvc.webp",
+                  link: "/reservation-terrasse"
                 },
               ].map((service, i) => (
                 <Card key={i} className="hover:shadow-lg transition-all cursor-pointer group overflow-hidden">
@@ -270,7 +274,7 @@ export default function HomeSFR() {
                     <Button
                       variant="outline"
                       className="w-full group-hover:bg-blue-500 group-hover:text-white transition-all"
-                      onClick={() => navigate("/reservation-ponctuelle")}
+                      onClick={() => navigate(service.link)}
                     >
                       Réserver
                     </Button>

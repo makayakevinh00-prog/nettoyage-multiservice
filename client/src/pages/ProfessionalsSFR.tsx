@@ -31,7 +31,7 @@ export default function ProfessionalsSFR() {
                 Pour Entreprises, Syndics & Commerces
               </p>
               <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Contrats sur-mesure, tarifs dégressifs, support dédié. Comme SFR Pro, mais pour le nettoyage.
+                Contrats sur-mesure, tarifs dégressifs, support dédié. Un service professionnel adapté à vos besoins.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -62,7 +62,7 @@ export default function ProfessionalsSFR() {
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
                 Pourquoi Choisir ProClean Empire ?
               </h2>
-              <p className="text-xl text-gray-600">Les mêmes avantages que SFR Pro, adaptés au nettoyage</p>
+              <p className="text-xl text-gray-600">Des avantages exclusifs pour les professionnels</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -136,7 +136,7 @@ export default function ProfessionalsSFR() {
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
                 Nos Offres Professionnelles
               </h2>
-              <p className="text-xl text-gray-600">Comme SFR Pro, 3 plans adaptés à votre taille</p>
+              <p className="text-xl text-gray-600">3 plans adaptés à la taille de votre entreprise</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -394,11 +394,11 @@ export default function ProfessionalsSFR() {
               <div className="mt-8 flex flex-col sm:flex-row gap-6 justify-center text-center">
                 <div>
                   <p className="font-bold text-slate-900">📞 Appel Direct</p>
-                  <p className="text-blue-600">+33 1 XX XX XX XX</p>
+                  <p className="text-blue-600">06 17 21 22 30</p>
                 </div>
                 <div>
                   <p className="font-bold text-slate-900">📧 Email</p>
-                  <p className="text-blue-600">pro@procleanempire.com</p>
+                  <p className="text-blue-600">contact@procleanempire.com</p>
                 </div>
               </div>
             </div>

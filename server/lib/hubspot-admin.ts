@@ -409,3 +409,255 @@ export async function updateHubSpotDeal(id: string, updates: Partial<HubSpotDeal
     return null;
   }
 }
+
+
+/**
+ * Crée un deal (opportunité) HubSpot
+ */
+export async function createHubSpotDeal(deal: {
+  dealname: string;
+  amount: number;
+  dealstage?: string;
+  closedate?: string;
+  contactId?: string;
+}): Promise<HubSpotDeal | null> {
+  try {
+    if (!HUBSPOT_API_KEY) {
+      console.error('HUBSPOT_API_KEY not set');
+      return null;
+    }
+
+    const properties: Record<string, any> = {
+      dealname: deal.dealname,
+      amount: deal.amount.toString(),
+      dealstage: deal.dealstage || 'closedwon',
+      pipeline: 'default',
+    };
+
+    if (deal.closedate) {
+      properties.closedate = deal.closedate;
+    }
+
+    const response = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/deals`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ properties }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`HubSpot create deal error: ${response.status} - ${errorText}`);
+      return null;
+    }
+
+    const data = await response.json() as any;
+
+    // Associer le deal au contact si contactId fourni
+    if (deal.contactId) {
+      try {
+        await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/deals/${data.id}/associations/contacts/${deal.contactId}/deal_to_contact`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+        });
+        console.log(`[HubSpot] Deal ${data.id} associé au contact ${deal.contactId}`);
+      } catch (assocError) {
+        console.error('[HubSpot] Erreur association deal-contact:', assocError);
+      }
+    }
+
+    return {
+      id: data.id,
+      dealname: data.properties.dealname,
+      dealstage: data.properties.dealstage,
+      amount: parseFloat(data.properties.amount) || 0,
+      closedate: data.properties.closedate,
+      updatedAt: data.updatedAt,
+    };
+  } catch (error) {
+    console.error('Error creating HubSpot deal:', error);
+    return null;
+  }
+}
+
+/**
+ * Ajoute une note à un contact HubSpot
+ */
+export async function addNoteToHubSpotContact(contactId: string, noteBody: string): Promise<boolean> {
+  try {
+    if (!HUBSPOT_API_KEY) {
+      console.error('HUBSPOT_API_KEY not set');
+      return false;
+    }
+
+    // Créer la note
+    const noteResponse = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/notes`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        properties: {
+          hs_note_body: noteBody,
+          hs_timestamp: new Date().toISOString(),
+        },
+      }),
+    });
+
+    if (!noteResponse.ok) {
+      const errorText = await noteResponse.text();
+      console.error(`HubSpot create note error: ${noteResponse.status} - ${errorText}`);
+      return false;
+    }
+
+    const noteData = await noteResponse.json() as any;
+
+    // Associer la note au contact
+    await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/notes/${noteData.id}/associations/contacts/${contactId}/note_to_contact`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log(`[HubSpot] Note ajoutée au contact ${contactId}`);
+    return true;
+  } catch (error) {
+    console.error('Error adding note to HubSpot contact:', error);
+    return false;
+  }
+}
+
+/**
+ * Synchronise une réservation payée avec HubSpot :
+ * - Crée ou met à jour le contact
+ * - Crée une opportunité (deal) avec le montant
+ * - Ajoute une note avec les détails de la réservation
+ */
+export async function syncReservationToHubSpot(data: {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  prestation?: string;
+  date: string;
+  time: string;
+  address: string;
+  amount: number;
+  message?: string;
+  type: 'reservation' | 'subscription';
+  plan?: string;
+}): Promise<void> {
+  try {
+    if (!HUBSPOT_API_KEY) {
+      console.log('[HubSpot] API key not configured, skipping sync');
+      return;
+    }
+
+    console.log(`[HubSpot] Synchronisation de la réservation pour ${data.email}...`);
+
+    // 1. Créer ou trouver le contact
+    const nameParts = data.name.split(' ');
+    const firstname = nameParts[0] || data.name;
+    const lastname = nameParts.slice(1).join(' ') || '';
+
+    let contact = await createHubSpotContact({
+      email: data.email,
+      firstname,
+      lastname,
+      phone: data.phone,
+    });
+
+    // Si le contact existe déjà (erreur 409), chercher par email
+    if (!contact) {
+      try {
+        const searchResponse = await fetch(`${HUBSPOT_API_URL}/crm/v3/objects/contacts/search`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${HUBSPOT_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            filterGroups: [{
+              filters: [{
+                propertyName: 'email',
+                operator: 'EQ',
+                value: data.email,
+              }],
+            }],
+          }),
+        });
+
+        if (searchResponse.ok) {
+          const searchData = await searchResponse.json() as any;
+          if (searchData.results && searchData.results.length > 0) {
+            contact = {
+              id: searchData.results[0].id,
+              email: data.email,
+              firstname,
+              lastname,
+            };
+            // Mettre à jour le téléphone si fourni
+            if (data.phone) {
+              await updateHubSpotContact(contact.id, { phone: data.phone });
+            }
+          }
+        }
+      } catch (searchError) {
+        console.error('[HubSpot] Erreur recherche contact:', searchError);
+      }
+    }
+
+    if (!contact) {
+      console.error('[HubSpot] Impossible de créer ou trouver le contact');
+      return;
+    }
+
+    console.log(`[HubSpot] Contact: ${contact.id} (${data.email})`);
+
+    // 2. Créer le deal (opportunité)
+    const serviceNames: Record<string, string> = {
+      automobile: 'Nettoyage Automobile',
+      terrasse: 'Nettoyage Terrasse',
+      tapis: 'Nettoyage Tapis & Canapés',
+      balcon: 'Nettoyage Balcon',
+      facade: 'Nettoyage Façade',
+      jardinage: 'Entretien Jardinage',
+    };
+
+    const serviceName = serviceNames[data.service] || data.service;
+    const dealName = data.type === 'subscription'
+      ? `Abonnement ${data.plan === 'express' ? 'Express' : 'Confort'} - ${data.name}`
+      : `${serviceName} - ${data.name} - ${data.date}`;
+
+    const deal = await createHubSpotDeal({
+      dealname: dealName,
+      amount: data.amount / 100, // Convertir centimes en euros
+      dealstage: 'closedwon',
+      closedate: new Date().toISOString(),
+      contactId: contact.id,
+    });
+
+    if (deal) {
+      console.log(`[HubSpot] Deal créé: ${deal.id} - ${dealName}`);
+    }
+
+    // 3. Ajouter une note avec les détails
+    const noteContent = data.type === 'subscription'
+      ? `📦 Nouvel abonnement souscrit\n\nPlan: ${data.plan === 'express' ? 'Express (30€/mois)' : 'Confort (60€/mois)'}\nMontant payé: ${(data.amount / 100).toFixed(2)}€\nDate de souscription: ${new Date().toLocaleDateString('fr-FR')}\n\nContact:\n- Tél: ${data.phone}\n- Email: ${data.email}`
+      : `🧹 Réservation payée\n\nService: ${serviceName}\nPrestation: ${data.prestation || 'Standard'}\nDate: ${data.date}\nHeure: ${data.time}\nAdresse: ${data.address}\nMontant: ${(data.amount / 100).toFixed(2)}€\n\nMessage client: ${data.message || 'Aucun'}\n\nContact:\n- Tél: ${data.phone}\n- Email: ${data.email}`;
+
+    await addNoteToHubSpotContact(contact.id, noteContent);
+
+    console.log(`[HubSpot] Synchronisation terminée pour ${data.email}`);
+  } catch (error) {
+    console.error('[HubSpot] Erreur lors de la synchronisation:', error);
+  }
+}

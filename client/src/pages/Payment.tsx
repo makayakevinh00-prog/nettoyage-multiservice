@@ -276,7 +276,7 @@ export default function Payment() {
                         type="tel"
                         value={contactInfo.phone}
                         onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
-                        placeholder="06 XX XX XX XX"
+                        placeholder="06 12 34 56 78"
                         required
                       />
                     </div>

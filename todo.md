@@ -1048,3 +1048,13 @@
 - [x] Changer le nom affiché sur Stripe de "Manus nettoyage-mwqn..." en "ProClean Empire" (statement_descriptor ajouté, nom marchand à changer dans Stripe Dashboard)
 - [x] Ajouter bouton retour sur les pages réservation ponctuelle et abonnement
 - [x] Corriger le scroll to top automatique lors de la navigation entre pages
+- [x] Créer page de réservation dédiée pour Nettoyage Terrasse avec prestations et options spécifiques
+- [x] Créer page de réservation dédiée pour Nettoyage Tapis & Canapés avec prestations et options spécifiques
+- [x] Créer page de réservation dédiée pour Nettoyage Balcon avec prestations et options spécifiques
+- [x] Créer page de réservation dédiée pour Nettoyage Façade avec prestations et options spécifiques
+- [x] Créer page de réservation dédiée pour Jardinage avec prestations et options spécifiques
+- [x] Mettre à jour les routes et liens de navigation pour pointer vers les bonnes pages de réservation
+- [x] Email de confirmation automatique après paiement réussi
+- [x] Synchronisation HubSpot : créer contact + opportunité après réservation payée
+- [x] Supprimer toutes les références à SFR dans le site (textes, descriptions)
+- [x] Corriger les coordonnées : tél 06 17 21 22 30, email contact@procleanempire.com partout

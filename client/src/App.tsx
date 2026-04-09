@@ -51,6 +51,11 @@ import AccountManagement from "./pages/AccountManagement";
 import Support from "./pages/Support";
 import SubscriptionPage from "./pages/SubscriptionPage";
 import PonctuelReservation from "./pages/PonctuelReservation";
+import ReservationTerrasse from "./pages/ReservationTerrasse";
+import ReservationTapis from "./pages/ReservationTapis";
+import ReservationBalcon from "./pages/ReservationBalcon";
+import ReservationFacade from "./pages/ReservationFacade";
+import ReservationJardinage from "./pages/ReservationJardinage";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   // Afficher la page de maintenance au lieu de la page d'accueil
@@ -107,6 +112,11 @@ function Router() {
       <Route path={"/support"} component={Support} />
       <Route path={"/abonnement"} component={SubscriptionPage} />
       <Route path={"/reservation-ponctuelle"} component={PonctuelReservation} />
+      <Route path={"/reservation-terrasse"} component={ReservationTerrasse} />
+      <Route path={"/reservation-tapis"} component={ReservationTapis} />
+      <Route path={"/reservation-balcon"} component={ReservationBalcon} />
+      <Route path={"/reservation-facade"} component={ReservationFacade} />
+      <Route path={"/reservation-jardinage"} component={ReservationJardinage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

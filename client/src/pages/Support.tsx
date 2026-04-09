@@ -345,14 +345,14 @@ export default function Support() {
                     <Phone className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-gray-900">Téléphone</p>
-                      <p className="text-gray-600">+33 1 XX XX XX XX</p>
+                      <p className="text-gray-600">06 17 21 22 30</p>
                     </div>
                   </div>
                   <div className="flex gap-3">
                     <Mail className="w-5 h-5 text-blue-600 flex-shrink-0 mt-1" />
                     <div>
                       <p className="font-semibold text-gray-900">Email</p>
-                      <p className="text-gray-600">support@proclean.fr</p>
+                      <p className="text-gray-600">contact@procleanempire.com</p>
                     </div>
                   </div>
                   <div className="border-t border-gray-200 pt-4">

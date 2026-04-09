@@ -61,7 +61,7 @@ export default function Professionals() {
                 <Phone className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                 <div>
                   <label className="text-sm font-semibold text-gray-600">Téléphone</label>
-                  <p className="text-lg text-gray-900">01 XX XX XX XX</p>
+                  <p className="text-lg text-gray-900">06 17 21 22 30</p>
                 </div>
               </div>
               
@@ -69,7 +69,7 @@ export default function Professionals() {
                 <Mail className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
                 <div>
                   <label className="text-sm font-semibold text-gray-600">Email</label>
-                  <p className="text-lg text-gray-900">contact@procleanempire.fr</p>
+                  <p className="text-lg text-gray-900">contact@procleanempire.com</p>
                 </div>
               </div>
               

@@ -150,10 +150,10 @@ export default function ServiceTerrasse() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700" asChild>
-              <a href="/#booking?service=terrasse">Réserver Maintenant</a>
+              <a href="/reservation-terrasse">Réserver Maintenant</a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="/#booking?service=terrasse">Demander un Devis</a>
+              <a href="/reservation-terrasse">Demander un Devis</a>
             </Button>
           </div>
         </div>
