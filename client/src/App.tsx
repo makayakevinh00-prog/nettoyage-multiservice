@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import BookingConfirmation from "@/pages/BookingConfirmation";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -127,6 +128,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
+          <ScrollToTop />
           <Router />
           <Footer />
           <WhatsAppButton />

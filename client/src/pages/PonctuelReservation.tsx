@@ -4,6 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ArrowLeft } from "lucide-react";
 
 const SERVICES = {
   interieur_seul: {
@@ -110,8 +113,19 @@ export default function PonctuelReservation() {
     : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white py-12 px-4">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-slate-50 to-white">
+      <Header />
+      <main className="flex-1 py-12 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Bouton retour */}
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-8 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Retour à l'accueil
+        </button>
+
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Réservez Votre Prestation</h1>
@@ -235,6 +249,7 @@ export default function PonctuelReservation() {
           </div>
         )}
       </div>
+      </main>
     </div>
   );
 }

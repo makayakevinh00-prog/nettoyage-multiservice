@@ -1046,3 +1046,5 @@
 - [x] Ajouter la prestation "Complète (Int. + Ext.)" à 110€ sur la page réservation ponctuelle
 - [x] Ajouter l'option "Polissage" dans les options supplémentaires
 - [x] Changer le nom affiché sur Stripe de "Manus nettoyage-mwqn..." en "ProClean Empire" (statement_descriptor ajouté, nom marchand à changer dans Stripe Dashboard)
+- [x] Ajouter bouton retour sur les pages réservation ponctuelle et abonnement
+- [x] Corriger le scroll to top automatique lors de la navigation entre pages
