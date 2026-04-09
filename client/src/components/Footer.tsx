@@ -12,22 +12,9 @@ export default function Footer() {
       {/* Section avec Carte et Infos */}
       <div className="border-t border-slate-700">
         <div className="container py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Carte Google Maps */}
-            <div className="rounded-lg overflow-hidden shadow-lg h-80">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.0558456419995!2d2.3522!3d48.8566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2s%C3%8Ele-de-France!5e0!3m2!1sfr!2sfr!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-
+          <div className="flex justify-center">
             {/* Informations */}
-            <div className="space-y-8">
+            <div className="space-y-8 max-w-md">
               {/* Logo et Titre */}
               <div className="flex items-center space-x-3">
                 <img src={APP_LOGO} alt="ProClean Empire" className="h-16 w-auto" />
@@ -81,117 +68,10 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
 
-      {/* Section Navigation et Réseaux */}
-      <div className="bg-slate-950 border-b border-slate-700">
-        <div className="container py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Navigation */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-orange-500">Navigation</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Accueil
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#services" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Services
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/professionnels" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Professionnels
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <a href="https://fr.trustpilot.com/review/procleanempire.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-orange-400 transition-colors flex items-center gap-1">
-                    <span>⭐</span> Avis Trustpilot
-                  </a>
-                </li>
-              </ul>
-            </div>
 
-            {/* Réseaux Sociaux */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-orange-500">Suivez-nous</h3>
-              <div className="flex space-x-4">
-                <a 
-                  href="https://www.facebook.com/people/Proclean-Empire/61575993812750/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
-                  aria-label="Facebook"
-                  title="Facebook"
-                >
-                  f
-                </a>
-                <a 
-                  href="https://www.tiktok.com/@procleanempire" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
-                  aria-label="TikTok"
-                  title="TikTok"
-                >
-                  ♪
-                </a>
-                <a 
-                  href="https://www.instagram.com/proclean_empire/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-orange-400 transition-colors text-2xl font-bold"
-                  aria-label="Instagram"
-                  title="Instagram"
-                >
-                  📷
-                </a>
-                <a 
-                  href="https://fr.trustpilot.com/review/procleanempire.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-white hover:text-orange-400 transition-colors text-lg font-bold"
-                  aria-label="Trustpilot"
-                  title="Trustpilot"
-                >
-                  ⭐
-                </a>
-              </div>
-            </div>
-
-            {/* Mentions Légales */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 text-orange-500">Légal</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/mentions-legales" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Mentions légales
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/politique-confidentialite" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Politique de confidentialité
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/conditions-generales" onClick={scrollToTop} className="text-gray-300 hover:text-orange-400 transition-colors">
-                    Conditions générales
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Copyright */}
       <div className="bg-slate-950">
