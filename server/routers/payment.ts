@@ -1,10 +1,6 @@
 import { z } from "zod";
 import { publicProcedure, router } from "../_core/trpc";
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2024-12-18.acacia",
-});
+import { createQontoPaymentRequest, getQontoPaymentRequest } from "../lib/qontoPayment";
 
 // Schéma de validation pour les réservations
 const ReservationSchema = z.object({
@@ -34,159 +30,108 @@ const SubscriptionSchema = z.object({
 });
 
 export const paymentRouter = router({
-  // Créer une session de paiement pour une prestation ponctuelle
+  // Créer une demande de paiement pour une prestation ponctuelle
   createReservationCheckout: publicProcedure
     .input(ReservationSchema)
     .mutation(async ({ input, ctx }) => {
       try {
-        console.log("[Stripe] Création session pour:", input.service, input.prestation, input.totalPrice);
+        console.log("[Qonto] Création demande de paiement pour:", input.service, input.prestation, input.totalPrice);
         
-        const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
-          {
-            price_data: {
-              currency: "eur",
-              product_data: {
-                name: `${input.service} - ${input.prestation}`,
-                description: input.options.length > 0 
-                  ? `Options: ${input.options.map(o => o.name).join(", ")}`
-                  : undefined,
-              },
-              unit_amount: Math.round(input.totalPrice * 100), // Convertir en centimes
-            },
-            quantity: 1,
-          },
-        ];
+        const successUrl = `${ctx.req.headers.origin || "https://procleanempire.com"}/payment-success`;
+        const cancelUrl = `${ctx.req.headers.origin || "https://procleanempire.com"}/reservation`;
 
-        const startTime = Date.now();
-        const session = await Promise.race([
-          stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            line_items: lineItems,
-            mode: "payment",
-            success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/reservation`,
-            customer_email: input.email,
-            payment_intent_data: {
-              statement_descriptor: "PROCLEAN EMPIRE",
-            },
-            metadata: {
-              service: input.service,
-              prestation: input.prestation,
-              date: input.date,
-              time: input.time,
-              name: input.name,
-              phone: input.phone,
-              address: input.address || "",
-              message: input.message || "",
-              type: "reservation",
-            },
-          }),
-          new Promise((_, reject) => 
-            setTimeout(() => reject(new Error("Timeout création session Stripe")), 15000)
-          ),
-        ]);
-        
-        console.log(`[Stripe] Session créée en ${Date.now() - startTime}ms:`, session.id);
+        const result = await createQontoPaymentRequest(
+          {
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: input.service,
+            date: input.date,
+            time: input.time,
+            address: input.address || "",
+            message: input.message,
+          },
+          input.totalPrice,
+          successUrl,
+          cancelUrl
+        );
 
         return {
-          sessionId: session.id,
-          url: session.url,
+          paymentRequestId: result.paymentRequestId,
+          url: result.url,
         };
       } catch (error) {
-        console.error("Erreur lors de la création de la session Stripe:", error);
-        throw new Error("Impossible de créer la session de paiement. Veuillez réessayer.");
+        console.error("[Qonto] Erreur lors de la création de la demande de paiement:", error);
+        throw new Error("Impossible de créer la demande de paiement. Veuillez réessayer.");
       }
     }),
 
-  // Créer une session de paiement pour un abonnement
+  // Créer une demande de paiement pour un abonnement
   createSubscriptionCheckout: publicProcedure
     .input(SubscriptionSchema)
     .mutation(async ({ input, ctx }) => {
       try {
-        console.log("[Stripe] Création session abonnement:", input.plan);
+        console.log("[Qonto] Création demande de paiement abonnement:", input.plan);
         
         const planDetails = {
           express: {
             name: "Abonnement Express",
             description: "1 intervention par mois - 30€/mois",
-            price: 3000, // 30€ en centimes
+            price: 30,
           },
           confort: {
             name: "Abonnement Confort",
             description: "2 interventions par mois - 60€/mois",
-            price: 6000, // 60€ en centimes
+            price: 60,
           },
         };
 
         const plan = planDetails[input.plan];
 
-        const startTime = Date.now();
-        const session = await Promise.race([
-          stripe.checkout.sessions.create({
-            payment_method_types: ["card"],
-            line_items: [
-              {
-                price_data: {
-                  currency: "eur",
-                  product_data: {
-                    name: plan.name,
-                    description: plan.description,
-                  },
-                  unit_amount: plan.price,
-                  recurring: {
-                    interval: "month",
-                    interval_count: 1,
-                  },
-                },
-                quantity: 1,
-              },
-            ],
-            mode: "subscription",
-            success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/subscription-success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/offres`,
-            customer_email: input.email,
-            subscription_data: {
-              description: "Abonnement ProClean Empire",
-            },
-            metadata: {
-              plan: input.plan,
-              name: input.name,
-              phone: input.phone,
-              type: "subscription",
-            },
-          }),
-          new Promise((_, reject) => 
-            setTimeout(() => reject(new Error("Timeout création session Stripe")), 15000)
-          ),
-        ]);
+        const successUrl = `${ctx.req.headers.origin || "https://procleanempire.com"}/subscription-success`;
+        const cancelUrl = `${ctx.req.headers.origin || "https://procleanempire.com"}/offres`;
 
-        console.log(`[Stripe] Session abonnement créée en ${Date.now() - startTime}ms:`, session.id);
+        const result = await createQontoPaymentRequest(
+          {
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            service: `Abonnement ${input.plan}`,
+            date: new Date().toISOString().split('T')[0],
+            time: new Date().toLocaleTimeString('fr-FR'),
+            address: "",
+            message: `Abonnement ${input.plan} - ${plan.description}`,
+          },
+          plan.price,
+          successUrl,
+          cancelUrl
+        );
 
         return {
-          sessionId: session.id,
-          url: session.url,
+          paymentRequestId: result.paymentRequestId,
+          url: result.url,
         };
       } catch (error) {
-        console.error("Erreur lors de la création de la session Stripe:", error);
-        throw new Error("Impossible de créer la session de paiement. Veuillez réessayer.");
+        console.error("[Qonto] Erreur lors de la création de la demande de paiement:", error);
+        throw new Error("Impossible de créer la demande de paiement. Veuillez réessayer.");
       }
     }),
 
-  // Récupérer les détails d'une session
-  getCheckoutSession: publicProcedure
-    .input(z.object({ sessionId: z.string() }))
+  // Récupérer les détails d'une demande de paiement
+  getPaymentRequest: publicProcedure
+    .input(z.object({ paymentRequestId: z.string() }))
     .query(async ({ input }) => {
       try {
-        const session = await stripe.checkout.sessions.retrieve(input.sessionId);
+        const paymentRequest = await getQontoPaymentRequest(input.paymentRequestId);
         return {
-          id: session.id,
-          status: session.payment_status,
-          customerEmail: session.customer_email,
-          metadata: session.metadata,
-          amountTotal: session.amount_total,
+          id: paymentRequest.id,
+          status: paymentRequest.status,
+          amount: paymentRequest.amount_cents / 100,
+          currency: paymentRequest.currency,
+          metadata: paymentRequest.custom_metadata,
         };
       } catch (error) {
-        console.error("Erreur lors de la récupération de la session:", error);
+        console.error("[Qonto] Erreur lors de la récupération de la demande de paiement:", error);
         throw new Error("Impossible de récupérer les détails du paiement");
       }
     }),

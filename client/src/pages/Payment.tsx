@@ -84,7 +84,7 @@ export default function Payment() {
     onSuccess: (data) => {
       if (data.url) {
         window.open(data.url, "_blank");
-        toast.success("Redirection vers le paiement Stripe...");
+        toast.success("Redirection vers le paiement Qonto...");
       }
     },
     onError: (error) => {
@@ -327,7 +327,7 @@ export default function Payment() {
                 <div className="bg-green-50 p-4 rounded mt-6 flex items-center gap-2">
                   <ShieldCheck className="w-5 h-5 text-green-600" />
                   <p className="text-sm text-green-700">
-                    Paiement sécurisé par Stripe
+                    Paiement sécurisé par Qonto
                   </p>
                 </div>
 
@@ -340,7 +340,7 @@ export default function Payment() {
                   {isLoading || createCheckout.isPending ? (
                     <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                      Redirection vers Stripe...
+                      Redirection vers Qonto...
                     </>
                   ) : (
                     <>
