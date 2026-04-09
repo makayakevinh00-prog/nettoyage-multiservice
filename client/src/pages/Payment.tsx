@@ -1,34 +1,90 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLocation } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, ShieldCheck, ArrowLeft } from "lucide-react";
+
+// Fonctions pour masquer partiellement les informations personnelles
+function maskName(name: string): string {
+  if (!name) return "";
+  const parts = name.trim().split(" ");
+  return parts.map(part => {
+    if (part.length <= 1) return part;
+    return part[0] + "*".repeat(part.length - 1);
+  }).join(" ");
+}
+
+function maskEmail(email: string): string {
+  if (!email) return "";
+  const [local, domain] = email.split("@");
+  if (!local || !domain) return email;
+  const maskedLocal = local.length <= 2 
+    ? local[0] + "***" 
+    : local[0] + "***" + local[local.length - 1];
+  return maskedLocal + "@" + domain;
+}
+
+function maskPhone(phone: string): string {
+  if (!phone) return "";
+  const digits = phone.replace(/\s/g, "");
+  if (digits.length <= 4) return phone;
+  return digits.slice(0, 2) + " ** ** ** " + digits.slice(-2);
+}
+
+function maskAddress(address: string): string {
+  if (!address) return "";
+  const words = address.split(" ");
+  if (words.length <= 2) return address[0] + "***";
+  return words[0] + " *** " + words[words.length - 1];
+}
 
 export default function Payment() {
   const [, navigate] = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [reservationData, setReservationData] = useState<any>(null);
+  const [contactInfo, setContactInfo] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+  });
+  const [needsContactInfo, setNeedsContactInfo] = useState(false);
 
   // Récupérer les données de réservation du localStorage
   useEffect(() => {
     const data = localStorage.getItem("reservationData");
     if (data) {
-      setReservationData(JSON.parse(data));
+      const parsed = JSON.parse(data);
+      setReservationData(parsed);
+      
+      // Vérifier si les informations de contact sont manquantes
+      if (!parsed.name || !parsed.email || !parsed.phone) {
+        setNeedsContactInfo(true);
+      } else {
+        setContactInfo({
+          name: parsed.name,
+          email: parsed.email,
+          phone: parsed.phone,
+          address: parsed.address || "",
+        });
+      }
     } else {
       toast.error("Aucune réservation trouvée");
-      navigate("/reservation");
+      navigate("/");
     }
   }, [navigate]);
 
   const createCheckout = trpc.payment.createReservationCheckout.useMutation({
     onSuccess: (data) => {
       if (data.url) {
-        // Rediriger vers Stripe
         window.open(data.url, "_blank");
+        toast.success("Redirection vers le paiement Stripe...");
       }
     },
     onError: (error) => {
@@ -41,22 +97,39 @@ export default function Payment() {
   const handlePayment = async () => {
     if (!reservationData) return;
 
+    // Vérifier les informations de contact
+    const name = needsContactInfo ? contactInfo.name : reservationData.name;
+    const email = needsContactInfo ? contactInfo.email : reservationData.email;
+    const phone = needsContactInfo ? contactInfo.phone : reservationData.phone;
+    const address = needsContactInfo ? contactInfo.address : reservationData.address;
+
+    if (!name || !email || !phone) {
+      toast.error("Veuillez remplir vos coordonnées");
+      return;
+    }
+
+    // Validation email basique
+    if (!email.includes("@")) {
+      toast.error("Veuillez entrer un email valide");
+      return;
+    }
+
     setIsLoading(true);
 
     try {
       createCheckout.mutate({
-        service: reservationData.service,
-        prestation: reservationData.prestation,
-        prestationPrice: reservationData.prestationPrice,
+        service: reservationData.service || "Nettoyage Automobile",
+        prestation: reservationData.prestation || "",
+        prestationPrice: reservationData.prestationPrice || 0,
         options: reservationData.options || [],
-        totalPrice: reservationData.totalPrice,
-        date: reservationData.date,
-        time: reservationData.time,
-        name: reservationData.name,
-        email: reservationData.email,
-        phone: reservationData.phone,
-        address: reservationData.address,
-        message: reservationData.message,
+        totalPrice: reservationData.totalPrice || 0,
+        date: reservationData.date || new Date().toISOString(),
+        time: reservationData.time || "À convenir",
+        name,
+        email,
+        phone,
+        address: address || "",
+        message: reservationData.message || "",
       });
     } catch (error) {
       console.error(error);
@@ -77,15 +150,26 @@ export default function Payment() {
     );
   }
 
+  const isSubscription = reservationData.type === "subscription";
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
       <main className="flex-1 py-20">
-        <div className="container max-w-2xl">
+        <div className="container max-w-3xl">
+          {/* Back button */}
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Retour
+          </button>
+
           <div className="mb-12">
             <h1 className="text-4xl font-bold text-slate-900 mb-4">Paiement Sécurisé</h1>
-            <p className="text-gray-600">Finalisez votre réservation en toute sécurité</p>
+            <p className="text-gray-600">Finalisez votre {isSubscription ? "abonnement" : "réservation"} en toute sécurité</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -120,16 +204,28 @@ export default function Payment() {
                   </div>
                 )}
 
-                <div className="border-b pb-4">
-                  <p className="text-sm text-gray-600">Date & Heure</p>
-                  <p className="font-semibold text-gray-900">
-                    {new Date(reservationData.date).toLocaleDateString("fr-FR")} à {reservationData.time}
-                  </p>
-                </div>
+                {reservationData.date && reservationData.time && reservationData.time !== "À convenir" && reservationData.time !== "Mensuel" && (
+                  <div className="border-b pb-4">
+                    <p className="text-sm text-gray-600">Date & Heure</p>
+                    <p className="font-semibold text-gray-900">
+                      {new Date(reservationData.date).toLocaleDateString("fr-FR")} à {reservationData.time}
+                    </p>
+                  </div>
+                )}
+
+                {isSubscription && reservationData.monthlyPrice && (
+                  <div className="border-b pb-4">
+                    <p className="text-sm text-gray-600">Prélèvement mensuel</p>
+                    <p className="font-semibold text-gray-900">{reservationData.monthlyPrice}€/mois</p>
+                    <p className="text-xs text-gray-500">À partir du mois suivant</p>
+                  </div>
+                )}
 
                 <div className="bg-blue-50 p-4 rounded">
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold">Total</span>
+                    <span className="text-lg font-bold">
+                      {isSubscription ? "1er Paiement" : "Total"}
+                    </span>
                     <span className="text-3xl font-bold text-blue-600">{reservationData.totalPrice}€</span>
                   </div>
                 </div>
@@ -139,41 +235,99 @@ export default function Payment() {
             {/* Informations de contact */}
             <Card>
               <CardHeader>
-                <CardTitle>Informations de Contact</CardTitle>
+                <CardTitle>
+                  {needsContactInfo ? "Vos Coordonnées" : "Informations de Contact"}
+                </CardTitle>
+                {!needsContactInfo && (
+                  <p className="text-xs text-gray-500">Informations masquées pour votre sécurité</p>
+                )}
               </CardHeader>
               <CardContent className="space-y-4">
-                <div>
-                  <p className="text-sm text-gray-600">Nom</p>
-                  <p className="font-semibold text-gray-900">{reservationData.name}</p>
-                </div>
+                {needsContactInfo ? (
+                  /* Formulaire de contact pour les nouvelles pages */
+                  <>
+                    <div>
+                      <Label htmlFor="name">Nom complet *</Label>
+                      <Input
+                        id="name"
+                        value={contactInfo.name}
+                        onChange={(e) => setContactInfo({ ...contactInfo, name: e.target.value })}
+                        placeholder="Votre nom"
+                        required
+                      />
+                    </div>
 
-                <div>
-                  <p className="text-sm text-gray-600">Email</p>
-                  <p className="font-semibold text-gray-900">{reservationData.email}</p>
-                </div>
+                    <div>
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={contactInfo.email}
+                        onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
+                        placeholder="votre@email.com"
+                        required
+                      />
+                    </div>
 
-                <div>
-                  <p className="text-sm text-gray-600">Téléphone</p>
-                  <p className="font-semibold text-gray-900">{reservationData.phone}</p>
-                </div>
+                    <div>
+                      <Label htmlFor="phone">Téléphone *</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={contactInfo.phone}
+                        onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
+                        placeholder="06 XX XX XX XX"
+                        required
+                      />
+                    </div>
 
-                {reservationData.address && (
-                  <div>
-                    <p className="text-sm text-gray-600">Adresse</p>
-                    <p className="font-semibold text-gray-900">{reservationData.address}</p>
-                  </div>
+                    <div>
+                      <Label htmlFor="address">Adresse d'intervention</Label>
+                      <Input
+                        id="address"
+                        value={contactInfo.address}
+                        onChange={(e) => setContactInfo({ ...contactInfo, address: e.target.value })}
+                        placeholder="Votre adresse"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  /* Affichage masqué pour les réservations classiques */
+                  <>
+                    {reservationData.name && (
+                      <div>
+                        <p className="text-sm text-gray-600">Nom</p>
+                        <p className="font-semibold text-gray-900">{maskName(reservationData.name)}</p>
+                      </div>
+                    )}
+
+                    {reservationData.email && (
+                      <div>
+                        <p className="text-sm text-gray-600">Email</p>
+                        <p className="font-semibold text-gray-900">{maskEmail(reservationData.email)}</p>
+                      </div>
+                    )}
+
+                    {reservationData.phone && (
+                      <div>
+                        <p className="text-sm text-gray-600">Téléphone</p>
+                        <p className="font-semibold text-gray-900">{maskPhone(reservationData.phone)}</p>
+                      </div>
+                    )}
+
+                    {reservationData.address && (
+                      <div>
+                        <p className="text-sm text-gray-600">Adresse</p>
+                        <p className="font-semibold text-gray-900">{maskAddress(reservationData.address)}</p>
+                      </div>
+                    )}
+                  </>
                 )}
 
-                {reservationData.message && (
-                  <div>
-                    <p className="text-sm text-gray-600">Message</p>
-                    <p className="font-semibold text-gray-900">{reservationData.message}</p>
-                  </div>
-                )}
-
-                <div className="bg-green-50 p-4 rounded mt-6">
+                <div className="bg-green-50 p-4 rounded mt-6 flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5 text-green-600" />
                   <p className="text-sm text-green-700">
-                    ✅ Paiement sécurisé par Stripe
+                    Paiement sécurisé par Stripe
                   </p>
                 </div>
 

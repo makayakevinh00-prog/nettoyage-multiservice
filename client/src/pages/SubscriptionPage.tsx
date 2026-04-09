@@ -78,14 +78,27 @@ export default function SubscriptionPage() {
 
     const totalFirstPayment = plan.firstPayment + optionsPrice;
 
-    // Sauvegarder les données et rediriger vers le paiement
-    localStorage.setItem("subscriptionData", JSON.stringify({
-      plan: selectedPlan,
-      planName: plan.name,
-      monthlyPrice: plan.monthlyPrice,
-      firstPayment: totalFirstPayment,
-      selectedOptions,
-      type: "subscription"
+    // Sauvegarder les données dans le format attendu par Payment.tsx
+    const optionDetails = selectedOptions.map(optionId => {
+      const option = ALL_OPTIONS.find(o => o.id === optionId);
+      return { name: option?.name || "", price: option?.price || 0 };
+    });
+
+    localStorage.setItem("reservationData", JSON.stringify({
+      service: "\ud83d\ude97 Abonnement Nettoyage Automobile",
+      prestation: `Abonnement ${plan.name}`,
+      prestationPrice: plan.firstPayment,
+      options: optionDetails,
+      totalPrice: totalFirstPayment,
+      date: new Date().toISOString(),
+      time: "Mensuel",
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      message: `Abonnement ${plan.name} - ${plan.monthlyPrice}\u20ac/mois`,
+      type: "subscription",
+      monthlyPrice: plan.monthlyPrice
     }));
 
     navigate("/payment");

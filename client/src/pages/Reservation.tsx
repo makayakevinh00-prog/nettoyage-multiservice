@@ -117,7 +117,14 @@ export default function Reservation() {
 
   const handlePrestationChange = (prestation: string) => {
     setFormData({ ...formData, prestation });
-    calculatePrice();
+    // Recalculer le prix avec la nouvelle prestation
+    const newPrestation = currentService?.prestations.find((p) => p.id === prestation);
+    let price = newPrestation?.price || 0;
+    selectedOptions.forEach((optionId) => {
+      const option = currentService?.options.find((o) => o.id === optionId);
+      if (option) price += option.price;
+    });
+    setTotalPrice(price);
   };
 
   const handleOptionToggle = (optionId: string) => {

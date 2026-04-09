@@ -63,12 +63,25 @@ export default function PonctuelReservation() {
 
     const totalPrice = service.price + optionsPrice;
 
-    // Sauvegarder les données et rediriger vers le paiement
+    // Sauvegarder les données dans le format attendu par Payment.tsx
+    const optionDetails = selectedOptions.map(optionId => {
+      const option = ALL_OPTIONS.find(o => o.id === optionId);
+      return { name: option?.name || "", price: option?.price || 0 };
+    });
+
     localStorage.setItem("reservationData", JSON.stringify({
-      service: selectedService,
-      serviceName: service.name,
-      price: totalPrice,
-      selectedOptions,
+      service: "\ud83d\ude97 Nettoyage Automobile",
+      prestation: service.name,
+      prestationPrice: service.price,
+      options: optionDetails,
+      totalPrice: totalPrice,
+      date: new Date().toISOString(),
+      time: "\u00c0 convenir",
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      message: "",
       type: "ponctuel"
     }));
 

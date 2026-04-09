@@ -1039,3 +1039,6 @@
 - [ ] Implémenter les options intelligentes (afficher uniquement ce qui n'est pas inclus)
 - [ ] Corriger le tableau de bord client
 - [ ] Tester les 2 tunnels de vente complets
+
+- [x] Bug: Page de paiement affiche Total 0€ au lieu du prix réel de la prestation
+- [x] Bug: Page de paiement affiche les informations personnelles du client (nom, email, téléphone, adresse) - à masquer ou reformater
