@@ -62,6 +62,9 @@ export const paymentRouter = router({
           success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/reservation`,
           customer_email: input.email,
+          payment_intent_data: {
+            statement_descriptor: "PROCLEAN EMPIRE",
+          },
           metadata: {
             service: input.service,
             prestation: input.prestation,
@@ -128,6 +131,9 @@ export const paymentRouter = router({
           success_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/subscription-success?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `${ctx.req.headers.origin || "https://procleanempire.com"}/offres`,
           customer_email: input.email,
+          subscription_data: {
+            description: "Abonnement ProClean Empire",
+          },
           metadata: {
             plan: input.plan,
             name: input.name,

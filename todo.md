@@ -1042,3 +1042,7 @@
 
 - [x] Bug: Page de paiement affiche Total 0€ au lieu du prix réel de la prestation
 - [x] Bug: Page de paiement affiche les informations personnelles du client (nom, email, téléphone, adresse) - à masquer ou reformater
+
+- [x] Ajouter la prestation "Complète (Int. + Ext.)" à 110€ sur la page réservation ponctuelle
+- [x] Ajouter l'option "Polissage" dans les options supplémentaires
+- [x] Changer le nom affiché sur Stripe de "Manus nettoyage-mwqn..." en "ProClean Empire" (statement_descriptor ajouté, nom marchand à changer dans Stripe Dashboard)

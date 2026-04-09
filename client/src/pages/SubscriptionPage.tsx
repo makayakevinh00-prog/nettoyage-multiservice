@@ -37,6 +37,7 @@ const SUBSCRIPTION_PLANS = {
 
 const ALL_OPTIONS = [
   { id: "shampoing_sieges", name: "Shampoing Sièges", price: 40, excludedFrom: ["interieur_avec_sieges"] },
+  { id: "polissage", name: "Polissage Carrosserie", price: 60, excludedFrom: [] },
   { id: "detailing_tableau", name: "Detailing Tableau de bord", price: 30, excludedFrom: [] },
   { id: "poils_animaux", name: "Poils d'animaux", price: 20, excludedFrom: [] },
   { id: "anti_odeurs", name: "Anti-odeurs Pro", price: 15, excludedFrom: [] },

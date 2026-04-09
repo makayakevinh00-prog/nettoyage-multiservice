@@ -17,11 +17,18 @@ const SERVICES = {
     price: 90,
     description: "Nettoyage intérieur + shampoing des sièges",
     includedServices: ["interieur", "shampoing_sieges"]
+  },
+  complete: {
+    name: "Complète (Int. + Ext.)",
+    price: 110,
+    description: "Nettoyage intérieur + extérieur complet",
+    includedServices: ["interieur", "exterieur"]
   }
 };
 
 const ALL_OPTIONS = [
   { id: "shampoing_sieges", name: "Shampoing Sièges", price: 40, excludedFrom: ["interieur_avec_sieges"] },
+  { id: "polissage", name: "Polissage Carrosserie", price: 60, excludedFrom: [] },
   { id: "detailing_tableau", name: "Detailing Tableau de bord", price: 30, excludedFrom: [] },
   { id: "poils_animaux", name: "Poils d'animaux", price: 20, excludedFrom: [] },
   { id: "anti_odeurs", name: "Anti-odeurs Pro", price: 15, excludedFrom: [] },
@@ -113,7 +120,7 @@ export default function PonctuelReservation() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {/* Services */}
           {Object.entries(SERVICES).map(([key, service]) => (
             <Card
