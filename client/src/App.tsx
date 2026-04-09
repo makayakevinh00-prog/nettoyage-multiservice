@@ -48,6 +48,8 @@ import ClientDashboardNew from "./pages/ClientDashboardNew";
 import Services from "./pages/Services";
 import AccountManagement from "./pages/AccountManagement";
 import Support from "./pages/Support";
+import SubscriptionPage from "./pages/SubscriptionPage";
+import PonctuelReservation from "./pages/PonctuelReservation";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   // Afficher la page de maintenance au lieu de la page d'accueil
@@ -101,7 +103,9 @@ function Router() {
       <Route path={"/blog/ecologie"} component={BlogArticleEcologie} />
       <Route path={"/blog/piscine"} component={BlogArticlePiscine} />
             <Route path="/blog/auto" component={BlogArticleAuto} />
-      <Route path="/maintenance" component={Maintenance} />
+      <Route path={"/support"} component={Support} />
+      <Route path={"/abonnement"} component={SubscriptionPage} />
+      <Route path={"/reservation-ponctuelle"} component={PonctuelReservation} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

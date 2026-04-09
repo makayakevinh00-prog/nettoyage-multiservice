@@ -60,7 +60,7 @@ export default function HomeSFR() {
                 <Button
                   size="lg"
                   className="bg-blue-500 hover:bg-blue-600 text-white text-lg px-8 py-6"
-                  onClick={() => navigate("/offres")}
+                  onClick={() => navigate("/abonnement")}
                 >
                   🚗 Choisir un Abonnement
                 </Button>
@@ -68,7 +68,7 @@ export default function HomeSFR() {
                   size="lg"
                   variant="outline"
                   className="border-white text-white hover:bg-white hover:text-blue-900 text-lg px-8 py-6"
-                  onClick={() => navigate("/reservation")}
+                  onClick={() => navigate("/reservation-ponctuelle")}
                 >
                   📅 Réserver Maintenant
                 </Button>
@@ -146,7 +146,7 @@ export default function HomeSFR() {
                   <Button
                     className="w-full bg-blue-500 hover:bg-blue-600"
                     size="lg"
-                    onClick={() => navigate("/offres")}
+                    onClick={() => navigate("/abonnement")}
                   >
                     Souscrire
                   </Button>
@@ -202,7 +202,7 @@ export default function HomeSFR() {
                   <Button
                     className="w-full bg-blue-600 hover:bg-blue-700"
                     size="lg"
-                    onClick={() => navigate("/offres")}
+                    onClick={() => navigate("/abonnement")}
                   >
                     Souscrire Maintenant
                   </Button>
@@ -270,7 +270,7 @@ export default function HomeSFR() {
                     <Button
                       variant="outline"
                       className="w-full group-hover:bg-blue-500 group-hover:text-white transition-all"
-                      onClick={scrollToBooking}
+                      onClick={() => navigate("/reservation-ponctuelle")}
                     >
                       Réserver
                     </Button>
@@ -320,7 +320,7 @@ export default function HomeSFR() {
               <Button
                 size="lg"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-6"
-                onClick={() => navigate("/offres")}
+                onClick={() => navigate("/reservation-ponctuelle")}
               >
                 Accéder au Formulaire de Réservation
               </Button>

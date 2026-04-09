@@ -30,7 +30,7 @@ const TRUSTPILOT_REVIEWS: Review[] = [
 ];
 
 const TRUSTPILOT_URL = "https://fr.trustpilot.com/review/procleanempire.com";
-const OVERALL_RATING = 4.1;
+const OVERALL_RATING = 4.5;
 const TOTAL_REVIEWS = 5;
 
 export function TrustpilotReviews() {

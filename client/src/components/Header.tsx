@@ -14,7 +14,7 @@ export default function Header() {
   const services = [
     { name: "Automobile", href: "/service-automobile", service: "automobile" },
     { name: "Terrasse", href: "/service-terrasse", service: "terrasse" },
-    { name: "Tapis & Canaпés", href: "/service-tapis", service: "tapis" },
+    { name: "Tapis & Canapés", href: "/service-tapis", service: "tapis" },
     { name: "Balcon", href: "/service-balcon", service: "balcon" },
     { name: "Façade", href: "/service-facade", service: "facade" },
     { name: "Jardinage", href: "/service-jardinage", service: "jardinage" },
@@ -100,7 +100,7 @@ export default function Header() {
           title="Voir nos avis Trustpilot"
         >
           <span className="text-yellow-500">⭐</span>
-          <span className="text-xs font-semibold text-yellow-700 dark:text-yellow-400">4.1/5</span>
+          <span className="text-xs font-semibold text-yellow-700 dark:text-yellow-400">4.5/5</span>
         </a>
 
         {/* Social Icons */}

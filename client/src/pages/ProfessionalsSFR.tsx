@@ -370,7 +370,7 @@ export default function ProfessionalsSFR() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
                     <input 
                       type="tel" 
-                      placeholder="06 XX XX XX XX"
+                      placeholder="06 12 34 56 78"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>

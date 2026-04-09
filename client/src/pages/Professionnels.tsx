@@ -194,7 +194,7 @@ export default function Professionnels() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  placeholder="06 XX XX XX XX"
+                  placeholder="06 12 34 56 78"
                 />
               </div>
 

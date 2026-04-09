@@ -1022,3 +1022,20 @@
 - [x] Optimiser les performances du calendrier
 - [x] Valider les notifications email/SMS
 - [x] Tester la gestion de compte sur mobile
+
+
+## Phase 6 - Bugs Critiques et Restructuration du Tunnel de Vente
+
+### Bugs Critiques à Corriger
+- [ ] Corriger le caractère cyrillique dans "Canapés" (actuellement "Canaпés")
+- [ ] Remplacer le numéro de téléphone factice (06 XX XX XX XX) par le vrai numéro
+- [ ] Corriger le lien Instagram brisé
+- [ ] Harmoniser la note Trustpilot (4.1/5 vs 5.0/5)
+- [ ] Compléter les mentions légales (assureur, numéro de police, hébergeur)
+
+### Pages Abonnement vs Réservation Ponctuelle
+- [ ] Créer une page Abonnement dédiée (/abonnement)
+- [ ] Créer une page Réservation Ponctuelle dédiée (/reservation-ponctuelle)
+- [ ] Implémenter les options intelligentes (afficher uniquement ce qui n'est pas inclus)
+- [ ] Corriger le tableau de bord client
+- [ ] Tester les 2 tunnels de vente complets

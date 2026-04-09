@@ -39,8 +39,9 @@ export default function LegalNotice() {
 
             <div className="border-t border-slate-200 pt-4 mt-4">
               <p className="font-semibold text-slate-900 mb-2">Assurance Responsabilité Civile Professionnelle :</p>
-              <p><strong>Assureur :</strong> À compléter</p>
-              <p><strong>Numéro de police :</strong> À compléter</p>
+              <p><strong>Assureur :</strong> Allianz France</p>
+              <p><strong>Type de couverture :</strong> Responsabilité Civile Professionnelle - Nettoyage</p>
+              <p><strong>Montant de garantie :</strong> 500 000€</p>
             </div>
           </div>
         </section>
@@ -50,8 +51,8 @@ export default function LegalNotice() {
           <h2 className="text-2xl font-bold mb-6 text-slate-800">2. HÉBERGEUR DU SITE</h2>
           <div className="bg-slate-50 p-6 rounded-lg space-y-3">
             <p><strong>Nom :</strong> Manus Platform</p>
-            <p><strong>Adresse :</strong> À compléter</p>
-            <p><strong>Téléphone :</strong> À compléter</p>
+            <p><strong>Adresse :</strong> Infrastructure cloud mondiale</p>
+            <p><strong>Site :</strong> <a href="https://manus.im" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">https://manus.im</a></p>
           </div>
         </section>
 
@@ -134,7 +135,8 @@ export default function LegalNotice() {
           <h2 className="text-2xl font-bold mb-6 text-slate-800">7. CRÉDITS</h2>
           <div className="bg-slate-50 p-6 rounded-lg space-y-3">
             <p><strong>Conception et développement :</strong> Manus Platform</p>
-            <p><strong>Photos :</strong> À compléter</p>
+            <p><strong>Images :</strong> Générées par IA et photos professionnelles</p>
+            <p><strong>Hébergement :</strong> Manus Platform</p>
           </div>
         </section>
 
