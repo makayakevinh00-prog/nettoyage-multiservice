@@ -30,9 +30,21 @@ export async function createQontoPaymentRequest(
     const apiKey = process.env.QONTO_API_KEY;
     const organizationId = process.env.QONTO_ORGANIZATION_ID;
 
+    console.log('[Qonto] Clés disponibles:', {
+      apiKey: apiKey ? 'OUI' : 'NON',
+      organizationId: organizationId ? 'OUI' : 'NON',
+    });
+
     if (!apiKey || !organizationId) {
-      throw new Error('Clés Qonto manquantes');
+      console.error('[Qonto] Clés Qonto manquantes');
+      throw new Error('Clés Qonto non configurées');
     }
+
+    console.log('[Qonto] Création demande de paiement:', {
+      amount,
+      service: bookingData.service,
+      client: bookingData.name,
+    });
 
     // Créer une demande de paiement via l'API Qonto
     const response = await axios.post(
@@ -64,18 +76,24 @@ export async function createQontoPaymentRequest(
         headers: {
           'Content-Type': 'application/json',
         },
+        timeout: 15000,
       }
     );
 
-    console.log('[Qonto] Demande de paiement créée:', response.data.payment_request.id);
+    console.log('[Qonto] Demande de paiement créée:', response.data?.payment_request?.id);
 
     return {
-      paymentRequestId: response.data.payment_request.id,
-      url: response.data.payment_request.payment_url,
+      paymentRequestId: response.data?.payment_request?.id,
+      url: response.data?.payment_request?.payment_url,
     };
-  } catch (error) {
-    console.error('[Qonto] Erreur lors de la création de la demande de paiement:', error);
-    throw new Error('Impossible de créer la demande de paiement');
+  } catch (error: any) {
+    console.error('[Qonto] Erreur lors de la création de la demande de paiement:', {
+      message: error?.message,
+      status: error?.response?.status,
+      data: error?.response?.data,
+      code: error?.code,
+    });
+    throw new Error(`Erreur de paiement: ${error?.response?.data?.message || error?.message || 'Erreur inconnue'}`);
   }
 }
 
@@ -183,6 +201,7 @@ export async function getQontoPaymentRequest(paymentRequestId: string) {
           username: apiKey,
           password: '',
         },
+        timeout: 15000,
       }
     );
 
@@ -214,6 +233,7 @@ export async function createQontoRefund(paymentRequestId: string, reason: string
           username: apiKey,
           password: '',
         },
+        timeout: 15000,
       }
     );
 
